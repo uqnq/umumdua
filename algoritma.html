@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mengenal Algoritma: Logika dan Kekuatan Komputasi</title>
+    <meta name="description" content="Selami dunia algoritma, dari dasar hingga aplikasi canggih. Pahami cara algoritma membentuk dunia digital kita.">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <style>
+        /* Desain Warna Sejuk Cerah */
+        :root {
+            --bg-color: #F8FDFF; /* Biru sangat muda, hampir putih */
+            --text-color: #333; /* Abu-abu gelap */
+            --heading-color: #2C7A7B; /* Teal gelap */
+            --accent-color: #3182CE; /* Biru sedang */
+            --light-accent-color: #BEE3F8; /* Biru sangat muda */
+            --code-bg: #EDF7F7; /* Hijau kebiruan sangat muda */
+            --border-color: #E2E8F0; /* Abu-abu kebiruan terang */
+            --link-color: #3182CE; /* Sama dengan accent-color */
+            --link-hover-color: #2B6CB0; /* Biru sedikit lebih gelap */
+        }
+
+        /* Reset & Base Styles */
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            font-size: 1.1rem;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #FFFFFF; /* Konten area putih bersih */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--heading-color);
+            font-weight: 700;
+            margin-top: 1.5em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            text-align: center;
+            color: var(--accent-color);
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            border-bottom: 2px solid var(--light-accent-color);
+            padding-bottom: 0.3em;
+            margin-top: 2em;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            margin-top: 1.8em;
+            color: var(--heading-color);
+        }
+
+        h4 {
+            font-size: 1.4rem;
+            margin-top: 1.5em;
+            color: var(--heading-color);
+        }
+
+        p {
+            margin-bottom: 1em;
+            text-align: justify;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: var(--link-hover-color);
+            text-decoration: underline;
+        }
+
+        ul, ol {
+            margin-bottom: 1em;
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        /* Code Blocks */
+        pre {
+            background-color: var(--code-bg);
+            padding: 1em;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Fira Code', 'Cascadia Code', 'Consolas', 'Monaco', monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            border: 1px solid var(--border-color);
+        }
+
+        code {
+            font-family: 'Fira Code', 'Cascadia Code', 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            background-color: var(--code-bg);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+        }
+
+        /* Images (SVG) */
+        .article-image {
+            display: block;
+            margin: 2em auto;
+            max-width: 100%;
+            height: auto;
+            background-color: var(--code-bg); /* Latar belakang ringan untuk SVG */
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+            font-size: 0.9rem;
+            margin-top: 40px;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            body {
+                font-size: 1rem;
+            }
+            .container {
+                padding: 15px;
+                margin: 10px;
+                border-radius: 4px;
+            }
+            h1 {
+                font-size: 2.2rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            h3 {
+                font-size: 1.5rem;
+            }
+            h4 {
+                font-size: 1.2rem;
+            }
+            pre {
+                font-size: 0.85rem;
+            }
+            code {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            h3 {
+                font-size: 1.3rem;
+            }
+            h4 {
+                font-size: 1.1rem;
+            }
+            .container {
+                padding: 10px;
+                margin: 5px;
+            }
+        }
+
+        /* Custom SVG Styles */
+        .svg-icon {
+            color: var(--accent-color); /* Warna utama untuk elemen SVG */
+        }
+        .svg-icon-secondary {
+            color: var(--heading-color); /* Warna sekunder untuk elemen SVG */
+        }
+        .svg-icon-background {
+            fill: var(--light-accent-color); /* Latar belakang ringan untuk shape SVG */
+        }
+        .svg-icon-stroke {
+            stroke: var(--heading-color);
+            stroke-width: 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mengenal Algoritma: Jantung Logika dan Kekuatan Komputasi</h1>
+
+        <svg class="article-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" role="img" aria-labelledby="flowchart-title flowchart-desc">
+            <title id="flowchart-title">Representasi Visual Algoritma Sederhana</title>
+            <desc id="flowchart-desc">Diagram alur sederhana yang menunjukkan input, proses, keputusan, dan output dalam sebuah algoritma.</desc>
+            <!-- Start Node -->
+            <rect x="50" y="75" width="100" height="50" rx="25" ry="25" fill="#BEE3F8" stroke="#3182CE" stroke-width="2"/>
+            <text x="100" y="105" font-family="Arial" font-size="20" fill="#2C7A7B" text-anchor="middle">Mulai</text>
+
+            <!-- Arrow 1 -->
+            <path d="M150 100 L200 100" stroke="#3182CE" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+            <!-- Process Node -->
+            <rect x="200" y="75" width="100" height="50" fill="#EDF7F7" stroke="#2C7A7B" stroke-width="2"/>
+            <text x="250" y="105" font-family="Arial" font-size="20" fill="#333" text-anchor="middle">Proses</text>
+
+            <!-- Arrow 2 -->
+            <path d="M300 100 L350 100" stroke="#3182CE" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+            <!-- Decision Node -->
+            <polygon points="400,100 375,75 350,100 375,125" fill="#BEE3F8" stroke="#3182CE" stroke-width="2"/>
+            <text x="375" y="105" font-family="Arial" font-size="18" fill="#2C7A7B" text-anchor="middle">Kondisi?</text>
+
+            <!-- Arrow 3 (Yes path) -->
+            <path d="M375 125 L375 150 L450 150" stroke="#3182CE" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <text x="400" y="145" font-family="Arial" font-size="16" fill="#333">Ya</text>
+
+            <!-- Arrow 4 (No path) -->
+            <path d="M400 100 L450 100" stroke="#3182CE" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <text x="425" y="90" font-family="Arial" font-size="16" fill="#333">Tidak</text>
+
+            <!-- Output Node (Yes) -->
+            <rect x="450" y="125" width="100" height="50" rx="5" ry="5" fill="#EDF7F7" stroke="#2C7A7B" stroke-width="2"/>
+            <text x="500" y="155" font-family="Arial" font-size="20" fill="#333" text-anchor="middle">Hasil A</text>
+
+            <!-- Output Node (No) -->
+            <rect x="450" y="75" width="100" height="50" rx="5" ry="5" fill="#EDF7F7" stroke="#2C7A7B" stroke-width="2"/>
+            <text x="500" y="105" font-family="Arial" font-size="20" fill="#333" text-anchor="middle">Hasil B</text>
+
+            <!-- Arrowhead definition -->
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#3182CE" />
+                </marker>
+            </defs>
+        </svg>
+
+
+        <p>Di era digital yang serbacepat ini, kita sering berinteraksi dengan teknologi yang bekerja secara otomatis, responsif, dan cerdas. Dari rekomendasi film di platform streaming, rute tercepat di aplikasi peta, hingga transaksi keuangan yang aman, semua itu tidak terlepas dari peran krusial sebuah konsep dasar dalam ilmu komputer: <strong>algoritma</strong>. Algoritma adalah tulang punggung dari setiap program komputer, logika yang tak terlihat namun menentukan bagaimana sebuah sistem beroperasi.</p>
+
+        <p>Secara sederhana, algoritma dapat diibaratkan sebagai resep masakan. Sebuah resep memberikan serangkaian langkah-langkah yang jelas dan terurut untuk mengubah bahan mentah menjadi hidangan yang lezat. Sama halnya, algoritma adalah serangkaian instruksi terdefinisi dengan baik yang dirancang untuk memecahkan suatu masalah atau mencapai suatu tujuan. Instruksi-instruksi ini haruslah spesifik, tidak ambigu, dan memiliki titik awal serta titik akhir yang jelas.</p>
+
+        <p>Pemahaman tentang algoritma bukan hanya penting bagi para programmer atau ilmuwan komputer. Di dunia yang semakin digerakkan oleh data dan otomatisasi, memiliki pemahaman dasar tentang bagaimana algoritma bekerja dapat membantu kita menjadi konsumen teknologi yang lebih cerdas, profesional yang lebih inovatif, dan warga negara yang lebih kritis terhadap dampak teknologi. Artikel ini akan membawa Anda dalam perjalanan mendalam untuk menjelajahi dunia algoritma, mulai dari definisi dasar, karakteristik, berbagai jenis, cara menganalisisnya, hingga penerapannya dalam kehidupan sehari-hari dan tantangan etis yang menyertainya.</p>
+
+        <h2>Apa Itu Algoritma? Definisi dan Karakteristik Esensial</h2>
+
+        <p>Istilah "algoritma" berasal dari nama seorang matematikawan Persia abad ke-9, Abu Abdullah Muhammad ibn Musa al-Khwarizmi, yang karyanya tentang sistem bilangan Hindu-Arab (termasuk desimal) memperkenalkan konsep-konsep penting yang menjadi dasar aljabar dan algoritma modern. Buku karyanya, "Kitāb al-muḫtaṣar fī ḥisāb al-ǧabr wa'l-muqābalah", menjadi sangat berpengaruh di dunia Barat.</p>
+
+        <h3>Definisi Formal Algoritma</h3>
+        <p>Dalam ilmu komputer, algoritma didefinisikan sebagai <strong>serangkaian instruksi yang jelas, terdefinisi dengan baik, dan terbatas untuk menyelesaikan suatu masalah atau mencapai suatu tujuan tertentu</strong>. Instruksi-instruksi ini haruslah dilaksanakan secara berurutan dan menghasilkan output yang spesifik dari input yang diberikan.</p>
+        <p>Mari kita bedah definisi ini lebih lanjut:</p>
+        <ul>
+            <li><strong>Serangkaian Instruksi:</strong> Algoritma bukanlah satu langkah tunggal, melainkan urutan langkah-langkah yang sistematis.</li>
+            <li><strong>Jelas dan Terdefinisi dengan Baik (Unambiguous):</strong> Setiap langkah harus jelas, tidak menimbulkan interpretasi ganda. Tidak boleh ada keraguan tentang apa yang harus dilakukan pada setiap tahap. Contoh: "Ambil air" adalah ambigu (berapa banyak? dari mana?). "Ambil 1 liter air dari keran dapur" adalah jelas.</li>
+            <li><strong>Terbatas (Finite):</strong> Algoritma harus berakhir setelah sejumlah langkah yang terbatas. Ia tidak boleh berjalan selamanya (infinite loop). Setiap algoritma harus mencapai solusi atau mengindikasikan bahwa solusi tidak dapat ditemukan dalam jumlah waktu yang wajar.</li>
+            <li><strong>Input:</strong> Algoritma menerima nol atau lebih input yang terdefinisi dengan baik. Input adalah data yang diproses oleh algoritma.</li>
+            <li><strong>Output:</strong> Algoritma menghasilkan satu atau lebih output yang terdefinisi dengan baik. Output adalah hasil dari pemrosesan input.</li>
+            <li><strong>Efektif (Effectiveness):</strong> Setiap langkah dalam algoritma harus cukup mendasar sehingga dapat dilakukan secara prinsip oleh seseorang dengan pensil dan kertas dalam jumlah waktu yang terbatas. Artinya, setiap operasi harus bisa dieksekusi secara nyata dan menghasilkan efek yang diinginkan.</li>
+        </ul>
+
+        <h3>Contoh Sederhana Algoritma: Memasak Mie Instan</h3>
+        <p>Untuk memahami konsep ini lebih dalam, mari kita ambil contoh algoritma yang sangat sederhana dan akrab dalam kehidupan sehari-hari: memasak mie instan.</p>
+        <ol>
+            <li>Siapkan bahan: Sebungkus mie instan, air secukupnya, panci, kompor, mangkuk, garpu.</li>
+            <li>Didihkan air dalam panci.</li>
+            <li>Setelah air mendidih, masukkan mie ke dalam panci.</li>
+            <li>Masak mie selama 3 menit atau sesuai petunjuk kemasan.</li>
+            <li>Sambil menunggu, siapkan bumbu mie di dalam mangkuk.</li>
+            <li>Setelah mie matang, tiriskan airnya (jika mie goreng) atau biarkan sedikit air (jika mie kuah).</li>
+            <li>Masukkan mie ke dalam mangkuk yang sudah berisi bumbu.</li>
+            <li>Aduk mie hingga bumbu tercampur rata.</li>
+            <li>Sajikan dan santap.</li>
+        </ol>
+        <p>Perhatikan bagaimana setiap langkahnya jelas, berurutan, memiliki input (mie, air) dan output (mie matang), serta pasti berakhir. Ini adalah esensi dari sebuah algoritma.</p>
+
+        <h2>Representasi Algoritma: Pseudocode dan Flowchart</h2>
+
+        <p>Ketika kita merancang algoritma untuk komputer, kita perlu cara untuk merepresentasikannya agar mudah dipahami oleh manusia dan kemudian bisa diterjemahkan ke dalam bahasa pemrograman. Dua metode yang umum digunakan adalah <em>Pseudocode</em> dan <em>Flowchart</em>.</p>
+
+        <h3>Pseudocode</h3>
+        <p>Pseudocode adalah deskripsi tingkat tinggi tentang algoritma yang menggunakan bahasa yang mirip dengan bahasa pemrograman, tetapi tidak terikat pada sintaksis bahasa tertentu. Ini lebih fokus pada logika daripada detail implementasi. Pseudocode memungkinkan kita untuk merencanakan algoritma tanpa harus khawatir tentang aturan tata bahasa yang ketat dari bahasa pemrograman. Ini juga mudah dibaca dan dipahami oleh siapa pun dengan pemahaman dasar pemrograman.</p>
+        <pre><code>
+FUNGSI HitungRataRata(daftarAngka):
+    JIKA daftarAngka KOSONG MAKA
+        KEMBALIKAN 0
+    AKHIR JIKA
+
+    jumlah = 0
+    UNTUK setiap angka dalam daftarAngka LAKUKAN
+        jumlah = jumlah + angka
+    AKHIR UNTUK
+
+    rataRata = jumlah / jumlah elemen dalam daftarAngka
+    KEMBALIKAN rataRata
+AKHIR FUNGSI
+        </code></pre>
+
+        <h3>Flowchart</h3>
+        <p>Flowchart adalah representasi grafis dari sebuah algoritma atau proses. Ini menggunakan berbagai simbol standar untuk menggambarkan langkah-langkah, keputusan, dan aliran kontrol. Flowchart sangat visual dan seringkali lebih mudah dipahami untuk algoritma yang tidak terlalu kompleks karena menunjukkan urutan kejadian dan jalur yang berbeda berdasarkan kondisi.</p>
+        <p>Simbol-simbol umum dalam flowchart meliputi:</p>
+        <ul>
+            <li><strong>Terminator (Oval):</strong> Menunjukkan awal atau akhir algoritma.</li>
+            <li><strong>Proses (Persegi Panjang):</strong> Menunjukkan operasi atau langkah pemrosesan.</li>
+            <li><strong>Input/Output (Jajaran Genjang):</strong> Menunjukkan input data ke algoritma atau output data dari algoritma.</li>
+            <li><strong>Keputusan (Diamond):</strong> Menunjukkan titik di mana keputusan harus dibuat, biasanya dengan dua jalur keluar (Ya/Tidak, Benar/Salah).</li>
+            <li><strong>Panah (Arrow):</strong> Menunjukkan arah aliran kontrol.</li>
+        </ul>
+        <p>Gambar SVG di awal artikel ini adalah contoh sederhana dari Flowchart.</p>
+
+        <h2>Klasifikasi Algoritma: Berbagai Pendekatan untuk Berbagai Masalah</h2>
+
+        <p>Dunia algoritma sangat luas dan beragam. Algoritma dapat diklasifikasikan berdasarkan berbagai kriteria, termasuk fungsinya, teknik yang digunakan untuk memecahkan masalah (paradigma), dan kompleksitasnya. Pemahaman klasifikasi ini membantu kita memilih alat yang tepat untuk pekerjaan yang tepat.</p>
+
+        <h3>Berdasarkan Fungsi (Jenis Masalah yang Dipecahkan)</h3>
+        <p>Ini adalah cara paling intuitif untuk mengelompokkan algoritma, berdasarkan apa yang mereka lakukan.</p>
+        <ol>
+            <li><strong>Algoritma Pencarian (Searching Algorithms):</strong> Bertujuan untuk menemukan elemen tertentu dalam kumpulan data. Contoh:
+                <ul>
+                    <li><em>Linear Search:</em> Memeriksa setiap elemen secara berurutan.</li>
+                    <li><em>Binary Search:</em> Efisien untuk data yang sudah terurut, membagi ruang pencarian menjadi dua di setiap langkah.</li>
+                </ul>
+            </li>
+            <li><strong>Algoritma Pengurutan (Sorting Algorithms):</strong> Mengatur ulang elemen-elemen dalam daftar sesuai urutan tertentu (misalnya, angka dari kecil ke besar, atau abjad). Contoh:
+                <ul>
+                    <li><em>Bubble Sort, Selection Sort, Insertion Sort:</em> Sederhana tapi kurang efisien untuk data besar.</li>
+                    <li><em>Merge Sort, Quick Sort, Heap Sort:</em> Lebih efisien, menggunakan teknik "Divide and Conquer".</li>
+                </ul>
+            </li>
+            <li><strong>Algoritma Graf (Graph Algorithms):</strong> Beroperasi pada struktur data graf, yang terdiri dari node (verteks) dan tepi (edge). Digunakan untuk masalah jaringan, rute, dll. Contoh:
+                <ul>
+                    <li><em>Breadth-First Search (BFS) dan Depth-First Search (DFS):</em> Untuk melintasi graf.</li>
+                    <li><em>Dijkstra's Algorithm:</em> Menemukan jalur terpendek dari satu node ke semua node lain.</li>
+                    <li><em>Prim's dan Kruskal's Algorithm:</em> Menemukan minimum spanning tree.</li>
+                </ul>
+            </li>
+            <li><strong>Algoritma String (String Algorithms):</strong> Beroperasi pada teks atau urutan karakter. Contoh:
+                <ul>
+                    <li><em>Pattern Matching:</em> Menemukan kemunculan pola tertentu dalam teks (misalnya, Knuth-Morris-Pratt).</li>
+                    <li><em>Kompresi Teks:</em> Mengurangi ukuran teks (misalnya, Huffman Coding).</li>
+                </ul>
+            </li>
+            <li><strong>Algoritma Kriptografi (Cryptography Algorithms):</strong> Digunakan untuk mengamankan komunikasi dan data, mengubahnya menjadi format yang tidak dapat dibaca oleh pihak tidak berwenang. Contoh:
+                <ul>
+                    <li><em>AES (Advanced Encryption Standard):</em> Enkripsi simetris.</li>
+                    <li><em>RSA:</em> Enkripsi asimetris.</li>
+                </ul>
+            </li>
+            <li><strong>Algoritma Kompresi Data (Data Compression Algorithms):</strong> Mengurangi ukuran data tanpa kehilangan informasi yang signifikan (lossless) atau dengan kehilangan informasi yang dapat diterima (lossy). Contoh:
+                <ul>
+                    <li><em>ZIP, GZIP, LZW:</em> Lossless compression.</li>
+                    <li><em>JPEG, MP3, MPEG:</em> Lossy compression.</li>
+                </ul>
+            </li>
+            <li><strong>Algoritma Numerik (Numerical Algorithms):</strong> Menyelesaikan masalah matematika seperti integrasi, persamaan diferensial, dan pencarian akar.</li>
+            <li><strong>Algoritma Geometri Komputasi (Computational Geometry Algorithms):</strong> Beroperasi pada objek geometris seperti titik, garis, dan poligon. Contoh: menemukan convex hull.</li>
+        </ol>
+
+        <h3>Berdasarkan Paradigma Desain (Teknik Pemecahan Masalah)</h3>
+        <p>Paradigma desain algoritma adalah pendekatan umum untuk memecahkan masalah. Ini berfokus pada strategi dasar yang digunakan algoritma.</p>
+        <ol>
+            <li><strong>Brute Force:</strong> Mencoba setiap kemungkinan solusi hingga menemukan yang benar. Seringkali tidak efisien tetapi mudah diimplementasikan dan dijamin menemukan solusi jika ada.
+                <p><em>Contoh:</em> Mencari password dengan mencoba setiap kombinasi karakter yang mungkin.</p>
+            </li>
+            <li><strong>Divide and Conquer (Bagi dan Taklukkan):</strong> Memecah masalah besar menjadi sub-masalah yang lebih kecil, memecahkan sub-masalah secara independen, dan kemudian menggabungkan solusi sub-masalah untuk mendapatkan solusi masalah asli.
+                <p><em>Contoh:</em> Merge Sort, Quick Sort, Binary Search.</p>
+                <svg class="article-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 200" role="img" aria-labelledby="divide-conquer-title divide-conquer-desc">
+                    <title id="divide-conquer-title">Ilustrasi Paradigma Divide and Conquer</title>
+                    <desc id="divide-conquer-desc">Diagram visual yang menunjukkan sebuah masalah besar dipecah menjadi sub-masalah yang lebih kecil, diselesaikan, dan kemudian digabungkan kembali.</desc>
+                    <!-- Main problem -->
+                    <rect x="200" y="20" width="100" height="40" fill="#BEE3F8" stroke="#3182CE" stroke-width="2"/>
+                    <text x="250" y="45" font-family="Arial" font-size="16" fill="#2C7A7B" text-anchor="middle">Masalah Besar</text>
+
+                    <!-- Divide Arrows -->
+                    <path d="M250 60 L150 90" stroke="#3182CE" stroke-width="2" marker-end="url(#arrowhead-blue)"/>
+                    <path d="M250 60 L350 90" stroke="#3182CE" stroke-width="2" marker-end="url(#arrowhead-blue)"/>
+
+                    <!-- Sub-problems -->
+                    <rect x="100" y="90" width="100" height="40" fill="#EDF7F7" stroke="#2C7A7B" stroke-width="2"/>
+                    <text x="150" y="115" font-family="Arial" font-size="14" fill="#333" text-anchor="middle">Sub-masalah 1</text>
+
+                    <rect x="300" y="90" width="100" height="40" fill="#EDF7F7" stroke="#2C7A7B" stroke-width="2"/>
+                    <text x="350" y="115" font-family="Arial" font-size="14" fill="#333" text-anchor="middle">Sub-masalah 2</text>
+
+                    <!-- Solve text -->
+                    <text x="150" y="145" font-family="Arial" font-size="12" fill="#777" text-anchor="middle">Selesaikan</text>
+                    <text x="350" y="145" font-family="Arial" font-size="12" fill="#777" text-anchor="middle">Selesaikan</text>
+
+                    <!-- Conquer Arrows -->
+                    <path d="M150 130 L250 160" stroke="#3182CE" stroke-width="2" marker-end="url(#arrowhead-blue)"/>
+                    <path d="M350 130 L250 160" stroke="#3182CE" stroke-width="2" marker-end="url(#arrowhead-blue)"/>
+
+                    <!-- Final Solution -->
+                    <rect x="200" y="160" width="100" height="40" fill="#BEE3F8" stroke="#3182CE" stroke-width="2"/>
+                    <text x="250" y="185" font-family="Arial" font-size="16" fill="#2C7A7B" text-anchor="middle">Solusi Akhir</text>
+
+                    <!-- Arrowhead definition -->
+                    <defs>
+                        <marker id="arrowhead-blue" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#3182CE" />
+                        </marker>
+                    </defs>
+                </svg>
+            </li>
+            <li><strong>Dynamic Programming (Pemrograman Dinamis):</strong> Mirip dengan Divide and Conquer, tetapi digunakan ketika sub-masalah saling tumpang tindih. Ini menyimpan hasil sub-masalah yang sudah dipecahkan untuk menghindari perhitungan ulang. Cocok untuk masalah optimasi.
+                <p><em>Contoh:</em> Menghitung deret Fibonacci secara efisien, masalah Knapsack, jalur terpendek di graf tanpa siklus negatif.</p>
+            </li>
+            <li><strong>Greedy Algorithm (Algoritma Rakus):</strong> Membuat pilihan optimal lokal di setiap langkah dengan harapan bahwa pilihan tersebut akan mengarah pada solusi optimal global. Tidak selalu menjamin solusi optimal, tetapi seringkali sangat cepat.
+                <p><em>Contoh:</em> Masalah penukaran uang kembalian (selalu memilih koin dengan nilai terbesar yang masih bisa digunakan).</p>
+            </li>
+            <li><strong>Backtracking:</strong> Mencari solusi dengan membangun solusi secara inkremental dan mundur (backtrack) ketika solusi parsial tidak dapat diperluas menjadi solusi lengkap yang valid. Mirip dengan brute force tetapi lebih cerdas.
+                <p><em>Contoh:</em> Pemecahan Sudoku, masalah N-Queens, menemukan semua jalur di labirin.</p>
+            </li>
+            <li><strong>Rekursi (Recursion):</strong> Sebuah fungsi atau prosedur yang memanggil dirinya sendiri. Ini adalah teknik pemrograman, tetapi seringkali menjadi dasar dari banyak algoritma Divide and Conquer atau Backtracking.
+                <p><em>Contoh:</em> Menghitung faktorial, melintasi struktur pohon.</p>
+            </li>
+            <li><strong>Iterasi (Iteration):</strong> Mengulangi serangkaian instruksi sampai suatu kondisi terpenuhi. Ini adalah kebalikan dari rekursi, menggunakan loop (for, while) daripada panggilan fungsi berulang.</li>
+        </ol>
+
+        <h2>Analisis Algoritma: Efisiensi dan Sumber Daya</h2>
+
+        <p>Meskipun banyak algoritma dapat memecahkan masalah yang sama, tidak semua algoritma memiliki kinerja yang sama. Beberapa mungkin sangat cepat dan hemat sumber daya, sementara yang lain mungkin lambat dan boros. Analisis algoritma adalah proses mengevaluasi kinerja algoritma dalam hal sumber daya yang digunakannya. Dua sumber daya utama adalah waktu (kecepatan eksekusi) dan ruang (memori).</p>
+
+        <h3>Kompleksitas Waktu (Time Complexity)</h3>
+        <p>Kompleksitas waktu mengukur berapa lama algoritma berjalan sebagai fungsi dari ukuran input. Kita biasanya tidak mengukur waktu dalam detik, karena itu tergantung pada kecepatan komputer. Sebaliknya, kita menggunakan notasi asimtotik, yang paling umum adalah "Big O Notation" (Notasi O Besar).</p>
+        <p>Big O Notation memberikan batas atas kinerja algoritma. Ini menggambarkan bagaimana waktu eksekusi tumbuh seiring dengan bertambahnya ukuran input (<code>n</code>).</p>
+        <ul>
+            <li><strong>O(1) - Waktu Konstan:</strong> Waktu eksekusi tidak berubah terlepas dari ukuran input.
+                <p><em>Contoh:</em> Mengakses elemen pada indeks tertentu dalam array.</p>
+            </li>
+            <li><strong>O(log n) - Waktu Logaritmik:</strong> Waktu eksekusi meningkat secara logaritmik dengan ukuran input. Sangat efisien, sering terlihat pada algoritma yang membagi masalah menjadi sub-masalah.
+                <p><em>Contoh:</em> Binary Search.</p>
+            </li>
+            <li><strong>O(n) - Waktu Linear:</strong> Waktu eksekusi meningkat secara proporsional dengan ukuran input.
+                <p><em>Contoh:</em> Melintasi semua elemen dalam array (Linear Search).</p>
+            </li>
+            <li><strong>O(n log n) - Waktu Log-Linear:</strong> Sedikit lebih buruk dari linear, tetapi masih sangat baik untuk sebagian besar masalah.
+                <p><em>Contoh:</em> Merge Sort, Quick Sort.</p>
+            </li>
+            <li><strong>O(n<sup>2</sup>) - Waktu Kuadratik:</strong> Waktu eksekusi meningkat sebanding dengan kuadrat ukuran input. Menjadi lambat dengan cepat untuk input besar.
+                <p><em>Contoh:</em> Bubble Sort, Selection Sort.</p>
+            </li>
+            <li><strong>O(2<sup>n</sup>) - Waktu Eksponensial:</strong> Waktu eksekusi tumbuh sangat cepat seiring dengan ukuran input. Hanya praktis untuk input yang sangat kecil.
+                <p><em>Contoh:</em> Beberapa solusi brute force untuk masalah Traveling Salesman.</p>
+            </li>
+            <li><strong>O(n!) - Waktu Faktorial:</strong> Waktu eksekusi tumbuh secara ekstrem cepat. Hampir tidak praktis sama sekali.
+                <p><em>Contoh:</em> Permutasi.</p>
+            </li>
+        </ul>
+        <p>Memahami Big O membantu kita memprediksi bagaimana algoritma akan berperilaku saat kita skalakan ukuran data yang diproses. Algoritma dengan kompleksitas O(n log n) akan jauh lebih baik daripada O(n<sup>2</sup>) ketika <code>n</code> sangat besar.</p>
+
+        <svg class="article-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 250" role="img" aria-labelledby="big-o-graph-title big-o-graph-desc">
+            <title id="big-o-graph-title">Perbandingan Kompleksitas Waktu Big O</title>
+            <desc id="big-o-graph-desc">Grafik yang menunjukkan bagaimana waktu eksekusi relatif dari algoritma (sumbu Y) tumbuh seiring dengan peningkatan ukuran input (sumbu X) untuk O(1), O(log n), O(n), O(n log n), dan O(n^2).</desc>
+            <!-- Axes -->
+            <line x1="50" y1="200" x2="550" y2="200" stroke="#777" stroke-width="1.5"/>
+            <line x1="50" y1="200" x2="50" y2="30" stroke="#777" stroke-width="1.5"/>
+
+            <!-- Labels -->
+            <text x="540" y="215" font-family="Arial" font-size="14" fill="#333" text-anchor="end">Ukuran Input (n)</text>
+            <text x="35" y="40" font-family="Arial" font-size="14" fill="#333" text-anchor="end" transform="rotate(-90 35 40)">Waktu Eksekusi</text>
+
+            <!-- Grid lines -->
+            <line x1="100" y1="200" x2="100" y2="40" stroke="#EEE" stroke-width="1"/>
+            <line x1="200" y1="200" x2="200" y2="40" stroke="#EEE" stroke-width="1"/>
+            <line x1="300" y1="200" x2="300" y2="40" stroke="#EEE" stroke-width="1"/>
+            <line x1="400" y1="200" x2="400" y2="40" stroke="#EEE" stroke-width="1"/>
+            <line x1="500" y1="200" x2="500" y2="40" stroke="#EEE" stroke-width="1"/>
+
+            <line x1="50" y1="180" x2="550" y2="180" stroke="#EEE" stroke-width="1"/>
+            <line x1="50" y1="160" x2="550" y2="160" stroke="#EEE" stroke-width="1"/>
+            <line x1="50" y1="140" x2="550" y2="140" stroke="#EEE" stroke-width="1"/>
+            <line x1="50" y1="120" x2="550" y2="120" stroke="#EEE" stroke-width="1"/>
+            <line x1="50" y1="100" x2="550" y2="100" stroke="#EEE" stroke-width="1"/>
+            <line x1="50" y1="80" x2="550" y2="80" stroke="#EEE" stroke-width="1"/>
+            <line x1="50" y1="60" x2="550" y2="60" stroke="#EEE" stroke-width="1"/>
+
+            <!-- O(1) - Constant Time -->
+            <path d="M50 190 L550 190" stroke="#3182CE" stroke-width="2" fill="none"/>
+            <text x="560" y="190" font-family="Arial" font-size="14" fill="#3182CE">O(1)</text>
+
+            <!-- O(log n) - Logarithmic Time (approx log2) -->
+            <path d="M50 195 C100 185 200 170 300 160 C400 155 500 150 550 148" stroke="#2C7A7B" stroke-width="2" fill="none"/>
+            <text x="560" y="148" font-family="Arial" font-size="14" fill="#2C7A7B">O(log n)</text>
+
+            <!-- O(n) - Linear Time -->
+            <path d="M50 190 L550 70" stroke="#D69E2E" stroke-width="2" fill="none"/>
+            <text x="560" y="70" font-family="Arial" font-size="14" fill="#D69E2E">O(n)</text>
+
+            <!-- O(n log n) - Log-linear Time -->
+            <path d="M50 195 C100 180 200 140 300 100 C400 70 500 50 550 40" stroke="#9F7AEA" stroke-width="2" fill="none"/>
+            <text x="560" y="40" font-family="Arial" font-size="14" fill="#9F7AEA">O(n log n)</text>
+
+            <!-- O(n^2) - Quadratic Time -->
+            <path d="M50 200 C100 180 200 100 300 60 C400 40 500 30 550 25" stroke="#E53E3E" stroke-width="2" fill="none"/>
+            <text x="560" y="25" font-family="Arial" font-size="14" fill="#E53E3E">O(n²)</text>
+        </svg>
+
+        <h3>Kompleksitas Ruang (Space Complexity)</h3>
+        <p>Kompleksitas ruang mengukur berapa banyak memori yang dibutuhkan algoritma sebagai fungsi dari ukuran input. Ini termasuk memori untuk menyimpan input, output, dan variabel-variabel sementara yang digunakan selama eksekusi. Sama seperti waktu, ruang juga diukur menggunakan Big O Notation.</p>
+        <p>Dalam desain algoritma, seringkali ada <em>trade-off</em> antara waktu dan ruang. Sebuah algoritma mungkin lebih cepat tetapi membutuhkan lebih banyak memori (misalnya, dengan menyimpan hasil perhitungan antara). Sebaliknya, algoritma lain mungkin lebih hemat memori tetapi lebih lambat. Pilihan tergantung pada batasan sumber daya yang tersedia dan persyaratan kinerja.</p>
+
+        <h2>Algoritma Penting dan Cara Kerjanya (Contoh Detail)</h2>
+
+        <p>Mari kita selami beberapa algoritma fundamental yang menjadi dasar bagi banyak aplikasi komputasi.</p>
+
+        <h3>1. Algoritma Pencarian</h3>
+        <h4>Linear Search (Pencarian Linier)</h4>
+        <p>Ini adalah algoritma pencarian yang paling sederhana. Ia bekerja dengan memeriksa setiap elemen dalam daftar secara berurutan sampai elemen yang diinginkan ditemukan atau seluruh daftar telah diperiksa.</p>
+        <p><strong>Cara Kerja:</strong></p>
+        <ol>
+            <li>Mulai dari elemen pertama dalam daftar.</li>
+            <li>Bandingkan elemen saat ini dengan nilai yang dicari.</li>
+            <li>Jika cocok, kembalikan indeks elemen tersebut dan algoritma berakhir.</li>
+            <li>Jika tidak cocok, pindah ke elemen berikutnya.</li>
+            <li>Ulangi langkah 2-4 sampai elemen ditemukan atau seluruh daftar telah diperiksa.</li>
+            <li>Jika seluruh daftar telah diperiksa dan elemen tidak ditemukan, kembalikan indikasi bahwa elemen tidak ada.</li>
+        </ol>
+        <p><strong>Kompleksitas:</strong> O(n) karena dalam kasus terburuk (elemen terakhir atau tidak ada), ia harus memeriksa semua <code>n</code> elemen.</p>
+        <pre><code>
+FUNGSI LinearSearch(daftar, nilaiCari):
+    UNTUK indeks DARI 0 SAMPAI panjang(daftar) - 1 LAKUKAN
+        JIKA daftar[indeks] SAMA DENGAN nilaiCari MAKA
+            KEMBALIKAN indeks // Elemen ditemukan
+        AKHIR JIKA
+    AKHIR UNTUK
+    KEMBALIKAN -1 // Elemen tidak ditemukan
+AKHIR FUNGSI
+        </code></pre>
+
+        <h4>Binary Search (Pencarian Biner)</h4>
+        <p>Binary Search adalah algoritma yang jauh lebih efisien daripada Linear Search, <strong>tetapi membutuhkan daftar yang sudah terurut</strong>. Ini bekerja dengan membagi daftar menjadi dua di setiap langkah.</p>
+        <p><strong>Cara Kerja:</strong></p>
+        <ol>
+            <li>Tentukan bagian tengah daftar.</li>
+            <li>Bandingkan nilai yang dicari dengan elemen tengah:
+                <ul>
+                    <li>Jika cocok, elemen ditemukan.</li>
+                    <li>Jika nilai yang dicari lebih kecil dari elemen tengah, fokuskan pencarian pada paruh kiri daftar.</li>
+                    <li>Jika nilai yang dicari lebih besar dari elemen tengah, fokuskan pencarian pada paruh kanan daftar.</li>
+                </ul>
+            </li>
+            <li>Ulangi langkah 1-2 pada paruh yang dipilih sampai elemen ditemukan atau paruh daftar menjadi kosong (elemen tidak ada).</li>
+        </ol>
+        <p><strong>Kompleksitas:</strong> O(log n) karena ukuran ruang pencarian berkurang menjadi setengah di setiap langkah.</p>
+        <pre><code>
+FUNGSI BinarySearch(daftarTerurut, nilaiCari):
+    kiri = 0
+    kanan = panjang(daftarTerurut) - 1
+
+    SELAMA kiri LEBIH KECIL DARI ATAU SAMA DENGAN kanan LAKUKAN
+        tengah = (kiri + kanan) DIV 2
+        
+        JIKA daftarTerurut[tengah] SAMA DENGAN nilaiCari MAKA
+            KEMBALIKAN tengah // Elemen ditemukan
+        JIKA daftarTerurut[tengah] LEBIH KECIL DARI nilaiCari MAKA
+            kiri = tengah + 1 // Cari di paruh kanan
+        LAIN
+            kanan = tengah - 1 // Cari di paruh kiri
+        AKHIR JIKA
+    AKHIR SELAMA
+
+    KEMBALIKAN -1 // Elemen tidak ditemukan
+AKHIR FUNGSI
+        </code></pre>
+
+        <h3>2. Algoritma Pengurutan</h3>
+        <p>Algoritma pengurutan adalah topik yang sangat kaya dalam ilmu komputer. Berikut beberapa contoh:</p>
+
+        <h4>Bubble Sort</h4>
+        <p>Algoritma pengurutan yang sederhana namun tidak efisien. Ia bekerja dengan berulang kali "menggelembungkan" elemen terbesar (atau terkecil) ke posisi yang benar melalui serangkaian pertukaran.</p>
+        <p><strong>Cara Kerja:</strong></p>
+        <ol>
+            <li>Mulai dari awal daftar.</li>
+            <li>Bandingkan elemen pertama dengan elemen kedua. Jika elemen pertama lebih besar dari yang kedua, tukar posisinya.</li>
+            <li>Pindah ke pasangan elemen berikutnya (elemen kedua dan ketiga), dan ulangi perbandingan dan penukaran.</li>
+            <li>Lanjutkan hingga akhir daftar. Elemen terbesar akan "menggelembung" ke posisi terakhir.</li>
+            <li>Ulangi proses ini untuk sisa daftar yang belum terurut, tetapi kali ini hanya sampai elemen kedua dari terakhir, dst.</li>
+            <li>Proses berhenti ketika tidak ada pertukaran yang terjadi dalam satu putaran penuh.</li>
+        </ol>
+        <p><strong>Kompleksitas:</strong> O(n<sup>2</sup>) dalam kasus terburuk dan rata-rata.</p>
+        <pre><code>
+FUNGSI BubbleSort(daftar):
+    n = panjang(daftar)
+    UNTUK i DARI 0 SAMPAI n - 2 LAKUKAN
+        swapped = FALSE
+        UNTUK j DARI 0 SAMPAI n - i - 2 LAKUKAN
+            JIKA daftar[j] LEBIH BESAR DARI daftar[j+1] MAKA
+                // Tukar elemen
+                temp = daftar[j]
+                daftar[j] = daftar[j+1]
+                daftar[j+1] = temp
+                swapped = TRUE
+            AKHIR JIKA
+        AKHIR UNTUK
+        JIKA NOT swapped MAKA
+            BERHENTI // Daftar sudah terurut
+        AKHIR JIKA
+    AKHIR UNTUK
+    KEMBALIKAN daftar
+AKHIR FUNGSI
+        </code></pre>
+
+        <h4>Merge Sort</h4>
+        <p>Algoritma pengurutan efisien yang menggunakan paradigma Divide and Conquer.</p>
+        <p><strong>Cara Kerja:</strong></p>
+        <ol>
+            <li><strong>Divide:</strong> Bagi daftar yang belum terurut menjadi dua sub-daftar yang kira-kira berukuran sama.</li>
+            <li><strong>Conquer:</strong> Urutkan setiap sub-daftar secara rekursif menggunakan Merge Sort.</li>
+            <li><strong>Combine:</strong> Gabungkan (merge) dua sub-daftar yang sudah terurut menjadi satu daftar terurut. Proses penggabungan dilakukan dengan membandingkan elemen-elemen dari kedua sub-daftar dan memilih yang terkecil/terbesar untuk dimasukkan ke daftar hasil.</li>
+        </ol>
+        <p><strong>Kompleksitas:</strong> O(n log n) dalam semua kasus (terburuk, rata-rata, terbaik).</p>
+        <pre><code>
+FUNGSI MergeSort(daftar):
+    JIKA panjang(daftar) LEBIH KECIL DARI 2 MAKA
+        KEMBALIKAN daftar
+    AKHIR JIKA
+
+    tengah = panjang(daftar) DIV 2
+    kiri = daftar DARI 0 SAMPAI tengah - 1
+    kanan = daftar DARI tengah SAMPAI akhir
+
+    kiriTerurut = MergeSort(kiri)
+    kananTerurut = MergeSort(kanan)
+
+    KEMBALIKAN Merge(kiriTerurut, kananTerurut)
+AKHIR FUNGSI
+
+FUNGSI Merge(kiri, kanan):
+    hasil = daftar kosong
+    i = 0, j = 0
+
+    SELAMA i LEBIH KECIL DARI panjang(kiri) DAN j LEBIH KECIL DARI panjang(kanan) LAKUKAN
+        JIKA kiri[i] LEBIH KECIL DARI ATAU SAMA DENGAN kanan[j] MAKA
+            TAMBAHKAN kiri[i] KE hasil
+            i = i + 1
+        LAIN
+            TAMBAHKAN kanan[j] KE hasil
+            j = j + 1
+        AKHIR JIKA
+    AKHIR SELAMA
+
+    // Tambahkan sisa elemen (jika ada)
+    TAMBAHKAN sisa kiri KE hasil
+    TAMBAHKAN sisa kanan KE hasil
+
+    KEMBALIKAN hasil
+AKHIR FUNGSI
+        </code></pre>
+
+        <h3>3. Algoritma Graf</h3>
+        <h4>Breadth-First Search (BFS)</h4>
+        <p>BFS adalah algoritma untuk melintasi atau mencari struktur data pohon atau graf. Dimulai dari node akar (atau node arbitrer), BFS menjelajahi semua node tetangga pada kedalaman saat ini sebelum pindah ke node pada tingkat kedalaman berikutnya.</p>
+        <p><strong>Cara Kerja:</strong></p>
+        <ol>
+            <li>Pilih node awal dan tandai sebagai sudah dikunjungi. Masukkan ke dalam antrean (queue).</li>
+            <li>Selama antrean tidak kosong:
+                <ul>
+                    <li>Keluarkan node dari depan antrean.</li>
+                    <li>Untuk setiap tetangga dari node yang dikeluarkan:
+                        <ul>
+                            <li>Jika tetangga belum dikunjungi, tandai sebagai sudah dikunjungi dan masukkan ke dalam antrean.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ol>
+        <p><strong>Penerapan:</strong> Menemukan jalur terpendek dalam graf yang tidak berbobot, pengindeksan situs web (crawl), jaringan sosial.</p>
+        <p><strong>Kompleksitas:</strong> O(V + E) di mana V adalah jumlah verteks (node) dan E adalah jumlah tepi (edge) dalam graf.</p>
+
+        <h4>Dijkstra's Algorithm</h4>
+        <p>Dijkstra's Algorithm digunakan untuk menemukan jalur terpendek antara dua node dalam graf berbobot (edge memiliki "biaya" atau "jarak") di mana semua bobot tepi tidak negatif.</p>
+        <p><strong>Cara Kerja (Garis Besar):</strong></p>
+        <ol>
+            <li>Inisialisasi jarak ke node awal sebagai 0 dan jarak ke semua node lain sebagai tak hingga.</li>
+            <li>Buat set node yang belum dikunjungi.</li>
+            <li>Selama set node yang belum dikunjungi tidak kosong:
+                <ul>
+                    <li>Pilih node <code>u</code> dari set yang belum dikunjungi dengan jarak terkecil.</li>
+                    <li>Tandai <code>u</code> sebagai sudah dikunjungi dan hapus dari set.</li>
+                    <li>Untuk setiap tetangga <code>v</code> dari <code>u</code>:
+                        <ul>
+                            <li>Hitung jarak alternatif: jarak <code>u</code> + bobot tepi (<code>u</code>, <code>v</code>).</li>
+                            <li>Jika jarak alternatif lebih kecil dari jarak <code>v</code> saat ini, perbarui jarak <code>v</code>.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ol>
+        <p><strong>Penerapan:</strong> Aplikasi peta (menemukan rute terpendek), routing jaringan.</p>
+        <p><strong>Kompleksitas:</strong> O(E log V) atau O(E + V log V) tergantung implementasi struktur data.</p>
+
+        <h3>4. Algoritma Rekursi vs. Iterasi</h3>
+        <p>Dua pendekatan fundamental untuk mengulang proses atau menyelesaikan masalah yang dapat dipecah menjadi sub-masalah serupa.</p>
+        <h4>Rekursi</h4>
+        <p>Sebuah fungsi yang memanggil dirinya sendiri sampai kondisi dasar (base case) terpenuhi. Penting untuk memiliki kondisi dasar agar rekursi tidak berjalan tanpa henti (infinite recursion).</p>
+        <pre><code>
+FUNGSI FaktorialRekursif(n):
+    JIKA n SAMA DENGAN 0 MAKA
+        KEMBALIKAN 1 // Base case
+    LAIN
+        KEMBALIKAN n * FaktorialRekursif(n - 1) // Panggilan rekursif
+    AKHIR JIKA
+AKHIR FUNGSI
+        </code></pre>
+        <p><strong>Kelebihan:</strong> Kode seringkali lebih ringkas dan mudah dibaca untuk masalah yang secara alami bersifat rekursif (misalnya, traversal pohon).
+        <strong>Kekurangan:</strong> Dapat menggunakan lebih banyak memori (untuk stack panggilan) dan bisa lebih lambat karena overhead panggilan fungsi. Risiko stack overflow jika kedalaman rekursi terlalu besar.</p>
+
+        <h4>Iterasi</h4>
+        <p>Menggunakan struktur loop (seperti <code>for</code> atau <code>while</code>) untuk mengulang serangkaian instruksi sampai suatu kondisi terpenuhi.</p>
+        <pre><code>
+FUNGSI FaktorialIteratif(n):
+    hasil = 1
+    UNTUK i DARI 1 SAMPAI n LAKUKAN
+        hasil = hasil * i
+    AKHIR UNTUK
+    KEMBALIKAN hasil
+AKHIR FUNGSI
+        </code></pre>
+        <p><strong>Kelebihan:</strong> Umumnya lebih efisien dalam hal memori dan kecepatan eksekusi.
+        <strong>Kekurangan:</strong> Terkadang kode bisa menjadi lebih panjang dan kurang intuitif untuk masalah yang secara alami rekursif.</p>
+        <p>Banyak masalah dapat diselesaikan baik secara rekursif maupun iteratif. Pilihan seringkali tergantung pada preferensi programmer, kebutuhan kinerja, dan kejelasan kode.</p>
+
+        <h2>Penerapan Algoritma dalam Kehidupan Nyata</h2>
+
+        <p>Algoritma tidak hanya bersembunyi di balik layar komputer atau perangkat lunak canggih. Mereka adalah motor penggerak banyak aspek kehidupan modern kita. Hampir setiap interaksi digital yang kita lakukan melibatkan satu atau lebih algoritma.</p>
+
+        <h3>1. Mesin Pencari (Google, Bing, dll.)</h3>
+        <p>Ketika Anda mengetikkan kueri di Google, miliaran halaman web diindeks dan dianalisis dalam hitungan milidetik. Algoritma seperti PageRank (atau penerusnya) menilai relevansi dan otoritas halaman. Algoritma pencarian dan pengurutan bekerja untuk menyajikan hasil terbaik di urutan teratas. Algoritma pemrosesan bahasa alami (NLP) memahami maksud di balik kueri Anda, bahkan jika ada salah ketik.</p>
+
+        <h3>2. Rekomendasi Produk dan Konten (E-commerce, Streaming)</h3>
+        <p>Platform seperti Amazon, Netflix, YouTube, dan Spotify menggunakan algoritma rekomendasi. Mereka menganalisis riwayat pembelian/tontonan/dengar Anda, interaksi pengguna lain dengan item serupa, dan karakteristik item itu sendiri untuk menyarankan produk, film, musik, atau berita yang mungkin Anda sukai. Ini sering melibatkan algoritma <em>collaborative filtering</em> dan <em>content-based filtering</em>.</p>
+
+        <svg class="article-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 200" role="img" aria-labelledby="recommendation-title recommendation-desc">
+            <title id="recommendation-title">Alur Kerja Sistem Rekomendasi</title>
+            <desc id="recommendation-desc">Diagram visual sederhana yang menunjukkan input pengguna dan data item, diproses oleh algoritma rekomendasi, menghasilkan output rekomendasi yang personal.</desc>
+            <!-- User Input -->
+            <rect x="50" y="75" width="100" height="50" rx="10" ry="10" fill="#BEE3F8" stroke="#3182CE" stroke-width="2"/>
+            <text x="100" y="105" font-family="Arial" font-size="16" fill="#2C7A7B" text-anchor="middle">Input Pengguna</text>
+
+            <!-- Data Item -->
+            <rect x="50" y="10" width="100" height="50" rx="10" ry="10" fill="#EDF7F7" stroke="#2C7A7B" stroke-width="2"/>
+            <text x="100" y="40" font-family="Arial" font-size="16" fill="#333" text-anchor="middle">Data Item</text>
+
+            <!-- Arrows to Algorithm -->
+            <path d="M150 100 L200 100" stroke="#3182CE" stroke-width="2" marker-end="url(#arrowhead-blue)"/>
+            <path d="M150 35 L200 35 L200 70 L220 70" stroke="#3182CE" stroke-width="2" marker-end="url(#arrowhead-blue)"/>
+            <path d="M220 70 L220 100" stroke="#3182CE" stroke-width="2" marker-end="url(#arrowhead-blue)"/>
+
+            <!-- Recommendation Algorithm -->
+            <rect x="200" y="75" width="150" height="50" fill="#BEE3F8" stroke="#3182CE" stroke-width="2"/>
+            <text x="275" y="105" font-family="Arial" font-size="16" fill="#2C7A7B" text-anchor="middle">Algoritma Rekomendasi</text>
+
+            <!-- Arrow from Algorithm to Output -->
+            <path d="M350 100 L400 100" stroke="#3182CE" stroke-width="2" marker-end="url(#arrowhead-blue)"/>
+
+            <!-- Output Recommendations -->
+            <rect x="400" y="75" width="100" height="50" rx="10" ry="10" fill="#EDF7F7" stroke="#2C7A7B" stroke-width="2"/>
+            <text x="450" y="105" font-family="Arial" font-size="16" fill="#333" text-anchor="middle">Rekomendasi</text>
+
+            <!-- Arrowhead definition (re-use from previous) -->
+            <defs>
+                <marker id="arrowhead-blue" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#3182CE" />
+                </marker>
+            </defs>
+        </svg>
+
+        <h3>3. Navigasi dan Pemetaan (GPS)</h3>
+        <p>Aplikasi GPS seperti Google Maps atau Waze menggunakan algoritma graf (seperti variasi Dijkstra's atau A*) untuk menemukan rute terpendek atau tercepat dari satu titik ke titik lain, dengan mempertimbangkan kondisi lalu lintas, batasan jalan, dan preferensi pengguna.</p>
+
+        <h3>4. Keamanan Data (Kriptografi)</h3>
+        <p>Setiap kali Anda masuk ke situs web yang aman, melakukan transaksi online, atau mengirim pesan pribadi, algoritma kriptografi bekerja di belakang layar untuk mengenkripsi dan mendekripsi data Anda, memastikan kerahasiaan, integritas, dan otentikasi. Contohnya adalah algoritma RSA untuk pertukaran kunci dan AES untuk enkripsi data.</p>
+
+        <h3>5. Kompresi Data</h3>
+        <p>Setiap foto JPEG, video MP4, atau file ZIP yang Anda gunakan adalah hasil dari algoritma kompresi data. Algoritma ini mengurangi ukuran file sehingga lebih cepat diunduh, lebih hemat ruang penyimpanan, dan lebih efisien untuk streaming. Ada algoritma <em>lossy</em> (seperti JPEG, MP3) yang menghilangkan beberapa detail yang tidak terlalu signifikan bagi persepsi manusia, dan <em>lossless</em> (seperti ZIP, PNG) yang mempertahankan semua data asli.</p>
+
+        <h3>6. Kecerdasan Buatan (AI) dan Pembelajaran Mesin (Machine Learning)</h3>
+        <p>Ini adalah bidang di mana algoritma menjadi semakin kompleks dan adaptif. Algoritma Machine Learning (seperti regresi linier, SVM, jaringan saraf tiruan) memungkinkan komputer untuk belajar dari data, membuat prediksi, dan mengidentifikasi pola tanpa diprogram secara eksplisit untuk setiap skenario. Deep Learning, sub-bidang ML, menggunakan jaringan saraf yang sangat dalam untuk memecahkan masalah kompleks seperti pengenalan gambar dan suara.</p>
+        <ul>
+            <li><strong>Pengenalan Wajah:</strong> Algoritma menganalisis fitur wajah, membandingkannya dengan database untuk identifikasi.</li>
+            <li><strong>Asisten Virtual:</strong> Algoritma pemrosesan bahasa alami memahami perintah suara dan teks.</li>
+            <li><strong>Deteksi Penipuan:</strong> Algoritma menganalisis pola transaksi untuk mengidentifikasi aktivitas yang mencurigakan.</li>
+        </ul>
+
+        <h3>7. Grafika Komputer dan Game</h3>
+        <p>Algoritma digunakan untuk merender grafis 3D yang realistis, simulasi fisika, animasi karakter, dan kecerdasan buatan musuh dalam video game. Contohnya adalah algoritma untuk <em>pathfinding</em>, <em>collision detection</em>, dan <em>rendering</em> bayangan.</p>
+
+        <h3>8. Manajemen Basis Data</h3>
+        <p>Setiap kali Anda melakukan kueri ke database (misalnya, mencari nama pelanggan atau produk), algoritma pencarian dan pengindeksan bekerja untuk mengambil informasi yang relevan secepat mungkin. Algoritma pengurutan juga digunakan untuk menampilkan hasil dalam urutan yang diinginkan.</p>
+
+        <h3>9. Bioinformatika</h3>
+        <p>Dalam biologi komputasi, algoritma digunakan untuk analisis sekuens DNA, pemodelan protein, perbandingan genom, dan penemuan obat. Misalnya, algoritma <em>sequence alignment</em> membandingkan dua sekuens DNA untuk menemukan kemiripan.</p>
+
+        <h3>10. Keuangan dan Perdagangan Saham</h3>
+        <p>Algoritma perdagangan frekuensi tinggi (HFT) secara otomatis melakukan transaksi saham dalam hitungan milidetik berdasarkan analisis data pasar real-time. Algoritma juga digunakan untuk pemodelan risiko, penilaian kredit, dan deteksi anomali dalam transaksi keuangan.</p>
+
+        <h2>Tantangan dan Masa Depan Algoritma</h2>
+
+        <p>Meskipun algoritma telah membawa kemajuan luar biasa, perkembangannya juga menimbulkan tantangan dan pertanyaan etis yang kompleks. Seiring dengan kemajuan teknologi, terutama di bidang Kecerdasan Buatan dan Pembelajaran Mesin, isu-isu ini menjadi semakin relevan.</p>
+
+        <h3>1. Bias Algoritma</h3>
+        <p>Algoritma seringkali belajar dari data. Jika data yang digunakan untuk melatih algoritma mengandung bias (misalnya, data historis yang merefleksikan diskriminasi rasial atau gender), maka algoritma tersebut dapat memperpetuasi atau bahkan memperkuat bias tersebut. Contohnya, algoritma perekrutan yang bias terhadap kelompok tertentu atau sistem pengenalan wajah yang kurang akurat pada individu dengan warna kulit gelap.</p>
+        <p>Mengidentifikasi dan mengurangi bias dalam algoritma adalah salah satu tantangan terbesar dalam pengembangan AI yang adil dan etis. Ini memerlukan data pelatihan yang lebih representatif, metode pengujian yang cermat, dan perhatian khusus terhadap dampak sosial.</p>
+
+        <h3>2. Transparansi dan "Kotak Hitam"</h3>
+        <p>Beberapa algoritma, terutama yang berbasis pembelajaran mendalam (deep learning), bisa sangat kompleks sehingga sulit untuk memahami mengapa mereka membuat keputusan tertentu. Ini dikenal sebagai masalah "kotak hitam" (black box problem). Kurangnya transparansi ini menjadi perhatian, terutama di sektor-sektor kritis seperti kesehatan, peradilan pidana, atau keuangan, di mana keputusan algoritma memiliki dampak besar pada kehidupan manusia.</p>
+        <p>Upaya sedang dilakukan untuk mengembangkan "Explainable AI" (XAI) yang bertujuan untuk membuat algoritma AI lebih transparan dan dapat dijelaskan, sehingga manusia dapat memahami, mempercayai, dan secara efektif mengelola sistem AI.</p>
+
+        <h3>3. Etika Algoritma dan Tanggung Jawab</h3>
+        <p>Siapa yang bertanggung jawab jika sebuah algoritma membuat keputusan yang merugikan? Apakah pengembang, perusahaan yang menggunakannya, atau algoritma itu sendiri? Pertanyaan etis muncul terkait penggunaan algoritma dalam pengawasan massal, senjata otonom, penyebaran berita palsu, dan manipulasi opini publik. Algoritma dapat mempengaruhi kebebasan individu, privasi, dan bahkan proses demokrasi.</p>
+        <p>Menciptakan kerangka kerja etika dan regulasi yang kuat untuk pengembangan dan penerapan algoritma adalah pekerjaan yang mendesak bagi masyarakat global.</p>
+
+        <h3>4. Privasi Data</h3>
+        <p>Banyak algoritma, terutama yang digunakan dalam personalisasi dan rekomendasi, mengandalkan pengumpulan dan analisis sejumlah besar data pribadi. Ini menimbulkan kekhawatiran serius tentang privasi data dan bagaimana informasi pribadi kita digunakan, disimpan, dan dilindungi. Regulasi seperti GDPR (General Data Protection Regulation) berupaya mengatasi masalah ini, tetapi tantangannya terus berkembang seiring dengan kemampuan algoritma untuk mengekstrak wawasan dari data.</p>
+
+        <h3>5. Keamanan Algoritma</h3>
+        <p>Algoritma yang kompleks, terutama dalam sistem keamanan siber, dapat menjadi target serangan. Musuh dapat mencari kerentanan dalam algoritma kriptografi, atau mencoba "mengelabui" algoritma pembelajaran mesin dengan data yang dimanipulasi (adversarial attacks) untuk menyebabkan keputusan yang salah atau berbahaya.</p>
+
+        <h3>6. Komputasi Kuantum</h3>
+        <p>Salah satu batas masa depan algoritma adalah komputasi kuantum. Komputer kuantum menjanjikan kemampuan untuk menyelesaikan jenis masalah tertentu yang saat ini tidak mungkin dipecahkan oleh komputer klasik, termasuk beberapa masalah kriptografi yang penting. Ini berarti algoritma yang saat ini dianggap aman mungkin perlu diganti di masa depan dengan algoritma "post-kuantum" yang tahan terhadap serangan dari komputer kuantum.</p>
+
+        <h3>7. Algoritma yang Belajar dan Beradaptasi</h3>
+        <p>Masa depan algoritma akan semakin berfokus pada sistem yang dapat belajar, beradaptasi, dan bahkan "menciptakan" algoritma baru (meta-learning, automl). Ini akan membawa tingkat otonomi dan kecerdasan yang belum pernah terjadi sebelumnya ke dalam sistem komputasi, tetapi juga memperbesar tantangan yang disebutkan di atas.</p>
+
+        <h2>Kesimpulan: Masa Depan yang Dibentuk oleh Logika</h2>
+
+        <p>Algoritma adalah fondasi yang tak tergoyahkan dari dunia digital modern kita. Dari operasi sederhana seperti pencarian dan pengurutan hingga sistem kecerdasan buatan yang kompleks, algoritma adalah inti dari setiap keputusan, setiap tindakan, dan setiap inovasi teknologi. Mereka adalah bahasa di mana kita menginstruksikan komputer untuk memecahkan masalah, mengotomatisasi tugas, dan mengekstrak makna dari data.</p>
+
+        <p>Memahami algoritma bukan hanya tentang menguasai sintaksis kode atau menghafal kompleksitas Big O. Ini tentang mengembangkan cara berpikir logis, analitis, dan sistematis yang dapat diterapkan pada masalah di berbagai domain. Ini tentang belajar bagaimana memecah masalah besar menjadi bagian-bagian yang lebih kecil, bagaimana merancang langkah-langkah yang jelas untuk mencapai tujuan, dan bagaimana mengevaluasi efisiensi dari solusi yang berbeda.</p>
+
+        <p>Seiring dengan terus berkembangnya teknologi, terutama di bidang kecerdasan buatan, peran algoritma akan semakin sentral. Namun, dengan kekuatan besar datanglah tanggung jawab besar. Kita sebagai masyarakat, baik pengembang, regulator, maupun pengguna, harus terlibat dalam diskusi tentang implikasi etis, sosial, dan ekonomi dari algoritma. Kita harus memastikan bahwa algoritma dirancang dan digunakan dengan cara yang adil, transparan, dan bermanfaat bagi seluruh umat manusia.</p>
+
+        <p>Pada akhirnya, algoritma adalah alat. Seperti semua alat, potensinya baik untuk membangun maupun menghancurkan bergantung pada tangan yang menggunakannya dan prinsip-prinsip yang memandunya. Dengan pemahaman yang mendalam dan pendekatan yang bijaksana, kita dapat memanfaatkan kekuatan algoritma untuk membangun masa depan yang lebih cerdas, lebih efisien, dan lebih baik bagi semua.</p>
+
+    </div>
+
+    <footer>
+        <p>&copy; Artikel Algoritma. Hak Cipta Dilindungi.</p>
+    </footer>
+
+
+<style>
+.related-posts {
+  clear: both;
+  display: block;
+  width: 100%;
+  margin: 30px auto;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.related-posts h3 {
+  margin-top: 0;
+}
+.related-posts ul {
+  list-style: none;
+  padding: 0;
+}
+.related-posts li {
+  margin: 6px 0;
+}
+</style>
+<div class='related-posts'><h3>Related Posts</h3><ul><li><a href="/bandol">Bandol</a></li>
+<li><a href="/arip">Arip</a></li>
+<li><a href="/basi">Basi</a></li>
+<li><a href="/amnesia">Amnesia</a></li>
+<li><a href="/asbes">Asbes</a></li>
+<li><a href="/alak">Alak</a></li>
+<li><a href="/anatomi">Anatomi</a></li>
+<li><a href="/anafilaksis">Anafilaksis</a></li>
+<li><a href="/arboretum">Arboretum</a></li>
+<li><a href="/batalyon">Batalyon</a></li></ul></div>
+<script src="/ik.js"></script>
+</body>
+</html>

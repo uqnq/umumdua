@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memahami Berbagai Bagian: Esensi Struktur & Fungsi</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;600&display=swap');
+
+        :root {
+            --primary-bg: #F8FAFC; /* Sangat terang, hampir putih */
+            --secondary-bg: #E0F7FA; /* Biru muda cerah */
+            --accent-color: #26C6DA; /* Biru teal cerah */
+            --text-color: #333333;
+            --heading-color: #00796B; /* Hijau teal gelap */
+            --link-color: #00BCD4; /* Biru langit cerah */
+            --border-color: #B2EBF2; /* Biru cyan sangat muda */
+        }
+
+        body {
+            font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        header {
+            background-color: var(--secondary-bg);
+            color: var(--heading-color);
+            padding: 2em 1em;
+            text-align: center;
+            border-bottom: 2px solid var(--border-color);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2em;
+            font-family: 'Lato', sans-serif;
+            color: var(--heading-color);
+        }
+
+        main {
+            max-width: 900px;
+            margin: 2em auto;
+            padding: 0 1.5em;
+            background-color: #FFFFFF;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        article {
+            padding: 2em 0;
+        }
+
+        section {
+            margin-bottom: 3em;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 2em;
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        h2 {
+            font-family: 'Lato', sans-serif;
+            color: var(--heading-color);
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            margin-bottom: 0.8em;
+            border-left: 5px solid var(--accent-color);
+            padding-left: 10px;
+        }
+
+        h3 {
+            font-family: 'Lato', sans-serif;
+            color: var(--accent-color);
+            font-size: 1.4em;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+        }
+
+        h4 {
+            font-family: 'Lato', sans-serif;
+            color: #0097A7; /* Slightly darker accent */
+            font-size: 1.1em;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+
+        p {
+            margin-bottom: 1em;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin-bottom: 1em;
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        footer {
+            background-color: var(--secondary-bg);
+            color: var(--heading-color);
+            text-align: center;
+            padding: 1.5em 1em;
+            margin-top: 3em;
+            border-top: 2px solid var(--border-color);
+        }
+
+        .image-container {
+            text-align: center;
+            margin: 2em 0;
+            background-color: var(--primary-bg);
+            padding: 1.5em;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        .image-container svg {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            stroke: var(--accent-color);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        figcaption {
+            font-style: italic;
+            color: #666;
+            margin-top: 0.8em;
+            font-size: 0.9em;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            main {
+                margin: 1em auto;
+                padding: 0 1em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            ul, ol {
+                padding-left: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5em;
+            }
+
+            main {
+                margin: 0.5em auto;
+                padding: 0 0.8em;
+            }
+
+            h2 {
+                font-size: 1.4em;
+            }
+
+            h3 {
+                font-size: 1.1em;
+            }
+
+            body {
+                font-size: 0.95em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Memahami Berbagai Bagian: Esensi Struktur dan Fungsi</h1>
+    </header>
+
+    <main>
+        <article>
+            <section id="pendahuluan">
+                <h2>Pendahuluan</h2>
+                <p>Dalam setiap aspek kehidupan, mulai dari organisme terkecil hingga sistem kompleks berskala global, kita selalu menemukan konsep 'bagian'. Bagian merujuk pada komponen, elemen, atau fragmen yang secara kolektif membentuk suatu keseluruhan. Memahami berbagai bagian dan bagaimana mereka berinteraksi adalah kunci untuk mengungkap struktur, fungsi, dan dinamika dari segala sesuatu di sekitar kita. Artikel ini akan membawa Anda dalam perjalanan mendalam untuk menjelajahi berbagai 'bagian' di beragam konteks, mulai dari biologi, teknologi, hingga sosial dan astronomi. Kita akan melihat bagaimana setiap bagian memiliki peran uniknya, dan bagaimana kegagalan atau perubahan pada satu bagian dapat memengaruhi keseluruhan sistem.</p>
+                <p>Konsep ‘bagian’ bukan sekadar pembagian fisik, melainkan juga melibatkan pemahaman fungsional dan relasional. Misalnya, sebuah buku terdiri dari bagian-bagian seperti bab dan halaman, namun ia juga memiliki bagian abstrak seperti alur cerita, karakter, dan pesan moral. Demikian pula, sebuah negara terdiri dari bagian-bagian geografis dan administratif, tetapi juga bagian-bagian sosial seperti warga negara, budaya, dan nilai-nilai. Dengan menganalisis setiap bagian secara cermat, kita dapat memperoleh perspektif yang lebih komprehensif tentang bagaimana entitas bekerja, berkembang, dan berinteraksi dalam lingkungannya. Mari kita selami lebih jauh beragam dunia yang dibangun dari kumpulan bagian-bagian yang menakjubkan ini.</p>
+                <p>Pentingnya memahami bagian-bagian tidak terbatas pada disiplin ilmu tertentu. Dalam bidang kedokteran, pengetahuan tentang bagian-bagian tubuh manusia dan fungsinya sangat esensial untuk diagnosis dan pengobatan. Dalam rekayasa, pemahaman tentang bagian-bagian mesin memungkinkan perancangan yang efisien dan pemeliharaan yang tepat. Di ranah sosial, pengenalan terhadap bagian-bagian masyarakat dan interaksi antar mereka membantu dalam pembangunan komunitas yang harmonis. Bahkan dalam filsafat, konsep 'bagian' sering digunakan untuk memecah masalah kompleks menjadi elemen-elemen yang lebih kecil dan lebih mudah dianalisis. Oleh karena itu, kemampuan untuk mengidentifikasi, menganalisis, dan memahami 'bagian' adalah keterampilan fundamental yang memperkaya cara kita berinteraksi dengan dunia.</p>
+                <p>Artikel ini akan mengkaji berbagai contoh dari konsep 'bagian' ini. Kita akan mulai dengan bagian-bagian tubuh manusia, yang merupakan mesin biologis paling kompleks yang kita kenal, lalu beralih ke struktur fundamental tumbuhan, komponen esensial dari teknologi modern seperti komputer, elemen-elemen pembentuk sebuah rumah, anatomi sebuah buku atau karya tulis, serta bagaimana konsep bagian berlaku dalam sistem dan proses yang lebih luas, seperti lingkungan dan bahkan tata surya. Setiap bagian akan dijelaskan secara rinci, menyoroti fungsi, interkoneksi, dan signifikansinya. Bersiaplah untuk mendapatkan wawasan baru tentang betapa integralnya setiap 'bagian' dalam membentuk realitas kita.</p>
+            </section>
+
+            <section id="tubuh-manusia">
+                <h2>Bagian Tubuh Manusia</h2>
+                <div class="image-container">
+                    <svg width="150" height="200" viewBox="0 0 150 200" fill="none" stroke="var(--accent-color)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" role="img" aria-labelledby="human-body-desc">
+                        <title id="human-body-desc">Ilustrasi sederhana tubuh manusia</title>
+                        <circle cx="75" cy="40" r="30"/> <!-- Kepala -->
+                        <line x1="75" y1="70" x2="75" y2="130"/> <!-- Badan -->
+                        <line x1="75" y1="85" x2="35" y2="115"/> <!-- Lengan kiri -->
+                        <line x1="75" y1="85" x2="115" y2="115"/> <!-- Lengan kanan -->
+                        <line x1="75" y1="130" x2="55" y2="190"/> <!-- Kaki kiri -->
+                        <line x1="75" y1="130" x2="95" y2="190"/> <!-- Kaki kanan -->
+                    </svg>
+                    <figcaption>Ilustrasi sederhana menunjukkan bagian-bagian utama tubuh manusia.</figcaption>
+                </div>
+                <p>Tubuh manusia adalah mahakarya biologis yang terdiri dari triliunan sel yang terorganisasi menjadi jaringan, organ, dan sistem yang saling terkait. Setiap 'bagian' memiliki peran krusial dalam menjaga kehidupan dan fungsi tubuh secara keseluruhan. Memahami anatomi dan fisiologi bagian-bagian ini bukan hanya penting bagi tenaga medis, tetapi juga bagi setiap individu untuk menghargai kompleksitas dan kerapuhan keberadaan kita.</p>
+
+                <h3>Sistem Rangka</h3>
+                <p>Sistem rangka adalah kerangka internal tubuh yang memberikan dukungan struktural, perlindungan organ vital, dan tempat menempelnya otot. Bagian-bagian utama sistem ini meliputi:</p>
+                <ul>
+                    <li><strong>Tulang:</strong> Ada sekitar 206 tulang pada tubuh manusia dewasa, yang terbagi menjadi rangka aksial (tengkorak, tulang belakang, tulang rusuk, tulang dada) dan rangka apendikular (tulang anggota gerak atas dan bawah, serta tulang panggul dan bahu). Tulang tidak hanya berfungsi sebagai penyangga, tetapi juga sebagai pabrik sel darah (sumsum tulang) dan tempat penyimpanan mineral seperti kalsium dan fosfor. Setiap tulang, dari tengkorak yang melindungi otak hingga falang jari yang memungkinkan genggaman, adalah bagian vital yang berkontribusi pada integritas struktural tubuh.</li>
+                    <li><strong>Sendi:</strong> Sendi adalah titik pertemuan antara dua tulang atau lebih, yang memungkinkan gerakan. Sendi dapat berupa sendi fibrosa (tidak bergerak, seperti sutura tengkorak), sendi kartilaginosa (bergerak sedikit, seperti sendi antar-ruas tulang belakang), atau sendi sinovial (bergerak bebas, seperti sendi lutut atau bahu). Bagian-bagian sendi sinovial yang kompleks, seperti tulang rawan, kapsul sendi, ligamen, dan cairan sinovial, bekerja sama untuk memungkinkan gerakan mulus tanpa gesekan.</li>
+                    <li><strong>Ligamen:</strong> Ligamen adalah pita jaringan ikat kuat yang menghubungkan tulang dengan tulang, memberikan stabilitas pada sendi. Tanpa ligamen, sendi akan menjadi tidak stabil dan rentan terhadap dislokasi.</li>
+                </ul>
+
+                <h3>Sistem Otot</h3>
+                <p>Sistem otot memungkinkan gerakan, mempertahankan postur, dan menghasilkan panas. Ada tiga jenis otot utama, masing-masing dengan bagian dan fungsinya sendiri:</p>
+                <ul>
+                    <li><strong>Otot Rangka:</strong> Ini adalah otot volunter yang menempel pada tulang dan bertanggung jawab untuk gerakan sadar. Setiap otot rangka terdiri dari ribuan serat otot yang dikelompokkan menjadi fasikulus, dilapisi oleh jaringan ikat. Kontraksi dan relaksasi serat-serat ini, yang dipicu oleh sinyal saraf, adalah dasar dari setiap gerakan yang kita lakukan, dari berjalan hingga berekspresi wajah.</li>
+                    <li><strong>Otot Polos:</strong> Otot ini bersifat involunter dan ditemukan di dinding organ internal seperti saluran pencernaan, pembuluh darah, dan kandung kemih. Gerakannya tidak berada di bawah kendali sadar kita, tetapi sangat penting untuk fungsi organ. Misalnya, otot polos di usus mendorong makanan melalui saluran pencernaan.</li>
+                    <li><strong>Otot Jantung:</strong> Hanya ditemukan di jantung, otot ini juga involunter. Serat otot jantung memiliki struktur unik yang memungkinkannya berkontraksi secara ritmis dan terus-menerus tanpa lelah, memompa darah ke seluruh tubuh. Bagian-bagian mikroskopisnya yang saling terhubung membentuk jaringan yang efisien untuk transmisi impuls listrik.</li>
+                </ul>
+
+                <h3>Sistem Saraf</h3>
+                <p>Sistem saraf adalah pusat kendali tubuh, mengoordinasikan semua aktivitas dan memungkinkan interaksi dengan lingkungan. Bagian-bagian utamanya adalah:</p>
+                <ul>
+                    <li><strong>Otak:</strong> Organ paling kompleks di tubuh, otak adalah pusat pemikiran, emosi, memori, dan kontrol tubuh. Bagian-bagiannya meliputi serebrum (korteks serebral untuk fungsi kognitif), serebelum (koordinasi gerakan), dan batang otak (fungsi vital seperti pernapasan dan detak jantung). Setiap lobus dan gyrus di otak memiliki spesialisasi fungsinya sendiri, namun bekerja dalam jaringan yang sangat terintegrasi.</li>
+                    <li><strong>Sumsum Tulang Belakang:</strong> Berada di dalam tulang belakang, sumsum tulang belakang adalah jalur komunikasi utama antara otak dan bagian tubuh lainnya. Ia juga terlibat dalam refleks.</li>
+                    <li><strong>Saraf Perifer:</strong> Jaringan saraf ini meluas dari otak dan sumsum tulang belakang ke seluruh tubuh, membawa informasi sensorik (dari indera ke otak) dan motorik (dari otak ke otot). Bagian-bagian saraf ini mencakup akson, dendrit, dan sel Schwann yang membentuk selubung mielin.</li>
+                </ul>
+
+                <h3>Sistem Pernapasan</h3>
+                <p>Sistem pernapasan bertanggung jawab untuk pertukaran gas, mengambil oksigen dan mengeluarkan karbon dioksida. Bagian-bagian pentingnya meliputi:</p>
+                <ul>
+                    <li><strong>Saluran Napas Atas:</strong> Hidung, faring (tenggorokan), dan laring (kotak suara). Bagian-bagian ini menyaring, menghangatkan, dan melembapkan udara sebelum mencapai paru-paru.</li>
+                    <li><strong>Saluran Napas Bawah:</strong> Trakea (batang tenggorokan), bronkus, bronkiolus, dan alveoli. Alveoli adalah kantung udara kecil tempat pertukaran gas sebenarnya terjadi. Setiap alveolus, meski mikroskopis, adalah bagian vital yang memungkinkan tubuh mengambil oksigen yang diperlukan untuk kelangsungan hidup.</li>
+                    <li><strong>Paru-paru:</strong> Organ utama pernapasan, tempat jutaan alveoli berada.</li>
+                </ul>
+
+                <h3>Sistem Pencernaan</h3>
+                <p>Sistem pencernaan memecah makanan menjadi nutrisi yang dapat diserap tubuh. Proses ini melibatkan banyak 'bagian':</p>
+                <ul>
+                    <li><strong>Saluran Cerna (Gastrointestinal Tract):</strong> Mulut, kerongkongan (esofagus), lambung, usus halus (duodenum, jejunum, ileum), usus besar (kolon, rektum), dan anus. Setiap bagian memiliki peran spesifik dalam pencernaan dan penyerapan. Lambung mengolah makanan dengan asam, usus halus menyerap sebagian besar nutrisi, dan usus besar menyerap air dan membentuk feses.</li>
+                    <li><strong>Organ Aksesori:</strong> Hati (menghasilkan empedu), kantung empedu (menyimpan empedu), dan pankreas (menghasilkan enzim pencernaan dan hormon). Bagian-bagian ini bukan jalur langsung makanan, tetapi esensial untuk proses pencernaan.</li>
+                </ul>
+
+                <h3>Sistem Peredaran Darah (Kardiovaskular)</h3>
+                <p>Sistem ini mengangkut oksigen, nutrisi, hormon, dan limbah ke seluruh tubuh. Bagian-bagian kuncinya adalah:</p>
+                <ul>
+                    <li><strong>Jantung:</strong> Otot berongga yang berfungsi sebagai pompa utama. Jantung memiliki empat bilik (dua atrium dan dua ventrikel) dan katup-katup yang memastikan aliran darah searah. Setiap katup dan bilik adalah bagian krusial yang harus berfungsi sempurna untuk menjaga sirkulasi darah.</li>
+                    <li><strong>Pembuluh Darah:</strong> Arteri (membawa darah dari jantung), vena (membawa darah ke jantung), dan kapiler (tempat pertukaran zat antara darah dan jaringan). Pembuluh darah membentuk jaringan kompleks yang membawa darah ke setiap sel.</li>
+                    <li><strong>Darah:</strong> Terdiri dari plasma, sel darah merah (mengangkut oksigen), sel darah putih (kekebalan), dan trombosit (pembekuan). Setiap komponen darah adalah bagian integral yang memiliki fungsi unik.</li>
+                </ul>
+
+                <h3>Sistem Endokrin</h3>
+                <p>Sistem endokrin adalah jaringan kelenjar yang menghasilkan dan melepaskan hormon untuk mengatur berbagai fungsi tubuh, termasuk metabolisme, pertumbuhan, dan reproduksi. Bagian-bagian pentingnya meliputi:</p>
+                <ul>
+                    <li><strong>Kelenjar Hipofisis:</strong> Sering disebut "kelenjar master" karena mengatur banyak kelenjar endokrin lainnya. Terletak di dasar otak, ia menghasilkan berbagai hormon yang memengaruhi pertumbuhan, fungsi tiroid, fungsi adrenal, dan fungsi reproduksi.</li>
+                    <li><strong>Kelenjar Tiroid:</strong> Terletak di leher, menghasilkan hormon tiroid yang mengatur metabolisme tubuh dan tingkat energi.</li>
+                    <li><strong>Kelenjar Adrenal:</strong> Terletak di atas ginjal, menghasilkan hormon seperti kortisol dan adrenalin yang terlibat dalam respons stres dan metabolisme.</li>
+                    <li><strong>Pankreas:</strong> Selain fungsi pencernaan, pankreas juga menghasilkan insulin dan glukagon yang mengatur kadar gula darah.</li>
+                    <li><strong>Kelenjar Reproduksi (Gonad):</strong> Testis pada pria dan ovarium pada wanita, menghasilkan hormon seks yang bertanggung jawab untuk karakteristik seksual sekunder dan reproduksi.</li>
+                </ul>
+
+                <h3>Sistem Kekebalan Tubuh (Imun)</h3>
+                <p>Sistem imun adalah mekanisme pertahanan tubuh terhadap infeksi dan penyakit. Ia terdiri dari berbagai 'bagian' yang bekerja sama:</p>
+                <ul>
+                    <li><strong>Sel Darah Putih (Leukosit):</strong> Berbagai jenis leukosit seperti neutrofil, limfosit (sel B dan sel T), monosit, dan eosinofil, masing-masing dengan peran spesifik dalam mengidentifikasi dan menghancurkan patogen.</li>
+                    <li><strong>Organ Limfoid:</strong> Sumsum tulang (tempat produksi sel imun), timus (tempat pematangan sel T), limpa (menyaring darah dan menyimpan sel imun), dan kelenjar getah bening (menyaring limfe dan tempat interaksi sel imun). Setiap organ ini adalah bagian penting dalam melatih dan menampung pasukan pertahanan tubuh.</li>
+                    <li><strong>Antibodi:</strong> Protein yang diproduksi oleh sel B untuk menetralkan atau menandai patogen agar dihancurkan oleh sel imun lainnya.</li>
+                </ul>
+
+                <h3>Sistem Reproduksi</h3>
+                <p>Sistem reproduksi bertanggung jawab untuk kelangsungan spesies. Bagian-bagiannya berbeda pada pria dan wanita:</p>
+                <ul>
+                    <li><strong>Pada Pria:</strong> Testis (menghasilkan sperma dan hormon testosteron), epididimis (tempat pematangan sperma), vas deferens (menyimpan dan mengangkut sperma), kelenjar prostat dan vesikula seminalis (menghasilkan cairan seminal), dan penis.</li>
+                    <li><strong>Pada Wanita:</strong> Ovarium (menghasilkan sel telur dan hormon estrogen/progesteron), tuba fallopi (saluran telur), rahim (tempat perkembangan janin), serviks (leher rahim), dan vagina.</li>
+                </ul>
+
+                <h3>Sistem Urinaria (Perkemihan)</h3>
+                <p>Sistem urinaria berfungsi menyaring darah dan membuang produk limbah dalam bentuk urin. Bagian-bagian utamanya adalah:</p>
+                <ul>
+                    <li><strong>Ginjal:</strong> Sepasang organ berbentuk kacang yang menyaring darah, membuang limbah nitrogen, dan mengatur keseimbangan air serta elektrolit. Setiap ginjal terdiri dari jutaan nefron, unit fungsional yang melakukan penyaringan.</li>
+                    <li><strong>Ureter:</strong> Saluran yang membawa urin dari ginjal ke kandung kemih.</li>
+                    <li><strong>Kandung Kemih:</strong> Kantung berotot yang menyimpan urin.</li>
+                    <li><strong>Uretra:</strong> Saluran yang membawa urin dari kandung kemih ke luar tubuh.</li>
+                </ul>
+
+                <h3>Sistem Indera</h3>
+                <p>Sistem indera memungkinkan kita untuk merasakan dan menafsirkan lingkungan. Bagian-bagian ini adalah jembatan kita dengan dunia:</p>
+                <ul>
+                    <li><strong>Mata:</strong> Bagian-bagiannya meliputi kornea, lensa, iris, retina, dan saraf optik. Retina mengandung fotoreseptor yang mendeteksi cahaya, mengirimkan sinyal ke otak untuk diinterpretasikan sebagai penglihatan.</li>
+                    <li><strong>Telinga:</strong> Terdiri dari telinga luar (mengumpulkan suara), telinga tengah (menguatkan suara dengan tulang-tulang kecil), dan telinga dalam (mengubah gelombang suara menjadi sinyal saraf dan bertanggung jawab atas keseimbangan).</li>
+                    <li><strong>Kulit:</strong> Organ terbesar tubuh, kulit mengandung reseptor sentuhan, tekanan, suhu, dan nyeri. Bagian-bagiannya adalah epidermis, dermis, dan hipodermis.</li>
+                    <li><strong>Lidah:</strong> Mengandung kuncup pengecap yang mendeteksi rasa manis, asam, asin, pahit, dan umami.</li>
+                    <li><strong>Hidung:</strong> Mengandung reseptor olfaktori yang mendeteksi bau.</li>
+                </ul>
+                <p>Secara keseluruhan, tubuh manusia adalah orkestra yang harmonis dari bagian-bagian yang saling bekerja sama. Kerusakan atau disfungsi pada satu bagian dapat memiliki efek domino pada seluruh sistem, menunjukkan betapa pentingnya pemeliharaan dan pemahaman terhadap setiap komponen.</p>
+            </section>
+
+            <section id="tumbuhan">
+                <h2>Bagian Tumbuhan</h2>
+                <div class="image-container">
+                    <svg width="150" height="200" viewBox="0 0 150 200" fill="none" stroke="var(--accent-color)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" role="img" aria-labelledby="plant-desc">
+                        <title id="plant-desc">Ilustrasi sederhana tumbuhan dengan akar, batang, daun, dan bunga</title>
+                        <!-- Akar -->
+                        <path d="M75 160 Q60 180 50 190 M75 160 Q90 180 100 190 M75 160 V180" stroke="var(--heading-color)" stroke-width="3"/>
+                        <!-- Batang -->
+                        <line x1="75" y1="160" x2="75" y2="60"/>
+                        <!-- Daun kiri bawah -->
+                        <path d="M75 120 Q50 110 40 100 Q40 120 75 120 Z" fill="var(--link-color)" stroke-width="2"/>
+                        <!-- Daun kanan bawah -->
+                        <path d="M75 120 Q100 110 110 100 Q110 120 75 120 Z" fill="var(--link-color)" stroke-width="2"/>
+                        <!-- Daun kiri atas -->
+                        <path d="M75 80 Q55 70 45 60 Q45 80 75 80 Z" fill="var(--link-color)" stroke-width="2"/>
+                        <!-- Daun kanan atas -->
+                        <path d="M75 80 Q95 70 105 60 Q105 80 75 80 Z" fill="var(--link-color)" stroke-width="2"/>
+                        <!-- Bunga -->
+                        <circle cx="75" cy="50" r="15" fill="#FFC107" stroke="var(--accent-color)" stroke-width="2"/>
+                        <path d="M75 50 L65 35 L75 25 L85 35 Z M75 50 L90 45 L95 60 L80 65 Z M75 50 L85 70 L70 75 L60 60 Z M75 50 L60 65 L55 50 L65 35 Z" fill="#F48FB1" stroke="var(--accent-color)" stroke-width="1"/>
+                    </svg>
+                    <figcaption>Ilustrasi sederhana menunjukkan bagian-bagian utama tumbuhan: akar, batang, daun, dan bunga.</figcaption>
+                </div>
+                <p>Tumbuhan adalah organisme autotrof yang menjadi fondasi sebagian besar ekosistem di Bumi. Setiap 'bagian' dari tumbuhan dirancang secara efisien untuk menjalankan fungsi-fungsi vital seperti fotosintesis, penyerapan nutrisi, reproduksi, dan penopang struktural. Memahami bagian-bagian ini krusial untuk pertanian, botani, dan juga untuk mengapresiasi peran tumbuhan dalam siklus kehidupan.</p>
+
+                <h3>Akar</h3>
+                <p>Akar adalah bagian tumbuhan yang umumnya tumbuh di bawah tanah, meskipun ada juga akar yang tumbuh di atas tanah (akar udara). Fungsi utama akar meliputi:</p>
+                <ul>
+                    <li><strong>Penyerapan Air dan Mineral:</strong> Melalui rambut akar yang halus, akar menyerap air dan mineral esensial dari tanah, yang kemudian diangkut ke seluruh bagian tumbuhan. Struktur akar yang bercabang-cabang dan luas permukaannya yang besar merupakan bagian integral dari efisiensi penyerapan ini.</li>
+                    <li><strong>Penjangkaran:</strong> Akar menahan tumbuhan agar tetap tegak dan tidak mudah tumbang oleh angin atau gangguan lainnya. Sistem perakaran yang kokoh adalah bagian penting dari stabilitas tumbuhan.</li>
+                    <li><strong>Penyimpanan Makanan:</strong> Pada beberapa tumbuhan, seperti wortel dan ubi jalar, akar juga berfungsi sebagai tempat penyimpanan cadangan makanan.</li>
+                    <li><strong>Sintesis Hormon:</strong> Beberapa hormon tumbuhan juga diproduksi di akar.</li>
+                </ul>
+                <p>Jenis akar bervariasi, termasuk akar tunggang (memiliki akar utama yang besar dengan cabang-cabang kecil, umum pada dikotil) dan akar serabut (terdiri dari banyak akar berukuran sama, umum pada monokotil). Setiap jenis akar adalah bagian adaptif yang sesuai dengan lingkungan dan kebutuhan tumbuhan.</p>
+
+                <h3>Batang</h3>
+                <p>Batang adalah bagian tumbuhan yang tumbuh di atas tanah, menghubungkan akar dengan daun dan bunga. Fungsi-fungsi penting batang adalah:</p>
+                <ul>
+                    <li><strong>Penopang:</strong> Batang menopang daun, bunga, dan buah agar terpapar cahaya matahari secara optimal dan memungkinkan reproduksi. Kekuatan dan kekakuan batang merupakan bagian vital dari arsitektur tumbuhan.</li>
+                    <li><strong>Transportasi:</strong> Batang berisi jaringan vaskular (xilem dan floem). Xilem mengangkut air dan mineral dari akar ke seluruh bagian tumbuhan, sementara floem mengangkut hasil fotosintesis (gula) dari daun ke bagian lain yang membutuhkan energi. Jaringan ini adalah bagian dari sistem distribusi internal tumbuhan.</li>
+                    <li><strong>Penyimpanan:</strong> Beberapa batang, seperti pada tebu atau kentang (umbi batang), berfungsi sebagai tempat penyimpanan makanan atau air.</li>
+                    <li><strong>Perbanyakan Vegetatif:</strong> Batang juga bisa menjadi bagian yang penting untuk perbanyakan aseksual melalui stek, cangkok, atau stolon.</li>
+                </ul>
+                <p>Struktur internal batang meliputi korteks, empulur, dan silinder vaskular yang berisi xilem dan floem. Lapisan kambium pada tumbuhan berkayu memungkinkan pertumbuhan diameter batang seiring waktu.</p>
+
+                <h3>Daun</h3>
+                <p>Daun adalah organ utama untuk fotosintesis, proses di mana tumbuhan mengubah energi cahaya menjadi makanan. Bagian-bagian utama daun meliputi:</p>
+                <ul>
+                    <li><strong>Helai Daun (Lamina):</strong> Bagian datar dan lebar yang memaksimalkan penangkapan cahaya matahari. Helai daun memiliki jaringan mesofil yang kaya kloroplas, tempat fotosintesis terjadi. Venasi (susunan tulang daun) adalah bagian struktural yang mendukung helai daun dan mengangkut air serta nutrisi.</li>
+                    <li><strong>Tangkai Daun (Petiole):</strong> Menghubungkan helai daun ke batang, memungkinkan helai daun bergerak untuk mendapatkan cahaya optimal.</li>
+                    <li><strong>Pelepah Daun (Leaf Sheath):</strong> Pada beberapa tumbuhan, seperti rumput, pelepah daun membungkus batang.</li>
+                    <li><strong>Stoma (Stomata):</strong> Pori-pori kecil di permukaan daun yang diapit oleh sel penjaga, memungkinkan pertukaran gas (CO2 masuk, O2 dan uap air keluar). Stoma adalah bagian vital untuk respirasi dan transpirasi.</li>
+                </ul>
+                <p>Kloroplas, yang mengandung pigmen klorofil, adalah bagian seluler yang bertanggung jawab atas warna hijau daun dan kemampuan fotosintesisnya. Tanpa bagian ini, tumbuhan tidak dapat memproduksi makanannya sendiri.</p>
+
+                <h3>Bunga</h3>
+                <p>Bunga adalah struktur reproduksi pada tumbuhan berbunga (Angiospermae). Bagian-bagiannya dirancang untuk menarik penyerbuk dan memungkinkan pembuahan:</p>
+                <ul>
+                    <li><strong>Kelopak (Sepal):</strong> Biasanya hijau, melindungi kuncup bunga yang belum mekar.</li>
+                    <li><strong>Mahkota (Petal):</strong> Seringkali berwarna cerah dan harum untuk menarik serangga atau hewan penyerbuk. Bentuk dan warna mahkota adalah bagian penting dari strategi penyerbukan.</li>
+                    <li><strong>Benang Sari (Stamen):</strong> Organ reproduksi jantan, terdiri dari filamen (tangkai) dan antera (mengandung serbuk sari). Serbuk sari adalah bagian yang membawa gamet jantan.</li>
+                    <li><strong>Putik (Pistil/Carpel):</strong> Organ reproduksi betina, terdiri dari stigma (menerima serbuk sari), tangkai putik (style), dan ovarium (mengandung ovula, yang akan menjadi biji setelah pembuahan). Ovarium adalah bagian penting yang melindungi ovula.</li>
+                </ul>
+                <p>Keberadaan dan struktur setiap bagian bunga sangat penting untuk keberhasilan reproduksi, yang pada akhirnya memastikan kelangsungan hidup spesies tumbuhan.</p>
+
+                <h3>Buah</h3>
+                <p>Buah adalah ovarium yang matang dari tumbuhan berbunga, yang melindungi biji dan membantu penyebarannya. Bagian-bagian buah umumnya meliputi:</p>
+                <ul>
+                    <li><strong>Perikarp:</strong> Dinding buah yang berkembang dari dinding ovarium. Perikarp dapat dibagi menjadi eksokarp (kulit luar), mesokarp (daging buah), dan endokarp (lapisan terdalam yang mengelilingi biji). Setiap lapisan ini adalah bagian yang memegang peran dalam perlindungan dan penyebaran biji.</li>
+                    <li><strong>Biji:</strong> Terkandung di dalam buah.</li>
+                </ul>
+                <p>Fungsi buah bukan hanya untuk melindungi biji tetapi juga untuk menarik hewan pemakan buah, yang kemudian akan membantu menyebarkan biji melalui feses mereka. Mekanisme penyebaran ini adalah bagian krusial dari siklus hidup tumbuhan.</p>
+
+                <h3>Biji</h3>
+                <p>Biji adalah embrio tumbuhan yang terlindungi dalam lapisan pelindung dan seringkali disertai dengan cadangan makanan. Biji adalah hasil akhir dari reproduksi seksual pada tumbuhan berbunga. Bagian-bagian biji meliputi:</p>
+                <ul>
+                    <li><strong>Embrio:</strong> Tumbuhan kecil yang belum berkembang sepenuhnya, yang akan tumbuh menjadi tumbuhan dewasa. Embrio terdiri dari radikula (akar embrionik), plumula (batang dan daun embrionik), dan kotiledon (daun biji).</li>
+                    <li><strong>Endosperm/Kotiledon:</strong> Jaringan penyimpan makanan yang memberi nutrisi pada embrio saat perkecambahan. Pada beberapa biji, makanan disimpan di endosperm, sementara pada yang lain, makanan disimpan di kotiledon.</li>
+                    <li><strong>Kulit Biji (Testa):</strong> Lapisan pelindung keras di bagian luar biji yang melindunginya dari kerusakan fisik dan kekeringan.</li>
+                </ul>
+                <p>Setiap bagian dari biji sangat penting untuk keberhasilan perkecambahan dan pertumbuhan tumbuhan baru. Kemampuan biji untuk tetap dorman dan kemudian berkecambah adalah bagian penting dari strategi kelangsungan hidup tumbuhan.</p>
+                <p>Keseluruhan bagian-bagian tumbuhan ini bekerja secara sinergis untuk mendukung kehidupan, pertumbuhan, dan reproduksi. Tanpa satu bagian pun, fungsi keseluruhan tumbuhan akan terganggu atau bahkan terhenti, menyoroti pentingnya setiap komponen dalam organisme hidup ini.</p>
+            </section>
+
+            <section id="komputer">
+                <h2>Bagian Komputer</h2>
+                <div class="image-container">
+                    <svg width="200" height="120" viewBox="0 0 200 120" fill="none" stroke="var(--accent-color)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" role="img" aria-labelledby="computer-desc">
+                        <title id="computer-desc">Ilustrasi sederhana komputer desktop</title>
+                        <!-- Monitor -->
+                        <rect x="10" y="10" width="100" height="70" rx="8" ry="8" fill="var(--secondary-bg)"/>
+                        <rect x="15" y="15" width="90" height="60" fill="#FFFFFF"/>
+                        <line x1="60" y1="80" x2="60" y2="95"/>
+                        <rect x="45" y="95" width="30" height="15" rx="3" ry="3"/>
+
+                        <!-- Keyboard -->
+                        <rect x="120" y="70" width="70" height="40" rx="5" ry="5" fill="var(--secondary-bg)"/>
+                        <rect x="125" y="75" width="10" height="8" rx="2" ry="2" fill="#FFFFFF"/>
+                        <rect x="138" y="75" width="10" height="8" rx="2" ry="2" fill="#FFFFFF"/>
+                        <rect x="151" y="75" width="10" height="8" rx="2" ry="2" fill="#FFFFFF"/>
+                        <rect x="164" y="75" width="10" height="8" rx="2" ry="2" fill="#FFFFFF"/>
+                        <rect x="177" y="75" width="10" height="8" rx="2" ry="2" fill="#FFFFFF"/>
+
+                        <rect x="125" y="88" width="10" height="8" rx="2" ry="2" fill="#FFFFFF"/>
+                        <rect x="138" y="88" width="10" height="8" rx="2" ry="2" fill="#FFFFFF"/>
+                        <rect x="151" y="88" width="10" height="8" rx="2" ry="2" fill="#FFFFFF"/>
+                        <rect x="164" y="88" width="10" height="8" rx="2" ry="2" fill="#FFFFFF"/>
+                        <rect x="177" y="88" width="10" height="8" rx="2" ry="2" fill="#FFFFFF"/>
+
+                        <rect x="125" y="101" width="30" height="8" rx="2" ry="2" fill="#FFFFFF"/>
+                        <rect x="158" y="101" width="10" height="8" rx="2" ry="2" fill="#FFFFFF"/>
+                        <rect x="171" y="101" width="16" height="8" rx="2" ry="2" fill="#FFFFFF"/>
+                    </svg>
+                    <figcaption>Ilustrasi sederhana komputer dengan monitor dan keyboard.</figcaption>
+                </div>
+                <p>Komputer, dari yang sekecil ponsel pintar hingga superkomputer raksasa, adalah alat revolusioner yang terdiri dari berbagai 'bagian' yang bekerja sama secara terintegrasi untuk memproses informasi. Memahami setiap bagian, baik perangkat keras maupun perangkat lunak, esensial untuk mengapresiasi cara kerjanya dan bagaimana ia telah membentuk dunia modern.</p>
+
+                <h3>Perangkat Keras (Hardware)</h3>
+                <p>Perangkat keras adalah komponen fisik komputer yang dapat kita lihat dan sentuh. Setiap bagian memiliki fungsi spesifik:</p>
+                <ul>
+                    <li><strong>Unit Pemroses Sentral (CPU):</strong> Sering disebut "otak" komputer, CPU adalah bagian yang melakukan sebagian besar perhitungan dan instruksi. Terdiri dari Unit Kontrol (CU) yang mengelola aliran data dan instruksi, serta Unit Logika Aritmatika (ALU) yang melakukan operasi matematika dan logika. Kecepatan CPU, jumlah core, dan arsitekturnya adalah bagian penting yang menentukan kinerja komputer secara keseluruhan.</li>
+                    <li><strong>Memori Akses Acak (RAM):</strong> RAM adalah memori volatil yang digunakan untuk menyimpan data yang sedang aktif digunakan oleh CPU. Ini adalah bagian yang sangat cepat yang memungkinkan CPU mengakses data dengan cepat. Semakin besar kapasitas RAM, semakin banyak aplikasi yang dapat berjalan secara bersamaan dengan lancar.</li>
+                    <li><strong>Penyimpanan (Storage):</strong> Bagian ini bertanggung jawab untuk menyimpan data secara permanen. Ada dua jenis utama:
+                        <ul>
+                            <li><strong>Hard Disk Drive (HDD):</strong> Menyimpan data pada piringan magnetik yang berputar. Umumnya memiliki kapasitas besar dengan biaya per gigabyte yang lebih rendah.</li>
+                            <li><strong>Solid State Drive (SSD):</strong> Menyimpan data pada memori flash, lebih cepat, lebih tahan guncangan, dan lebih hemat energi dibandingkan HDD.</li>
+                            <p>Kedua jenis penyimpanan ini adalah bagian esensial untuk menyimpan sistem operasi, aplikasi, dan data pengguna.</p>
+                        </ul>
+                    </li>
+                    <li><strong>Papan Induk (Motherboard):</strong> Motherboard adalah papan sirkuit utama yang menghubungkan semua bagian perangkat keras komputer. Ini adalah pusat komunikasi di mana CPU, RAM, kartu grafis, dan perangkat periferal lainnya saling terhubung. Chipset pada motherboard adalah bagian krusial yang mengatur komunikasi antar komponen.</p></li>
+                    <li><strong>Unit Pemroses Grafis (GPU):</strong> Atau sering disebut kartu grafis. Bagian ini bertanggung jawab untuk memproses dan merender gambar, video, dan animasi. GPU sangat penting untuk game, desain grafis, dan aplikasi yang membutuhkan visual intensif. GPU modern sering memiliki memorinya sendiri (VRAM) untuk kinerja yang lebih baik.</li>
+                    <li><strong>Unit Catu Daya (PSU):</strong> PSU adalah bagian yang mengubah daya listrik dari stopkontak menjadi daya yang dapat digunakan oleh komponen komputer. PSU harus mampu menyediakan daya yang cukup untuk semua komponen agar sistem berfungsi stabil.</li>
+                    <li><strong>Perangkat Input/Output (I/O Devices):</strong>
+                        <ul>
+                            <li><strong>Input:</strong> Keyboard (memasukkan teks), Mouse (mengontrol kursor), Mikrofon (memasukkan suara), Webcam (memasukkan gambar/video).</li>
+                            <li><strong>Output:</strong> Monitor (menampilkan visual), Speaker (mengeluarkan suara), Printer (mencetak dokumen).</li>
+                            <p>Setiap perangkat I/O adalah bagian yang memungkinkan interaksi antara pengguna dan komputer.</p>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>Perangkat Lunak (Software)</h3>
+                <p>Perangkat lunak adalah instruksi atau program yang memberi tahu perangkat keras apa yang harus dilakukan. Ini adalah 'bagian' non-fisik komputer, namun tak kalah penting:</p>
+                <ul>
+                    <li><strong>Sistem Operasi (OS):</strong> Bagian terpenting dari perangkat lunak, OS (contoh: Windows, macOS, Linux, Android) adalah perangkat lunak yang mengelola semua sumber daya perangkat keras dan perangkat lunak lain. Ia menyediakan antarmuka pengguna dan mengelola file, memori, dan proses. Tanpa OS, perangkat keras tidak akan dapat berfungsi.</li>
+                    <li><strong>Aplikasi (Applications):</strong> Ini adalah program yang dirancang untuk melakukan tugas-tugas spesifik bagi pengguna, seperti pengolah kata (Microsoft Word), peramban web (Google Chrome), editor gambar (Adobe Photoshop), atau permainan video. Setiap aplikasi adalah bagian dari ekosistem perangkat lunak yang memungkinkan pengguna mencapai tujuan tertentu.</li>
+                    <li><strong>Driver:</strong> Driver adalah perangkat lunak khusus yang memungkinkan sistem operasi berkomunikasi dengan perangkat keras tertentu (misalnya, driver untuk kartu grafis, printer, atau kartu suara). Driver yang tepat adalah bagian yang esensial agar perangkat keras dapat berfungsi dengan benar.</li>
+                </ul>
+                <p>Interaksi antara perangkat keras dan perangkat lunak adalah inti dari fungsionalitas komputer. Perangkat keras menyediakan infrastruktur fisik, sementara perangkat lunak memberikan instruksi dan kemampuan. Kerusakan atau kegagalan pada salah satu 'bagian' ini dapat menyebabkan gangguan pada seluruh sistem, menunjukkan sifat saling ketergantungan yang kuat.</p>
+            </section>
+
+            <section id="rumah">
+                <h2>Bagian Rumah</h2>
+                <div class="image-container">
+                    <svg width="150" height="150" viewBox="0 0 150 150" fill="none" stroke="var(--accent-color)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" role="img" aria-labelledby="house-desc">
+                        <title id="house-desc">Ilustrasi sederhana sebuah rumah</title>
+                        <!-- Pondasi/Dasar -->
+                        <rect x="20" y="90" width="110" height="40" fill="var(--secondary-bg)"/>
+                        <!-- Dinding -->
+                        <rect x="20" y="40" width="110" height="50" fill="#E8F5E9"/>
+                        <!-- Atap -->
+                        <polygon points="10 40, 75 10, 140 40" fill="#80CBC4"/>
+                        <!-- Pintu -->
+                        <rect x="65" y="60" width="20" height="30" fill="#BDBDBD"/>
+                        <circle cx="80" cy="75" r="2" fill="#424242"/>
+                        <!-- Jendela -->
+                        <rect x="35" y="55" width="20" height="20" fill="#BBDEFB"/>
+                        <line x1="45" y1="55" x2="45" y2="75"/>
+                        <line x1="35" y1="65" x2="55" y2="65"/>
+
+                        <rect x="95" y="55" width="20" height="20" fill="#BBDEFB"/>
+                        <line x1="105" y1="55" x2="105" y2="75"/>
+                        <line x1="95" y1="65" x2="115" y2="65"/>
+                    </svg>
+                    <figcaption>Ilustrasi sederhana menunjukkan bagian-bagian utama sebuah rumah.</figcaption>
+                </div>
+                <p>Sebuah rumah bukan hanya sekadar bangunan, melainkan sebuah sistem kompleks yang dirancang untuk memberikan tempat berlindung, keamanan, dan kenyamanan. Setiap 'bagian' dari rumah memiliki tujuan arsitektural dan fungsional yang penting, berkontribusi pada integritas struktural dan kelayakan huni secara keseluruhan. Memahami bagian-bagian ini membantu kita dalam merancang, membangun, dan memelihara tempat tinggal yang aman dan efisien.</p>
+
+                <h3>Struktur Utama</h3>
+                <p>Bagian-bagian ini membentuk kerangka dasar dan kekuatan struktural rumah:</p>
+                <ul>
+                    <li><strong>Pondasi:</strong> Ini adalah bagian paling bawah dari rumah, yang menopang seluruh berat struktur dan mendistribusikannya ke tanah. Pondasi yang kuat dan stabil sangat penting untuk mencegah keretakan atau pergeseran bangunan di masa depan. Berbagai jenis pondasi, seperti pondasi batu kali, tiang pancang, atau rakit, adalah bagian fundamental yang disesuaikan dengan kondisi tanah.</li>
+                    <li><strong>Dinding:</strong> Dinding eksterior dan interior berfungsi sebagai pembatas ruang, penopang atap, dan memberikan insulasi terhadap cuaca dan suara. Dinding dapat terbuat dari berbagai bahan seperti bata, beton, kayu, atau gypsum. Bagian dinding ini juga tempat terpasangnya jendela dan pintu. Dinding juga memainkan peran penting dalam efisiensi energi rumah.</li>
+                    <li><strong>Kolom dan Balok:</strong> Pada konstruksi tertentu, kolom (vertikal) dan balok (horizontal) adalah bagian struktural yang menopang beban lantai dan atap, mentransfernya ke pondasi. Ini sangat penting untuk bangunan bertingkat.</li>
+                    <li><strong>Rangka Atap:</strong> Struktur rangka atap, yang biasanya terbuat dari kayu atau baja ringan, menopang penutup atap. Desain rangka atap adalah bagian krusial yang harus diperhitungkan untuk kekuatan dan drainase air hujan.</li>
+                    <li><strong>Atap:</strong> Bagian teratas rumah yang melindungi dari hujan, sinar matahari, angin, dan elemen cuaca lainnya. Material atap bervariasi dari genteng, seng, asbes, hingga dak beton. Atap adalah bagian pelindung utama sebuah rumah.</li>
+                    <li><strong>Lantai:</strong> Lantai adalah permukaan horizontal yang membentuk dasar ruangan. Terdiri dari berbagai lapisan, termasuk struktur penyangga, lapisan perata, dan penutup lantai (keramik, kayu, vinyl). Lantai yang kokoh dan rata adalah bagian penting untuk kenyamanan dan keamanan penghuni.</li>
+                </ul>
+
+                <h3>Ruangan dan Fungsi</h3>
+                <p>Rumah dibagi menjadi berbagai ruangan, masing-masing dengan 'bagian' fungsional dan tujuan spesifik:</p>
+                <ul>
+                    <li><strong>Ruang Tamu:</strong> Area untuk menyambut tamu dan bersosialisasi. Furnitur seperti sofa, meja kopi, dan dekorasi adalah bagian dari estetika dan fungsionalitas ruang ini.</li>
+                    <li><strong>Kamar Tidur:</strong> Ruangan pribadi untuk beristirahat dan tidur. Tempat tidur, lemari, dan meja samping adalah bagian esensial dari kamar tidur.</li>
+                    <li><strong>Dapur:</strong> Bagian untuk menyiapkan dan memasak makanan. Peralatan seperti kompor, oven, lemari es, wastafel, dan lemari penyimpanan adalah bagian integral dari dapur yang efisien. Desain tata letak dapur sangat memengaruhi alur kerja.</li>
+                    <li><strong>Kamar Mandi:</strong> Area untuk kebersihan pribadi, dilengkapi dengan toilet, wastafel, dan pancuran atau bak mandi. Ventilasi yang baik adalah bagian penting dari kamar mandi untuk mencegah kelembapan berlebih.</li>
+                    <li><strong>Ruang Makan:</strong> Tempat untuk makan bersama keluarga. Meja dan kursi makan adalah bagian inti dari ruang ini.</li>
+                    <li><strong>Area Servis/Mencuci:</strong> Bagian untuk kegiatan seperti mencuci pakaian, menyimpan alat kebersihan.</li>
+                    <li><strong>Garasi/Carport:</strong> Untuk memarkir kendaraan dan kadang menyimpan barang.</li>
+                    <li><strong>Teras/Balkon:</strong> Bagian luar ruangan untuk bersantai atau menikmati pemandangan.</li>
+                </ul>
+
+                <h3>Elemen Pelengkap</h3>
+                <p>Selain struktur dan ruangan, ada 'bagian-bagian' lain yang penting untuk fungsionalitas dan estetika rumah:</p>
+                <ul>
+                    <li><strong>Pintu:</strong> Titik akses masuk dan keluar antar ruangan atau ke luar rumah. Pintu memberikan privasi, keamanan, dan insulasi. Bahan dan desain pintu adalah bagian yang memengaruhi tampilan dan fungsi.</li>
+                    <li><strong>Jendela:</strong> Memungkinkan masuknya cahaya alami dan ventilasi, serta pandangan ke luar. Jendela juga bisa menjadi bagian penting dari desain fasad rumah.</li>
+                    <li><strong>Sistem Listrik:</strong> Jaringan kabel, sakelar, stopkontak, dan panel listrik yang mendistribusikan listrik ke seluruh rumah. Sistem listrik yang aman dan efisien adalah bagian vital untuk kenyamanan dan keselamatan.</li>
+                    <li><strong>Sistem Air dan Saluran Pembuangan:</strong> Pipa yang mengalirkan air bersih ke keran dan pipa yang mengalirkan air limbah dari wastafel, toilet, dan saluran pembuangan. Sistem yang berfungsi baik adalah bagian fundamental dari sanitasi rumah.</li>
+                    <li><strong>Ventilasi dan Tata Udara:</strong> Sistem yang menjaga kualitas udara dalam ruangan, baik melalui jendela terbuka, ventilasi pasif, atau sistem pendingin udara (AC). Sirkulasi udara yang baik adalah bagian penting untuk kenyamanan dan kesehatan penghuni.</li>
+                    <li><strong>Finishing (Cat, Keramik, Plafon):</strong> Bagian-bagian estetika yang memberikan tampilan akhir pada dinding, lantai, dan langit-langit. Ini juga berfungsi sebagai pelindung.</li>
+                </ul>
+                <p>Setiap bagian rumah, dari pondasi yang kokoh hingga sentuhan finishing terkecil, berkontribusi pada fungsi, kenyamanan, dan nilai keseluruhan properti. Interaksi harmonis dari semua bagian inilah yang mengubah sekumpulan material menjadi sebuah rumah yang utuh dan layak huni.</p>
+            </section>
+
+            <section id="buku">
+                <h2>Bagian Buku/Karya Tulis</h2>
+                <div class="image-container">
+                    <svg width="150" height="120" viewBox="0 0 150 120" fill="none" stroke="var(--accent-color)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" role="img" aria-labelledby="book-desc">
+                        <title id="book-desc">Ilustrasi sederhana tumpukan buku</title>
+                        <!-- Buku bawah -->
+                        <rect x="20" y="70" width="110" height="40" rx="5" ry="5" fill="var(--secondary-bg)"/>
+                        <line x1="20" y1="75" x2="130" y2="75" stroke="#BBDEFB"/>
+                        <line x1="20" y1="85" x2="130" y2="85" stroke="#BBDEFB"/>
+                        <line x1="20" y1="95" x2="130" y2="95" stroke="#BBDEFB"/>
+                        <line x1="20" y1="105" x2="130" y2="105" stroke="#BBDEFB"/>
+
+                        <!-- Buku tengah -->
+                        <rect x="30" y="45" width="100" height="35" rx="5" ry="5" fill="#C8E6C9"/>
+                        <line x1="30" y1="50" x2="130" y2="50" stroke="#A5D6A7"/>
+                        <line x1="30" y1="60" x2="130" y2="60" stroke="#A5D6A7"/>
+                        <line x1="30" y1="70" x2="130" y2="70" stroke="#A5D6A7"/>
+
+                        <!-- Buku atas -->
+                        <rect x="40" y="20" width="80" height="30" rx="5" ry="5" fill="#FFECB3"/>
+                        <line x1="40" y1="25" x2="120" y2="25" stroke="#FFE082"/>
+                        <line x1="40" y1="35" x2="120" y2="35" stroke="#FFE082"/>
+                        <line x1="40" y1="45" x2="120" y2="45" stroke="#FFE082"/>
+                    </svg>
+                    <figcaption>Ilustrasi sederhana menunjukkan tumpukan buku.</figcaption>
+                </div>
+                <p>Sebuah buku atau karya tulis adalah lebih dari sekadar kumpulan kata; ia adalah struktur informasi yang terorganisir dengan cermat. Setiap 'bagian' memiliki tujuan spesifik, dari menarik perhatian pembaca hingga menyajikan inti materi, memastikan bahwa pesan penulis tersampaikan secara efektif. Memahami anatomi buku membantu pembaca menavigasi konten dan penulis menyusun karyanya dengan logis.</p>
+
+                <h3>Bagian-bagian Fisik dan Awal</h3>
+                <p>Bagian-bagian ini sering kali menjadi kesan pertama bagi pembaca dan berfungsi sebagai penanda identitas:</p>
+                <ul>
+                    <li><strong>Sampul (Cover):</strong> Bagian terluar buku yang melindungi isinya dan menarik perhatian. Terdiri dari:
+                        <ul>
+                            <li><strong>Sampul Depan:</strong> Menampilkan judul, nama penulis, dan desain visual yang relevan. Ini adalah bagian pemasaran utama.</li>
+                            <li><strong>Punggung Buku (Spine):</strong> Bagian samping buku yang terlihat saat buku diletakkan di rak. Berisi judul, penulis, dan penerbit.</li>
+                            <li><strong>Sampul Belakang:</strong> Berisi sinopsis, kutipan ulasan, biografi singkat penulis, dan ISBN. Informasi ini adalah bagian penting untuk meyakinkan calon pembaca.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Halaman Judul (Title Page):</strong> Halaman pertama di dalam buku yang mencantumkan judul lengkap, subjudul (jika ada), nama penulis, dan penerbit. Ini adalah bagian formal pengenalan karya.</li>
+                    <li><strong>Halaman Hak Cipta (Copyright Page):</strong> Berisi informasi hak cipta, edisi, tahun penerbitan, ISBN, dan data katalogisasi-dalam-terbitan (KDT). Bagian ini memastikan perlindungan hukum atas karya.</li>
+                    <li><strong>Dedikasi (Dedication):</strong> Halaman singkat tempat penulis mendedikasikan karyanya kepada individu atau kelompok tertentu.</li>
+                    <li><strong>Kata Pengantar/Prakata (Foreword/Preface):</strong> Pendahuluan yang ditulis oleh orang lain (Foreword) atau oleh penulis sendiri (Preface). Biasanya menjelaskan tujuan buku, latar belakang penulisan, atau memberikan konteks tambahan. Ini adalah bagian yang memberikan gambaran awal kepada pembaca.</li>
+                    <li><strong>Ucapan Terima Kasih (Acknowledgements):</strong> Tempat penulis menyampaikan terima kasih kepada orang-orang yang telah berkontribusi atau mendukung selama proses penulisan.</li>
+                    <li><strong>Daftar Isi (Table of Contents):</strong> Berisi daftar bab, sub-bab, dan halaman terkait. Daftar isi adalah bagian navigasi utama yang membantu pembaca menemukan informasi spesifik.</li>
+                </ul>
+
+                <h3>Bagian Inti (Isi Utama)</h3>
+                <p>Ini adalah 'bagian' di mana materi pokok karya disajikan:</p>
+                <ul>
+                    <li><strong>Bab (Chapters):</strong> Pembagian utama dari isi buku. Setiap bab biasanya membahas satu topik besar atau aspek cerita. Bab berfungsi untuk memecah konten menjadi segmen yang lebih mudah dicerna.</li>
+                    <li><strong>Sub-bab/Bagian Kecil:</strong> Pembagian lebih lanjut di dalam bab, yang membahas topik-topik spesifik secara lebih rinci. Struktur ini adalah bagian penting untuk organisasi dan kejelasan.</li>
+                    <li><strong>Paragraf:</strong> Unit dasar tulisan yang mengembangkan satu ide utama. Setiap paragraf adalah bagian kecil yang saling terhubung untuk membentuk narasi atau argumen yang koheren.</li>
+                    <li><strong>Kalimat:</strong> Unit tata bahasa terkecil yang menyampaikan pemikiran lengkap. Setiap kalimat adalah bagian fundamental dari komunikasi.</li>
+                    <li><strong>Kata:</strong> Unit bahasa terkecil yang memiliki makna. Setiap kata adalah bagian penyusun kalimat dan paragraf.</li>
+                </ul>
+
+                <h3>Bagian Penutup dan Referensi</h3>
+                <p>Bagian-bagian ini melengkapi karya dan seringkali menyediakan sumber daya tambahan:</p>
+                <ul>
+                    <li><strong>Daftar Pustaka/Bibliografi (Bibliography):</strong> Daftar sumber-sumber yang digunakan atau dirujuk oleh penulis dalam karyanya. Ini adalah bagian yang menunjukkan dasar penelitian dan memberikan kredibilitas.</li>
+                    <li><strong>Glosarium (Glossary):</strong> Daftar istilah-istilah khusus yang digunakan dalam buku beserta definisinya. Berguna bagi pembaca yang mungkin tidak familiar dengan terminologi tertentu.</li>
+                    <li><strong>Indeks (Index):</strong> Daftar alfabetis kata kunci, nama, atau topik penting yang disebutkan dalam buku, beserta nomor halaman tempat mereka muncul. Indeks adalah bagian yang sangat membantu untuk pencarian informasi spesifik.</li>
+                    <li><strong>Lampiran (Appendix):</strong> Berisi materi tambahan yang relevan tetapi tidak cocok dimasukkan ke dalam teks utama, seperti data mentah, peta, atau dokumen pendukung.</li>
+                    <li><strong>Biografi Penulis (Author Biography):</strong> Informasi singkat tentang latar belakang, kualifikasi, dan karya-karya lain penulis.</li>
+                </ul>
+                <p>Dari sampul depan hingga indeks terakhir, setiap 'bagian' buku bekerja sama untuk menciptakan pengalaman membaca yang utuh dan informatif. Sebuah buku adalah contoh sempurna bagaimana banyak bagian kecil dapat bersatu untuk membentuk entitas yang jauh lebih besar dan lebih bermakna.</p>
+            </section>
+
+            <section id="sistem-proses">
+                <h2>Bagian dari Sebuah Sistem atau Proses</h2>
+                <div class="image-container">
+                    <svg width="200" height="100" viewBox="0 0 200 100" fill="none" stroke="var(--accent-color)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" role="img" aria-labelledby="system-desc">
+                        <title id="system-desc">Ilustrasi sederhana sistem dengan roda gigi yang saling terhubung</title>
+                        <!-- Roda gigi kiri -->
+                        <circle cx="60" cy="50" r="30"/>
+                        <line x1="60" y1="20" x2="60" y2="30"/>
+                        <line x1="60" y1="70" x2="60" y2="80"/>
+                        <line x1="30" y1="50" x2="40" y2="50"/>
+                        <line x1="80" y1="50" x2="90" y2="50"/>
+                        <path d="M40 35 L45 25 L55 30 M45 75 L40 65 L55 70 M90 75 L85 65 L70 70 M85 25 L90 35 L70 30"/>
+
+                        <!-- Roda gigi kanan -->
+                        <circle cx="140" cy="50" r="30"/>
+                        <line x1="140" y1="20" x2="140" y2="30"/>
+                        <line x1="140" y1="70" x2="140" y2="80"/>
+                        <line x1="110" y1="50" x2="120" y2="50"/>
+                        <line x1="160" y1="50" x2="170" y2="50"/>
+                        <path d="M120 35 L115 25 L125 30 M115 75 L120 65 L125 70 M170 75 L165 65 L150 70 M165 25 L170 35 L150 30"/>
+
+                        <!-- Garis penghubung (interaksi) -->
+                        <line x1="90" y1="50" x2="110" y2="50" stroke-dasharray="5,5"/>
+                    </svg>
+                    <figcaption>Ilustrasi roda gigi yang saling terhubung melambangkan bagian-bagian dalam sebuah sistem atau proses.</figcaption>
+                </div>
+                <p>Konsep 'bagian' tidak hanya berlaku untuk objek fisik, tetapi juga untuk sistem abstrak dan proses dinamis. Setiap sistem, baik itu alamiah maupun buatan manusia, terdiri dari berbagai bagian yang berinteraksi dalam pola tertentu untuk mencapai tujuan atau menghasilkan luaran. Memecah sistem atau proses menjadi bagian-bagian komponennya adalah metode fundamental dalam analisis, pemecahan masalah, dan perancangan. Ini memungkinkan kita untuk memahami kompleksitas, mengidentifikasi titik lemah, dan mengoptimalkan kinerja.</p>
+
+                <h3>Bagian dari Siklus Air</h3>
+                <p>Siklus air adalah contoh sempurna dari proses alam yang terdiri dari banyak 'bagian' yang saling terkait, memastikan distribusi air di Bumi:</p>
+                <ul>
+                    <li><strong>Evaporasi:</strong> Bagian di mana air dari permukaan laut, danau, sungai, dan tanah berubah menjadi uap air dan naik ke atmosfer.</li>
+                    <li><strong>Transpirasi:</strong> Proses penguapan air dari tumbuhan ke atmosfer. Bagian ini penting dalam transfer air dari biosfer.</li>
+                    <li><strong>Kondensasi:</strong> Uap air di atmosfer mendingin dan berubah menjadi tetesan air atau kristal es kecil, membentuk awan. Proses ini adalah bagian vital dalam pembentukan awan.</li>
+                    <li><strong>Presipitasi:</strong> Tetesan air atau kristal es yang cukup besar jatuh ke Bumi dalam bentuk hujan, salju, atau hujan es. Ini adalah bagian di mana air kembali ke permukaan Bumi.</li>
+                    <li><strong>Aliran Permukaan (Runoff):</strong> Air yang mengalir di permukaan tanah menuju sungai, danau, atau laut setelah presipitasi.</li>
+                    <li><strong>Infiltrasi/Perkolasi:</strong> Bagian di mana air meresap ke dalam tanah dan mengisi akuifer air tanah.</li>
+                </ul>
+                <p>Setiap bagian ini adalah tahapan penting yang, jika terganggu, dapat memengaruhi keseluruhan ketersediaan air di suatu wilayah.</p>
+
+                <h3>Bagian dari Rantai Makanan (Ekosistem)</h3>
+                <p>Rantai makanan menggambarkan aliran energi dan nutrisi dalam suatu ekosistem, terdiri dari beberapa 'bagian' trofik:</p>
+                <ul>
+                    <li><strong>Produsen:</strong> Organisme yang menghasilkan makanannya sendiri melalui fotosintesis (misalnya, tumbuhan, alga). Mereka adalah bagian dasar dari setiap rantai makanan.</li>
+                    <li><strong>Konsumen Primer (Herbivora):</strong> Organisme yang memakan produsen (misalnya, kelinci, sapi).</li>
+                    <li><strong>Konsumen Sekunder (Karnivora/Omnivora):</strong> Organisme yang memakan konsumen primer (misalnya, ular, manusia).</li>
+                    <li><strong>Konsumen Tersier:</strong> Organisme yang memakan konsumen sekunder (misalnya, elang yang makan ular).</li>
+                    <li><strong>Dekomposer:</strong> Organisme (misalnya, bakteri, jamur) yang menguraikan sisa-sisa organisme mati, mengembalikan nutrisi ke lingkungan. Mereka adalah bagian penting yang menutup siklus.</li>
+                </ul>
+                <p>Setiap bagian dalam rantai makanan ini adalah penghubung penting; hilangnya satu bagian dapat menyebabkan ketidakseimbangan yang signifikan dalam ekosistem.</p>
+
+                <h3>Bagian dari Sistem Pemerintahan (Demokrasi)</h3>
+                <p>Dalam sistem demokrasi, kekuasaan dibagi menjadi beberapa 'bagian' untuk memastikan keseimbangan dan mencegah penyalahgunaan kekuasaan:</p>
+                <ul>
+                    <li><strong>Eksekutif:</strong> Bagian yang bertanggung jawab untuk melaksanakan hukum (misalnya, Presiden/Perdana Menteri dan kabinet).</li>
+                    <li><strong>Legislatif:</strong> Bagian yang bertanggung jawab untuk membuat undang-undang (misalnya, Parlemen/Kongres). Mereka adalah bagian yang merepresentasikan suara rakyat.</li>
+                    <li><strong>Yudikatif:</strong> Bagian yang bertanggung jawab untuk menafsirkan hukum dan menegakkan keadilan (misalnya, Mahkamah Agung dan pengadilan).</li>
+                </ul>
+                <p>Konsep trias politika ini memastikan setiap bagian berfungsi sebagai penyeimbang bagi bagian lainnya, mencegah dominasi satu cabang kekuasaan.</p>
+
+                <h3>Bagian dari Proses Pengambilan Keputusan</h3>
+                <p>Proses pengambilan keputusan, baik individual maupun organisasional, juga melibatkan beberapa 'bagian' atau tahapan:</p>
+                <ul>
+                    <li><strong>Identifikasi Masalah:</strong> Mengakui adanya masalah atau peluang yang memerlukan keputusan. Bagian ini adalah titik awal yang krusial.</li>
+                    <li><strong>Pengumpulan Informasi:</strong> Mengumpulkan data dan fakta yang relevan untuk memahami masalah secara menyeluruh.</li>
+                    <li><strong>Identifikasi Alternatif:</strong> Mengembangkan berbagai pilihan atau solusi yang mungkin.</li>
+                    <li><strong>Evaluasi Alternatif:</strong> Menganalisis pro dan kontra dari setiap pilihan berdasarkan kriteria tertentu. Bagian ini melibatkan penilaian risiko dan manfaat.</li>
+                    <li><strong>Pemilihan Opsi Terbaik:</strong> Memilih alternatif yang paling sesuai berdasarkan evaluasi.</li>
+                    <li><strong>Implementasi:</strong> Menerapkan keputusan yang telah diambil.</li>
+                    <li><strong>Evaluasi Hasil:</strong> Menilai efektivitas keputusan dan membuat penyesuaian jika diperlukan. Bagian ini adalah umpan balik penting untuk proses di masa depan.</li>
+                </ul>
+                <p>Setiap langkah adalah bagian integral; melompati salah satu bagian dapat mengakibatkan keputusan yang buruk atau tidak efektif.</p>
+
+                <h3>Bagian dari Proses Manufaktur</h3>
+                <p>Dalam industri, proses manufaktur seringkali dipecah menjadi serangkaian 'bagian' atau langkah:</p>
+                <ul>
+                    <li><strong>Perencanaan:</strong> Merancang produk, menentukan bahan baku, dan merencanakan alur produksi.</li>
+                    <li><strong>Pengadaan Bahan Baku:</strong> Membeli dan mengelola bahan yang diperlukan.</li>
+                    <li><strong>Produksi/Perakitan:</strong> Mengubah bahan baku menjadi produk jadi melalui serangkaian tahapan (misalnya, pemotongan, pembentukan, penyatuan, pengujian). Setiap stasiun kerja atau lini perakitan adalah bagian dari proses produksi.</li>
+                    <li><strong>Kontrol Kualitas:</strong> Memeriksa produk pada berbagai tahap untuk memastikan memenuhi standar. Ini adalah bagian yang menjamin kualitas produk.</li>
+                    <li><strong>Pengemasan:</strong> Menyiapkan produk untuk distribusi.</li>
+                    <li><strong>Distribusi:</strong> Mengirim produk ke pasar atau pelanggan.</li>
+                </ul>
+                <p>Optimalisasi setiap bagian dalam proses manufaktur sangat penting untuk efisiensi, kualitas, dan profitabilitas. Keterlambatan atau cacat pada satu bagian dapat menunda atau merusak seluruh lini produksi.</p>
+                <p>Kesimpulannya, baik itu dalam fenomena alam, organisasi sosial, maupun aktivitas manusia, setiap sistem atau proses dapat diurai menjadi 'bagian-bagian' yang lebih kecil. Pemahaman mendalam tentang bagaimana setiap bagian beroperasi dan berinteraksi adalah kunci untuk mengelola, memperbaiki, dan berinovasi dalam dunia yang semakin kompleks.</p>
+            </section>
+
+            <section id="lingkungan-ekosistem">
+                <h2>Bagian dari Lingkungan/Ekosistem</h2>
+                <div class="image-container">
+                    <svg width="200" height="100" viewBox="0 0 200 100" fill="none" stroke="var(--accent-color)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" role="img" aria-labelledby="ecosystem-desc">
+                        <title id="ecosystem-desc">Ilustrasi sederhana elemen-elemen ekosistem: matahari, gunung, sungai, dan tumbuhan</title>
+                        <!-- Matahari -->
+                        <circle cx="20" cy="20" r="10" fill="#FFC107"/>
+                        <line x1="20" y1="10" x2="20" y2="30"/>
+                        <line x1="10" y1="20" x2="30" y2="20"/>
+                        <line x1="13" y1="13" x2="27" y2="27"/>
+                        <line x1="13" y1="27" x2="27" y2="13"/>
+
+                        <!-- Gunung -->
+                        <path d="M100 80 L120 40 L150 70 L180 30 L190 80 Z" fill="#80CBC4"/>
+                        <path d="M110 80 L130 50 L160 80 Z" fill="#4DB6AC"/>
+
+                        <!-- Sungai -->
+                        <path d="M0 90 Q50 70 100 85 Q150 100 200 80" fill="#B2EBF2" stroke="#4FC3F7" stroke-width="2"/>
+                        <path d="M0 95 Q50 75 100 90 Q150 105 200 85" fill="#B2EBF2" stroke="#4FC3F7" stroke-width="2"/>
+
+                        <!-- Tumbuhan (Pohon) -->
+                        <rect x="50" y="70" width="10" height="20" fill="#8D6E63"/>
+                        <circle cx="55" cy="60" r="15" fill="#66BB6A"/>
+                        <rect x="70" y="75" width="8" height="15" fill="#8D6E63"/>
+                        <circle cx="74" cy="68" r="12" fill="#66BB6A"/>
+                    </svg>
+                    <figcaption>Ilustrasi sederhana komponen biotik dan abiotik dalam sebuah ekosistem.</figcaption>
+                </div>
+                <p>Lingkungan, atau lebih spesifiknya ekosistem, adalah sistem biologis yang terdiri dari berbagai 'bagian' yang saling berinteraksi: organisme hidup (biotik) dan komponen tak hidup (abiotik). Keseimbangan dan keberlanjutan ekosistem sangat bergantung pada fungsi dan interaksi yang tepat antara semua bagian ini. Pemahaman tentang bagian-bagian ekosistem sangat penting untuk konservasi, pengelolaan sumber daya, dan mitigasi dampak perubahan iklim.</p>
+
+                <h3>Komponen Biotik</h3>
+                <p>Komponen biotik adalah semua organisme hidup dalam suatu ekosistem. Mereka dapat diklasifikasikan berdasarkan peran fungsionalnya:</p>
+                <ul>
+                    <li><strong>Produsen (Autotrof):</strong> Bagian dasar dari rantai makanan. Mereka adalah organisme yang mampu menghasilkan makanannya sendiri, sebagian besar melalui fotosintesis (misalnya, tumbuhan hijau, alga, beberapa bakteri). Mereka mengubah energi matahari menjadi energi kimia yang dapat digunakan oleh organisme lain.</li>
+                    <li><strong>Konsumen (Heterotrof):</strong> Organisme yang memperoleh energi dengan memakan organisme lain. Mereka dibagi lagi berdasarkan sumber makanannya:
+                        <ul>
+                            <li><strong>Konsumen Primer (Herbivora):</strong> Memakan produsen (misalnya, rusa, kelinci, ulat).</li>
+                            <li><strong>Konsumen Sekunder (Karnivora/Omnivora):</strong> Memakan konsumen primer atau produsen (misalnya, burung pemakan serangga, manusia).</li>
+                            <li><strong>Konsumen Tersier:</strong> Memakan konsumen sekunder (misalnya, elang, harimau).</li>
+                            <li><strong>Konsumen Kuartener:</strong> Memakan konsumen tersier (jarang, tetapi bisa terjadi pada rantai makanan yang sangat panjang).</li>
+                        </ul>
+                        <p>Setiap tingkatan konsumen adalah bagian penting dalam transfer energi dan materi melalui ekosistem.</p>
+                    </li>
+                    <li><strong>Dekomposer (Pengurai):</strong> Organisme yang menguraikan organisme mati dan produk limbah, mengembalikan nutrisi ke tanah untuk digunakan kembali oleh produsen (misalnya, bakteri, jamur, cacing tanah). Mereka adalah bagian vital yang menyelesaikan siklus nutrisi dan mencegah penumpukan bahan organik mati.</li>
+                </ul>
+                <p>Interaksi antara komponen biotik ini sangat kompleks, meliputi predasi, kompetisi, simbiosis, dan mutualisme. Setiap spesies, sebagai bagian dari komunitas biotik, memiliki relung ekologinya sendiri.</p>
+
+                <h3>Komponen Abiotik</h3>
+                <p>Komponen abiotik adalah faktor-faktor tak hidup dalam ekosistem yang memengaruhi organisme hidup. Bagian-bagian ini menyediakan kondisi dasar bagi kehidupan:</p>
+                <ul>
+                    <li><strong>Suhu:</strong> Salah satu faktor paling penting yang memengaruhi laju reaksi biokimia dan metabolisme organisme. Kisaran suhu yang ekstrem dapat membatasi jenis organisme yang dapat hidup di suatu wilayah.</li>
+                    <li><strong>Cahaya Matahari:</strong> Sumber energi utama untuk sebagian besar ekosistem melalui fotosintesis. Intensitas dan durasi cahaya matahari adalah bagian krusial yang menentukan produktivitas produsen.</li>
+                    <li><strong>Air:</strong> Esensial untuk semua bentuk kehidupan. Ketersediaan air memengaruhi distribusi spesies dan kepadatan populasi. Kualitas air (pH, salinitas) juga merupakan bagian penting dari kondisi lingkungan.</li>
+                    <li><strong>Tanah:</strong> Struktur kompleks yang terdiri dari mineral, bahan organik, air, dan udara. Tanah menyediakan nutrisi, penjangkaran bagi tumbuhan, dan habitat bagi banyak organisme. Tekstur tanah, pH, dan kandungan nutrisi adalah bagian yang memengaruhi kesuburan.</li>
+                    <li><strong>Udara/Atmosfer:</strong> Menyediakan gas-gas vital seperti oksigen untuk respirasi dan karbon dioksida untuk fotosintesis. Komposisi dan pergerakan udara adalah bagian penting dalam iklim dan penyebaran spora.</li>
+                    <li><strong>Kelembapan:</strong> Jumlah uap air di udara. Kelembapan memengaruhi laju transpirasi tumbuhan dan kenyamanan hewan.</li>
+                    <li><strong>pH (Tingkat Keasaman):</strong> Tingkat keasaman atau kebasaan tanah dan air yang memengaruhi ketersediaan nutrisi dan kelangsungan hidup organisme.</li>
+                </ul>
+                <p>Komponen biotik dan abiotik saling memengaruhi secara timbal balik. Misalnya, tumbuhan (biotik) memengaruhi komposisi tanah (abiotik), dan ketersediaan air (abiotik) memengaruhi jenis tumbuhan (biotik) yang dapat tumbuh di suatu daerah. Keseimbangan dinamis antara semua 'bagian' ini adalah yang mendefinisikan kesehatan dan resiliensi suatu ekosistem. Gangguan pada salah satu bagian, seperti polusi (abiotik) atau kepunahan spesies (biotik), dapat memiliki konsekuensi yang jauh meluas ke seluruh sistem.</p>
+            </section>
+
+            <section id="cerita-narasi">
+                <h2>Bagian dari Sebuah Cerita/Narasi</h2>
+                <div class="image-container">
+                    <svg width="150" height="120" viewBox="0 0 150 120" fill="none" stroke="var(--accent-color)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" role="img" aria-labelledby="story-desc">
+                        <title id="story-desc">Ilustrasi sederhana buku terbuka dengan balon ucapan</title>
+                        <!-- Buku terbuka -->
+                        <path d="M20 20 L75 10 L130 20 L130 100 L75 110 L20 100 Z" fill="#E0F7FA"/>
+                        <path d="M75 10 L75 110" stroke="#00796B" stroke-width="4"/>
+                        <path d="M20 20 L20 100" stroke-dasharray="2,2"/>
+                        <path d="M130 20 L130 100" stroke-dasharray="2,2"/>
+
+                        <!-- Balon ucapan (speech bubble) -->
+                        <path d="M85 30 Q110 10 135 30 Q145 50 135 70 Q110 90 85 70 Q75 50 85 30 Z" fill="#FFFFFF" stroke="#26C6DA"/>
+                        <line x1="85" y1="65" x2="70" y2="80"/>
+                    </svg>
+                    <figcaption>Ilustrasi buku terbuka dan balon ucapan, melambangkan bagian-bagian dalam sebuah cerita.</figcaption>
+                </div>
+                <p>Sebuah cerita atau narasi, baik lisan maupun tulisan, bukan hanya sekadar deretan peristiwa. Ia adalah struktur yang tersusun dari 'bagian-bagian' fundamental yang bekerja sama untuk membangun ketegangan, mengembangkan karakter, dan menyampaikan pesan. Memahami bagian-bagian ini krusial bagi penulis untuk menciptakan narasi yang kuat dan bagi pembaca untuk mengapresiasi kedalaman sebuah karya. Struktur ini sering disebut sebagai kurva naratif atau piramida Freytag.</p>
+
+                <h3>Bagian-bagian Struktur Narasi</h3>
+                <p>Berikut adalah bagian-bagian utama yang membentuk struktur cerita:</p>
+                <ul>
+                    <li><strong>Eksposisi/Pengantar (Exposition):</strong> Bagian awal cerita yang memperkenalkan latar, karakter utama, dan konflik awal. Di sini, pembaca mendapatkan gambaran tentang "siapa, apa, kapan, di mana, dan mengapa." Bagian ini penting untuk membangun fondasi pemahaman bagi pembaca.</li>
+                    <li><strong>Konflik Penggerak/Insiden Pemicu (Inciting Incident):</strong> Peristiwa atau tindakan yang memicu konflik utama cerita dan menggerakkan plot. Ini adalah bagian yang mengubah arah narasi dan memperkenalkan masalah yang harus diatasi protagonis.</li>
+                    <li><strong>Peningkatan Aksi/Komplikasi (Rising Action):</strong> Serangkaian peristiwa yang membangun ketegangan dan mengembangkan konflik setelah insiden pemicu. Bagian ini biasanya memperkenalkan hambatan, tantangan, dan pengembangan karakter yang membuat pembaca semakin terlibat.</li>
+                    <li><strong>Klimaks (Climax):</strong> Titik balik atau momen paling intens dalam cerita, di mana konflik mencapai puncaknya. Ini adalah bagian paling dramatis, tempat protagonis menghadapi masalah utama secara langsung. Hasil dari klimaks menentukan arah akhir cerita.</li>
+                    <li><strong>Penurunan Aksi (Falling Action):</strong> Peristiwa-peristiwa yang terjadi setelah klimaks, di mana ketegangan mulai mereda dan konsekuensi dari klimaks mulai terurai. Konflik-konflik minor mungkin diselesaikan di bagian ini.</li>
+                    <li><strong>Resolusi/Penyelesaian (Resolution/Denouement):</strong> Bagian akhir cerita di mana konflik utama diselesaikan, longgar-longgar plot diikat, dan narasi menemukan penutupnya. Pembaca mendapatkan rasa penyelesaian, meskipun mungkin tidak selalu bahagia.</li>
+                    <li><strong>Epilog (Epilogue):</strong> Bagian opsional yang terjadi setelah resolusi, memberikan informasi tambahan tentang nasib karakter atau peristiwa di masa depan, atau memberikan penutup moral.</li>
+                </ul>
+
+                <h3>Bagian-bagian Elemen Cerita</h3>
+                <p>Selain struktur plot, cerita juga terdiri dari bagian-bagian elemen lain yang membentuk esensinya:</p>
+                <ul>
+                    <li><strong>Karakter:</strong> Individu, hewan, atau entitas lain yang digerakkan dalam cerita. Terdiri dari:
+                        <ul>
+                            <li><strong>Protagonis:</strong> Karakter utama yang menjadi fokus cerita.</li>
+                            <li><strong>Antagonis:</strong> Karakter atau kekuatan yang menentang protagonis.</li>
+                            <li><strong>Karakter Pendukung:</strong> Bagian yang membantu mengembangkan protagonis atau plot.</li>
+                        </ul>
+                        <p>Setiap karakter adalah bagian yang krusial untuk menggerakkan plot dan mengeksplorasi tema.</p>
+                    </li>
+                    <li><strong>Latar (Setting):</strong> Waktu dan tempat cerita berlangsung. Latar adalah bagian penting yang menciptakan suasana dan memengaruhi tindakan karakter.</li>
+                    <li><strong>Tema:</strong> Ide sentral, pesan, atau makna yang dieksplorasi dalam cerita. Tema adalah bagian filosofis yang seringkali membuat cerita relevan dan bermakna.</li>
+                    <li><strong>Sudut Pandang (Point of View):</strong> Perspektif dari mana cerita diceritakan (misalnya, orang pertama, orang ketiga). Sudut pandang adalah bagian yang membentuk bagaimana pembaca mengalami narasi.</li>
+                    <li><strong>Gaya Bahasa/Nada (Style/Tone):</strong> Cara penulis menggunakan bahasa (pilihan kata, struktur kalimat) dan sikap penulis terhadap subjek. Ini adalah bagian yang memberikan keunikan pada suara penulis.</li>
+                    <li><strong>Konflik:</strong> Pertarungan antara dua kekuatan yang berlawanan, yang merupakan inti dari plot. Konflik adalah bagian pendorong yang menciptakan ketegangan.</li>
+                </ul>
+                <p>Semua 'bagian' ini—struktur plot, karakter, latar, tema, dan elemen lainnya—bekerja sama untuk menciptakan pengalaman naratif yang kohesif dan bermakna. Hilangnya atau kelemahan pada satu bagian dapat merusak kekuatan dan dampak keseluruhan cerita. Oleh karena itu, para penulis berupaya keras untuk memastikan setiap bagian ini teranyam dengan cermat dalam tapestry narasi mereka.</p>
+            </section>
+
+            <section id="tata-surya">
+                <h2>Bagian dari Tata Surya</h2>
+                <div class="image-container">
+                    <svg width="200" height="150" viewBox="0 0 200 150" fill="none" stroke="var(--accent-color)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" role="img" aria-labelledby="solar-system-desc">
+                        <title id="solar-system-desc">Ilustrasi sederhana Matahari dan planet-planet di tata surya</title>
+                        <!-- Matahari -->
+                        <circle cx="50" cy="75" r="30" fill="#FFEB3B" stroke="#FDD835" stroke-width="5"/>
+                        <line x1="50" y1="45" x2="50" y2="105" stroke="#FDD835"/>
+                        <line x1="20" y1="75" x2="80" y2="75" stroke="#FDD835"/>
+                        <line x1="29" y1="54" x2="71" y2="96" stroke="#FDD835"/>
+                        <line x1="29" y1="96" x2="71" y2="54" stroke="#FDD835"/>
+
+                        <!-- Orbit 1 (Merkurius) -->
+                        <ellipse cx="50" cy="75" rx="40" ry="20" stroke-dasharray="2,2" stroke-opacity="0.5"/>
+                        <circle cx="90" cy="75" r="3" fill="#BDBDBD"/> <!-- Planet -->
+
+                        <!-- Orbit 2 (Bumi) -->
+                        <ellipse cx="50" cy="75" rx="65" ry="35" stroke-dasharray="2,2" stroke-opacity="0.5"/>
+                        <circle cx="115" cy="75" r="5" fill="#4CAF50"/> <!-- Planet -->
+
+                        <!-- Orbit 3 (Mars) -->
+                        <ellipse cx="50" cy="75" rx="90" ry="50" stroke-dasharray="2,2" stroke-opacity="0.5"/>
+                        <circle cx="140" cy="75" r="4" fill="#FF5722"/> <!-- Planet -->
+
+                        <!-- Asteroid (contoh kecil) -->
+                        <circle cx="105" cy="50" r="1.5" fill="#795548"/>
+                        <circle cx="120" cy="100" r="2" fill="#795548"/>
+                        <circle cx="155" cy="60" r="1.8" fill="#795548"/>
+                    </svg>
+                    <figcaption>Ilustrasi sederhana Matahari dan beberapa planet di tata surya.</figcaption>
+                </div>
+                <p>Tata surya kita adalah sistem gravitasi yang luar biasa, terdiri dari berbagai 'bagian' benda langit yang mengorbit sebuah bintang pusat, yaitu Matahari. Setiap bagian ini memiliki karakteristik unik dan peran dalam dinamika tata surya secara keseluruhan. Mempelajari bagian-bagian tata surya membantu kita memahami asal-usul, evolusi, dan potensi kehidupan di luar Bumi.</p>
+
+                <h3>Matahari</h3>
+                <p>Matahari adalah bintang di pusat tata surya kita dan merupakan 'bagian' paling masif, menyumbang sekitar 99.8% dari total massa sistem. Fungsi utamanya adalah:</p>
+                <ul>
+                    <li><strong>Sumber Energi Utama:</strong> Melalui reaksi fusi nuklir di intinya, Matahari menghasilkan energi dalam bentuk cahaya dan panas. Energi ini adalah bagian vital yang menopang hampir semua kehidupan di Bumi dan menggerakkan proses-proses atmosferik.</li>
+                    <li><strong>Pusat Gravitasi:</strong> Tarikan gravitasi Matahari menjaga semua planet, asteroid, komet, dan benda langit lainnya tetap berada dalam orbitnya. Tanpa bagian gravitasi ini, tata surya akan tercerai-berai.</li>
+                    <li><strong>Radiasi:</strong> Matahari memancarkan angin surya (aliran partikel bermuatan) dan radiasi elektromagnetik yang memengaruhi lingkungan antariksa dan medan magnet planet.</li>
+                </ul>
+                <p>Matahari sendiri memiliki bagian-bagian internal (inti, zona radiatif, zona konvektif) dan atmosfer eksternal (fotosfer, kromosfer, korona), masing-masing dengan karakteristik suhu dan aktivitas yang berbeda.</p>
+
+                <h3>Planet</h3>
+                <p>Ada delapan planet utama di tata surya kita, yang dibagi menjadi dua kelompok besar, masing-masing adalah 'bagian' yang berbeda berdasarkan komposisinya:</p>
+                <ul>
+                    <li><strong>Planet Dalam (Terestrial):</strong> Bagian ini adalah empat planet terdekat dengan Matahari – Merkurius, Venus, Bumi, dan Mars. Mereka bercirikan ukuran yang relatif kecil, kepadatan tinggi, dan terdiri sebagian besar dari batuan dan logam.
+                        <ul>
+                            <li><strong>Merkurius:</strong> Planet terkecil dan terdekat dengan Matahari.</li>
+                            <li><strong>Venus:</strong> Dikenal dengan atmosfer tebal dan efek rumah kaca yang ekstrem.</li>
+                            <li><strong>Bumi:</strong> Satu-satunya planet yang diketahui menopang kehidupan, dengan atmosfer dan air cair. Bagian atmosfer dan hidrosfer Bumi adalah komponen krusial untuk kehidupannya.</li>
+                            <li><strong>Mars:</strong> Dikenal sebagai "Planet Merah" dengan atmosfer tipis dan bukti keberadaan air di masa lalu.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Planet Luar (Raksasa Gas/Es):</strong> Bagian ini adalah empat planet terjauh dari Matahari – Jupiter, Saturnus, Uranus, dan Neptunus. Mereka berukuran jauh lebih besar, memiliki kepadatan rendah, dan sebagian besar terdiri dari hidrogen, helium, metana, dan amonia.
+                        <ul>
+                            <li><strong>Jupiter:</strong> Planet terbesar, raksasa gas dengan Bintik Merah Besar.</li>
+                            <li><strong>Saturnus:</strong> Dikenal dengan cincinnya yang indah dan kompleks.</li>
+                            <li><strong>Uranus:</strong> Raksasa es yang unik karena poros rotasinya yang sangat miring.</li>
+                            <li><strong>Neptunus:</strong> Raksasa es terjauh dengan angin terkuat di tata surya.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>Setiap planet adalah bagian dari sistem yang lebih besar, memiliki karakteristik unik dalam hal atmosfer, geologi, dan jumlah satelitnya.</p>
+
+                <h3>Benda Langit Lainnya</h3>
+                <p>Selain Matahari dan planet, tata surya juga memiliki berbagai 'bagian' benda langit lainnya:</p>
+                <ul>
+                    <li><strong>Planet Kerdil:</strong> Benda langit yang cukup besar untuk menjadi bulat karena gravitasinya sendiri, tetapi belum membersihkan orbitnya dari benda lain (misalnya, Pluto, Eris, Ceres). Mereka adalah bagian penting untuk memahami keragaman objek di tata surya.</li>
+                    <li><strong>Satelit Alam (Bulan):</strong> Objek yang mengorbit planet atau planet kerdil. Bumi hanya memiliki satu bulan, sementara Jupiter dan Saturnus memiliki banyak bulan. Setiap bulan adalah bagian yang unik, beberapa di antaranya bahkan menunjukkan potensi aktivitas geologis atau memiliki lautan bawah permukaan (misalnya, Europa, Enceladus).</li>
+                    <li><strong>Asteroid:</strong> Batuan sisa dari pembentukan tata surya, sebagian besar ditemukan di Sabuk Asteroid antara Mars dan Jupiter. Mereka adalah bagian yang menyimpan petunjuk tentang sejarah awal tata surya.</li>
+                    <li><strong>Komet:</strong> Benda es dan debu yang mengorbit Matahari dalam lintasan elips yang panjang. Saat mendekati Matahari, mereka membentuk ekor gas dan debu yang spektakuler. Komet adalah bagian yang menarik dari tata surya luar.</li>
+                    <li><strong>Meteoroid, Meteor, dan Meteorit:</strong> Meteoroid adalah pecahan batuan atau logam di antariksa. Ketika masuk atmosfer Bumi, ia menjadi meteor (bintang jatuh). Jika mencapai permukaan, ia disebut meteorit.</li>
+                    <li><strong>Sabuk Kuiper:</strong> Wilayah di luar orbit Neptunus yang dihuni oleh ribuan benda es kecil, termasuk beberapa planet kerdil. Ini adalah bagian yang menjadi sumber komet berperiode pendek.</li>
+                    <li><strong>Awan Oort:</strong> Hipotesis awan bola raksasa yang mengelilingi tata surya pada jarak yang sangat jauh, diperkirakan menjadi sumber komet berperiode panjang.</li>
+                </ul>
+                <p>Setiap 'bagian' dari tata surya ini, mulai dari bintang raksasa hingga partikel debu terkecil, berinteraksi melalui gaya gravitasi dan radiasi. Pemahaman tentang masing-masing bagian dan interaksinya adalah fondasi bagi astronomi dan astrofisika, memungkinkan kita untuk menyatukan gambaran besar tentang alam semesta tempat kita berada.</p>
+            </section>
+
+            <section id="penutup">
+                <h2>Penutup</h2>
+                <p>Dari penjelajahan kita yang mendalam, terlihat jelas bahwa konsep 'bagian' adalah lensa universal untuk memahami kompleksitas dunia di sekitar kita. Baik itu bagian-bagian tubuh manusia yang membentuk organisme hidup yang luar biasa, komponen-komponen tumbuhan yang menopang kehidupan ekosistem, elemen-elemen yang membangun mesin teknologi canggih seperti komputer, atau struktur fundamental yang membentuk sebuah tempat tinggal, setiap bagian memiliki identitas dan fungsinya sendiri.</p>
+                <p>Kita juga melihat bagaimana 'bagian' merupakan elemen kunci dalam sistem dan proses yang lebih abstrak, seperti siklus air, rantai makanan, sistem pemerintahan, proses pengambilan keputusan, dan manufaktur. Bahkan skala kosmik tata surya kita pun terurai menjadi bagian-bagian yang saling berinteraksi, mulai dari bintang pusat hingga debu antarbintang.</p>
+                <p>Pentingnya pemahaman ini terletak pada kenyataan bahwa semua bagian ini tidak berdiri sendiri. Mereka adalah elemen-elemen yang saling terhubung, saling bergantung, dan bekerja sama dalam suatu keseluruhan yang lebih besar. Kegagalan atau perubahan pada satu bagian seringkali dapat memiliki efek domino yang signifikan pada seluruh sistem. Oleh karena itu, kemampuan untuk mengidentifikasi, menganalisis, dan memahami setiap 'bagian' merupakan keterampilan esensial yang memungkinkan kita untuk mendiagnosis masalah, merancang solusi yang efektif, berinovasi, dan pada akhirnya, berinteraksi dengan dunia secara lebih bijaksana.</p>
+                <p>Melalui artikel ini, semoga Anda mendapatkan wawasan baru tentang betapa fundamentalnya konsep 'bagian' dalam kehidupan dan ilmu pengetahuan. Setiap objek, sistem, atau fenomena adalah kumpulan bagian yang unik, dan dengan menguraikannya, kita dapat mengungkap rahasia struktur dan fungsi yang membentuk realitas kita. Teruslah bertanya, teruslah menjelajah, karena setiap bagian kecil memiliki cerita besar yang menunggu untuk ditemukan.</p>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; Hak Cipta Dilindungi Undang-undang.</p>
+    </footer>
+
+<style>
+.related-posts {
+  clear: both;
+  display: block;
+  width: 100%;
+  margin: 30px auto;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.related-posts h3 {
+  margin-top: 0;
+}
+.related-posts ul {
+  list-style: none;
+  padding: 0;
+}
+.related-posts li {
+  margin: 6px 0;
+}
+</style>
+<div class='related-posts'><h3>Related Posts</h3><ul><li><a href="/asam-format">Asam Format</a></li>
+<li><a href="/aksen">Aksen</a></li>
+<li><a href="/ambasador">Ambasador</a></li>
+<li><a href="/antre">Antre</a></li>
+<li><a href="/anugerah">Anugerah</a></li>
+<li><a href="/ayam-gorengan">Ayam Gorengan</a></li>
+<li><a href="/akbp">Akbp</a></li>
+<li><a href="/ayam-aduan">Ayam Aduan</a></li>
+<li><a href="/ampo">Ampo</a></li>
+<li><a href="/angan">Angan</a></li></ul></div>
+<script src="/ik.js"></script>
+</body>
+</html>

@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memahami Angka Desimal: Panduan Lengkap & Aplikasi</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <style>
+        /* Desain Umum dan Palet Warna Sejuk Cerah */
+        :root {
+            --bg-light: #f0f8ff; /* AliceBlue - sangat terang dan sejuk */
+            --text-dark: #333;   /* Abu-abu gelap untuk keterbacaan */
+            --primary-blue: #4a90e2; /* Biru cerah dan sejuk */
+            --secondary-green: #66bb6a; /* Hijau cerah sebagai aksen */
+            --border-light: #d0e0f0; /* Garis tipis, sejuk */
+            --heading-color: #2c7a7b; /* Teal tua, kalem */
+            --code-bg: #e6f7ff; /* Latar belakang kode yang sangat terang */
+            --code-border: #a8d7ff; /* Border kode yang lembut */
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Kontainer Utama untuk Responsif dan Keterbacaan */
+        .container {
+            max-width: 850px; /* Lebar maksimal artikel */
+            margin: 30px auto; /* Margin atas/bawah, auto untuk centering */
+            padding: 20px;
+            background-color: #ffffff; /* Latar belakang putih untuk konten */
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* Shadow lembut */
+            border: 1px solid var(--border-light);
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--primary-blue);
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.8em;
+            color: var(--heading-color);
+            margin: 0 0 10px 0;
+            line-height: 1.2;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        header p {
+            font-size: 1.1em;
+            color: var(--text-dark);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Judul Bagian */
+        h2 {
+            font-size: 2.2em;
+            color: var(--primary-blue);
+            margin-top: 45px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border-light);
+            padding-bottom: 10px;
+            position: relative;
+        }
+
+        h2::before {
+            content: "•";
+            color: var(--secondary-green);
+            margin-right: 10px;
+            font-size: 1.2em;
+            position: absolute;
+            left: -20px; /* Sedikit keluar dari padding */
+            top: 2px;
+        }
+        
+        h3 {
+            font-size: 1.6em;
+            color: var(--heading-color);
+            margin-top: 35px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--secondary-green);
+            padding-left: 12px;
+        }
+
+        h4 {
+            font-size: 1.2em;
+            color: var(--text-dark);
+            margin-top: 25px;
+            margin-bottom: 10px;
+            color: var(--primary-blue);
+        }
+
+        /* Paragraf dan Teks */
+        p {
+            margin-bottom: 1em;
+            text-align: justify;
+        }
+
+        strong {
+            color: var(--primary-blue);
+        }
+
+        em {
+            color: var(--secondary-green);
+        }
+
+        /* Daftar (List) */
+        ul, ol {
+            margin-bottom: 1em;
+            padding-left: 25px;
+        }
+
+        ul li, ol li {
+            margin-bottom: 0.5em;
+        }
+
+        ul {
+            list-style: square; /* Atau none dengan custom bullet */
+        }
+
+        /* Kode dan Contoh Angka */
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--code-border);
+            border-radius: 8px;
+            padding: 15px;
+            overflow-x: auto; /* Untuk kode yang lebar */
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-family: 'Consolas', 'Monaco', 'Lucida Console', monospace;
+            font-size: 0.95em;
+            line-height: 1.4;
+            color: var(--heading-color);
+        }
+
+        code {
+            font-family: 'Consolas', 'Monaco', 'Lucida Console', monospace;
+            background-color: var(--code-bg);
+            padding: 3px 6px;
+            border-radius: 4px;
+            border: 1px solid var(--code-border);
+            color: var(--heading-color);
+        }
+
+        /* Tabel */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.95em;
+            text-align: left;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden; /* Untuk membuat border-radius bekerja pada tabel */
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        th {
+            background-color: var(--primary-blue);
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9fcff; /* Sedikit shading untuk baris genap */
+        }
+
+        tr:hover {
+            background-color: #e6f7ff; /* Highlight saat hover */
+        }
+
+        /* Gambar SVG */
+        .image-container {
+            text-align: center;
+            margin: 30px 0;
+            background-color: #fcfdff;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid var(--border-light);
+        }
+
+        .image-container svg {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .image-caption {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid var(--border-light);
+            color: #777;
+            font-size: 0.9em;
+        }
+
+        /* Media Queries untuk Responsivitas Mobile */
+        @media (max-width: 768px) {
+            .container {
+                margin: 15px auto;
+                padding: 15px;
+                box-shadow: none; /* Lebih bersih di mobile */
+                border: none; /* Lebih bersih di mobile */
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.8em;
+                margin-top: 30px;
+            }
+
+            h2::before {
+                left: 0; /* Sesuaikan posisi bullet untuk mobile */
+            }
+
+            h3 {
+                font-size: 1.4em;
+                margin-top: 25px;
+            }
+
+            pre {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto; /* Untuk tabel yang terlalu lebar */
+            }
+            thead, tbody, th, td, tr {
+                display: block; /* Membuat tabel tumpuk di mobile */
+            }
+            th {
+                text-align: right;
+                background-color: var(--primary-blue);
+                color: white;
+                padding-right: 15px;
+            }
+            td {
+                text-align: right;
+                padding-right: 15px;
+                border-bottom: 1px solid var(--border-light);
+            }
+            tr {
+                margin-bottom: 10px;
+                border: 1px solid var(--border-light);
+                border-radius: 8px;
+                overflow: hidden;
+            }
+            tr:nth-child(even) {
+                background-color: #ffffff; /* Ubah background untuk tata letak tumpuk */
+            }
+            td:before { /* Tambahkan label untuk setiap sel data */
+                content: attr(data-label);
+                float: left;
+                font-weight: bold;
+                color: var(--heading-color);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Angka Desimal: Panduan Lengkap untuk Pemahaman Mendalam</h1>
+            <p>Eksplorasi komprehensif tentang angka desimal, mulai dari konsep dasar, operasi hitung, hingga aplikasi praktis dalam kehidupan sehari-hari dan ilmu pengetahuan.</p>
+        </header>
+
+        <main>
+            <section>
+                <h2>Pengantar Angka Desimal</h2>
+                <p>Dalam dunia matematika, bilangan adalah fondasi utama yang memungkinkan kita untuk mengukur, menghitung, dan memahami kuantitas di sekitar kita. Di antara berbagai jenis bilangan, <strong>angka desimal</strong> memegang peranan yang sangat penting, berfungsi sebagai jembatan antara bilangan bulat dan pecahan, memberikan presisi yang dibutuhkan untuk berbagai aplikasi mulai dari transaksi finansial hingga perhitungan ilmiah yang kompleks.</p>
+                <p>Sistem desimal, yang secara harfiah berarti "berbasis sepuluh", adalah sistem penomoran yang paling umum digunakan di seluruh dunia. Sistem ini menggunakan sepuluh simbol unik (0, 1, 2, 3, 4, 5, 6, 7, 8, 9) dan konsep nilai tempat. Angka desimal memperluas konsep ini lebih jauh, memungkinkan kita untuk merepresentasikan nilai-nilai yang berada di antara bilangan bulat, dengan presisi yang bisa diatur sesuai kebutuhan.</p>
+                <p>Kemunculan angka desimal menandai sebuah revolusi dalam matematika, menyederhanakan perhitungan yang sebelumnya rumit dengan pecahan. Sejak diperkenalkan secara luas, angka desimal telah menjadi bagian tak terpisahkan dari kehidupan kita. Ketika kita berbicara tentang harga barang di toko, suhu cuaca, kecepatan kendaraan, atau bahkan hasil pertandingan olahraga, kita hampir selalu berinteraksi dengan angka desimal.</p>
+                <p>Artikel ini akan membedah secara mendalam semua aspek angka desimal, dimulai dari pengertian dasar dan komponennya, sejarah singkat perkembangannya, sistem nilai tempat yang menjadi ciri khasnya, hingga berbagai jenis angka desimal yang ada. Kita akan mengeksplorasi bagaimana mengonversi angka desimal ke bentuk bilangan lain dan sebaliknya, serta menguasai semua operasi hitung dasar—penjumlahan, pengurangan, perkalian, dan pembagian—dengan angka desimal. Terakhir, kita akan melihat aplikasi luas angka desimal dalam kehidupan sehari-hari dan di berbagai bidang ilmu pengetahuan dan teknologi.</p>
+                <p>Dengan pemahaman yang kokoh tentang angka desimal, Anda akan memiliki alat yang powerful untuk menghadapi tantangan matematika dan menginterpretasikan dunia dengan lebih akurat. Mari kita mulai perjalanan ini untuk mengungkap keajaiban <strong>angka desimal</strong>.</p>
+            </section>
+
+            <section>
+                <h2>Bagian 1: Fondasi Angka Desimal</h2>
+
+                <h3>Apa Itu Angka Desimal?</h3>
+                <p>Secara sederhana, <strong>angka desimal</strong> adalah cara untuk menuliskan bilangan yang tidak bulat atau bilangan yang memiliki bagian pecahan. Angka desimal terdiri dari dua bagian utama yang dipisahkan oleh tanda titik (titik desimal) atau koma (di beberapa negara termasuk Indonesia):</p>
+                <ul>
+                    <li><strong>Bagian Bilangan Bulat (Integer Part):</strong> Ini adalah angka di sebelah kiri titik desimal, mewakili bagian bilangan bulat dari nilai tersebut. Misalnya, dalam <code>123.45</code>, <code>123</code> adalah bagian bilangan bulat.</li>
+                    <li><strong>Titik Desimal (Decimal Point/Separator):</strong> Ini adalah tanda pemisah yang memisahkan bagian bilangan bulat dari bagian pecahan. Di Indonesia, penggunaan koma (<code>,</code>) sebagai pemisah desimal lebih umum, namun dalam konteks ilmiah dan internasional, titik (<code>.</code>) sering digunakan. Untuk konsistensi dalam artikel ini, kita akan menggunakan titik desimal.</li>
+                    <li><strong>Bagian Pecahan (Fractional Part):</strong> Ini adalah angka di sebelah kanan titik desimal, mewakili bagian dari satu kesatuan atau pecahan. Misalnya, dalam <code>123.45</code>, <code>45</code> adalah bagian pecahan.</li>
+                </ul>
+                <p>Setiap digit di bagian pecahan memiliki nilai tempat yang merupakan pangkat negatif dari 10. Ini berarti digit pertama setelah titik desimal mewakili persepuluhan (1/10), digit kedua mewakili perseratusan (1/100), digit ketiga mewakili perseribuan (1/1000), dan seterusnya.</p>
+                <p>Contoh: Angka <code>3.14</code> berarti 3 bilangan bulat dan 1 persepuluhan (0.1) ditambah 4 perseratusan (0.04). Jadi, <code>3.14 = 3 + 1/10 + 4/100</code>.</p>
+
+                <h3>Sejarah Singkat Sistem Desimal</h3>
+                <p>Konsep sistem berbasis sepuluh bukanlah hal baru. Peradaban kuno seperti Mesir, Tiongkok, dan India sudah menggunakan sistem penomoran berbasis 10 dalam berbagai bentuk. Namun, pengembangan sistem angka desimal modern dengan penggunaan titik desimal untuk merepresentasikan pecahan adalah perjalanan yang panjang dan berliku.</p>
+                <p>Para matematikawan India diyakini sebagai yang pertama mengembangkan sistem nilai tempat untuk bilangan bulat dan konsep nol, yang kemudian menyebar ke dunia Arab. Dari sana, sistem ini dikenal di Eropa melalui karya Al-Khawarizmi pada abad ke-9.</p>
+                <p>Penggunaan eksplisit notasi desimal untuk pecahan baru muncul lebih kemudian. Al-Uqlidisi, seorang matematikawan Arab dari Damaskus pada abad ke-10, menulis buku yang menjelaskan tentang penggunaan pecahan desimal, meskipun tanpa titik desimal modern. Simon Stevin, seorang matematikawan dan insinyur Flanders, sering dikreditkan sebagai tokoh kunci dalam mempopulerkan notasi desimal di Eropa pada abad ke-16 dengan karyanya "De Thiende" (Seni Persepuluhan) pada tahun 1585. Stevin menunjukkan betapa mudahnya perhitungan dengan pecahan desimal dibandingkan dengan pecahan biasa. Dia menggunakan lingkaran kecil di atas setiap digit untuk menunjukkan nilai tempatnya, misalnya <code>1(0) 2(1) 3(2)</code> untuk 1.23.</p>
+                <p>Pada abad ke-17, titik desimal atau koma desimal mulai distandarisasi dan digunakan secara luas, berkat kontribusi seperti John Napier dengan logaritmanya. Sejak itu, notasi desimal menjadi standar global, merevolusi bidang perdagangan, ilmu pengetahuan, dan teknik dengan menyediakan cara yang efisien dan akurat untuk bekerja dengan bilangan non-bulat.</p>
+
+                <h3>Nilai Tempat dalam Angka Desimal</h3>
+                <p>Sistem nilai tempat adalah esensi dari sistem desimal. Setiap posisi digit dalam sebuah angka memiliki nilai yang sepuluh kali lebih besar dari posisi di sebelah kanannya, dan sepersepuluh dari posisi di sebelah kirinya. Ini berlaku baik untuk bagian bilangan bulat maupun bagian pecahan.</p>
+                <p>Mari kita lihat struktur nilai tempat untuk angka desimal:</p>
+                <div class="image-container">
+                    <svg width="600" height="150" viewBox="0 0 600 150" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Background guides -->
+                        <rect x="0" y="0" width="600" height="150" fill="var(--code-bg)" rx="10" ry="10"/>
+                        <rect x="195" y="10" width="10" height="130" fill="var(--primary-blue)" /> <!-- Decimal point separator -->
+
+                        <!-- Labels for Integer Part -->
+                        <text x="100" y="30" font-family="Arial, sans-serif" font-size="16" fill="#666" text-anchor="middle">Ratusan</text>
+                        <text x="150" y="30" font-family="Arial, sans-serif" font-size="16" fill="#666" text-anchor="middle">Puluhan</text>
+                        <text x="190" y="30" font-family="Arial, sans-serif" font-size="16" fill="#666" text-anchor="middle">Satuan</text>
+
+                        <!-- Labels for Fractional Part -->
+                        <text x="230" y="30" font-family="Arial, sans-serif" font-size="16" fill="#666" text-anchor="middle">Persepuluhan</text>
+                        <text x="290" y="30" font-family="Arial, sans-serif" font-size="16" fill="#666" text-anchor="middle">Perseratusan</text>
+                        <text x="360" y="30" font-family="Arial, sans-serif" font-size="16" fill="#666" text-anchor="middle">Perseribuan</text>
+                        <text x="440" y="30" font-family="Arial, sans-serif" font-size="16" fill="#666" text-anchor="middle">Persepuluh Ribuan</text>
+
+                        <!-- Example Number -->
+                        <text x="100" y="90" font-family="Arial, sans-serif" font-size="40" fill="var(--heading-color)" text-anchor="middle">4</text>
+                        <text x="150" y="90" font-family="Arial, sans-serif" font-size="40" fill="var(--heading-color)" text-anchor="middle">7</text>
+                        <text x="190" y="90" font-family="Arial, sans-serif" font-size="40" fill="var(--heading-color)" text-anchor="middle">2</text>
+                        <text x="200" y="90" font-family="Arial, sans-serif" font-size="40" fill="var(--primary-blue)" text-anchor="start">.</text>
+                        <text x="230" y="90" font-family="Arial, sans-serif" font-size="40" fill="var(--heading-color)" text-anchor="middle">5</text>
+                        <text x="290" y="90" font-family="Arial, sans-serif" font-size="40" fill="var(--heading-color)" text-anchor="middle">1</text>
+                        <text x="360" y="90" font-family="Arial, sans-serif" font-size="40" fill="var(--heading-color)" text-anchor="middle">8</text>
+                        <text x="440" y="90" font-family="Arial, sans-serif" font-size="40" fill="var(--heading-color)" text-anchor="middle">3</text>
+
+                        <!-- Values -->
+                        <text x="100" y="130" font-family="Arial, sans-serif" font-size="14" fill="#888" text-anchor="middle">10^2</text>
+                        <text x="150" y="130" font-family="Arial, sans-serif" font-size="14" fill="#888" text-anchor="middle">10^1</text>
+                        <text x="190" y="130" font-family="Arial, sans-serif" font-size="14" fill="#888" text-anchor="middle">10^0</text>
+                        <text x="230" y="130" font-family="Arial, sans-serif" font-size="14" fill="#888" text-anchor="middle">10^-1</text>
+                        <text x="290" y="130" font-family="Arial, sans-serif" font-size="14" fill="#888" text-anchor="middle">10^-2</text>
+                        <text x="360" y="130" font-family="Arial, sans-serif" font-size="14" fill="#888" text-anchor="middle">10^-3</text>
+                        <text x="440" y="130" font-family="Arial, sans-serif" font-size="14" fill="#888" text-anchor="middle">10^-4</text>
+                    </svg>
+                    <p class="image-caption">Ilustrasi nilai tempat pada angka desimal 472.5183.</p>
+                </div>
+                <p>Pada bagian bilangan bulat:</p>
+                <ul>
+                    <li>Digit paling kanan adalah posisi <strong>satuan</strong> (10<sup>0</sup> = 1).</li>
+                    <li>Digit di sebelah kiri satuan adalah posisi <strong>puluhan</strong> (10<sup>1</sup> = 10).</li>
+                    <li>Digit di sebelah kiri puluhan adalah posisi <strong>ratusan</strong> (10<sup>2</sup> = 100), dan seterusnya.</li>
+                </ul>
+                <p>Pada bagian pecahan (setelah titik desimal):</p>
+                <ul>
+                    <li>Digit pertama adalah posisi <strong>persepuluhan</strong> (10<sup>-1</sup> = 1/10).</li>
+                    <li>Digit kedua adalah posisi <strong>perseratusan</strong> (10<sup>-2</sup> = 1/100).</li>
+                    <li>Digit ketiga adalah posisi <strong>perseribuan</strong> (10<sup>-3</sup> = 1/1000), dan seterusnya.</li>
+                </ul>
+                <p>Memahami nilai tempat ini sangat krusial untuk melakukan operasi hitung dengan benar, terutama penjumlahan dan pengurangan, serta untuk membandingkan dan mengurutkan angka desimal.</p>
+
+                <h3>Membaca dan Menulis Angka Desimal</h3>
+                <p>Membaca dan menulis angka desimal memiliki aturan tersendiri untuk memastikan kejelasan dan akurasi. Ada dua cara utama untuk membaca angka desimal:</p>
+                <ol>
+                    <li><strong>Membaca sebagai bilangan bulat dan kemudian menyebutkan digit-digit setelah titik desimal secara individual:</strong>
+                        <ul>
+                            <li>Contoh: <code>3.14</code> dibaca "tiga koma satu empat".</li>
+                            <li>Contoh: <code>12.345</code> dibaca "dua belas koma tiga empat lima".</li>
+                            <li>Ini adalah cara paling umum dan paling jelas, terutama dalam konteks teknis atau saat mendikte angka.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Membaca dengan menggunakan nama nilai tempat (lebih formal dan sering untuk pecahan sederhana):</strong>
+                        <ul>
+                            <li>Contoh: <code>0.5</code> dibaca "nol koma lima" atau "lima persepuluhan".</li>
+                            <li>Contoh: <code>0.25</code> dibaca "nol koma dua lima" atau "dua puluh lima perseratusan".</li>
+                            <li>Contoh: <code>1.75</code> dibaca "satu koma tujuh lima" atau "satu dan tujuh puluh lima perseratusan".</li>
+                            <li>Cara ini lebih umum ketika angka desimal dapat dengan mudah diartikan sebagai pecahan biasa.</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p>Penting untuk selalu menyebutkan setiap digit setelah titik desimal secara terpisah (misalnya, "satu empat" bukan "empat belas") untuk menghindari kebingungan, terutama ketika ada banyak digit setelah titik desimal.</p>
+                <p>Dalam penulisan, pastikan penggunaan titik desimal konsisten. Di Indonesia, koma (<code>,</code>) digunakan sebagai pemisah desimal, misalnya <code>Rp1.234,50</code>. Namun, dalam banyak konteks internasional dan komputasi, titik (<code>.</code>) digunakan, misalnya <code>1.234.50</code> (dengan koma sebagai pemisah ribuan dan titik sebagai pemisah desimal). Dalam artikel ini, kita akan menggunakan konvensi titik desimal untuk pemisah pecahan.</p>
+            </section>
+
+            <section>
+                <h2>Bagian 2: Jenis-Jenis Angka Desimal</h2>
+                <p>Angka desimal dapat dikelompokkan menjadi beberapa jenis berdasarkan bagaimana digit-digit setelah titik desimal berakhir atau berulang.</p>
+
+                <h3>Desimal Berhingga (Terminating Decimals)</h3>
+                <p><strong>Desimal berhingga</strong> adalah angka desimal yang memiliki jumlah digit terbatas setelah titik desimal. Artinya, representasi desimalnya berhenti pada suatu titik. Ini terjadi ketika pecahan yang mendasarinya memiliki penyebut yang faktor primanya hanya 2 atau 5 (atau keduanya).</p>
+                <p>Contoh-contoh desimal berhingga:</p>
+                <ul>
+                    <li><code>0.5</code> (karena 1/2 = 5/10)</li>
+                    <li><code>0.25</code> (karena 1/4 = 25/100)</li>
+                    <li><code>0.75</code> (karena 3/4 = 75/100)</li>
+                    <li><code>0.125</code> (karena 1/8 = 125/1000)</li>
+                    <li><code>1.3</code> (karena 13/10)</li>
+                    <li><code>5.0</code> (meskipun terlihat seperti bilangan bulat, ia masih merupakan desimal berhingga)</li>
+                </ul>
+                <p>Desimal berhingga sangat mudah untuk diolah karena representasinya yang tepat dan ringkas. Sebagian besar pengukuran sehari-hari, harga, dan banyak perhitungan dasar menghasilkan desimal berhingga.</p>
+
+                <h3>Desimal Berulang (Repeating/Recurring Decimals)</h3>
+                <p><strong>Desimal berulang</strong> adalah angka desimal yang memiliki satu atau lebih digit yang berulang tanpa henti setelah titik desimal. Ini terjadi ketika pecahan yang mendasarinya memiliki penyebut yang faktor primanya *bukan hanya* 2 atau 5.</p>
+                <p>Untuk menandai bagian yang berulang, kita biasanya menggunakan garis di atas digit yang berulang (vinculum) atau elipsis (<code>...</code>) untuk menunjukkan pola pengulangan.</p>
+
+                <h4>Desimal Berulang Murni (Pure Repeating Decimals)</h4>
+                <p>Desimal berulang murni adalah jenis desimal berulang di mana pola pengulangan dimulai segera setelah titik desimal.</p>
+                <p>Contoh-contoh desimal berulang murni:</p>
+                <ul>
+                    <li><code>0.333...</code> atau <code>0.<u>3</u></code> (karena 1/3). Angka 3 berulang terus-menerus.</li>
+                    <li><code>0.181818...</code> atau <code>0.<u>18</u></code> (karena 2/11). Pola 18 berulang.</li>
+                    <li><code>0.142857142857...</code> atau <code>0.<u>142857</u></code> (karena 1/7). Pola 142857 berulang.</li>
+                </ul>
+                <p>Setiap desimal berulang murni dapat direpresentasikan sebagai pecahan biasa. Proses konversinya akan dijelaskan lebih lanjut di bagian berikutnya.</p>
+
+                <h4>Desimal Berulang Campuran (Mixed Repeating Decimals)</h4>
+                <p>Desimal berulang campuran adalah jenis desimal berulang di mana ada satu atau lebih digit yang tidak berulang setelah titik desimal, diikuti oleh satu atau lebih digit yang berulang.</p>
+                <p>Contoh-contoh desimal berulang campuran:</p>
+                <ul>
+                    <li><code>0.1666...</code> atau <code>0.1<u>6</u></code> (karena 1/6). Angka 1 tidak berulang, diikuti oleh angka 6 yang berulang.</li>
+                    <li><code>0.08333...</code> atau <code>0.08<u>3</u></code> (karena 1/12). Angka 0 dan 8 tidak berulang, diikuti oleh angka 3 yang berulang.</li>
+                    <li><code>0.23444...</code> atau <code>0.23<u>4</u></code>. Angka 2 dan 3 tidak berulang, diikuti oleh angka 4 yang berulang.</li>
+                </ul>
+                <p>Sama seperti desimal berulang murni, desimal berulang campuran juga dapat direpresentasikan sebagai pecahan biasa, meskipun prosesnya sedikit lebih kompleks.</p>
+
+                <h3>Desimal Tak Berhingga dan Tak Berulang (Non-Terminating, Non-Repeating Decimals)</h3>
+                <p>Jenis desimal ini adalah yang paling menarik dalam matematika. <strong>Desimal tak berhingga dan tak berulang</strong> adalah angka desimal yang memiliki jumlah digit tak terbatas setelah titik desimal, dan tidak ada pola digit yang berulang. Angka-angka ini tidak dapat direpresentasikan sebagai pecahan biasa (rasio dua bilangan bulat) dan oleh karena itu disebut <strong>bilangan irasional</strong>.</p>
+                <p>Contoh-contoh bilangan irasional yang terkenal:</p>
+                <ul>
+                    <li><strong>Pi (π):</strong> Rasio keliling lingkaran terhadap diameternya, kira-kira <code>3.1415926535...</code> Tidak ada pola berulang dalam digitnya.</li>
+                    <li><strong>Akar kuadrat dari 2 (√2):</strong> Kira-kira <code>1.4142135623...</code> Juga tidak berulang.</li>
+                    <li><strong>Bilangan Euler (e):</strong> Basis logaritma natural, kira-kira <code>2.7182818284...</code> Tidak berulang.</li>
+                    <li><strong>Phi (φ), rasio emas:</strong> Kira-kira <code>1.6180339887...</code></li>
+                </ul>
+                <p>Bilangan irasional menunjukkan batas representasi desimal, di mana kita hanya bisa menggunakan aproksimasi (pembulatan) untuk nilai-nilai tersebut dalam perhitungan praktis. Konsep bilangan irasional sangat fundamental dalam banyak cabang matematika dan fisika.</p>
+            </section>
+
+            <section>
+                <h2>Bagian 3: Konversi Antar Bentuk Bilangan</h2>
+                <p>Kemampuan untuk mengonversi angka desimal ke pecahan dan sebaliknya adalah keterampilan fundamental dalam matematika yang memungkinkan kita untuk bekerja dengan berbagai bentuk representasi bilangan sesuai kebutuhan.</p>
+
+                <h3>Mengubah Pecahan ke Desimal</h3>
+                <p>Ada dua metode utama untuk mengubah pecahan biasa menjadi desimal:</p>
+
+                <h4>1. Pembagian Panjang (Long Division)</h4>
+                <p>Metode ini berlaku untuk semua jenis pecahan. Caranya adalah dengan membagi pembilang (angka di atas) dengan penyebut (angka di bawah).</p>
+                <p><strong>Contoh 1: Ubah <code>3/4</code> menjadi desimal.</strong></p>
+                <pre>
+       0.75
+      ____
+    4 | 3.00
+        -0
+        ---
+         30
+        -28
+        ---
+          20
+         -20
+         ---
+           0
+                </pre>
+                <p>Jadi, <code>3/4 = 0.75</code> (desimal berhingga).</p>
+
+                <p><strong>Contoh 2: Ubah <code>1/3</code> menjadi desimal.</strong></p>
+                <pre>
+       0.333...
+      ____
+    3 | 1.000
+        -0
+        ---
+         10
+         -9
+         --
+          10
+          -9
+          --
+           10
+           -9
+           --
+            1  (dan seterusnya)
+                </pre>
+                <p>Jadi, <code>1/3 = 0.333...</code> atau <code>0.<u>3</u></code> (desimal berulang murni).</p>
+
+                <p><strong>Contoh 3: Ubah <code>1/6</code> menjadi desimal.</strong></p>
+                <pre>
+       0.166...
+      ____
+    6 | 1.000
+        -0
+        ---
+         10
+         -6
+         --
+          40
+         -36
+         ---
+           40
+          -36
+          ---
+            4  (dan seterusnya)
+                </pre>
+                <p>Jadi, <code>1/6 = 0.166...</code> atau <code>0.1<u>6</u></code> (desimal berulang campuran).</p>
+
+                <h4>2. Mengubah Penyebut Menjadi Pangkat 10</h4>
+                <p>Metode ini hanya berlaku jika penyebut pecahan dapat diubah menjadi 10, 100, 1000, dst., dengan perkalian. Setelah penyebut menjadi pangkat 10, pembilang akan menjadi bagian desimalnya.</p>
+                <p><strong>Contoh 1: Ubah <code>3/5</code> menjadi desimal.</strong></p>
+                <p>Penyebut 5 dapat diubah menjadi 10 dengan mengalikan 2. Lakukan hal yang sama pada pembilang:</p>
+                <pre>
+    3   x 2   =   6
+    ---     ---
+    5   x 2     10
+
+    Jadi, 6/10 = 0.6.
+                </pre>
+
+                <p><strong>Contoh 2: Ubah <code>7/20</code> menjadi desimal.</strong></p>
+                <p>Penyebut 20 dapat diubah menjadi 100 dengan mengalikan 5:</p>
+                <pre>
+    7   x 5   =   35
+    ---     ---
+    20  x 5     100
+
+    Jadi, 35/100 = 0.35.
+                </pre>
+
+                <h3>Mengubah Desimal Berhingga ke Pecahan</h3>
+                <p>Mengubah desimal berhingga ke pecahan relatif mudah. Langkah-langkahnya adalah:</p>
+                <ol>
+                    <li>Tulis angka desimal sebagai pecahan dengan pembilang adalah angka tanpa titik desimal dan penyebut adalah 1 diikuti dengan jumlah nol sebanyak digit setelah titik desimal.</li>
+                    <li>Sederhanakan pecahan tersebut ke bentuk paling sederhana.</li>
+                </ol>
+                <p><strong>Contoh 1: Ubah <code>0.75</code> menjadi pecahan.</strong></p>
+                <ol>
+                    <li>Ada dua digit setelah titik desimal (7 dan 5), jadi penyebutnya adalah 100.
+                        <code>0.75 = 75/100</code>
+                    </li>
+                    <li>Sederhanakan pecahan (bagi pembilang dan penyebut dengan FPB mereka, yaitu 25):
+                        <code>75 ÷ 25 = 3</code>
+                        <code>100 ÷ 25 = 4</code>
+                        Jadi, <code>0.75 = 3/4</code>.
+                    </li>
+                </ol>
+
+                <p><strong>Contoh 2: Ubah <code>2.125</code> menjadi pecahan.</strong></p>
+                <ol>
+                    <li>Bagian bilangan bulat adalah 2. Bagian desimal adalah 0.125.
+                        Ada tiga digit setelah titik desimal (1, 2, dan 5), jadi penyebutnya adalah 1000.
+                        <code>0.125 = 125/1000</code>
+                    </li>
+                    <li>Sederhanakan <code>125/1000</code> (FPB adalah 125):
+                        <code>125 ÷ 125 = 1</code>
+                        <code>1000 ÷ 125 = 8</code>
+                        Jadi, <code>0.125 = 1/8</code>.
+                    </li>
+                    <li>Gabungkan kembali dengan bagian bilangan bulat:
+                        <code>2.125 = 2 1/8</code>.
+                        Jika diinginkan sebagai pecahan tidak wajar: <code>2 1/8 = (2 * 8 + 1) / 8 = 17/8</code>.
+                    </li>
+                </ol>
+
+                <h3>Mengubah Desimal Berulang Murni ke Pecahan</h3>
+                <p>Ini melibatkan sedikit aljabar.</p>
+                <p><strong>Contoh 1: Ubah <code>0.<u>3</u></code> menjadi pecahan.</strong></p>
+                <ol>
+                    <li>Misalkan <code>x = 0.333...</code> (Persamaan 1)</li>
+                    <li>Kalikan kedua sisi dengan 10 (karena ada 1 digit yang berulang):
+                        <code>10x = 3.333...</code> (Persamaan 2)</li>
+                    <li>Kurangkan Persamaan 1 dari Persamaan 2:
+                        <pre>
+    10x = 3.333...
+     -x = 0.333...
+    ----------------
+     9x = 3
+                        </pre>
+                    </li>
+                    <li>Selesaikan untuk x:
+                        <code>x = 3/9</code>
+                    </li>
+                    <li>Sederhanakan:
+                        <code>x = 1/3</code>
+                    </li>
+                </ol>
+
+                <p><strong>Contoh 2: Ubah <code>0.<u>18</u></code> menjadi pecahan.</strong></p>
+                <ol>
+                    <li>Misalkan <code>x = 0.181818...</code> (Persamaan 1)</li>
+                    <li>Kalikan kedua sisi dengan 100 (karena ada 2 digit yang berulang):
+                        <code>100x = 18.181818...</code> (Persamaan 2)</li>
+                    <li>Kurangkan Persamaan 1 dari Persamaan 2:
+                        <pre>
+    100x = 18.181818...
+     - x =  0.181818...
+    --------------------
+     99x = 18
+                        </pre>
+                    </li>
+                    <li>Selesaikan untuk x:
+                        <code>x = 18/99</code>
+                    </li>
+                    <li>Sederhanakan (bagi dengan FPB 9):
+                        <code>x = 2/11</code>
+                    </li>
+                </ol>
+
+                <h3>Mengubah Desimal Berulang Campuran ke Pecahan</h3>
+                <p>Proses ini sedikit lebih panjang, melibatkan dua langkah perkalian.</p>
+                <p><strong>Contoh 1: Ubah <code>0.1<u>6</u></code> menjadi pecahan.</strong></p>
+                <ol>
+                    <li>Misalkan <code>x = 0.1666...</code> (Persamaan 1)</li>
+                    <li>Kalikan kedua sisi dengan 10 (untuk memindahkan digit non-berulang ke kiri titik desimal):
+                        <code>10x = 1.666...</code> (Persamaan 2)</li>
+                    <li>Kalikan Persamaan 1 dengan 100 (untuk memindahkan satu set pola berulang ke kiri titik desimal):
+                        <code>100x = 16.666...</code> (Persamaan 3)</li>
+                    <li>Kurangkan Persamaan 2 dari Persamaan 3:
+                        <pre>
+    100x = 16.666...
+    - 10x =  1.666...
+    -----------------
+     90x = 15
+                        </pre>
+                    </li>
+                    <li>Selesaikan untuk x:
+                        <code>x = 15/90</code>
+                    </li>
+                    <li>Sederhanakan (bagi dengan FPB 15):
+                        <code>x = 1/6</code>
+                    </li>
+                </ol>
+
+                <p><strong>Contoh 2: Ubah <code>0.23<u>4</u></code> menjadi pecahan.</strong></p>
+                <ol>
+                    <li>Misalkan <code>x = 0.23444...</code> (Persamaan 1)</li>
+                    <li>Kalikan kedua sisi dengan 100 (untuk memindahkan digit non-berulang ke kiri titik desimal):
+                        <code>100x = 23.444...</code> (Persamaan 2)</li>
+                    <li>Kalikan Persamaan 1 dengan 1000 (untuk memindahkan satu set pola berulang ke kiri titik desimal, termasuk digit non-berulang):
+                        <code>1000x = 234.444...</code> (Persamaan 3)</li>
+                    <li>Kurangkan Persamaan 2 dari Persamaan 3:
+                        <pre>
+    1000x = 234.444...
+    - 100x =  23.444...
+    -------------------
+     900x = 211
+                        </pre>
+                    </li>
+                    <li>Selesaikan untuk x:
+                        <code>x = 211/900</code>
+                    </li>
+                    <li>Dalam kasus ini, 211 adalah bilangan prima, jadi pecahan tidak dapat disederhanakan lebih lanjut.</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>Bagian 4: Operasi Hitung dengan Angka Desimal</h2>
+                <p>Melakukan operasi dasar aritmatika (penjumlahan, pengurangan, perkalian, dan pembagian) dengan angka desimal memerlukan pemahaman yang baik tentang nilai tempat dan perhatian terhadap titik desimal.</p>
+
+                <h3>Penjumlahan Angka Desimal</h3>
+                <p>Kunci utama dalam penjumlahan angka desimal adalah <strong>menyelaraskan titik desimal</strong>. Ini memastikan bahwa Anda menjumlahkan nilai tempat yang sesuai (satuan dengan satuan, persepuluhan dengan persepuluhan, dll.).</p>
+                <ol>
+                    <li>Tulis angka-angka yang akan dijumlahkan dalam kolom, pastikan titik desimalnya sejajar secara vertikal.</li>
+                    <li>Jika ada angka yang memiliki jumlah digit desimal yang berbeda, Anda dapat menambahkan nol di akhir (trailing zeros) ke angka dengan digit desimal lebih sedikit agar semua memiliki jumlah digit yang sama. Ini tidak mengubah nilai angka dan dapat membantu menjaga keteraturan.</li>
+                    <li>Jumlahkan angka-angka seperti Anda menjumlahkan bilangan bulat biasa, dimulai dari kolom paling kanan.</li>
+                    <li>Letakkan titik desimal pada hasil di tempat yang sejajar dengan titik desimal pada angka-angka yang dijumlahkan.</li>
+                </ol>
+                <p><strong>Contoh 1: Penjumlahan sederhana</strong></p>
+                <p><code>3.25 + 1.40</code></p>
+                <pre>
+    3.25
+  + 1.40
+  -------
+    4.65
+                </pre>
+                <p><strong>Contoh 2: Penjumlahan dengan jumlah digit desimal yang berbeda</strong></p>
+                <p><code>12.3 + 5.678</code></p>
+                <pre>
+    12.300  (menambahkan trailing zeros)
+  +  5.678
+  --------
+    17.978
+                </pre>
+                <p><strong>Contoh 3: Penjumlahan dengan pembulatan ke depan (carry-over)</strong></p>
+                <p><code>7.89 + 3.12</code></p>
+                <pre>
+    7.89
+  + 3.12
+  -------
+   11.01
+                </pre>
+                <p>(9 + 2 = 11, tulis 1, bawa 1 ke kolom persepuluhan. 8 + 1 + 1 (carry) = 10, tulis 0, bawa 1 ke kolom satuan. 7 + 3 + 1 (carry) = 11.)</p>
+
+                <h3>Pengurangan Angka Desimal</h3>
+                <p>Seperti penjumlahan, pengurangan angka desimal juga membutuhkan <strong>penyelarasan titik desimal</strong>.</p>
+                <ol>
+                    <li>Tulis angka-angka yang akan dikurangkan, pastikan titik desimalnya sejajar secara vertikal.</li>
+                    <li>Tambahkan nol di akhir (trailing zeros) ke angka dengan digit desimal lebih sedikit jika diperlukan, agar kedua angka memiliki jumlah digit desimal yang sama.</li>
+                    <li>Kurangkan angka-angka seperti Anda mengurangkan bilangan bulat biasa, dimulai dari kolom paling kanan. Mungkin perlu melakukan "meminjam" (borrowing) dari kolom sebelah kiri.</li>
+                    <li>Letakkan titik desimal pada hasil di tempat yang sejajar.</li>
+                </ol>
+                <p><strong>Contoh 1: Pengurangan sederhana</strong></p>
+                <p><code>5.75 - 2.50</code></p>
+                <pre>
+    5.75
+  - 2.50
+  -------
+    3.25
+                </pre>
+                <p><strong>Contoh 2: Pengurangan dengan jumlah digit desimal yang berbeda</strong></p>
+                <p><code>15.8 - 6.234</code></p>
+                <pre>
+    15.800  (menambahkan trailing zeros)
+  -  6.234
+  ---------
+     9.566
+                </pre>
+                <p><strong>Contoh 3: Pengurangan dengan peminjaman (borrowing)</strong></p>
+                <p><code>10.00 - 3.45</code></p>
+                <pre>
+    10.00
+  -  3.45
+  --------
+     6.55
+                </pre>
+                <p>(0-5 tidak bisa, pinjam dari 0 sebelah kiri. 0-4 tidak bisa, pinjam dari 0 sebelah kiri. Akhirnya pinjam dari 1 di posisi puluhan.)</p>
+
+                <h3>Perkalian Angka Desimal</h3>
+                <p>Perkalian angka desimal sedikit berbeda dari penjumlahan dan pengurangan karena Anda tidak perlu menyelaraskan titik desimal di awal.</p>
+                <ol>
+                    <li>Kalikan angka-angka tersebut seolah-olah mereka adalah bilangan bulat (abaikan titik desimal untuk sementara waktu).</li>
+                    <li>Hitung total jumlah digit di belakang titik desimal pada kedua angka yang dikalikan.</li>
+                    <li>Pada hasil perkalian bilangan bulat Anda, tempatkan titik desimal dari kanan ke kiri sebanyak total jumlah digit yang Anda hitung pada langkah sebelumnya.</li>
+                </ol>
+                <p><strong>Contoh 1: Perkalian sederhana</strong></p>
+                <p><code>2.5 x 1.2</code></p>
+                <pre>
+    2.5  (1 digit di belakang desimal)
+  x 1.2  (1 digit di belakang desimal)
+  -----
+     50
+   250
+  -----
+   3.00 (total 1 + 1 = 2 digit di belakang desimal, jadi letakkan titik setelah 2 digit dari kanan)
+                </pre>
+                <p>Jadi, <code>2.5 x 1.2 = 3.00</code> atau <code>3</code>.</p>
+
+                <p><strong>Contoh 2: Perkalian dengan lebih banyak digit desimal</strong></p>
+                <p><code>0.12 x 0.3</code></p>
+                <pre>
+    0.12 (2 digit di belakang desimal)
+  x 0.3  (1 digit di belakang desimal)
+  ------
+    036  (kalikan 12 x 3 = 36)
+  ------
+   0.036 (total 2 + 1 = 3 digit di belakang desimal. Tambahkan nol di depan jika perlu.)
+                </pre>
+                <p>Jadi, <code>0.12 x 0.3 = 0.036</code>.</p>
+
+                <p><strong>Contoh 3: Perkalian bilangan bulat dengan desimal</strong></p>
+                <p><code>4 x 0.75</code></p>
+                <pre>
+    0.75 (2 digit di belakang desimal)
+  x 4    (0 digit di belakang desimal)
+  -----
+   3.00 (total 2 + 0 = 2 digit di belakang desimal)
+                </pre>
+                <p>Jadi, <code>4 x 0.75 = 3</code>.</p>
+
+                <h3>Pembagian Angka Desimal</h3>
+                <p>Pembagian angka desimal bisa menjadi yang paling rumit, tetapi mengikuti beberapa aturan sederhana akan membuatnya lebih mudah. Tujuan utamanya adalah mengubah pembagi menjadi bilangan bulat.</p>
+                <ol>
+                    <li>Tuliskan soal pembagian.</li>
+                    <li><strong>Pindahkan titik desimal pada pembagi</strong> (angka yang membagi) ke kanan sampai menjadi bilangan bulat.</li>
+                    <li><strong>Pindahkan titik desimal pada pembilang</strong> (angka yang dibagi) ke kanan dengan jumlah tempat yang sama seperti pada langkah 2. Tambahkan nol di belakang pembilang jika Anda kehabisan digit.</li>
+                    <li>Lakukan pembagian panjang seperti biasa.</li>
+                    <li>Tempatkan titik desimal pada hasil (kuosien) tepat di atas titik desimal yang baru pada pembilang.</li>
+                </ol>
+                <p><strong>Contoh 1: Desimal dibagi bilangan bulat</strong></p>
+                <p><code>6.25 ÷ 5</code></p>
+                <pre>
+       1.25
+      -----
+    5 | 6.25
+        -5
+        ---
+         12
+        -10
+        ----
+          25
+         -25
+         ----
+           0
+                </pre>
+                <p>Jadi, <code>6.25 ÷ 5 = 1.25</code>.</p>
+
+                <p><strong>Contoh 2: Bilangan bulat dibagi desimal</strong></p>
+                <p><code>10 ÷ 0.5</code></p>
+                <ol>
+                    <li>Pembagi adalah <code>0.5</code>. Pindahkan titik desimal 1 tempat ke kanan agar menjadi <code>5</code>.</li>
+                    <li>Pembilang adalah <code>10</code> (setara dengan <code>10.0</code>). Pindahkan titik desimal 1 tempat ke kanan agar menjadi <code>100</code>.</li>
+                    <li>Sekarang soalnya menjadi <code>100 ÷ 5</code>.</li>
+                </ol>
+                <pre>
+       20
+      ----
+    5 | 100
+        -10
+        ----
+          00
+          -0
+          --
+           0
+                </pre>
+                <p>Jadi, <code>10 ÷ 0.5 = 20</code>.</p>
+
+                <p><strong>Contoh 3: Desimal dibagi desimal</strong></p>
+                <p><code>0.75 ÷ 0.25</code></p>
+                <ol>
+                    <li>Pembagi adalah <code>0.25</code>. Pindahkan titik desimal 2 tempat ke kanan agar menjadi <code>25</code>.</li>
+                    <li>Pembilang adalah <code>0.75</code>. Pindahkan titik desimal 2 tempat ke kanan agar menjadi <code>75</code>.</li>
+                    <li>Sekarang soalnya menjadi <code>75 ÷ 25</code>.</li>
+                </ol>
+                <pre>
+        3
+      ----
+    25 | 75
+         -75
+         ----
+           0
+                </pre>
+                <p>Jadi, <code>0.75 ÷ 0.25 = 3</code>.</p>
+
+                <p><strong>Contoh 4: Pembagian yang menghasilkan desimal berulang</strong></p>
+                <p><code>1 ÷ 3</code></p>
+                <ol>
+                    <li>Pembagi adalah <code>3</code> (bilangan bulat). Pembilang adalah <code>1</code>.</li>
+                    <li>Lakukan pembagian panjang, tambahkan nol di belakang pembilang setelah titik desimal.</li>
+                </ol>
+                <pre>
+       0.333...
+      -----
+    3 | 1.000
+        -0
+        ---
+         10
+         -9
+         --
+          10
+          -9
+          --
+           10
+           -9
+           --
+            1
+                </pre>
+                <p>Jadi, <code>1 ÷ 3 = 0.333...</code> atau <code>0.<u>3</u></code>.</p>
+                <p>Memahami dan berlatih keempat operasi dasar ini dengan angka desimal akan membangun fondasi yang kuat untuk pemecahan masalah yang lebih kompleks.</p>
+            </section>
+
+            <section>
+                <h2>Bagian 5: Aplikasi dan Konsep Lanjutan Angka Desimal</h2>
+
+                <h3>Membandingkan dan Mengurutkan Angka Desimal</h3>
+                <p>Membandingkan dan mengurutkan angka desimal adalah keterampilan penting yang sering digunakan dalam kehidupan sehari-hari, misalnya saat membandingkan harga atau pengukuran. Prosesnya cukup intuitif:</p>
+                <ol>
+                    <li><strong>Bandingkan bagian bilangan bulat terlebih dahulu.</strong> Angka desimal dengan bagian bilangan bulat yang lebih besar adalah yang lebih besar.
+                        <ul>
+                            <li>Contoh: <code>5.7</code> lebih besar dari <code>3.9</code> karena <code>5 > 3</code>.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Jika bagian bilangan bulat sama, bandingkan digit-digit setelah titik desimal dari kiri ke kanan.</strong>
+                        <ul>
+                            <li>Contoh: Bandingkan <code>0.52</code> dan <code>0.58</code>. Bagian bulatnya sama (0). Digit persepuluhan juga sama (5). Namun, digit perseratusan berbeda: <code>2</code> vs <code>8</code>. Karena <code>8 > 2</code>, maka <code>0.58</code> lebih besar dari <code>0.52</code>.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Tambahkan nol di akhir (trailing zeros) jika perlu.</strong> Untuk memudahkan perbandingan, Anda bisa menambahkan nol di akhir agar semua angka memiliki jumlah digit desimal yang sama. Ini tidak mengubah nilainya.
+                        <ul>
+                            <li>Contoh: Bandingkan <code>0.4</code> dan <code>0.385</code>.
+                                Ubah <code>0.4</code> menjadi <code>0.400</code>.
+                                Sekarang bandingkan <code>0.400</code> dan <code>0.385</code>.
+                                Bagian bulat sama (0). Digit persepuluhan: <code>4</code> vs <code>3</code>. Karena <code>4 > 3</code>, maka <code>0.400</code> (atau <code>0.4</code>) lebih besar dari <code>0.385</code>.</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p><strong>Langkah-langkah Mengurutkan Angka Desimal:</strong></p>
+                <ol>
+                    <li>Seleraskan titik desimal semua angka.</li>
+                    <li>Tambahkan nol di akhir sehingga semua angka memiliki jumlah digit desimal yang sama dengan angka yang paling banyak digit desimalnya.</li>
+                    <li>Bandingkan angka-angka dari kiri ke kanan (mulai dari bagian bilangan bulat, kemudian persepuluhan, perseratusan, dan seterusnya).</li>
+                    <li>Urutkan berdasarkan perbandingan tersebut.</li>
+                </ol>
+                <p><strong>Contoh: Urutkan dari yang terkecil hingga terbesar: <code>0.7</code>, <code>0.65</code>, <code>0.705</code>, <code>0.6</code>.</strong></p>
+                <ol>
+                    <li>Angka dengan digit desimal terbanyak adalah <code>0.705</code> (3 digit).</li>
+                    <li>Tambahkan nol di akhir:
+                        <code>0.700</code>
+                        <code>0.650</code>
+                        <code>0.705</code>
+                        <code>0.600</code>
+                    </li>
+                    <li>Bandingkan:
+                        <ul>
+                            <li>Bagian bilangan bulat semuanya 0.</li>
+                            <li>Digit persepuluhan: <code>0.600</code> (6), <code>0.650</code> (6), <code>0.700</code> (7), <code>0.705</code> (7).</li>
+                            <li>Yang dimulai dengan 6 lebih kecil dari yang dimulai dengan 7.
+                                Urutkan <code>0.600</code> dan <code>0.650</code>: <code>0.600</code> < <code>0.650</code>.</li>
+                            <li>Urutkan <code>0.700</code> dan <code>0.705</code>: <code>0.700</code> < <code>0.705</code>.</li>
+                        </ul>
+                    </li>
+                    <li>Urutan akhir: <code>0.6</code>, <code>0.65</code>, <code>0.7</code>, <code>0.705</code>.</li>
+                </ol>
+
+                <h3>Pembulatan Angka Desimal</h3>
+                <p>Pembulatan angka desimal adalah proses mengubah angka menjadi nilai yang lebih sederhana namun tetap mendekati nilai aslinya, seringkali untuk tujuan estimasi atau ketika tingkat presisi tertentu tidak diperlukan atau tidak mungkin tercapai. Aturan pembulatan umum adalah sebagai berikut:</p>
+                <ol>
+                    <li><strong>Tentukan nilai tempat di mana Anda ingin membulatkan.</strong> (Misalnya, ke persepuluhan terdekat, perseratusan terdekat, atau bilangan bulat terdekat).</li>
+                    <li><strong>Lihat digit yang tepat di sebelah kanan nilai tempat pembulatan.</strong></li>
+                    <li><strong>Jika digit tersebut 5 atau lebih tinggi (5, 6, 7, 8, 9):</strong> Bulatkan digit pada nilai tempat yang Anda tuju ke atas (tambah 1). Buang semua digit di sebelah kanannya.</li>
+                    <li><strong>Jika digit tersebut kurang dari 5 (0, 1, 2, 3, 4):</strong> Biarkan digit pada nilai tempat yang Anda tuju apa adanya. Buang semua digit di sebelah kanannya.</li>
+                </ol>
+                <p><strong>Contoh 1: Bulatkan <code>3.14159</code> ke perseratusan terdekat.</strong></p>
+                <ul>
+                    <li>Nilai tempat perseratusan adalah digit kedua setelah titik desimal, yaitu <code>4</code>.</li>
+                    <li>Digit di sebelah kanannya adalah <code>1</code>.</li>
+                    <li>Karena <code>1</code> kurang dari 5, biarkan <code>4</code> apa adanya.</li>
+                    <li>Hasilnya: <code>3.14</code>.</li>
+                </ul>
+
+                <p><strong>Contoh 2: Bulatkan <code>7.86</code> ke persepuluhan terdekat.</strong></p>
+                <ul>
+                    <li>Nilai tempat persepuluhan adalah digit pertama setelah titik desimal, yaitu <code>8</code>.</li>
+                    <li>Digit di sebelah kanannya adalah <code>6</code>.</li>
+                    <li>Karena <code>6</code> adalah 5 atau lebih, bulatkan <code>8</code> ke atas menjadi <code>9</code>.</li>
+                    <li>Hasilnya: <code>7.9</code>.</li>
+                </ul>
+
+                <p><strong>Contoh 3: Bulatkan <code>12.50</code> ke bilangan bulat terdekat.</strong></p>
+                <ul>
+                    <li>Nilai tempat bilangan bulat adalah <code>2</code> (satuan).</li>
+                    <li>Digit di sebelah kanannya (digit persepuluhan) adalah <code>5</code>.</li>
+                    <li>Karena <code>5</code> adalah 5 atau lebih, bulatkan <code>2</code> ke atas menjadi <code>3</code>.</li>
+                    <li>Hasilnya: <code>13</code>.</li>
+                </ul>
+
+                <p><strong>Contoh 4: Bulatkan <code>0.998</code> ke perseratusan terdekat.</strong></p>
+                <ul>
+                    <li>Nilai tempat perseratusan adalah <code>9</code>.</li>
+                    <li>Digit di sebelah kanannya adalah <code>8</code>.</li>
+                    <li>Karena <code>8</code> adalah 5 atau lebih, bulatkan <code>9</code> ke atas. Membulatkan 9 ke atas berarti menjadi 10, jadi digit persepuluhan juga akan terpengaruh.</li>
+                    <li><code>0.998</code> dibulatkan ke perseratusan terdekat menjadi <code>1.00</code>. (9 menjadi 0, dan 9 di persepuluhan menjadi 10, sehingga 0 di satuan menjadi 1).</li>
+                </ul>
+                <p>Pembulatan sangat penting dalam konteks pengukuran, statistik, dan ilmu komputer untuk mengelola presisi dan ukuran data.</p>
+
+                <h3>Angka Desimal dalam Kehidupan Sehari-hari</h3>
+                <p>Angka desimal adalah bagian tak terpisahkan dari kehidupan kita sehari-hari, seringkali tanpa kita sadari. Mereka memberikan kemampuan untuk mengekspresikan nilai-nilai yang lebih halus dan lebih akurat daripada sekadar bilangan bulat.</p>
+                <p>Beberapa aplikasi paling umum meliputi:</p>
+                <ol>
+                    <li><strong>Uang dan Keuangan:</strong> Ini mungkin adalah contoh paling jelas. Mata uang hampir selalu menggunakan desimal untuk merepresentasikan sen atau pecahan mata uang.
+                        <ul>
+                            <li>Harga barang: <code>Rp12.500,75</code></li>
+                            <li>Diskon: <code>15.5%</code></li>
+                            <li>Suku bunga: <code>3.75%</code> per tahun</li>
+                            <li>Nilai tukar mata uang: <code>1 USD = Rp15.420,50</code></li>
+                            <li>Perhitungan pajak, investasi, dan anggaran semuanya sangat bergantung pada angka desimal.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Pengukuran:</strong> Dalam ilmu pengetahuan, teknik, dan kegiatan sehari-hari, pengukuran jarang sekali menghasilkan bilangan bulat sempurna. Desimal memungkinkan kita mencatat presisi yang diperlukan.
+                        <ul>
+                            <li>Panjang: <code>Tinggi saya 1.75 meter</code>, <code>meja ini 0.8 meter lebarnya</code>.</li>
+                            <li>Berat: <code>Berat saya 68.3 kg</code>, <code>paket ini 2.45 kg</code>.</li>
+                            <li>Volume: <code>Botol air 1.5 liter</code>, <code>memasak dengan 0.25 liter minyak</code>.</li>
+                            <li>Suhu: <code>Suhu tubuh normal 37.0 derajat Celsius</code>, <code>cuaca hari ini 28.5 derajat Celsius</code>.</li>
+                            <li>Waktu: <code>Atlet lari dalam 9.87 detik</code>.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Ilmu Pengetahuan dan Teknik:</strong> Bidang ini menuntut tingkat presisi yang sangat tinggi, yang hanya bisa dicapai dengan angka desimal.
+                        <ul>
+                            <li>Kimia: Konsentrasi larutan, massa molar, pH.</li>
+                            <li>Fisika: Kecepatan (<code>9.8 m/s²</code> untuk gravitasi), jarak, energi, konstanta fisik.</li>
+                            <li>Kedokteran: Dosis obat (<code>0.5 mg</code>), hasil tes laboratorium.</li>
+                            <li>Rekayasa: Spesifikasi dimensi (<code>toleransi 0.01 mm</code>), perhitungan kekuatan material.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Statistika dan Data:</strong> Angka desimal sering muncul dalam analisis data dan statistik untuk menunjukkan rata-rata, persentase, probabilitas, dan rasio.
+                        <ul>
+                            <li>Rata-rata nilai ujian: <code>85.7</code></li>
+                            <li>Persentase pertumbuhan ekonomi: <code>3.2%</code></li>
+                            <li>Indeks harga konsumen: <code>102.5</code></li>
+                            <li>Probabilitas: <code>P(A) = 0.65</code></li>
+                        </ul>
+                    </li>
+                    <li><strong>Komputasi dan Teknologi:</strong> Komputer secara internal merepresentasikan angka desimal sebagai "floating-point numbers". Meskipun ada isu presisi tertentu (yang lebih merupakan topik ilmu komputer), representasi ini adalah fundamental untuk semua perhitungan non-integer.
+                        <ul>
+                            <li>Grafik komputer, simulasi fisika, perhitungan keuangan di perangkat lunak, semuanya mengandalkan representasi desimal.</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p>Kehadiran angka desimal di mana-mana menunjukkan betapa esensialnya mereka untuk mengukur dan memahami dunia kuantitatif yang kompleks.</p>
+
+                <h3>Keterbatasan dan Tantangan Angka Desimal</h3>
+                <p>Meskipun angka desimal sangat kuat dan serbaguna, mereka juga memiliki beberapa keterbatasan dan dapat menimbulkan tantangan tertentu:</p>
+                <ol>
+                    <li><strong>Representasi Pecahan Berulang:</strong> Tidak semua pecahan dapat direpresentasikan secara tepat sebagai desimal berhingga. Contohnya <code>1/3</code> menjadi <code>0.333...</code> Jika kita membulatkannya, kita kehilangan sedikit presisi. Dalam konteks yang membutuhkan presisi mutlak (misalnya, dalam matematika murni), kadang lebih baik bekerja dengan pecahan biasa.</li>
+                    <li><strong>Presisi dalam Komputasi (Floating-Point Arithmetic):</strong> Komputer menyimpan angka desimal (floating-point numbers) dalam format biner yang memiliki jumlah bit terbatas. Hal ini dapat menyebabkan masalah presisi. Beberapa desimal berhingga yang mudah bagi manusia (misalnya <code>0.1</code>) tidak dapat direpresentasikan secara tepat dalam biner dan akan disimpan sebagai aproksimasi yang sangat dekat, tetapi tidak persis sama. Ini bisa menyebabkan kesalahan pembulatan kecil yang terakumulasi dalam perhitungan yang kompleks, sebuah fenomena yang dikenal sebagai "floating-point error".</li>
+                    <li><strong>Ambiguitas Notasi:</strong> Terkadang, <code>0.999...</code> (0.<u>9</u>) sebenarnya sama persis dengan <code>1</code>. Konsep ini dapat membingungkan bagi banyak orang, tetapi secara matematis, keduanya adalah representasi yang setara.</li>
+                    <li><strong>Kesulitan Aritmatika Mental:</strong> Untuk beberapa orang, melakukan operasi desimal secara mental (terutama perkalian dan pembagian) bisa lebih sulit dibandingkan dengan bilangan bulat atau pecahan sederhana, karena kebutuhan untuk melacak titik desimal dan nilai tempat.</li>
+                    <li><strong>Kesalahan Pembulatan yang Disengaja/Tidak Disengaja:</strong> Dalam aplikasi keuangan atau ilmiah, pembulatan yang tidak tepat atau tidak konsisten dapat memiliki konsekuensi yang signifikan. Misalnya, dalam perhitungan pajak atau bunga, pembulatan yang salah meskipun kecil dapat menghasilkan perbedaan yang besar jika dikalikan dengan jutaan transaksi.</li>
+                </ol>
+                <p>Memahami keterbatasan ini sama pentingnya dengan memahami kekuatannya. Dalam banyak kasus, angka desimal adalah alat terbaik yang tersedia, tetapi kita harus selalu sadar akan nuansa dan potensi jebakan saat menggunakannya, terutama dalam lingkungan komputasi atau aplikasi yang sangat kritis terhadap presisi.</p>
+            </section>
+        </main>
+
+        <footer>
+            <p>Hak cipta dilindungi. Konten ini adalah panduan edukasi untuk pemahaman angka desimal.</p>
+        </footer>
+    </div>
+
+<style>
+.related-posts {
+  clear: both;
+  display: block;
+  width: 100%;
+  margin: 30px auto;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.related-posts h3 {
+  margin-top: 0;
+}
+.related-posts ul {
+  list-style: none;
+  padding: 0;
+}
+.related-posts li {
+  margin: 6px 0;
+}
+</style>
+<div class='related-posts'><h3>Related Posts</h3><ul><li><a href="/aids">Aids</a></li>
+<li><a href="/ahai">Ahai</a></li>
+<li><a href="/bad">Bad</a></li>
+<li><a href="/aditorium">Aditorium</a></li>
+<li><a href="/bahasa-cinta">Bahasa Cinta</a></li>
+<li><a href="/abila">Abila</a></li>
+<li><a href="/balon-lampu">Balon Lampu</a></li>
+<li><a href="/afeksi">Afeksi</a></li>
+<li><a href="/aliterasi">Aliterasi</a></li>
+<li><a href="/abas">Abas</a></li></ul></div>
+<script src="/ik.js"></script>
+</body>
+</html>

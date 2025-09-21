@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Panduan lengkap tentang akar persamaan, mulai dari definisi dasar, metode analitik dan numerik, hingga berbagai aplikasinya dalam ilmu pengetahuan dan teknik.">
+    <meta name="keywords" content="akar persamaan, solusi persamaan, metode analitik, metode numerik, persamaan kuadrat, teorema dasar aljabar, metode biseksi, newton-raphson, regula falsi, titik tetap, secant, polinomial">
+    <title>Akar Persamaan: Teori, Metode Analitik, & Numerik Komprehensif</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <style>
+        :root {
+            --primary-bg: #F0F8FF; /* AliceBlue - Sejuk Cerah */
+            --secondary-bg: #FFFFFF; /* Putih bersih */
+            --text-color: #333333; /* Abu tua */
+            --heading-color: #2196F3; /* Biru cerah */
+            --accent-color: #00BCD4; /* Cyan terang */
+            --border-color: #E0E0E0; /* Abu terang */
+            --code-bg: #EEF; /* Biru sangat muda */
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --max-width: 800px;
+        }
+
+        /* Reset dan Box Sizing */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--primary-bg);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        article {
+            background-color: var(--secondary-bg);
+            max-width: var(--max-width);
+            width: 100%;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            margin-bottom: 20px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--heading-color);
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--accent-color); /* H1 lebih menonjol */
+        }
+
+        h2 {
+            font-size: 2em;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            margin-top: 25px;
+        }
+
+        h4 {
+            font-size: 1.2em;
+            margin-top: 20px;
+            color: var(--text-color); /* Sub-sub heading lebih kalem */
+        }
+
+        p {
+            margin-bottom: 1em;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin-bottom: 1em;
+            margin-left: 25px;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+            text-align: justify;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        code, pre {
+            font-family: 'Consolas', 'Monaco', monospace;
+            background-color: var(--code-bg);
+            padding: 3px 6px;
+            border-radius: 4px;
+            white-space: pre-wrap; /* Agar code responsif */
+            word-break: break-all;
+        }
+
+        pre {
+            display: block;
+            padding: 15px;
+            margin: 1.5em 0;
+            overflow-x: auto; /* Untuk code block yang panjang */
+            border: 1px solid var(--border-color);
+        }
+
+        blockquote {
+            background-color: var(--code-bg);
+            border-left: 5px solid var(--accent-color);
+            margin: 1.5em 0;
+            padding: 15px 20px;
+            font-style: italic;
+            color: var(--text-color);
+        }
+
+        img, svg {
+            max-width: 100%;
+            height: auto;
+            display: block; /* Menghilangkan ruang kosong di bawah gambar */
+            margin: 2em auto; /* Pusat gambar dan beri jarak */
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px var(--shadow-color);
+        }
+
+        figcaption {
+            font-size: 0.9em;
+            text-align: center;
+            color: #666;
+            margin-top: 0.5em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            background-color: var(--secondary-bg);
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--code-bg);
+            color: var(--heading-color);
+            font-weight: bold;
+        }
+
+        /* Responsiveness untuk layar yang lebih kecil */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            article {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.7em;
+            }
+            h3 {
+                font-size: 1.3em;
+            }
+            ul, ol {
+                margin-left: 20px;
+            }
+            pre {
+                padding: 10px;
+            }
+            table {
+                display: block;
+                overflow-x: auto; /* Memungkinkan tabel di-scroll horizontal */
+                white-space: nowrap;
+            }
+            td, th {
+                white-space: normal; /* Kembali ke normal untuk konten sel */
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            article {
+                padding: 15px;
+                border-radius: 8px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            h3 {
+                font-size: 1.2em;
+            }
+            p {
+                font-size: 0.95em;
+            }
+            li {
+                font-size: 0.95em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <h1>Akar Persamaan: Teori, Metode Analitik, & Numerik Komprehensif</h1>
+
+        <p>Akar persamaan adalah salah satu konsep fundamental dalam matematika yang memiliki aplikasi luas di berbagai disiplin ilmu, mulai dari fisika, teknik, ekonomi, hingga ilmu komputer. Secara sederhana, akar persamaan adalah nilai-nilai variabel yang membuat suatu persamaan menjadi benar atau bernilai nol. Menemukan akar-akar ini seringkali menjadi langkah krusial dalam memecahkan masalah kompleks dan memahami perilaku sistem.</p>
+
+        <p>Artikel ini akan membahas secara mendalam tentang akar persamaan, dimulai dari definisi dasar dan pentingnya, jenis-jenis persamaan yang umum, metode-metode analitik untuk menemukan akar secara tepat, metode-metode numerik untuk pendekatan akar ketika solusi analitik sulit atau tidak mungkin ditemukan, serta berbagai aplikasi praktisnya. Kami juga akan menelusuri tantangan dan pertimbangan dalam pencarian akar, memastikan pemahaman yang komprehensif bagi pembaca.</p>
+
+        <h2>1. Konsep Dasar Akar Persamaan</h2>
+
+        <h3>1.1 Apa Itu Akar Persamaan?</h3>
+        <p>Dalam matematika, akar atau nol dari sebuah fungsi $f(x)$ adalah nilai $x$ sedemikian rupa sehingga $f(x) = 0$. Ketika kita berbicara tentang akar persamaan, kita mencari nilai variabel yang memenuhi persamaan tersebut. Misalnya, untuk persamaan $x^2 - 4 = 0$, akar-akarnya adalah $x = 2$ dan $x = -2$, karena jika kita substitusikan nilai-nilai ini ke dalam persamaan, hasilnya akan menjadi nol.</p>
+        <p>Konsep ini sangat intuitif jika kita melihatnya secara grafis. Akar sebuah fungsi riil $f(x)$ adalah titik-titik di mana grafik fungsi tersebut memotong atau menyentuh sumbu $x$.</p>
+
+        <figure>
+            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="svg1-title svg1-desc">
+                <title id="svg1-title">Ilustrasi Akar Persamaan pada Grafik</title>
+                <desc id="svg1-desc">Sebuah grafik kurva memotong sumbu x di dua titik, menunjukkan dua akar persamaan.</desc>
+                <!-- Sumbu X -->
+                <line x1="10" y1="100" x2="290" y2="100" stroke="#666" stroke-width="2"/>
+                <!-- Sumbu Y -->
+                <line x1="150" y1="10" x2="150" y2="190" stroke="#666" stroke-width="2"/>
+                <!-- Label Sumbu -->
+                <text x="285" y="108" font-family="Arial" font-size="12" fill="#666">X</text>
+                <text x="155" y="15" font-family="Arial" font-size="12" fill="#666">Y</text>
+
+                <!-- Kurva -->
+                <path d="M10 180 C 50 20, 150 20, 200 180 S 250 180, 290 20" fill="none" stroke="#00BCD4" stroke-width="3" />
+                <path d="M10 170 C 50 10, 150 10, 200 170 S 250 170, 290 10" fill="none" stroke="#2196F3" stroke-width="3" />
+                
+                <!-- Titik Akar (Potongan Sumbu X) -->
+                <circle cx="50" cy="100" r="4" fill="#E91E63"/>
+                <circle cx="250" cy="100" r="4" fill="#E91E63"/>
+
+                <text x="50" y="90" font-family="Arial" font-size="12" fill="#E91E63" text-anchor="middle">x₁</text>
+                <text x="250" y="90" font-family="Arial" font-size="12" fill="#E91E63" text-anchor="middle">x₂</text>
+            </svg>
+            <figcaption>Gambar 1.1: Ilustrasi grafik fungsi dengan dua akar (titik potong sumbu X).</figcaption>
+        </figure>
+
+        <h3>1.2 Pentingnya Mencari Akar Persamaan</h3>
+        <p>Pencarian akar persamaan adalah salah satu tugas paling fundamental dalam matematika terapan dan ilmu pengetahuan. Ini penting karena:</p>
+        <ul>
+            <li><strong>Pemodelan Fenomena Fisik:</strong> Banyak hukum fisika dan model rekayasa dinyatakan dalam bentuk persamaan. Mencari akarnya seringkali berarti menemukan kondisi keseimbangan, titik kritis, atau hasil spesifik dari suatu proses.</li>
+            <li><strong>Optimalisasi:</strong> Dalam ekonomi, bisnis, dan ilmu komputer, seringkali kita perlu menemukan nilai maksimum atau minimum suatu fungsi. Ini seringkali melibatkan pencarian akar turunan pertama fungsi tersebut.</li>
+            <li><strong>Desain dan Analisis Sistem:</strong> Dalam teknik, akar persamaan digunakan untuk menganalisis stabilitas sistem kontrol, merancang sirkuit listrik, atau memprediksi perilaku material.</li>
+            <li><strong>Grafika Komputer:</strong> Perhitungan interseksi objek, ray tracing, dan rendering seringkali melibatkan penyelesaian persamaan.</li>
+            <li><strong>Keuangan:</strong> Menghitung tingkat pengembalian internal (IRR), nilai sekarang bersih (NPV), atau suku bunga pinjaman seringkali memerlukan pencarian akar persamaan non-linear.</li>
+        </ul>
+
+        <h3>1.3 Klasifikasi Persamaan</h3>
+        <p>Persamaan dapat diklasifikasikan menjadi beberapa jenis, yang memengaruhi metode pencarian akarnya:</p>
+        <ol>
+            <li><strong>Persamaan Aljabar (Polinomial):</strong> Persamaan yang hanya melibatkan operasi aljabar (penjumlahan, pengurangan, perkalian, pembagian, dan pangkat bulat non-negatif). Bentuk umum: $a_n x^n + a_{n-1} x^{n-1} + \dots + a_1 x + a_0 = 0$.
+                <ul>
+                    <li><strong>Linear ($n=1$):</strong> $ax + b = 0$</li>
+                    <li><strong>Kuadrat ($n=2$):</strong> $ax^2 + bx + c = 0$</li>
+                    <li><strong>Kubik ($n=3$):</strong> $ax^3 + bx^2 + cx + d = 0$</li>
+                    <li><strong>Kuartik ($n=4$):</strong> $ax^4 + bx^3 + cx^2 + dx + e = 0$</li>
+                    <li><strong>Orde Tinggi ($n > 4$):</strong> Persamaan polinomial dengan derajat lebih dari empat.</li>
+                </ul>
+            </li>
+            <li><strong>Persamaan Transenden:</strong> Persamaan yang melibatkan fungsi transenden seperti fungsi trigonometri (sin, cos, tan), eksponensial ($e^x$), atau logaritma (ln, log). Contoh: $e^x - 2x = 0$, $\sin(x) - x^2 = 0$. Persamaan jenis ini umumnya tidak memiliki solusi analitik dan memerlukan metode numerik.</li>
+        </ol>
+
+        <h3>1.4 Teorema Dasar Aljabar</h3>
+        <p>Salah satu teorema paling penting terkait akar persamaan adalah Teorema Dasar Aljabar, yang menyatakan:</p>
+        <blockquote>
+            Setiap persamaan polinomial dengan satu variabel dan koefisien kompleks (atau riil) yang berderajat $n \ge 1$ memiliki tepat $n$ akar di bidang bilangan kompleks, dihitung dengan multiplisitasnya.
+        </blockquote>
+        <p>Ini berarti bahwa persamaan kuadrat selalu memiliki dua akar, persamaan kubik memiliki tiga akar, dan seterusnya. Akar-akar ini bisa riil (nyata) atau kompleks (mengandung bagian imajiner). Jika koefisien persamaan adalah riil, maka akar-akar kompleks selalu muncul berpasangan konjugat.</p>
+
+        <h2>2. Metode Analitik Pencarian Akar</h2>
+        <p>Metode analitik adalah teknik yang memungkinkan kita menemukan akar persamaan secara eksak (tepat) menggunakan rumus atau prosedur aljabar tertentu. Metode ini efektif untuk persamaan polinomial berderajat rendah.</p>
+
+        <h3>2.1 Persamaan Linear</h3>
+        <p>Persamaan linear adalah yang paling sederhana. Bentuk umumnya adalah $ax + b = 0$, di mana $a \ne 0$.</p>
+        <p>Solusinya dapat ditemukan dengan isolasi variabel $x$:</p>
+        <pre>
+$ax + b = 0$
+$ax = -b$
+$x = -b/a$
+        </pre>
+        <p>Contoh: $3x + 6 = 0 \implies 3x = -6 \implies x = -2$.</p>
+
+        <h3>2.2 Persamaan Kuadrat</h3>
+        <p>Persamaan kuadrat memiliki bentuk umum $ax^2 + bx + c = 0$, di mana $a \ne 0$. Ada beberapa cara untuk menemukan akarnya:</p>
+
+        <h4>2.2.1 Pemfaktoran</h4>
+        <p>Metode ini bekerja jika persamaan kuadrat dapat difaktorkan menjadi dua ekspresi linear. Misalnya, $x^2 - 5x + 6 = 0$ dapat difaktorkan menjadi $(x-2)(x-3) = 0$. Dari sini, kita dapat langsung melihat bahwa akar-akarnya adalah $x = 2$ dan $x = 3$. Metode ini memerlukan kemampuan untuk mengenali pola pemfaktoran.</p>
+
+        <h4>2.2.2 Melengkapkan Kuadrat Sempurna</h4>
+        <p>Metode ini mengubah persamaan kuadrat menjadi bentuk $(x-h)^2 = k$, yang akarnya mudah ditemukan. Langkah-langkahnya adalah:</p>
+        <ol>
+            <li>Bagi seluruh persamaan dengan $a$ (jika $a \ne 1$).</li>
+            <li>Pindahkan konstanta ke ruas kanan.</li>
+            <li>Tambahkan $(b/2a)^2$ ke kedua ruas.</li>
+            <li>Faktorkan ruas kiri menjadi kuadrat sempurna.</li>
+            <li>Ambil akar kuadrat dari kedua ruas.</li>
+            <li>Selesaikan untuk $x$.</li>
+        </ol>
+        <p>Contoh: $x^2 + 6x + 5 = 0$</p>
+        <pre>
+$x^2 + 6x = -5$
+$x^2 + 6x + (6/2)^2 = -5 + (6/2)^2$
+$x^2 + 6x + 9 = -5 + 9$
+$(x+3)^2 = 4$
+$x+3 = \pm\sqrt{4}$
+$x+3 = \pm2$
+$x_1 = -3 + 2 = -1$
+$x_2 = -3 - 2 = -5$
+        </pre>
+
+        <h4>2.2.3 Rumus ABC (Rumus Kuadrat)</h4>
+        <p>Ini adalah metode paling umum dan universal untuk menyelesaikan persamaan kuadrat. Akarnya diberikan oleh rumus:</p>
+        <pre>
+$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$
+        </pre>
+        <p>Ekspresi di bawah akar kuadrat, $D = b^2 - 4ac$, disebut diskriminan. Nilai diskriminan menentukan sifat akar-akar persamaan:</p>
+        <ul>
+            <li>Jika $D > 0$: Ada dua akar riil yang berbeda.</li>
+            <li>Jika $D = 0$: Ada satu akar riil (akar kembar).</li>
+            <li>Jika $D < 0$: Ada dua akar kompleks konjugat.</li>
+        </ul>
+        <p>Contoh: $2x^2 + 5x - 3 = 0$. Di sini $a=2, b=5, c=-3$.</p>
+        <pre>
+$x = \frac{-5 \pm \sqrt{5^2 - 4(2)(-3)}}{2(2)}$
+$x = \frac{-5 \pm \sqrt{25 + 24}}{4}$
+$x = \frac{-5 \pm \sqrt{49}}{4}$
+$x = \frac{-5 \pm 7}{4}$
+
+$x_1 = \frac{-5 + 7}{4} = \frac{2}{4} = 0.5$
+$x_2 = \frac{-5 - 7}{4} = \frac{-12}{4} = -3$
+        </pre>
+
+        <figure>
+            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="svg2-title svg2-desc">
+                <title id="svg2-title">Grafik Parabola dengan Dua Akar Riil</title>
+                <desc id="svg2-desc">Sebuah grafik parabola membuka ke atas, memotong sumbu x di dua titik yang berbeda, merepresentasikan kasus D > 0.</desc>
+                <!-- Sumbu X -->
+                <line x1="10" y1="100" x2="290" y2="100" stroke="#666" stroke-width="2"/>
+                <!-- Sumbu Y -->
+                <line x1="150" y1="10" x2="150" y2="190" stroke="#666" stroke-width="2"/>
+                <!-- Label Sumbu -->
+                <text x="285" y="108" font-family="Arial" font-size="12" fill="#666">X</text>
+                <text x="155" y="15" font-family="Arial" font-size="12" fill="#666">Y</text>
+
+                <!-- Parabola f(x) = (x-150)^2 / 50 - 50 -->
+                <path d="M10 180 Q 150 20, 290 180" fill="none" stroke="#2196F3" stroke-width="3"/>
+                
+                <!-- Titik Akar (Potongan Sumbu X) -->
+                <circle cx="70" cy="100" r="4" fill="#E91E63"/>
+                <circle cx="230" cy="100" r="4" fill="#E91E63"/>
+
+                <text x="70" y="90" font-family="Arial" font-size="12" fill="#E91E63" text-anchor="middle">x₁</text>
+                <text x="230" y="90" font-family="Arial" font-size="12" fill="#E91E63" text-anchor="middle">x₂</text>
+            </svg>
+            <figcaption>Gambar 2.1: Contoh grafik parabola dengan diskriminan $D > 0$, menghasilkan dua akar riil.</figcaption>
+        </figure>
+
+
+        <h3>2.3 Persamaan Kubik dan Kuartik</h3>
+        <p>Rumus umum untuk menyelesaikan persamaan kubik (derajat 3) dan kuartik (derajat 4) memang ada (misalnya, rumus Cardano untuk kubik), tetapi sangat kompleks dan jarang digunakan dalam praktik manual. Umumnya, untuk persamaan kubik dan kuartik, metode analitik terbatas pada kasus-kasus khusus seperti pemfaktoran yang jelas atau penggunaan software komputasi aljabar.</p>
+
+        <h3>2.4 Persamaan Polinomial Orde Tinggi ($n > 4$)</h3>
+        <p>Menurut teorema Abel-Ruffini, tidak ada rumus aljabar umum yang dapat menyelesaikan persamaan polinomial berderajat lima (kuintik) atau lebih tinggi menggunakan hanya operasi penjumlahan, pengurangan, perkalian, pembagian, dan akar. Ini berarti bahwa untuk sebagian besar persamaan polinomial orde tinggi, kita harus mengandalkan metode numerik untuk menemukan akar-akar aproksimasi.</p>
+        <p>Dalam beberapa kasus, kita dapat mencari akar rasional menggunakan Teorema Akar Rasional. Teorema ini menyatakan bahwa jika sebuah polinomial memiliki akar rasional $p/q$ (dalam bentuk paling sederhana), maka $p$ haruslah pembagi dari konstanta $a_0$ dan $q$ haruslah pembagi dari koefisien utama $a_n$. Setelah menemukan satu akar rasional, kita dapat melakukan pembagian polinomial untuk mengurangi derajat persamaan dan mencari akar lainnya.</p>
+
+        <h2>3. Metode Numerik Pencarian Akar</h2>
+        <p>Ketika metode analitik tidak memungkinkan atau terlalu rumit, kita beralih ke metode numerik. Metode ini tidak memberikan solusi eksak, melainkan aproksimasi (pendekatan) akar dengan tingkat akurasi tertentu. Metode numerik bekerja secara iteratif, artinya mereka memulai dengan tebakan awal dan secara bertahap memperbaikinya hingga mencapai solusi yang cukup dekat dengan akar yang sebenarnya.</p>
+
+        <h3>3.1 Mengapa Metode Numerik?</h3>
+        <ul>
+            <li><strong>Persamaan Transenden:</strong> Tidak ada rumus analitik untuk menyelesaikan persamaan seperti $e^x - \cos(x) = 0$.</li>
+            <li><strong>Persamaan Polinomial Orde Tinggi:</strong> Seperti yang dijelaskan, tidak ada rumus umum untuk polinomial derajat lima atau lebih tinggi.</li>
+            <li><strong>Kompleksitas Perhitungan Analitik:</strong> Bahkan jika ada rumus analitik (seperti untuk kubik/kuartik), implementasinya bisa sangat rumit dan rawan kesalahan.</li>
+            <li><strong>Fleksibilitas:</strong> Metode numerik dapat diterapkan pada berbagai jenis fungsi, tidak hanya polinomial.</li>
+        </ul>
+        <p>Konsep kunci dalam metode numerik adalah <strong>galat (error)</strong> dan <strong>toleransi</strong>. Proses iterasi berhenti ketika galat (perbedaan antara nilai aproksimasi saat ini dan sebelumnya, atau nilai fungsi di titik aproksimasi) berada di bawah ambang batas toleransi yang telah ditentukan.</p>
+
+        <h3>3.2 Metode Tertutup (Bracketing Methods)</h3>
+        <p>Metode tertutup memerlukan dua tebakan awal, $a$ dan $b$, yang mengurung akar (yaitu, $f(a)$ dan $f(b)$ memiliki tanda yang berlawanan). Ini menjamin konvergensi, meskipun mungkin lambat.</p>
+
+        <h4>3.2.1 Metode Biseksi (Bisection Method)</h4>
+        <p>Metode biseksi adalah metode pencarian akar yang paling sederhana dan paling kuat (robust). Ini didasarkan pada Teorema Nilai Antara, yang menyatakan bahwa jika sebuah fungsi kontinu $f(x)$ memiliki nilai dengan tanda berlawanan pada ujung interval $[a, b]$, maka harus ada setidaknya satu akar di antara $a$ dan $b$.</p>
+        <p><strong>Algoritma:</strong></p>
+        <ol>
+            <li>Pilih interval $[a, b]$ sedemikian rupa sehingga $f(a)$ dan $f(b)$ memiliki tanda berlawanan (artinya $f(a) \cdot f(b) < 0$).</li>
+            <li>Hitung titik tengah $m = (a+b)/2$.</li>
+            <li>Evaluasi $f(m)$.</li>
+            <li>Jika $f(m) = 0$ atau $|b-a|$ lebih kecil dari toleransi yang diinginkan, maka $m$ adalah akar. Berhenti.</li>
+            <li>Jika $f(a) \cdot f(m) < 0$, maka akar berada di interval $[a, m]$. Set $b = m$.</li>
+            <li>Jika $f(b) \cdot f(m) < 0$, maka akar berada di interval $[m, b]$. Set $a = m$.</li>
+            <li>Ulangi dari langkah 2.</li>
+        </ol>
+        <p><strong>Kelebihan:</strong> Selalu konvergen (menjamin menemukan akar jika ada di interval awal).
+        <strong>Kekurangan:</strong> Konvergensi relatif lambat.</p>
+
+        <figure>
+            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="svg3-title svg3-desc">
+                <title id="svg3-title">Ilustrasi Metode Biseksi</title>
+                <desc id="svg3-desc">Sebuah grafik kurva memotong sumbu x. Interval pencarian akar (a, b) dibagi dua menjadi (a, m) dan (m, b), dengan akar selalu berada di salah satu sub-interval.</desc>
+                <!-- Sumbu X -->
+                <line x1="10" y1="100" x2="290" y2="100" stroke="#666" stroke-width="2"/>
+                <!-- Sumbu Y -->
+                <line x1="150" y1="10" x2="150" y2="190" stroke="#666" stroke-width="2"/>
+                <!-- Label Sumbu -->
+                <text x="285" y="108" font-family="Arial" font-size="12" fill="#666">X</text>
+                <text x="155" y="15" font-family="Arial" font-size="12" fill="#666">Y</text>
+
+                <!-- Kurva -->
+                <path d="M10 180 C 50 20, 150 20, 200 180 S 250 180, 290 20" fill="none" stroke="#2196F3" stroke-width="3" />
+                
+                <!-- Titik Akar Sejati -->
+                <circle cx="150" cy="100" r="4" fill="#E91E63"/>
+                <text x="150" y="90" font-family="Arial" font-size="12" fill="#E91E63" text-anchor="middle">akar</text>
+
+                <!-- Interval awal a dan b -->
+                <line x1="30" y1="90" x2="30" y2="110" stroke="#00BCD4" stroke-width="2"/>
+                <line x1="270" y1="90" x2="270" y2="110" stroke="#00BCD4" stroke-width="2"/>
+                <text x="30" y="120" font-family="Arial" font-size="12" fill="#00BCD4" text-anchor="middle">a</text>
+                <text x="270" y="120" font-family="Arial" font-size="12" fill="#00BCD4" text-anchor="middle">b</text>
+
+                <!-- Titik tengah m1 -->
+                <line x1="150" y1="90" x2="150" y2="110" stroke="#FFC107" stroke-width="2" stroke-dasharray="3,3"/>
+                <text x="150" y="120" font-family="Arial" font-size="12" fill="#FFC107" text-anchor="middle">m₁</text>
+            </svg>
+            <figcaption>Gambar 3.1: Cara kerja metode Biseksi, di mana interval yang mengurung akar diperkecil secara progresif.</figcaption>
+        </figure>
+
+
+        <h4>3.2.2 Metode Posisi Palsu (Regula Falsi Method)</h4>
+        <p>Metode Regula Falsi mirip dengan biseksi, tetapi alih-alih mengambil titik tengah interval, ia menggunakan garis lurus yang menghubungkan $f(a)$ dan $f(b)$ untuk memperkirakan di mana akar memotong sumbu $x$. Ini seringkali mengarah pada konvergensi yang lebih cepat daripada biseksi.</p>
+        <p><strong>Algoritma:</strong></p>
+        <ol>
+            <li>Pilih interval $[a, b]$ sedemikian rupa sehingga $f(a) \cdot f(b) < 0$.</li>
+            <li>Hitung perkiraan akar baru $x_r$ menggunakan rumus:
+                <pre>
+$x_r = b - \frac{f(b)(b-a)}{f(b)-f(a)}$
+                </pre>
+            </li>
+            <li>Evaluasi $f(x_r)$.</li>
+            <li>Jika $f(x_r) = 0$ atau $|f(x_r)|$ lebih kecil dari toleransi yang diinginkan, maka $x_r$ adalah akar. Berhenti.</li>
+            <li>Jika $f(a) \cdot f(x_r) < 0$, maka akar berada di interval $[a, x_r]$. Set $b = x_r$.</li>
+            <li>Jika $f(b) \cdot f(x_r) < 0$, maka akar berada di interval $[x_r, b]$. Set $a = x_r$.</li>
+            <li>Ulangi dari langkah 2.</li>
+        </ol>
+        <p><strong>Kelebihan:</strong> Lebih cepat dari biseksi.
+        <strong>Kekurangan:</strong> Dapat konvergen lebih lambat jika fungsi sangat cekung atau cembung pada satu sisi akar, terkadang satu ujung interval cenderung tetap.</p>
+
+        <h3>3.3 Metode Terbuka (Open Methods)</h3>
+        <p>Metode terbuka hanya memerlukan satu atau dua tebakan awal, tetapi tidak menjamin pengurungan akar. Oleh karena itu, mereka mungkin divergen (tidak konvergen) jika tebakan awal tidak cukup dekat dengan akar. Namun, jika mereka konvergen, mereka biasanya melakukannya dengan kecepatan yang jauh lebih tinggi daripada metode tertutup.</p>
+
+        <h4>3.3.1 Metode Iterasi Titik Tetap (Fixed-Point Iteration Method)</h4>
+        <p>Metode ini mengubah persamaan $f(x)=0$ menjadi bentuk $x = g(x)$. Akar dari $f(x)=0$ akan menjadi titik tetap dari $g(x)$. Iterasi dilakukan dengan $x_{i+1} = g(x_i)$.</p>
+        <p><strong>Algoritma:</strong></p>
+        <ol>
+            <li>Ubah $f(x) = 0$ menjadi bentuk $x = g(x)$.</li>
+            <li>Pilih tebakan awal $x_0$.</li>
+            <li>Hitung $x_{i+1} = g(x_i)$.</li>
+            <li>Ulangi hingga $|x_{i+1} - x_i|$ atau $|f(x_{i+1})|$ berada di bawah toleransi.</li>
+        </ol>
+        <p><strong>Syarat Konvergensi:</strong> Metode ini konvergen jika $|g'(x)| < 1$ di sekitar akar. Pilihan $g(x)$ sangat krusial.
+        <strong>Kelebihan:</strong> Konseptual sederhana.
+        <strong>Kekurangan:</strong> Tidak selalu konvergen; konvergensi bisa lambat.</p>
+
+        <h4>3.3.2 Metode Newton-Raphson</h4>
+        <p>Metode Newton-Raphson adalah salah satu metode numerik paling populer karena kecepatan konvergensinya yang tinggi (kuadratik) jika tebakan awal cukup dekat dengan akar. Metode ini menggunakan turunan fungsi.</p>
+        <p><strong>Algoritma:</strong></p>
+        <ol>
+            <li>Pilih tebakan awal $x_0$.</li>
+            <li>Hitung akar aproksimasi berikutnya menggunakan rumus:
+                <pre>
+$x_{i+1} = x_i - \frac{f(x_i)}{f'(x_i)}$
+                </pre>
+            </li>
+            <li>Ulangi hingga $|x_{i+1} - x_i|$ atau $|f(x_{i+1})|$ berada di bawah toleransi.</li>
+        </ol>
+        <p><strong>Kelebihan:</strong> Konvergensi sangat cepat (kuadratik).
+        <strong>Kekurangan:</strong> Membutuhkan turunan pertama $f'(x)$, bisa divergen jika $f'(x_i)$ mendekati nol, atau jika tebakan awal jauh dari akar.</p>
+
+        <figure>
+            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="svg4-title svg4-desc">
+                <title id="svg4-title">Ilustrasi Metode Newton-Raphson</title>
+                <desc id="svg4-desc">Sebuah grafik kurva, dengan sebuah titik tebakan awal di sumbu x. Sebuah garis singgung ditarik dari titik pada kurva yang berkorespondensi dengan tebakan awal, memotong sumbu x di titik tebakan berikutnya, mendekati akar.</desc>
+                <!-- Sumbu X -->
+                <line x1="10" y1="100" x2="290" y2="100" stroke="#666" stroke-width="2"/>
+                <!-- Sumbu Y -->
+                <line x1="150" y1="10" x2="150" y2="190" stroke="#666" stroke-width="2"/>
+                <!-- Label Sumbu -->
+                <text x="285" y="108" font-family="Arial" font-size="12" fill="#666">X</text>
+                <text x="155" y="15" font-family="Arial" font-size="12" fill="#666">Y</text>
+
+                <!-- Kurva -->
+                <path d="M10 180 C 70 10, 230 10, 290 180" fill="none" stroke="#2196F3" stroke-width="3" />
+                
+                <!-- Titik Akar Sejati -->
+                <circle cx="150" cy="100" r="4" fill="#E91E63"/>
+                <text x="150" y="90" font-family="Arial" font-size="12" fill="#E91E63" text-anchor="middle">akar</text>
+
+                <!-- Tebakan awal x0 -->
+                <circle cx="250" cy="100" r="4" fill="#00BCD4"/>
+                <text x="250" y="120" font-family="Arial" font-size="12" fill="#00BCD4" text-anchor="middle">x₀</text>
+                
+                <!-- Titik pada kurva f(x0) -->
+                <circle cx="250" cy="155" r="3" fill="#00BCD4"/>
+                <line x1="250" y1="100" x2="250" y2="155" stroke="#00BCD4" stroke-width="1" stroke-dasharray="2,2"/>
+
+                <!-- Garis singgung -->
+                <line x1="120" y1="20" x2="280" y2="180" stroke="#FFC107" stroke-width="2" stroke-dasharray="4,2"/>
+                
+                <!-- Tebakan berikutnya x1 -->
+                <circle cx="120" cy="100" r="4" fill="#FFC107"/>
+                <text x="120" y="120" font-family="Arial" font-size="12" fill="#FFC107" text-anchor="middle">x₁</text>
+            </svg>
+            <figcaption>Gambar 3.2: Prinsip kerja metode Newton-Raphson menggunakan garis singgung untuk mempercepat konvergensi.</figcaption>
+        </figure>
+
+
+        <h4>3.3.3 Metode Secant</h4>
+        <p>Metode Secant adalah modifikasi dari metode Newton-Raphson yang tidak memerlukan turunan fungsi. Sebagai gantinya, ia mengaproksimasi turunan menggunakan perbedaan terbagi (kemiringan garis yang menghubungkan dua titik fungsi).</p>
+        <p><strong>Algoritma:</strong></p>
+        <ol>
+            <li>Pilih dua tebakan awal $x_{i-1}$ dan $x_i$.</li>
+            <li>Hitung akar aproksimasi berikutnya menggunakan rumus:
+                <pre>
+$x_{i+1} = x_i - f(x_i) \frac{x_i - x_{i-1}}{f(x_i) - f(x_{i-1})}$
+                </pre>
+            </li>
+            <li>Ulangi hingga $|x_{i+1} - x_i|$ atau $|f(x_{i+1})|$ berada di bawah toleransi.</li>
+        </ol>
+        <p><strong>Kelebihan:</strong> Tidak memerlukan turunan (cocok untuk fungsi yang turunannya sulit/tidak mungkin dihitung secara analitik), konvergensi lebih cepat daripada metode biseksi (superlinear).
+        <strong>Kekurangan:</strong> Membutuhkan dua tebakan awal, bisa divergen, konvergensi sedikit lebih lambat dari Newton-Raphson.</p>
+
+        <h2>4. Aplikasi Akar Persamaan dalam Berbagai Bidang</h2>
+        <p>Pencarian akar persamaan adalah tulang punggung dari banyak perhitungan di berbagai disiplin ilmu. Berikut adalah beberapa contoh aplikasi praktisnya:</p>
+
+        <h3>4.1 Fisika dan Rekayasa</h3>
+        <ul>
+            <li><strong>Kinematika Proyektil:</strong> Menentukan waktu pendaratan suatu proyektil atau jangkauan maksimum seringkali melibatkan penyelesaian persamaan kuadratik. Misalnya, $y(t) = y_0 + v_{y0}t - \frac{1}{2}gt^2 = 0$ untuk mencari waktu $t$ saat proyektil menyentuh tanah.</li>
+            <li><strong>Sirkuit Listrik:</strong> Analisis rangkaian RLC (Resistor-Induktor-Kapasitor) dapat melibatkan persamaan diferensial yang karakteristiknya bergantung pada akar-akar persamaan polinomial. Akar-akar ini menentukan respons sirkuit (osilasi, redaman).</li>
+            <li><strong>Desain Struktur:</strong> Dalam analisis stabilitas struktur, seperti jembatan atau gedung, persamaan-persamaan eigen (yang merupakan kasus khusus dari pencarian akar) digunakan untuk menemukan frekuensi resonansi atau mode getaran kritis.</li>
+            <li><strong>Fluid Dynamics:</strong> Mencari titik stagnation, profil kecepatan aliran, atau kondisi kritis dalam aliran fluida seringkali membutuhkan penyelesaian persamaan non-linear.</li>
+            <li><strong>Termodinamika:</strong> Menentukan titik didih, titik beku, atau keseimbangan fasa dalam sistem kimia seringkali melibatkan penyelesaian persamaan keadaan yang kompleks, seperti persamaan Van der Waals.</li>
+        </ul>
+
+        <h3>4.2 Ekonomi dan Keuangan</h3>
+        <ul>
+            <li><strong>Nilai Sekarang Bersih (Net Present Value/NPV):</strong> NPV digunakan untuk mengevaluasi profitabilitas investasi. Seringkali, untuk menemukan Tingkat Pengembalian Internal (Internal Rate of Return/IRR) — suku bunga yang membuat NPV proyek menjadi nol — kita perlu menyelesaikan persamaan polinomial atau transenden.
+                <pre>
+$NPV = \sum_{t=0}^{n} \frac{CF_t}{(1+r)^t} = 0$
+                </pre>
+                di mana $CF_t$ adalah arus kas pada waktu $t$, dan $r$ adalah IRR yang dicari.</li>
+            <li><strong>Analisis Titik Impas (Break-Even Point):</strong> Menemukan jumlah unit yang harus dijual agar pendapatan sama dengan biaya total (profit = 0) seringkali melibatkan penyelesaian persamaan linear atau kuadratik sederhana.</li>
+            <li><strong>Model Pertumbuhan:</strong> Persamaan yang memodelkan pertumbuhan populasi, investasi, atau inflasi seringkali melibatkan fungsi eksponensial, dan mencari waktu tertentu untuk mencapai nilai tertentu memerlukan pencarian akar logaritmik.</li>
+        </ul>
+
+        <h3>4.3 Ilmu Komputer dan Informatika</h3>
+        <ul>
+            <li><strong>Grafika Komputer:</strong> Dalam rendering gambar 3D, interseksi sinar (ray) dengan objek (seperti bola, kubus, atau permukaan parametrik) dihitung dengan menyelesaikan persamaan polinomial atau transenden. Akar-akar ini menunjukkan titik di mana sinar memotong objek.</li>
+            <li><strong>Optimasi:</strong> Banyak algoritma optimasi (misalnya, untuk mencari rute terpendek, alokasi sumber daya, atau pelatihan model machine learning) secara internal menggunakan pencarian akar dari turunan fungsi objektif.</li>
+            <li><strong>Kriptografi:</strong> Beberapa algoritma kriptografi modern didasarkan pada kesulitan memecahkan persamaan tertentu dalam matematika diskrit, seperti masalah logaritma diskrit atau pemfaktoran bilangan prima besar, yang secara konseptual terkait dengan menemukan "akar" dalam ruang bilangan tertentu.</li>
+        </ul>
+
+        <h3>4.4 Biologi dan Kimia</h3>
+        <ul>
+            <li><strong>Keseimbangan Kimia:</strong> Konsentrasi reaktan dan produk pada keadaan setimbang seringkali ditentukan oleh konstanta keseimbangan, yang mengarah pada persamaan polinomial atau rasional.</li>
+            <li><strong>Pemodelan Populasi:</strong> Model pertumbuhan populasi logistik atau model predator-mangsa melibatkan persamaan diferensial. Menemukan titik setimbang (di mana laju perubahan nol) dari model-model ini memerlukan pencarian akar.</li>
+            <li><strong>Farmakologi:</strong> Menentukan dosis obat yang efektif atau laju eliminasi obat dari tubuh seringkali melibatkan penyelesaian persamaan yang memodelkan kinetika obat.</li>
+        </ul>
+
+        <h2>5. Pertimbangan dan Tantangan dalam Mencari Akar</h2>
+        <p>Meskipun tampak sederhana, mencari akar persamaan dapat menjadi tugas yang kompleks, terutama untuk fungsi non-linear atau polinomial berderajat tinggi. Ada beberapa pertimbangan dan tantangan yang perlu dihadapi:</p>
+
+        <h3>5.1 Pemilihan Metode</h3>
+        <p>Memilih metode yang tepat adalah kunci. Metode analitik (jika berlaku) selalu lebih disukai karena memberikan solusi eksak. Namun, jika tidak tersedia, metode numerik harus digunakan. Pertimbangan meliputi:</p>
+        <ul>
+            <li><strong>Kecepatan Konvergensi:</strong> Beberapa metode (misalnya Newton-Raphson) konvergen sangat cepat, sementara yang lain (biseksi) lebih lambat.</li>
+            <li><strong>Robustness (Kekuatan):</strong> Metode biseksi selalu konvergen jika ada akar di interval awal, menjadikannya sangat kuat. Metode terbuka mungkin gagal konvergen.</li>
+            <li><strong>Kebutuhan Turunan:</strong> Metode seperti Newton-Raphson memerlukan turunan fungsi. Jika turunan sulit dihitung atau tidak ada, metode seperti Secant atau Biseksi lebih cocok.</li>
+            <li><strong>Tebakan Awal:</strong> Metode terbuka sangat sensitif terhadap tebakan awal. Tebakan yang buruk dapat menyebabkan divergensi atau konvergensi ke akar yang salah.</li>
+            <li><strong>Biaya Komputasi:</strong> Jumlah operasi yang dibutuhkan per iterasi bisa berbeda antar metode.</li>
+        </ul>
+
+        <h3>5.2 Konvergensi dan Divergensi</h3>
+        <p>Dalam metode numerik, tidak ada jaminan bahwa sebuah metode akan selalu menemukan akar, atau bahwa ia akan menemukan akar yang dicari. Terkadang, iterasi akan:</p>
+        <ul>
+            <li><strong>Konvergen:</strong> Iterasi mendekati akar.</li>
+            <li><strong>Divergen:</strong> Iterasi menjauh dari akar, biasanya karena tebakan awal yang buruk atau karakteristik fungsi.</li>
+            <li><strong>Konvergen ke Akar yang Salah:</strong> Terjadi jika ada banyak akar, dan metode numerik konvergen ke akar lain yang lebih dekat dengan tebakan awal.</li>
+        </ul>
+        <p>Sangat penting untuk memahami kondisi di mana sebuah metode dijamin atau kemungkinan besar akan konvergen.</p>
+
+        <h3>5.3 Akar Ganda (Multiple Roots)</h3>
+        <p>Akar ganda terjadi ketika grafik fungsi menyentuh sumbu $x$ tetapi tidak melewatinya (untuk fungsi ganjil) atau hanya menyentuh tanpa memotong (untuk fungsi genap). Misalnya, $f(x) = (x-2)^2 = 0$ memiliki akar ganda $x=2$.</p>
+        <p>Metode numerik seringkali mengalami kesulitan dengan akar ganda:</p>
+        <ul>
+            <li><strong>Konvergensi Lebih Lambat:</strong> Metode Newton-Raphson, misalnya, kehilangan sifat konvergensi kuadratiknya dan menjadi linear untuk akar ganda.</li>
+            <li><strong>Masalah dengan Turunan:</strong> Jika $f'(x)$ juga nol di akar ganda (misalnya, $f(x) = (x-c)^m$ dengan $m > 1$, maka $f(c) = 0$ dan $f'(c) = 0$), metode Newton-Raphson akan mengalami pembagian dengan nol.</li>
+        </ul>
+        <p>Ada modifikasi metode Newton-Raphson yang dapat menangani akar ganda, seperti menggunakan $x_{i+1} = x_i - m \frac{f(x_i)}{f'(x_i)}$ di mana $m$ adalah multiplisitas akar, tetapi $m$ jarang diketahui sebelumnya.</p>
+
+        <h3>5.4 Akar Kompleks</h3>
+        <p>Banyak persamaan (terutama polinomial) memiliki akar kompleks. Metode numerik yang dibahas di sini (kecuali diimplementasikan dengan aritmetika kompleks) umumnya dirancang untuk menemukan akar riil. Menemukan akar kompleks memerlukan teknik khusus, seperti metode Bairstow atau penggunaan bidang kompleks dalam algoritma.</p>
+
+        <h3>5.5 Sistem Persamaan Non-linear</h3>
+        <p>Seringkali, kita dihadapkan pada sistem persamaan non-linear, yaitu beberapa persamaan dengan beberapa variabel yang harus diselesaikan secara simultan. Mencari akar untuk sistem ini jauh lebih kompleks daripada mencari akar untuk satu persamaan tunggal. Metode seperti Newton-Raphson dapat diperluas ke sistem persamaan menggunakan Jacobian matriks (matriks turunan parsial), tetapi perhitungannya menjadi lebih intensif.</p>
+
+        <h2>6. Kesimpulan</h2>
+        <p>Akar persamaan adalah salah satu pilar matematika yang mendasari pemecahan masalah di berbagai bidang ilmu pengetahuan dan rekayasa. Dari persamaan linear sederhana hingga polinomial orde tinggi dan fungsi transenden, kemampuan untuk menemukan nilai-nilai yang membuat persamaan menjadi nol adalah keterampilan yang sangat berharga.</p>
+        <p>Kita telah menjelajahi perbedaan antara metode analitik yang memberikan solusi eksak dan metode numerik yang memberikan aproksimasi. Metode analitik seperti rumus ABC untuk persamaan kuadrat menawarkan presisi tinggi, sementara metode numerik seperti biseksi, regula falsi, Newton-Raphson, dan secant menjadi alat yang sangat diperlukan ketika solusi analitik tidak praktis atau tidak mungkin ditemukan. Setiap metode memiliki kelebihan dan kekurangannya sendiri dalam hal kecepatan konvergensi, keandalan, dan persyaratan komputasi.</p>
+        <p>Pemahaman yang kuat tentang konsep akar persamaan dan penguasaan berbagai metode pencariannya tidak hanya memperkaya pemahaman matematis tetapi juga membekali kita dengan alat yang ampuh untuk menganalisis dan memecahkan tantangan dunia nyata yang kompleks. Dengan terus berkembangnya komputasi, metode numerik akan tetap menjadi garda terdepan dalam eksplorasi dan aplikasi matematika untuk masa depan.</p>
+    </article>
+
+<style>
+.related-posts {
+  clear: both;
+  display: block;
+  width: 100%;
+  margin: 30px auto;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.related-posts h3 {
+  margin-top: 0;
+}
+.related-posts ul {
+  list-style: none;
+  padding: 0;
+}
+.related-posts li {
+  margin: 6px 0;
+}
+</style>
+<div class='related-posts'><h3>Related Posts</h3><ul><li><a href="/ashar">Ashar</a></li>
+<li><a href="/bank-syariah">Bank Syariah</a></li>
+<li><a href="/ahau">Ahau</a></li>
+<li><a href="/apotheosis">Apotheosis</a></li>
+<li><a href="/amarah">Amarah</a></li>
+<li><a href="/ambil-alih">Ambil Alih</a></li>
+<li><a href="/apotek">Apotek</a></li>
+<li><a href="/babi-hutan">Babi Hutan</a></li>
+<li><a href="/bato">Bato</a></li>
+<li><a href="/abu-soda">Abu Soda</a></li></ul></div>
+<script src="/ik.js"></script>
+</body>
+</html>

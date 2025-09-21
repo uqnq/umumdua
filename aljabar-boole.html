@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aljabar Boole: Panduan Lengkap Konsep & Aplikasi Digital</title>
+    <meta name="description" content="Pelajari Aljabar Boole secara mendalam, dari konsep dasar, hukum-hukum, gerbang logika, hingga aplikasinya dalam dunia digital dan komputer. Panduan komprehensif untuk pemula dan praktisi.">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <style>
+        /* CSS untuk tampilan rapi, mobile-friendly, dan warna sejuk cerah */
+        :root {
+            --primary-bg: #f0f8ff; /* Alice Blue - Sangat cerah, sejuk */
+            --secondary-bg: #e0f2f7; /* Light Cyan - Sedikit lebih gelap, masih cerah dan sejuk */
+            --text-color: #333; /* Dark Gray - Mudah dibaca */
+            --heading-color: #005f73; /* Dark Teal - Sejuk dan tegas */
+            --accent-color: #008c9e; /* Cerulean - Cerah dan menarik */
+            --border-color: #a7d9de; /* Pale Cyan - Batas lembut */
+            --code-bg: #e6e6fa; /* Lavender Blush - Latar belakang kode */
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            margin: 20px auto; /* Memberi sedikit ruang di atas/bawah */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--heading-color);
+            margin-top: 1.5em;
+            margin-bottom: 0.8em;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: 2.5em; text-align: center; color: var(--accent-color); margin-bottom: 1em;}
+        h2 { font-size: 1.8em; border-bottom: 2px solid var(--border-color); padding-bottom: 0.3em; }
+        h3 { font-size: 1.4em; color: var(--accent-color); }
+        h4 { font-size: 1.2em; }
+
+        p {
+            margin-bottom: 1em;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin-bottom: 1em;
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        b, strong {
+            color: var(--heading-color);
+        }
+
+        code {
+            font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+            background-color: var(--code-bg);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1em;
+            text-align: left;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+        }
+
+        th {
+            background-color: var(--secondary-bg);
+            color: var(--heading-color);
+            font-weight: bold;
+        }
+
+        /* Gambar SVG dan Figure */
+        figure {
+            margin: 2em 0;
+            text-align: center;
+        }
+
+        figure svg {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 10px;
+            background-color: var(--secondary-bg);
+        }
+
+        figcaption {
+            margin-top: 0.8em;
+            font-style: italic;
+            color: var(--heading-color);
+            font-size: 0.9em;
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 10px auto;
+            }
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.6em; }
+            h3 { font-size: 1.2em; }
+            h4 { font-size: 1.1em; }
+            body { font-size: 0.95em; }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+                margin: 5px auto;
+                border-radius: 0; /* Full width on very small screens */
+            }
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.4em; }
+            h3 { font-size: 1.1em; }
+            body { font-size: 0.9em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Aljabar Boole: Panduan Lengkap Konsep & Aplikasi Digital</h1>
+        </header>
+
+        <main>
+            <section id="pengantar">
+                <h2>1. Pengantar Aljabar Boole</h2>
+                <p>Dalam dunia komputasi dan elektronika digital, Aljabar Boole adalah fondasi teoretis yang tak tergantikan. Dikembangkan oleh matematikawan Inggris George Boole pada pertengahan abad ke-19, sistem logika ini awalnya merupakan upaya untuk memformulasikan proses penalaran manusia dalam bentuk matematis. Boole menyadari bahwa banyak aspek penalaran dapat disederhanakan menjadi serangkaian pernyataan yang hanya memiliki dua kemungkinan nilai: benar atau salah, yang dalam konteks digital kemudian direpresentasikan sebagai 1 atau 0. Penemuan ini, meskipun awalnya abstrak, terbukti revolusioner ketika para insinyur pada abad ke-20 mulai menggunakannya untuk merancang sirkuit elektronik.</p>
+                <p>Aljabar Boole berbeda secara fundamental dari aljabar biasa yang kita kenal. Alih-alih berurusan dengan bilangan real dan operasi aritmetika seperti penjumlahan, pengurangan, perkalian, dan pembagian, Aljabar Boole beroperasi pada nilai-nilai biner (0 dan 1) dan tiga operasi dasar: AND, OR, dan NOT. Kesederhanaan inilah yang menjadikannya sangat kuat dan efisien untuk mendeskripsikan dan menganalisis perilaku sistem digital.</p>
+                <p>Saat ini, Aljabar Boole adalah tulang punggung dari semua perangkat elektronik digital, mulai dari kalkulator sederhana, <i>smartphone</i> canggih, hingga superkomputer yang kompleks. Setiap kali Anda menekan tombol pada perangkat digital, melakukan pencarian di internet, atau menjalankan program komputer, Anda berinteraksi dengan sirkuit yang dirancang berdasarkan prinsip-prinsip Aljabar Boole. Memahami Aljabar Boole tidak hanya penting bagi insinyur listrik dan ilmuwan komputer, tetapi juga bagi siapa pun yang ingin mendapatkan pemahaman mendalam tentang bagaimana dunia digital di sekitar kita bekerja.</p>
+                <p>Dalam artikel ini, kita akan menjelajahi Aljabar Boole secara komprehensif, mulai dari konsep dasarnya, hukum-hukum penting yang mengaturnya, gerbang logika sebagai implementasi fisik, teknik minimisasi fungsi, hingga berbagai aplikasinya yang luas dalam teknologi modern. Mari kita selami dunia logika biner yang menarik ini.</p>
+            </section>
+
+            <section id="konsep-dasar">
+                <h2>2. Konsep Dasar Aljabar Boole</h2>
+                <p>Untuk memahami Aljabar Boole, kita perlu terlebih dahulu memahami elemen-elemen fundamental yang membangunnya. Ini mencakup variabel Boole, nilai-nilai yang dapat diasumsikan variabel tersebut, dan operator logika dasar yang bekerja pada variabel-variabel tersebut.</p>
+
+                <h3>2.1. Variabel Boole dan Nilai Biner</h3>
+                <p>Dalam Aljabar Boole, semua variabel hanya dapat mengambil dua nilai diskrit. Secara konvensional, nilai-nilai ini sering disebut sebagai:</p>
+                <ul>
+                    <li><b>Benar (True)</b> atau <b>1 (Logika Tinggi)</b>: Merepresentasikan kondisi aktif, ada arus, ya, atau ON.</li>
+                    <li><b>Salah (False)</b> atau <b>0 (Logika Rendah)</b>: Merepresentasikan kondisi tidak aktif, tidak ada arus, tidak, atau OFF.</li>
+                </ul>
+                <p>Nilai 1 dan 0 ini tidak merepresentasikan kuantitas numerik seperti pada aljabar biasa, melainkan status atau kondisi logis. Sebuah sakelar lampu, misalnya, bisa dalam kondisi ON (1) atau OFF (0). Sebuah pintu bisa terbuka (1) atau tertutup (0). Kesederhanaan inilah yang memungkinkan Aljabar Boole menjadi sangat efektif dalam merancang sirkuit digital yang juga beroperasi dalam keadaan dua kondisi.</p>
+
+                <h3>2.2. Operator Logika Dasar</h3>
+                <p>Aljabar Boole memiliki tiga operator logika dasar yang menjadi fondasi untuk semua operasi yang lebih kompleks. Operator ini bekerja pada satu atau lebih variabel Boole dan menghasilkan satu nilai Boole (0 atau 1) sebagai hasilnya. Ketiga operator tersebut adalah AND, OR, dan NOT.</p>
+
+                <h4>2.2.1. Operator AND (Konjungsi)</h4>
+                <p>Operator AND, juga dikenal sebagai konjungsi, menghasilkan nilai 1 (benar) hanya jika semua operand-nya bernilai 1 (benar). Jika salah satu atau lebih operand bernilai 0 (salah), maka hasilnya adalah 0 (salah). Dalam aljabar Boole, operator AND dapat direpresentasikan dengan simbol perkalian (<code>.</code>), atau terkadang tanpa simbol (implisit), seperti <code>A . B</code> atau <code>AB</code>.</p>
+                <p>Bayangkan dua sakelar yang dihubungkan secara seri ke sebuah lampu. Lampu akan menyala (1) hanya jika kedua sakelar tersebut ON (1). Jika salah satu atau keduanya OFF (0), lampu akan tetap mati (0).</p>
+                <p>Tabel kebenaran untuk operator AND dengan dua variabel (A dan B):</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>A</th>
+                            <th>B</th>
+                            <th>A . B</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <figure>
+                    <svg width="200" height="100" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+                        <title>Gerbang AND</title>
+                        <path d="M20 20 L20 80 L80 80 A30 30 0 0 0 80 20 L20 20 Z" fill="none" stroke="black" stroke-width="2"/>
+                        <circle cx="120" cy="50" r="5" fill="black"/>
+                        <line x1="100" y1="50" x2="115" y2="50" stroke="black" stroke-width="2"/>
+                        <line x1="0" y1="35" x2="20" y2="35" stroke="black" stroke-width="2"/>
+                        <line x1="0" y1="65" x2="20" y2="65" stroke="black" stroke-width="2"/>
+                        <text x="5" y="30" font-family="Arial" font-size="16">A</text>
+                        <text x="5" y="70" font-family="Arial" font-size="16">B</text>
+                        <text x="125" y="55" font-family="Arial" font-size="16">Y</text>
+                        <path d="M80 50 L100 50" stroke="black" stroke-width="2"/>
+                        <path d="M20 35 L20 40 C20 45 20 45 25 50 C20 55 20 55 20 60 L20 65" fill="none" stroke="black" stroke-width="0"/>
+                    </svg>
+                    <figcaption>Gambar 2.1: Simbol Gerbang Logika AND</figcaption>
+                </figure>
+
+                <h4>2.2.2. Operator OR (Disjungsi)</h4>
+                <p>Operator OR, juga dikenal sebagai disjungsi, menghasilkan nilai 1 (benar) jika salah satu atau lebih operand-nya bernilai 1 (benar). Operator ini hanya akan menghasilkan 0 (salah) jika semua operand-nya bernilai 0 (salah). Dalam aljabar Boole, operator OR direpresentasikan dengan simbol penjumlahan (<code>+</code>).</p>
+                <p>Analoginya adalah dua sakelar yang dihubungkan secara paralel ke sebuah lampu. Lampu akan menyala (1) jika salah satu sakelar ON (1), atau jika kedua sakelar ON (1). Lampu hanya akan mati (0) jika kedua sakelar OFF (0).</p>
+                <p>Tabel kebenaran untuk operator OR dengan dua variabel (A dan B):</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>A</th>
+                            <th>B</th>
+                            <th>A + B</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <figure>
+                    <svg width="200" height="100" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+                        <title>Gerbang OR</title>
+                        <path d="M10 20 C30 10 70 10 90 50 C70 90 30 90 10 80 L10 20 Z" fill="none" stroke="black" stroke-width="2"/>
+                        <path d="M10 20 C15 30 15 70 10 80" fill="none" stroke="black" stroke-width="2"/>
+                        <circle cx="120" cy="50" r="5" fill="black"/>
+                        <line x1="100" y1="50" x2="115" y2="50" stroke="black" stroke-width="2"/>
+                        <line x1="0" y1="35" x2="20" y2="35" stroke="black" stroke-width="2"/>
+                        <line x1="0" y1="65" x2="20" y2="65" stroke="black" stroke-width="2"/>
+                        <text x="5" y="30" font-family="Arial" font-size="16">A</text>
+                        <text x="5" y="70" font-family="Arial" font-size="16">B</text>
+                        <text x="125" y="55" font-family="Arial" font-size="16">Y</text>
+                        <path d="M90 50 L100 50" stroke="black" stroke-width="2"/>
+                    </svg>
+                    <figcaption>Gambar 2.2: Simbol Gerbang Logika OR</figcaption>
+                </figure>
+
+                <h4>2.2.3. Operator NOT (Negasi/Inversi)</h4>
+                <p>Operator NOT, juga dikenal sebagai negasi atau inversi, adalah operator uner (bekerja pada satu operand). Operator ini membalikkan nilai logika operand-nya. Jika operand bernilai 1 (benar), maka hasilnya adalah 0 (salah), dan sebaliknya. Dalam aljabar Boole, operator NOT direpresentasikan dengan tanda petik (<code>'</code>) atau garis di atas variabel (<code><span style="text-decoration: overline;">A</span></code>).</p>
+                <p>Jika kita memiliki sakelar yang aktif (1), operator NOT akan membuatnya tidak aktif (0). Jika sakelar tidak aktif (0), NOT akan membuatnya aktif (1).</p>
+                <p>Tabel kebenaran untuk operator NOT dengan satu variabel (A):</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>A</th>
+                            <th>A'</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>0</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <figure>
+                    <svg width="200" height="100" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+                        <title>Gerbang NOT (Inverter)</title>
+                        <polygon points="20,50 80,20 80,80" fill="none" stroke="black" stroke-width="2"/>
+                        <circle cx="90" cy="50" r="10" fill="none" stroke="black" stroke-width="2"/>
+                        <line x1="0" y1="50" x2="20" y2="50" stroke="black" stroke-width="2"/>
+                        <line x1="100" y1="50" x2="120" y2="50" stroke="black" stroke-width="2"/>
+                        <text x="5" y="55" font-family="Arial" font-size="16">A</text>
+                        <text x="125" y="55" font-family="Arial" font-size="16">Y</text>
+                    </svg>
+                    <figcaption>Gambar 2.3: Simbol Gerbang Logika NOT (Inverter)</figcaption>
+                </figure>
+                <p>Dengan memahami variabel biner dan ketiga operator dasar ini, kita telah memiliki fondasi yang kokoh untuk menjelajahi hukum-hukum Aljabar Boole dan bagaimana mereka digunakan untuk menyederhanakan ekspresi logika.</p>
+            </section>
+
+            <section id="hukum-aljabar-boole">
+                <h2>3. Hukum-Hukum Aljabar Boole</h2>
+                <p>Seperti halnya aljabar biasa memiliki hukum-hukum seperti komutatif dan asosiatif, Aljabar Boole juga memiliki serangkaian hukum dan teorema yang mengatur operasi logis. Hukum-hukum ini sangat penting untuk menyederhanakan ekspresi Boole, merancang sirkuit digital yang efisien, dan membuktikan kebenaran suatu pernyataan logika. Memahami dan menguasai hukum-hukum ini adalah kunci untuk menjadi mahir dalam Aljabar Boole.</p>
+
+                <h3>3.1. Hukum Komutatif</h3>
+                <p>Hukum komutatif menyatakan bahwa urutan operan dalam operasi AND atau OR tidak mempengaruhi hasilnya. Ini berarti bahwa Anda dapat menukar posisi variabel tanpa mengubah nilai ekspresi.</p>
+                <ul>
+                    <li>Untuk operasi OR: <code>A + B = B + A</code></li>
+                    <li>Untuk operasi AND: <code>A . B = B . A</code></li>
+                </ul>
+                <p>Ini adalah properti yang intuitif; "A atau B" memiliki arti yang sama dengan "B atau A", demikian pula "A dan B" sama dengan "B dan A".</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>A</th>
+                            <th>B</th>
+                            <th>A + B</th>
+                            <th>B + A</th>
+                            <th>A . B</th>
+                            <th>B . A</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>Seperti terlihat dari tabel kebenaran di atas, hasil <code>A + B</code> selalu sama dengan <code>B + A</code>, dan <code>A . B</code> selalu sama dengan <code>B . A</code>.</p>
+
+                <h3>3.2. Hukum Asosiatif</h3>
+                <p>Hukum asosiatif menyatakan bahwa ketika melakukan operasi yang sama (baik semua AND atau semua OR) dengan tiga atau lebih operan, pengelompokan operan tidak mempengaruhi hasilnya. Ini berarti Anda dapat mengubah tanda kurung tanpa mengubah nilai ekspresi.</p>
+                <ul>
+                    <li>Untuk operasi OR: <code>(A + B) + C = A + (B + C)</code></li>
+                    <li>Untuk operasi AND: <code>(A . B) . C = A . (B . C)</code></li>
+                </ul>
+                <p>Hukum ini sangat membantu ketika kita memiliki ekspresi yang panjang dengan banyak operan. Ini memungkinkan kita untuk mengatur ulang operan untuk tujuan penyederhanaan.</p>
+                <p>Contoh tabel kebenaran untuk operasi OR:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>A</th>
+                            <th>B</th>
+                            <th>C</th>
+                            <th>A + B</th>
+                            <th>(A + B) + C</th>
+                            <th>B + C</th>
+                            <th>A + (B + C)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                        <tr><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+                        <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                        <tr><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                        <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+                        <tr><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                        <tr><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                        <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                    </tbody>
+                </table>
+                <p>Dari tabel di atas, kolom <code>(A + B) + C</code> dan <code>A + (B + C)</code> selalu identik, memvalidasi hukum asosiatif untuk OR.</p>
+
+                <h3>3.3. Hukum Distributif</h3>
+                <p>Hukum distributif adalah salah satu hukum yang paling sering digunakan dalam penyederhanaan ekspresi Boole. Ini menunjukkan bagaimana operasi OR dapat didistribusikan atas operasi AND, dan sebaliknya.</p>
+                <ul>
+                    <li>Distribusi AND atas OR: <code>A . (B + C) = (A . B) + (A . C)</code></li>
+                    <li>Distribusi OR atas AND: <code>A + (B . C) = (A + B) . (A + C)</code></li>
+                </ul>
+                <p>Hukum distribusi OR atas AND seringkali kurang intuitif dibandingkan distribusi AND atas OR, tetapi sangat penting dalam Aljabar Boole dan berbeda dari aljabar biasa. Hukum ini sering digunakan untuk mengubah ekspresi dari bentuk Sum-of-Products (SOP) menjadi Product-of-Sums (POS) atau sebaliknya, yang berguna dalam minimisasi.</p>
+                <p>Contoh tabel kebenaran untuk distribusi AND atas OR (<code>A . (B + C) = (A . B) + (A . C)</code>):</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>A</th>
+                            <th>B</th>
+                            <th>C</th>
+                            <th>B + C</th>
+                            <th>A . (B + C)</th>
+                            <th>A . B</th>
+                            <th>A . C</th>
+                            <th>(A . B) + (A . C)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                        <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                        <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                        <tr><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                        <tr><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                        <tr><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+                        <tr><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+                        <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                    </tbody>
+                </table>
+                <p>Terlihat bahwa kolom <code>A . (B + C)</code> dan <code>(A . B) + (A . C)</code> memiliki nilai yang sama untuk semua kombinasi input.</p>
+
+                <h3>3.4. Hukum Identitas</h3>
+                <p>Hukum identitas mendefinisikan elemen identitas untuk operasi AND dan OR. Elemen identitas adalah nilai yang, ketika dioperasikan dengan variabel lain, tidak mengubah nilai variabel tersebut.</p>
+                <ul>
+                    <li>Untuk operasi OR: <code>A + 0 = A</code> (0 adalah elemen identitas untuk OR)</li>
+                    <li>Untuk operasi AND: <code>A . 1 = A</code> (1 adalah elemen identitas untuk AND)</li>
+                </ul>
+                <p>Secara intuitif, menambahkan "salah" pada "A" tidak mengubah nilai "A". Demikian pula, melakukan AND dengan "benar" pada "A" tidak mengubah nilai "A".</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>A</th>
+                            <th>A + 0</th>
+                            <th>A . 1</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>0</td><td>0</td><td>0</td></tr>
+                        <tr><td>1</td><td>1</td><td>1</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>3.5. Hukum Komplemen</h3>
+                <p>Hukum komplemen berhubungan dengan bagaimana sebuah variabel berinteraksi dengan komplemennya (nilai inversnya).</p>
+                <ul>
+                    <li>Untuk operasi OR: <code>A + A' = 1</code></li>
+                    <li>Untuk operasi AND: <code>A . A' = 0</code></li>
+                </ul>
+                <p>Ini masuk akal: "A atau bukan A" selalu benar (1), karena A dan A' tidak mungkin keduanya 0 pada saat yang bersamaan. Sebaliknya, "A dan bukan A" selalu salah (0), karena A dan A' tidak mungkin keduanya 1 pada saat yang bersamaan.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>A</th>
+                            <th>A'</th>
+                            <th>A + A'</th>
+                            <th>A . A'</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+                        <tr><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>3.6. Hukum Idempoten</h3>
+                <p>Hukum idempoten menyatakan bahwa mengoperasikan sebuah variabel dengan dirinya sendiri tidak mengubah nilai variabel tersebut.</p>
+                <ul>
+                    <li>Untuk operasi OR: <code>A + A = A</code></li>
+                    <li>Untuk operasi AND: <code>A . A = A</code></li>
+                </ul>
+                <p>Jika A adalah benar, maka "benar atau benar" adalah benar. Jika A adalah salah, maka "salah atau salah" adalah salah. Logika yang sama berlaku untuk operasi AND.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>A</th>
+                            <th>A + A</th>
+                            <th>A . A</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>0</td><td>0</td><td>0</td></tr>
+                        <tr><td>1</td><td>1</td><td>1</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>3.7. Hukum Absorpsi</h3>
+                <p>Hukum absorpsi adalah hukum yang sangat berguna untuk menyederhanakan ekspresi kompleks. Hukum ini memungkinkan eliminasi istilah tertentu.</p>
+                <ul>
+                    <li><code>A + (A . B) = A</code></li>
+                    <li><code>A . (A + B) = A</code></li>
+                </ul>
+                <p>Untuk memahami <code>A + (A . B) = A</code>: Jika A bernilai 1, maka <code>1 + (1 . B) = 1 + B</code>. Karena apapun nilai B, <code>1 + B</code> akan selalu 1. Jadi, <code>1 + (1 . B) = 1</code>. Jika A bernilai 0, maka <code>0 + (0 . B) = 0 + 0 = 0</code>. Dalam kedua kasus, hasilnya adalah A. Oleh karena itu, <code>A + (A . B) = A</code>.</p>
+                <p>Tabel kebenaran untuk <code>A + (A . B) = A</code>:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>A</th>
+                            <th>B</th>
+                            <th>A . B</th>
+                            <th>A + (A . B)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                        <tr><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+                        <tr><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+                        <tr><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                    </tbody>
+                </table>
+                <p>Kolom <code>A</code> dan <code>A + (A . B)</code> adalah identik.</p>
+
+                <h3>3.8. Hukum De Morgan</h3>
+                <p>Hukum De Morgan adalah salah satu hukum terpenting dalam Aljabar Boole, terutama dalam desain gerbang logika dan penyederhanaan ekspresi yang melibatkan komplemen. Hukum ini menunjukkan bagaimana negasi dari operasi AND atau OR dapat diekspresikan sebagai operasi OR atau AND dari negasi masing-masing operand.</p>
+                <ul>
+                    <li><code>(A . B)' = A' + B'</code> (Negasi dari AND adalah OR dari negasi)</li>
+                    <li><code>(A + B)' = A' . B'</code> (Negasi dari OR adalah AND dari negasi)</li>
+                </ul>
+                <p>Hukum De Morgan memungkinkan kita untuk mengubah ekspresi yang kompleks, terutama yang melibatkan negasi dari kelompok istilah, menjadi bentuk yang lebih mudah dianalisis atau diimplementasikan menggunakan gerbang logika universal (NAND atau NOR).</p>
+                <p>Tabel kebenaran untuk <code>(A . B)' = A' + B'</code>:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>A</th>
+                            <th>B</th>
+                            <th>A . B</th>
+                            <th>(A . B)'</th>
+                            <th>A'</th>
+                            <th>B'</th>
+                            <th>A' + B'</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                        <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+                        <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+                        <tr><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                    </tbody>
+                </table>
+                <p>Kolom <code>(A . B)'</code> dan <code>A' + B'</code> menunjukkan hasil yang identik.</p>
+
+                <h3>3.9. Hukum Ganda Negasi (Double Negation)</h3>
+                <p>Hukum ini menyatakan bahwa negasi ganda dari sebuah variabel akan mengembalikannya ke nilai aslinya.</p>
+                <ul>
+                    <li><code>(A')' = A</code></li>
+                </ul>
+                <p>Jika A adalah 0, maka A' adalah 1, dan (A')' adalah 0 lagi. Jika A adalah 1, maka A' adalah 0, dan (A')' adalah 1 lagi. Ini adalah hukum yang sangat mendasar dan intuitif.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>A</th>
+                            <th>A'</th>
+                            <th>(A')'</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>0</td><td>1</td><td>0</td></tr>
+                        <tr><td>1</td><td>0</td><td>1</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>3.10. Hukum Null/Dominasi</h3>
+                <p>Hukum ini menunjukkan bahwa ada nilai tertentu yang, ketika dioperasikan dengan variabel lain, akan selalu menghasilkan nilai yang sama, terlepas dari nilai variabel lainnya.</p>
+                <ul>
+                    <li>Untuk operasi OR: <code>A + 1 = 1</code> (1 mendominasi operasi OR)</li>
+                    <li>Untuk operasi AND: <code>A . 0 = 0</code> (0 mendominasi operasi AND)</li>
+                </ul>
+                <p>Jika "A" atau "benar" (1), hasilnya selalu benar (1). Jika "A" dan "salah" (0), hasilnya selalu salah (0). Ini adalah hukum yang seringkali langsung terlihat dalam penyederhanaan.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>A</th>
+                            <th>A + 1</th>
+                            <th>A . 0</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>0</td><td>1</td><td>0</td></tr>
+                        <tr><td>1</td><td>1</td><td>0</td></tr>
+                    </tbody>
+                </table>
+                <p>Penguasaan hukum-hukum ini adalah langkah penting untuk dapat secara efektif memanipulasi dan menyederhanakan ekspresi Boole, yang pada gilirannya akan mengarah pada desain sirkuit digital yang lebih efisien dan logis.</p>
+            </section>
+
+            <section id="fungsi-boole">
+                <h2>4. Fungsi Boole dan Minimisasi</h2>
+                <p>Fungsi Boole adalah sebuah fungsi yang memiliki satu atau lebih variabel input Boole (0 atau 1) dan menghasilkan satu output Boole (0 atau 1). Setiap kombinasi input akan menghasilkan output tunggal. Fungsi Boole dapat merepresentasikan perilaku logis dari sirkuit digital apa pun.</p>
+
+                <h3>4.1. Representasi Fungsi Boole</h3>
+                <p>Ada beberapa cara untuk merepresentasikan fungsi Boole:</p>
+                <h4>4.1.1. Ekspresi Aljabar</h4>
+                <p>Ini adalah cara yang paling umum untuk menuliskan fungsi Boole menggunakan variabel dan operator logika (AND, OR, NOT). Contohnya: <code>F(A, B, C) = A . B + A' . C</code>.</p>
+
+                <h4>4.1.2. Tabel Kebenaran</h4>
+                <p>Tabel kebenaran adalah daftar sistematis dari semua kemungkinan kombinasi input dan output yang sesuai untuk suatu fungsi Boole. Ini adalah cara yang lengkap dan tidak ambigu untuk mendefinisikan fungsi. Untuk N variabel input, akan ada <code>2<sup>N</sup></code> baris dalam tabel kebenaran.</p>
+                <p>Contoh tabel kebenaran untuk <code>F(A, B) = A + B'</code>:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>A</th>
+                            <th>B</th>
+                            <th>B'</th>
+                            <th>A + B'</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+                        <tr><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+                        <tr><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+                        <tr><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+                    </tbody>
+                </table>
+
+                <h4>4.1.3. Bentuk Kanonik (SOP dan POS)</h4>
+                <p>Fungsi Boole dapat diekspresikan dalam bentuk standar atau kanonik, yaitu Sum-of-Products (SOP) atau Product-of-Sums (POS).</p>
+                <ul>
+                    <li><b>Sum-of-Products (SOP)</b>: Ekspresi ini terdiri dari istilah-istilah produk (minterm) yang di-OR-kan bersama. Setiap minterm adalah produk dari semua variabel input (atau komplemennya). Minterm bernilai 1 untuk satu kombinasi input tertentu. Contoh: <code>F(A,B,C) = A'B'C + AB'C' + ABC</code>.</li>
+                    <li><b>Product-of-Sums (POS)</b>: Ekspresi ini terdiri dari istilah-istilah jumlah (maxterm) yang di-AND-kan bersama. Setiap maxterm adalah jumlah dari semua variabel input (atau komplemennya). Maxterm bernilai 0 untuk satu kombinasi input tertentu. Contoh: <code>F(A,B,C) = (A+B+C) . (A'+B+C') . (A'+B'+C)</code>.</li>
+                </ul>
+                <p>Bentuk kanonik penting karena memungkinkan representasi unik dari setiap fungsi Boole dan merupakan titik awal yang baik untuk minimisasi.</p>
+
+                <h3>4.2. Minimisasi Fungsi Boole</h3>
+                <p>Minimisasi fungsi Boole adalah proses menyederhanakan ekspresi Boole menjadi bentuk yang setara tetapi dengan jumlah istilah (literal) dan operator yang lebih sedikit. Mengapa minimisasi penting?</p>
+                <ul>
+                    <li><b>Penghematan Biaya</b>: Setiap istilah dan operator dalam ekspresi Boole biasanya diterjemahkan menjadi gerbang logika dalam sirkuit digital. Semakin sedikit gerbang, semakin murah biaya produksi sirkuit.</li>
+                    <li><b>Kecepatan</b>: Sirkuit dengan lebih sedikit gerbang biasanya memiliki penundaan propagasi yang lebih rendah, yang berarti mereka dapat beroperasi lebih cepat.</li>
+                    <li><b>Kompleksitas</b>: Sirkuit yang lebih sederhana lebih mudah dirancang, dianalisis, dan diperbaiki.</li>
+                    <li><b>Konsumsi Daya</b>: Lebih sedikit gerbang berarti konsumsi daya yang lebih rendah.</li>
+                </ul>
+                <p>Ada beberapa metode untuk melakukan minimisasi fungsi Boole:</p>
+
+                <h4>4.2.1. Minimisasi Menggunakan Hukum Aljabar Boole</h4>
+                <p>Ini adalah metode dasar yang melibatkan penerapan hukum-hukum Aljabar Boole secara sistematis untuk menyederhanakan ekspresi. Metode ini membutuhkan pemahaman yang kuat tentang semua hukum dan seringkali bersifat "coba-coba", terutama untuk ekspresi yang lebih kompleks.</p>
+                <p>Contoh: Sederhanakan <code>F = AB + A(B+C) + B(B+C)</code></p>
+                <ol>
+                    <li><code>F = AB + AB + AC + BB + BC</code> (Hukum Distributif)</li>
+                    <li><code>F = AB + AC + B + BC</code> (Hukum Idempoten: <code>AB + AB = AB</code>, <code>BB = B</code>)</li>
+                    <li><code>F = AB + B + AC + BC</code> (Hukum Komutatif)</li>
+                    <li><code>F = B(A+1) + AC + BC</code> (Faktorisasi B)</li>
+                    <li><code>F = B(1) + AC + BC</code> (Hukum Null: <code>A+1 = 1</code>)</li>
+                    <li><code>F = B + AC + BC</code> (Hukum Identitas: <code>B.1 = B</code>)</li>
+                    <li><code>F = B(1+C) + AC</code> (Faktorisasi B)</li>
+                    <li><code>F = B(1) + AC</code> (Hukum Null: <code>1+C = 1</code>)</li>
+                    <li><code>F = B + AC</code> (Hukum Identitas: <code>B.1 = B</code>)</li>
+                </ol>
+                <p>Jadi, ekspresi <code>AB + A(B+C) + B(B+C)</code> disederhanakan menjadi <code>B + AC</code>.</p>
+
+                <h4>4.2.2. Peta Karnaugh (Karnaugh Maps - K-Maps)</h4>
+                <p>Peta Karnaugh adalah metode grafis yang sangat populer untuk menyederhanakan fungsi Boole. Ini adalah alat visual yang memungkinkan kita untuk mengidentifikasi dan mengelompokkan istilah-istilah yang berdekatan (adjacent terms) yang dapat disederhanakan. K-Map bekerja dengan menyusun tabel kebenaran dalam format grid yang unik, di mana sel-sel yang berdekatan secara fisik hanya berbeda dalam satu variabel.</p>
+                <p>K-Map sangat efektif untuk fungsi dengan hingga 4 atau 5 variabel. Untuk lebih banyak variabel, metode lain seperti Quine-McCluskey lebih disukai karena K-Map menjadi terlalu kompleks.</p>
+
+                <h5>Prinsip Dasar K-Map:</h5>
+                <ul>
+                    <li>Setiap sel dalam K-Map merepresentasikan satu minterm (atau maxterm) dari fungsi Boole.</li>
+                    <li>Sel-sel diatur sedemikian rupa sehingga sel yang berdekatan secara horizontal atau vertikal hanya berbeda dalam satu variabel. Bahkan sel-sel di tepi yang berlawanan (atas-bawah, kiri-kanan) dianggap berdekatan (membungkus).</li>
+                    <li>Kita mencari kelompok-kelompok '1' (untuk SOP) atau '0' (untuk POS) yang berbentuk persegi panjang (termasuk bujur sangkar) dengan ukuran pangkat dua (misalnya 1, 2, 4, 8, 16 sel).</li>
+                    <li>Kelompok harus sebesar mungkin.</li>
+                    <li>Setiap '1' (atau '0') harus tercakup dalam setidaknya satu kelompok.</li>
+                    <li>Jumlah kelompok harus sesedikit mungkin.</li>
+                    <li>Setiap kelompok yang tumpang tindih dapat digunakan, selama itu membantu membuat kelompok yang lebih besar atau mencakup '1' yang belum tercakup.</li>
+                </ul>
+
+                <h5>K-Map 2 Variabel (A, B)</h5>
+                <p>Memiliki <code>2^2 = 4</code> sel. Inputnya adalah A dan B.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>A\B</th>
+                            <th>0</th>
+                            <th>1</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0</td>
+                            <td>m0</td>
+                            <td>m1</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>m2</td>
+                            <td>m3</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>Contoh: <code>F(A, B) = Σ(0, 2, 3)</code> (menunjukkan minterm m0, m2, m3)</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>A\B</th>
+                            <th>0</th>
+                            <th>1</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0</td>
+                            <td><b>1</b></td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td><b>1</b></td>
+                            <td><b>1</b></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>Pengelompokan:</p>
+                <ul>
+                    <li>Kelompok 1 (vertikal): m0 dan m2 (<code>A'B'</code> dan <code>AB'</code>). Variabel yang berubah adalah A. Yang tetap <code>B'</code>. Jadi kelompok ini menyederhanakan menjadi <code>B'</code>.</li>
+                    <li>Kelompok 2 (horizontal): m2 dan m3 (<code>AB'</code> dan <code>AB</code>). Variabel yang berubah adalah B. Yang tetap <code>A</code>. Jadi kelompok ini menyederhanakan menjadi <code>A</code>.</li>
+                </ul>
+                <p>Hasil minimisasi: <code>F = B' + A</code> (atau <code>A + B'</code>).</p>
+                <figure>
+                    <svg width="250" height="150" viewBox="0 0 250 150" xmlns="http://www.w3.org/2000/svg">
+                        <title>K-Map 2 Variabel Example</title>
+                        <rect x="50" y="30" width="150" height="100" fill="none" stroke="black" stroke-width="2"/>
+                        <line x1="125" y1="30" x2="125" y2="130" stroke="black" stroke-width="1"/>
+                        <line x1="50" y1="80" x2="200" y2="80" stroke="black" stroke-width="1"/>
+                        <text x="75" y="60" font-family="Arial" font-size="20" fill="blue">1</text>
+                        <text x="150" y="60" font-family="Arial" font-size="20">0</text>
+                        <text x="75" y="110" font-family="Arial" font-size="20" fill="red">1</text>
+                        <text x="150" y="110" font-family="Arial" font-size="20" fill="red">1</text>
+
+                        <text x="25" y="60" font-family="Arial" font-size="16">A=0</text>
+                        <text x="25" y="110" font-family="Arial" font-size="16">A=1</text>
+                        <text x="75" y="25" font-family="Arial" font-size="16">B=0</text>
+                        <text x="150" y="25" font-family="Arial" font-size="16">B=1</text>
+
+                        <!-- Grouping for B' -->
+                        <rect x="52" y="32" width="71" height="96" fill="blue" fill-opacity="0.1" stroke="blue" stroke-width="2" rx="5" ry="5"/>
+                        <!-- Grouping for A -->
+                        <rect x="52" y="82" width="146" height="46" fill="red" fill-opacity="0.1" stroke="red" stroke-width="2" rx="5" ry="5"/>
+
+                    </svg>
+                    <figcaption>Gambar 4.1: Contoh K-Map 2 Variabel dengan Pengelompokan</figcaption>
+                </figure>
+
+                <h5>K-Map 3 Variabel (A, B, C)</h5>
+                <p>Memiliki <code>2^3 = 8</code> sel. Grid biasanya 2x4 atau 4x2. Penting untuk diingat bahwa urutan B dan C menggunakan kode Gray (00, 01, 11, 10) untuk memastikan hanya satu bit yang berubah antar sel yang berdekatan.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th rowspan="2">A</th>
+                            <th colspan="4">BC</th>
+                        </tr>
+                        <tr>
+                            <th>00</th>
+                            <th>01</th>
+                            <th>11</th>
+                            <th>10</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0</td>
+                            <td>m0</td>
+                            <td>m1</td>
+                            <td>m3</td>
+                            <td>m2</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>m4</td>
+                            <td>m5</td>
+                            <td>m7</td>
+                            <td>m6</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>Contoh: <code>F(A, B, C) = Σ(0, 2, 4, 5, 6)</code></p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th rowspan="2">A</th>
+                            <th colspan="4">BC</th>
+                        </tr>
+                        <tr>
+                            <th>00</th>
+                            <th>01</th>
+                            <th>11</th>
+                            <th>10</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0</td>
+                            <td><b>1</b></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td><b>1</b></td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td><b>1</b></td>
+                            <td><b>1</b></td>
+                            <td>0</td>
+                            <td><b>1</b></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>Pengelompokan:</p>
+                <ul>
+                    <li>Kelompok 1 (vertikal, membungkus): m0, m2, m4, m6. Variabel A, C berubah. B tetap 0. Jadi <code>B'</code>. (Kelompok 4 sel)</li>
+                    <li>Kelompok 2 (horizontal): m4, m5. Variabel C berubah. A=1, B=0 tetap. Jadi <code>AB'</code>. (Kelompok 2 sel)</li>
+                </ul>
+                <p>Hasil minimisasi: <code>F = B' + AB'</code>. Menggunakan hukum Absorpsi: <code>B' + AB' = B'(1 + A) = B'(1) = B'</code>. Sebenarnya jika kita lebih cermat, kelompok <code>m4,m5</code> sudah tercakup dalam kelompok <code>B'</code> sehingga tidak perlu lagi. Jadi <code>F = B'</code>.</p>
+                <p>Mari kita cek ulang pengelompokan yang lebih optimal. Kelompok <code>m0, m2, m4, m6</code> sudah menghasilkan <code>B'</code>. Apakah ada 1 lain yang belum tercover? Ada <code>m5</code> (A=1, B=0, C=1). <code>m5</code> belum tercover. Kita bisa kelompokkan <code>m5</code> dengan <code>m4</code> (A=1, B=0, C=0) menjadi <code>AB'</code>. Tapi <code>m4</code> sudah tercover di kelompok <code>B'</code>.</p>
+                <p>Pengelompokan optimal:</p>
+                <ul>
+                    <li>Kelompok 4: m0(000), m2(010), m4(100), m6(110) &rarr; Variabel yang berubah: A (dari 0 ke 1), C (dari 0 ke 0 ke 1 ke 1). Yang tetap: B=0. Jadi, <code>B'</code>.</li>
+                    <li>Istilah yang tersisa: m5(101). m5 dapat dikelompokkan dengan m1(001) yang tidak terisi (berdekatan secara fisik). Atau dengan m4(100) secara horizontal, tetapi m4 sudah tercakup. Kita harus mencari kelompok yang tidak redundan.</li>
+                    <li>Jika kita mengelompokkan m5 dengan m4, hasilnya adalah <code>A B'</code>. Ini adalah kelompok yang sah.</li>
+                </ul>
+                <p>Jadi, ekspresi tersederhana adalah <code>F = B' + AB'</code> yang dapat disederhanakan lebih lanjut menjadi <code>F = B'</code> karena <code>B' + AB' = B'(1+A) = B' . 1 = B'</code>. Jadi fungsi ini adalah <code>F=B'</code>. Ini menunjukkan pentingnya mencari kelompok terbesar dan terkecil yang mencakup semua 1 dan tidak redundan.</p>
+
+                <h5>K-Map 4 Variabel (A, B, C, D)</h5>
+                <p>Memiliki <code>2^4 = 16</code> sel. Grid biasanya 4x4. Urutan baris dan kolom juga menggunakan kode Gray (00, 01, 11, 10).</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th rowspan="2">AB\CD</th>
+                            <th>00</th>
+                            <th>01</th>
+                            <th>11</th>
+                            <th>10</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>00</td>
+                            <td>m0</td>
+                            <td>m1</td>
+                            <td>m3</td>
+                            <td>m2</td>
+                        </tr>
+                        <tr>
+                            <td>01</td>
+                            <td>m4</td>
+                            <td>m5</td>
+                            <td>m7</td>
+                            <td>m6</td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td>m12</td>
+                            <td>m13</td>
+                            <td>m15</td>
+                            <td>m14</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>m8</td>
+                            <td>m9</td>
+                            <td>m11</td>
+                            <td>m10</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>K-Map 4 variabel memungkinkan pengelompokan yang lebih kompleks, termasuk pengelompokan 8 sel, 4 sel, dan 2 sel, serta pembungkusan di semua sisi.</p>
+                <p>Contoh: <code>F(A,B,C,D) = Σ(0, 1, 2, 3, 5, 7, 8, 9, 10, 11, 13, 15)</code></p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th rowspan="2">AB\CD</th>
+                            <th>00</th>
+                            <th>01</th>
+                            <th>11</th>
+                            <th>10</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>00</td>
+                            <td><b>1</b></td>
+                            <td><b>1</b></td>
+                            <td><b>1</b></td>
+                            <td><b>1</b></td>
+                        </tr>
+                        <tr>
+                            <td>01</td>
+                            <td>0</td>
+                            <td><b>1</b></td>
+                            <td><b>1</b></td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td><b>1</b></td>
+                            <td><b>1</b></td>
+                            <td><b>1</b></td>
+                            <td><b>1</b></td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td><b>1</b></td>
+                            <td><b>1</b></td>
+                            <td><b>1</b></td>
+                            <td><b>1</b></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>Pengelompokan (visualisasi di sini sulit tanpa gambar, tapi kita coba deskripsikan):</p>
+                <ul>
+                    <li><b>Kelompok 8 sel (sudut-sudut)</b>: Ini adalah kelompok terbesar yang bisa kita buat. Perhatikan m0, m2, m8, m10 (pojok kiri atas, pojok kanan atas, pojok kiri bawah, pojok kanan bawah dari blok 4x4). Ini adalah 4 sel. Jika kita tambahkan m1, m3, m9, m11, kita akan mendapatkan semua pojok dari K-map yang membungkus. Variabel A, B, C, D:
+                        <ul>
+                            <li>m0: 0000</li>
+                            <li>m1: 0001</li>
+                            <li>m2: 0010</li>
+                            <li>m3: 0011</li>
+                            <li>m8: 1000</li>
+                            <li>m9: 1001</li>
+                            <li>m10: 1010</li>
+                            <li>m11: 1011</li>
+                        </ul>
+                        Dalam semua minterm ini, B selalu 0. C dan D berubah (00, 01, 11, 10). A berubah (0, 1). Jadi kelompok ini menyederhanakan menjadi <code>B'</code>. (Ini adalah kelompok 8 sel)
+                    </li>
+                    <li><b>Kelompok 4 sel (tengah)</b>: m5, m7, m13, m15. Variabel B=1, D=1. A dan C berubah. Jadi <code>BD</code>.</li>
+                </ul>
+                <p>Hasil minimisasi: <code>F = B' + BD</code>. Menggunakan hukum absorpsi lagi: <code>B' + BD = (B' + B)(B' + D) = 1 . (B' + D) = B' + D</code>.</p>
+                <p>Sehingga, <code>F = B' + D</code>.</p>
+
+                <h4>4.2.3. Metode Quine-McCluskey</h4>
+                <p>Untuk fungsi dengan lebih dari 5 variabel, K-Map menjadi tidak praktis. Metode Quine-McCluskey adalah metode tabular yang lebih algoritmik dan dapat digunakan untuk menyederhanakan fungsi Boole dengan banyak variabel. Meskipun lebih kompleks secara manual, metode ini menjadi dasar untuk program komputer yang melakukan minimisasi sirkuit logika.</p>
+                <p>Secara singkat, metode ini melibatkan:</p>
+                <ol>
+                    <li>Mencantumkan semua minterm dalam bentuk biner.</li>
+                    <li>Mengelompokkan minterm berdasarkan jumlah '1' (berat Hamming).</li>
+                    <li>Membandingkan minterm yang berdekatan (hanya berbeda satu bit) dan menggabungkannya menjadi implikan.</li>
+                    <li>Melanjutkan proses ini sampai tidak ada implikan yang dapat digabungkan lebih lanjut (implikan prima).</li>
+                    <li>Membuat tabel implikan prima untuk memilih implikan prima esensial dan non-esensial yang menutupi semua minterm dengan jumlah total literal yang minimum.</li>
+                </ol>
+                <p>Meskipun detail metode ini melampaui cakupan panduan ini yang berfokus pada konsep dasar dan K-Map, penting untuk mengetahui keberadaannya sebagai alat minimisasi yang lebih canggih.</p>
+                <p>Minimisasi fungsi Boole adalah langkah krusial dalam desain sirkuit digital. Dengan menyederhanakan ekspresi logika, kita dapat mencapai desain yang lebih ringkas, cepat, hemat daya, dan lebih ekonomis.</p>
+            </section>
+
+            <section id="gerbang-logika">
+                <h2>5. Gerbang Logika: Implementasi Fisik Aljabar Boole</h2>
+                <p>Gerbang logika adalah blok bangunan dasar dari semua sirkuit digital. Ini adalah perangkat elektronik yang mengimplementasikan operasi-operasi Aljabar Boole. Setiap gerbang logika mengambil satu atau lebih input biner dan menghasilkan satu output biner, sesuai dengan fungsi logis yang diwakilinya. Gerbang ini dibuat menggunakan transistor dan dioda, yang dapat beroperasi sebagai sakelar ON/OFF untuk merepresentasikan nilai 1 dan 0.</p>
+                <p>Memahami gerbang logika adalah kunci untuk menjembatani kesenjangan antara teori Aljabar Boole dan implementasi praktis dalam perangkat keras komputer.</p>
+
+                <h3>5.1. Gerbang AND</h3>
+                <p>Gerbang AND menghasilkan output 1 hanya jika semua inputnya 1. Jika ada input yang 0, outputnya adalah 0.</p>
+                <ul>
+                    <li>Simbol: (Lihat Gambar 2.1)</li>
+                    <li>Ekspresi Boole: <code>Y = A . B</code> (atau <code>Y = AB</code>)</li>
+                    <li>Tabel Kebenaran:
+                        <table>
+                            <thead><tr><th>A</th><th>B</th><th>Y</th></tr></thead>
+                            <tbody>
+                                <tr><td>0</td><td>0</td><td>0</td></tr>
+                                <tr><td>0</td><td>1</td><td>0</td></tr>
+                                <tr><td>1</td><td>0</td><td>0</td></tr>
+                                <tr><td>1</td><td>1</td><td>1</td></tr>
+                            </tbody>
+                        </table>
+                    </li>
+                </ul>
+
+                <h3>5.2. Gerbang OR</h3>
+                <p>Gerbang OR menghasilkan output 1 jika setidaknya salah satu inputnya 1. Hanya jika semua inputnya 0, outputnya adalah 0.</p>
+                <ul>
+                    <li>Simbol: (Lihat Gambar 2.2)</li>
+                    <li>Ekspresi Boole: <code>Y = A + B</code></li>
+                    <li>Tabel Kebenaran:
+                        <table>
+                            <thead><tr><th>A</th><th>B</th><th>Y</th></tr></thead>
+                            <tbody>
+                                <tr><td>0</td><td>0</td><td>0</td></tr>
+                                <tr><td>0</td><td>1</td><td>1</td></tr>
+                                <tr><td>1</td><td>0</td><td>1</td></tr>
+                                <tr><td>1</td><td>1</td><td>1</td></tr>
+                            </tbody>
+                        </table>
+                    </li>
+                </ul>
+
+                <h3>5.3. Gerbang NOT (Inverter)</h3>
+                <p>Gerbang NOT memiliki satu input dan satu output. Outputnya selalu kebalikan (komplemen) dari inputnya.</p>
+                <ul>
+                    <li>Simbol: (Lihat Gambar 2.3)</li>
+                    <li>Ekspresi Boole: <code>Y = A'</code> (atau <code>Y = <span style="text-decoration: overline;">A</span></code>)</li>
+                    <li>Tabel Kebenaran:
+                        <table>
+                            <thead><tr><th>A</th><th>Y</th></tr></thead>
+                            <tbody>
+                                <tr><td>0</td><td>1</td></tr>
+                                <tr><td>1</td><td>0</td></tr>
+                            </tbody>
+                        </table>
+                    </li>
+                </ul>
+
+                <h3>5.4. Gerbang NAND (NOT-AND)</h3>
+                <p>Gerbang NAND adalah kombinasi dari gerbang AND dan gerbang NOT. Outputnya adalah kebalikan dari output gerbang AND. Artinya, outputnya 0 hanya jika semua inputnya 1; jika ada input yang 0, outputnya 1.</p>
+                <ul>
+                    <li>Simbol: Gerbang AND dengan lingkaran kecil (bubble) di outputnya.</li>
+                    <li>Ekspresi Boole: <code>Y = (A . B)'</code></li>
+                    <li>Tabel Kebenaran:
+                        <table>
+                            <thead><tr><th>A</th><th>B</th><th>Y</th></tr></thead>
+                            <tbody>
+                                <tr><td>0</td><td>0</td><td>1</td></tr>
+                                <tr><td>0</td><td>1</td><td>1</td></tr>
+                                <tr><td>1</td><td>0</td><td>1</td></tr>
+                                <tr><td>1</td><td>1</td><td>0</td></tr>
+                            </tbody>
+                        </table>
+                    </li>
+                </ul>
+                <figure>
+                    <svg width="200" height="100" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+                        <title>Gerbang NAND</title>
+                        <path d="M20 20 L20 80 L80 80 A30 30 0 0 0 80 20 L20 20 Z" fill="none" stroke="black" stroke-width="2"/>
+                        <circle cx="95" cy="50" r="10" fill="none" stroke="black" stroke-width="2"/> <!-- Bubble -->
+                        <line x1="105" y1="50" x2="120" y2="50" stroke="black" stroke-width="2"/>
+                        <line x1="0" y1="35" x2="20" y2="35" stroke="black" stroke-width="2"/>
+                        <line x1="0" y1="65" x2="20" y2="65" stroke="black" stroke-width="2"/>
+                        <text x="5" y="30" font-family="Arial" font-size="16">A</text>
+                        <text x="5" y="70" font-family="Arial" font-size="16">B</text>
+                        <text x="125" y="55" font-family="Arial" font-size="16">Y</text>
+                        <path d="M80 50 L85 50" stroke="black" stroke-width="2"/>
+                    </svg>
+                    <figcaption>Gambar 5.1: Simbol Gerbang Logika NAND</figcaption>
+                </figure>
+
+                <h3>5.5. Gerbang NOR (NOT-OR)</h3>
+                <p>Gerbang NOR adalah kombinasi dari gerbang OR dan gerbang NOT. Outputnya adalah kebalikan dari output gerbang OR. Artinya, outputnya 1 hanya jika semua inputnya 0; jika ada input yang 1, outputnya 0.</p>
+                <ul>
+                    <li>Simbol: Gerbang OR dengan lingkaran kecil (bubble) di outputnya.</li>
+                    <li>Ekspresi Boole: <code>Y = (A + B)'</code></li>
+                    <li>Tabel Kebenaran:
+                        <table>
+                            <thead><tr><th>A</th><th>B</th><th>Y</th></tr></thead>
+                            <tbody>
+                                <tr><td>0</td><td>0</td><td>1</td></tr>
+                                <tr><td>0</td><td>1</td><td>0</td></tr>
+                                <tr><td>1</td><td>0</td><td>0</td></tr>
+                                <tr><td>1</td><td>1</td><td>0</td></tr>
+                            </tbody>
+                        </table>
+                    </li>
+                </ul>
+                <figure>
+                    <svg width="200" height="100" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+                        <title>Gerbang NOR</title>
+                        <path d="M10 20 C30 10 70 10 90 50 C70 90 30 90 10 80 L10 20 Z" fill="none" stroke="black" stroke-width="2"/>
+                        <path d="M10 20 C15 30 15 70 10 80" fill="none" stroke="black" stroke-width="2"/>
+                        <circle cx="105" cy="50" r="10" fill="none" stroke="black" stroke-width="2"/> <!-- Bubble -->
+                        <line x1="115" y1="50" x2="130" y2="50" stroke="black" stroke-width="2"/>
+                        <line x1="0" y1="35" x2="20" y2="35" stroke="black" stroke-width="2"/>
+                        <line x1="0" y1="65" x2="20" y2="65" stroke="black" stroke-width="2"/>
+                        <text x="5" y="30" font-family="Arial" font-size="16">A</text>
+                        <text x="5" y="70" font-family="Arial" font-size="16">B</text>
+                        <text x="135" y="55" font-family="Arial" font-size="16">Y</text>
+                        <path d="M90 50 L95 50" stroke="black" stroke-width="2"/>
+                    </svg>
+                    <figcaption>Gambar 5.2: Simbol Gerbang Logika NOR</figcaption>
+                </figure>
+
+                <h3>5.6. Gerbang XOR (Exclusive OR)</h3>
+                <p>Gerbang XOR menghasilkan output 1 jika inputnya berbeda (salah satu 1 dan yang lain 0). Jika kedua inputnya sama (keduanya 0 atau keduanya 1), outputnya adalah 0.</p>
+                <ul>
+                    <li>Simbol: Gerbang OR dengan garis lengkung tambahan di inputnya.</li>
+                    <li>Ekspresi Boole: <code>Y = A ⊕ B = A'B + AB'</code></li>
+                    <li>Tabel Kebenaran:
+                        <table>
+                            <thead><tr><th>A</th><th>B</th><th>Y</th></tr></thead>
+                            <tbody>
+                                <tr><td>0</td><td>0</td><td>0</td></tr>
+                                <tr><td>0</td><td>1</td><td>1</td></tr>
+                                <tr><td>1</td><td>0</td><td>1</td></tr>
+                                <tr><td>1</td><td>1</td><td>0</td></tr>
+                            </tbody>
+                        </table>
+                    </li>
+                </ul>
+                <figure>
+                    <svg width="200" height="100" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+                        <title>Gerbang XOR</title>
+                        <path d="M10 20 C30 10 70 10 90 50 C70 90 30 90 10 80" fill="none" stroke="black" stroke-width="2"/>
+                        <path d="M5 20 C10 30 10 70 5 80" fill="none" stroke="black" stroke-width="2"/> <!-- Additional curve for XOR -->
+                        <line x1="100" y1="50" x2="120" y2="50" stroke="black" stroke-width="2"/>
+                        <line x1="0" y1="35" x2="15" y2="35" stroke="black" stroke-width="2"/>
+                        <line x1="0" y1="65" x2="15" y2="65" stroke="black" stroke-width="2"/>
+                        <text x="5" y="30" font-family="Arial" font-size="16">A</text>
+                        <text x="5" y="70" font-family="Arial" font-size="16">B</text>
+                        <text x="125" y="55" font-family="Arial" font-size="16">Y</text>
+                    </svg>
+                    <figcaption>Gambar 5.3: Simbol Gerbang Logika XOR</figcaption>
+                </figure>
+
+                <h3>5.7. Gerbang XNOR (Exclusive NOR)</h3>
+                <p>Gerbang XNOR adalah kebalikan dari gerbang XOR. Outputnya 1 jika inputnya sama (keduanya 0 atau keduanya 1). Outputnya 0 jika inputnya berbeda.</p>
+                <ul>
+                    <li>Simbol: Gerbang XOR dengan lingkaran kecil (bubble) di outputnya.</li>
+                    <li>Ekspresi Boole: <code>Y = (A ⊕ B)' = AB + A'B'</code></li>
+                    <li>Tabel Kebenaran:
+                        <table>
+                            <thead><tr><th>A</th><th>B</th><th>Y</th></tr></thead>
+                            <tbody>
+                                <tr><td>0</td><td>0</td><td>1</td></tr>
+                                <tr><td>0</td><td>1</td><td>0</td></tr>
+                                <tr><td>1</td><td>0</td><td>0</td></tr>
+                                <tr><td>1</td><td>1</td><td>1</td></tr>
+                            </tbody>
+                        </table>
+                    </li>
+                </ul>
+                <figure>
+                    <svg width="200" height="100" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+                        <title>Gerbang XNOR</title>
+                        <path d="M10 20 C30 10 70 10 90 50 C70 90 30 90 10 80" fill="none" stroke="black" stroke-width="2"/>
+                        <path d="M5 20 C10 30 10 70 5 80" fill="none" stroke="black" stroke-width="2"/> <!-- Additional curve for XOR -->
+                        <circle cx="105" cy="50" r="10" fill="none" stroke="black" stroke-width="2"/> <!-- Bubble -->
+                        <line x1="115" y1="50" x2="130" y2="50" stroke="black" stroke-width="2"/>
+                        <line x1="0" y1="35" x2="15" y2="35" stroke="black" stroke-width="2"/>
+                        <line x1="0" y1="65" x2="15" y2="65" stroke="black" stroke-width="2"/>
+                        <text x="5" y="30" font-family="Arial" font-size="16">A</text>
+                        <text x="5" y="70" font-family="Arial" font-size="16">B</text>
+                        <text x="135" y="55" font-family="Arial" font-size="16">Y</text>
+                    </svg>
+                    <figcaption>Gambar 5.4: Simbol Gerbang Logika XNOR</figcaption>
+                </figure>
+
+                <h3>5.8. Gerbang Universal (NAND dan NOR)</h3>
+                <p>Salah satu konsep yang paling menarik dalam desain logika adalah keberadaan gerbang universal. Gerbang universal adalah gerbang logika yang dapat digunakan untuk membuat semua jenis gerbang logika lainnya (AND, OR, NOT, XOR, XNOR). Ini sangat penting dalam manufaktur karena memungkinkan desainer untuk membangun sirkuit kompleks hanya dengan satu jenis komponen dasar, yang menyederhanakan proses produksi dan mengurangi biaya.</p>
+                <ul>
+                    <li><b>Gerbang NAND sebagai Gerbang Universal</b>:
+                        <ul>
+                            <li><b>NOT</b>: Hubungkan kedua input gerbang NAND ke input yang sama (A). Outputnya adalah <code>(A.A)' = A'</code>.</li>
+                            <li><b>AND</b>: Hubungkan output gerbang NAND pertama ke input gerbang NAND kedua yang dihubungkan sebagai NOT. <code>((A.B)')' = A.B</code>.</li>
+                            <li><b>OR</b>: Terapkan Hukum De Morgan. <code>A+B = (A'.B')'</code>. Jadi, negasikan A dan B secara terpisah (menggunakan NAND sebagai NOT), lalu AND-kan hasilnya, dan negasikan lagi (menggunakan NAND).</li>
+                        </ul>
+                    </li>
+                    <li><b>Gerbang NOR sebagai Gerbang Universal</b>:
+                        <ul>
+                            <li><b>NOT</b>: Hubungkan kedua input gerbang NOR ke input yang sama (A). Outputnya adalah <code>(A+A)' = A'</code>.</li>
+                            <li><b>OR</b>: Hubungkan output gerbang NOR pertama ke input gerbang NOR kedua yang dihubungkan sebagai NOT. <code>((A+B)')' = A+B</code>.</li>
+                            <li><b>AND</b>: Terapkan Hukum De Morgan. <code>A.B = (A'+B')'</code>. Jadi, negasikan A dan B secara terpisah (menggunakan NOR sebagai NOT), lalu OR-kan hasilnya, dan negasikan lagi (menggunakan NOR).</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>Kemampuan NAND dan NOR untuk bertindak sebagai gerbang universal adalah alasan utama mengapa mereka banyak digunakan dalam desain sirkuit terpadu (IC).</p>
+            </section>
+
+            <section id="aplikasi-aljabar-boole">
+                <h2>6. Aplikasi Aljabar Boole dalam Dunia Digital</h2>
+                <p>Aljabar Boole bukanlah sekadar konsep matematis abstrak; ia adalah bahasa fundamental yang digunakan untuk merancang, menganalisis, dan memahami cara kerja hampir setiap sistem digital modern. Dari perangkat keras komputer hingga perangkat lunak, Aljabar Boole memainkan peran krusial.</p>
+
+                <h3>6.1. Desain Sirkuit Digital</h3>
+                <p>Ini adalah aplikasi paling langsung dan jelas dari Aljabar Boole. Setiap komponen dalam sistem komputer – mulai dari unit pemrosesan pusat (CPU), memori, hingga perangkat I/O – dibangun dari sirkuit digital yang mengimplementasikan fungsi-fungsi Boole menggunakan gerbang logika.</p>
+                <h4>6.1.1. Penjumlah Biner (Adders)</h4>
+                <p>Salah satu sirkuit dasar adalah penjumlah biner. Bagaimana komputer menambahkan dua angka? Ini dilakukan dengan serangkaian gerbang logika.</p>
+                <ul>
+                    <li><b>Half Adder</b>: Menerima dua input biner (A, B) dan menghasilkan Sum (S) dan Carry (C).
+                        <ul>
+                            <li><code>S = A ⊕ B</code></li>
+                            <li><code>C = A . B</code></li>
+                        </ul>
+                        <figure>
+                            <svg width="250" height="150" viewBox="0 0 250 150" xmlns="http://www.w3.org/2000/svg">
+                                <title>Half Adder Circuit Diagram</title>
+                                <!-- Inputs -->
+                                <line x1="0" y1="40" x2="30" y2="40" stroke="black" stroke-width="2"/>
+                                <text x="5" y="35" font-family="Arial" font-size="16">A</text>
+                                <line x1="0" y1="110" x2="30" y2="110" stroke="black" stroke-width="2"/>
+                                <text x="5" y="105" font-family="Arial" font-size="16">B</text>
+
+                                <!-- XOR Gate for Sum -->
+                                <path d="M30 40 C50 30 90 30 110 70 C90 110 50 110 30 100" fill="none" stroke="black" stroke-width="2"/>
+                                <path d="M25 40 C30 50 30 90 25 100" fill="none" stroke="black" stroke-width="2"/>
+                                <line x1="110" y1="70" x2="160" y2="70" stroke="black" stroke-width="2"/>
+                                <text x="165" y="75" font-family="Arial" font-size="16">Sum</text>
+
+                                <!-- AND Gate for Carry -->
+                                <path d="M120 40 L120 70 L150 70 A15 15 0 0 0 150 40 L120 40 Z" fill="none" stroke="black" stroke-width="2"/>
+                                <path d="M120 55 L120 55 C120 55 120 55 125 55" fill="none" stroke="black" stroke-width="0"/>
+                                <line x1="150" y1="55" x2="180" y2="55" stroke="black" stroke-width="2"/>
+                                <text x="185" y="60" font-family="Arial" font-size="16">Carry</text>
+
+                                <!-- Connections to AND gate -->
+                                <line x1="30" y1="40" x2="120" y2="40" stroke="black" stroke-width="2"/>
+                                <line x1="30" y1="110" x2="80" y2="110" stroke="black" stroke-width="2"/>
+                                <line x1="80" y1="110" x2="80" y2="70" stroke="black" stroke-width="2"/>
+                                <line x1="80" y1="70" x2="120" y2="70" stroke="black" stroke-width="2"/>
+
+                                <!-- Splitters for inputs -->
+                                <circle cx="30" cy="40" r="3" fill="black" stroke="none"/>
+                                <circle cx="30" cy="110" r="3" fill="black" stroke="none"/>
+                            </svg>
+                            <figcaption>Gambar 6.1: Diagram Sirkuit Half Adder</figcaption>
+                        </figure>
+                    </li>
+                    <li><b>Full Adder</b>: Menerima tiga input biner (A, B, Carry-in) dan menghasilkan Sum (S) dan Carry-out (Cout). Full adder dibangun dari dua half adder dan satu gerbang OR. Ini adalah blok pembangun untuk penjumlah multi-bit.</li>
+                </ul>
+
+                <h4>6.1.2. Multiplexer (MUX)</h4>
+                <p>Multiplexer (MUX) adalah sirkuit yang memilih salah satu dari beberapa input data dan meneruskannya ke satu jalur output. Pilihan input ditentukan oleh input kontrol (selektor). Jika ada N jalur input data, maka dibutuhkan log2(N) jalur input selektor.</p>
+                <p>Contoh: MUX 2-ke-1 memiliki dua input data (D0, D1) dan satu input selektor (S). Jika S=0, output=D0. Jika S=1, output=D1. Ekspresi Boole-nya: <code>Y = S'D0 + SD1</code>.</p>
+                <p>MUX digunakan dalam komunikasi data, routing sinyal, dan memori komputer.</p>
+
+                <h4>6.1.3. Demultiplexer (DEMUX)</h4>
+                <p>Demultiplexer (DEMUX) adalah kebalikan dari MUX. Ia mengambil satu input data dan mendistribusikannya ke salah satu dari beberapa jalur output. Jalur output yang dipilih ditentukan oleh input kontrol (selektor).</p>
+                <p>DEMUX digunakan untuk mendistribusikan data dari satu sumber ke berbagai tujuan, seperti dalam sistem alamat memori atau kontrol I/O.</p>
+
+                <h4>6.1.4. Encoder dan Decoder</h4>
+                <ul>
+                    <li><b>Decoder</b>: Mengubah kode input (misalnya biner) menjadi sinyal output yang spesifik. Contoh, decoder biner ke desimal (3-ke-8 decoder) akan mengubah input biner 3-bit menjadi salah satu dari 8 output tunggal yang aktif. Ini digunakan untuk pemilihan alamat memori atau kontrol perangkat.</li>
+                    <li><b>Encoder</b>: Melakukan operasi kebalikan dari decoder. Mengambil beberapa input, hanya satu yang aktif pada satu waktu, dan menghasilkan kode biner yang sesuai. Contoh, encoder prioritas akan menghasilkan kode biner untuk input prioritas tertinggi yang aktif.</li>
+                </ul>
+
+                <h4>6.1.5. Sirkuit Sekuensial (Memori)</h4>
+                <p>Selain sirkuit kombinasional (yang outputnya hanya bergantung pada input saat ini), Aljabar Boole juga mendasari sirkuit sekuensial, yang outputnya bergantung pada input saat ini dan juga keadaan sebelumnya (memiliki memori). Flip-flop, register, dan penghitung adalah contoh sirkuit sekuensial yang dibangun menggunakan gerbang logika dan prinsip-prinsip Aljabar Boole.</p>
+
+                <h3>6.2. Pemrograman Komputer</h3>
+                <p>Meskipun Aljabar Boole secara inheren terkait dengan perangkat keras, prinsip-prinsipnya juga meresap ke dalam dunia perangkat lunak. Bahasa pemrograman modern menggunakan operator logika yang secara langsung mencerminkan operator Boole.</p>
+                <ul>
+                    <li><b>Kondisional (If-Else)</b>: Pernyataan <code>if</code> dalam kode bergantung pada evaluasi ekspresi Boole.
+                        <pre><code>if (suhu > 30 AND kelembaban > 80) {
+    // Jalankan kode untuk peringatan panas
+} else {
+    // Lakukan hal lain
+}</code></pre>
+                        Di sini, <code>AND</code> adalah operator Boole.
+                    </li>
+                    <li><b>Operator Logika</b>: Hampir semua bahasa pemrograman memiliki operator untuk AND (<code>&&</code>), OR (<code>||</code>), dan NOT (<code>!</code>).
+                        <pre><code>boolean isUserLoggedIn = true;
+boolean hasPermission = false;
+
+if (isUserLoggedIn && !hasPermission) {
+    System.out.println("User is logged in but lacks permission.");
+}</code></pre>
+                    </li>
+                    <li><b>Struktur Kontrol</b>: Loop seperti <code>while</code> dan <code>for</code> juga menggunakan ekspresi Boole untuk menentukan kapan harus melanjutkan atau berhenti.</li>
+                </ul>
+
+                <h3>6.3. Basis Data dan Pencarian Informasi</h3>
+                <p>Operator Boole sangat penting dalam query basis data dan mesin pencari. Mereka memungkinkan pengguna untuk menentukan kriteria pencarian yang kompleks.</p>
+                <ul>
+                    <li><b>SQL (Structured Query Language)</b>: Menggunakan <code>AND</code>, <code>OR</code>, dan <code>NOT</code> untuk memfilter hasil.
+                        <pre><code>SELECT * FROM customers WHERE city = 'Jakarta' AND age > 25;
+SELECT * FROM products WHERE category = 'Electronics' OR price < 100;
+SELECT * FROM users WHERE NOT (isActive = FALSE);</code></pre>
+                    </li>
+                    <li><b>Mesin Pencari</b>: Saat Anda mencari "Aljabar Boole AND aplikasi", Anda secara implisit menggunakan operator AND untuk menemukan dokumen yang berisi kedua istilah tersebut. "Kucing OR anjing" akan mencari dokumen yang berisi salah satu atau keduanya.</li>
+                </ul>
+
+                <h3>6.4. Jaringan Komputer</h3>
+                <p>Dalam jaringan, Aljabar Boole digunakan untuk operasi filtering, routing, dan pengaturan akses.</p>
+                <ul>
+                    <li><b>Subnetting</b>: Perhitungan subnet mask melibatkan operasi AND bitwise untuk menentukan alamat jaringan dan host.</li>
+                    <li><b>Access Control Lists (ACLs)</b>: Router dan firewall menggunakan aturan logika Boole untuk memutuskan apakah suatu paket data diizinkan atau ditolak berdasarkan alamat IP sumber, tujuan, port, dll.</li>
+                </ul>
+
+                <h3>6.5. Desain Eksperimen dan Logika Kendali</h3>
+                <p>Di luar komputasi murni, Aljabar Boole digunakan dalam berbagai bidang lain yang membutuhkan logika biner, seperti desain eksperimen, sistem kendali industri, dan bahkan dalam studi logika filosofis untuk menganalisis argumen.</p>
+                <p>Dari mikroskopis di dalam chip komputer hingga interaksi kita sehari-hari dengan internet, Aljabar Boole adalah kekuatan pendorong di balik dunia digital kita. Penguasaannya membuka pintu untuk pemahaman yang lebih dalam tentang teknologi yang mendefinisikan zaman modern.</p>
+            </section>
+
+            <section id="kesimpulan">
+                <h2>7. Kesimpulan</h2>
+                <p>Aljabar Boole, yang pertama kali diperkenalkan oleh George Boole sebagai alat untuk memformalkan logika penalaran manusia, telah berkembang menjadi fondasi tak tergantikan bagi seluruh arsitektur digital modern. Dari konsep dasarnya yang hanya mengenal dua nilai, "benar" dan "salah" (atau 1 dan 0), hingga operator-operator logis fundamental seperti AND, OR, dan NOT, sistem ini menawarkan kerangka kerja yang elegan dan kuat untuk merepresentasikan dan memanipulasi informasi biner.</p>
+                <p>Melalui serangkaian hukum dan teorema, seperti hukum komutatif, asosiatif, distributif, hingga hukum De Morgan yang revolusioner, kita memiliki alat untuk menyederhanakan ekspresi logika yang kompleks. Kemampuan untuk meminimalkan fungsi Boole, baik secara aljabar maupun menggunakan metode grafis seperti Peta Karnaugh, adalah kunci untuk merancang sirkuit digital yang lebih efisien, hemat biaya, lebih cepat, dan dengan konsumsi daya yang lebih rendah. Gerbang logika – implementasi fisik dari operator Boole – adalah blok bangunan dasar yang mengubah teori abstrak ini menjadi sirkuit nyata yang membentuk komputer, <i>smartphone</i>, dan miliaran perangkat elektronik lainnya di seluruh dunia.</p>
+                <p>Aplikasi Aljabar Boole membentang luas, mulai dari desain sirkuit digital yang membentuk otak sebuah komputer seperti <i>adders</i>, <i>multiplexer</i>, dan <i>decoder</i>, hingga inti dari bagaimana perangkat lunak beroperasi melalui pernyataan kondisional dan operator logika. Bahkan dalam pengelolaan data dan jaringan komputer, prinsip-prinsip Boole menjadi panduan untuk query basis data yang kompleks dan filter jaringan yang cerdas.</p>
+                <p>Dengan demikian, Aljabar Boole bukan hanya sekadar cabang matematika, melainkan sebuah bahasa universal yang memungkinkan kita untuk memahami, merancang, dan berinteraksi dengan dunia digital. Penguasaan Aljabar Boole adalah investasi berharga bagi siapa pun yang tertarik pada ilmu komputer, teknik elektro, atau sekadar ingin memahami lebih dalam tentang bagaimana teknologi modern bekerja di tingkat paling fundamental.</p>
+                <p>Masa depan komputasi dan teknologi digital akan terus bergantung pada prinsip-prinsip abadi Aljabar Boole, bahkan ketika kita menjelajahi komputasi kuantum atau neurokomputasi. Memahami fondasi ini akan selalu relevan dan memberdayakan.</p>
+            </section>
+        </main>
+    </div>
+
+<style>
+.related-posts {
+  clear: both;
+  display: block;
+  width: 100%;
+  margin: 30px auto;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.related-posts h3 {
+  margin-top: 0;
+}
+.related-posts ul {
+  list-style: none;
+  padding: 0;
+}
+.related-posts li {
+  margin: 6px 0;
+}
+</style>
+<div class='related-posts'><h3>Related Posts</h3><ul><li><a href="/bakaran">Bakaran</a></li>
+<li><a href="/ambacang">Ambacang</a></li>
+<li><a href="/agu">Agu</a></li>
+<li><a href="/aparteid">Aparteid</a></li>
+<li><a href="/alun-alun">Alun Alun</a></li>
+<li><a href="/bakwan-jagung">Bakwan Jagung</a></li>
+<li><a href="/akses-informasi">Akses Informasi</a></li>
+<li><a href="/anastesi">Anastesi</a></li>
+<li><a href="/bale">Bale</a></li>
+<li><a href="/alat-masak">Alat Masak</a></li></ul></div>
+<script src="/ik.js"></script>
+</body>
+</html>

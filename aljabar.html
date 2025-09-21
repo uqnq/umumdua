@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aljabar: Dari Dasar Hingga Aplikasi Modern & Menarik</title>
+    <link rel="icon" href="/favicon.svg">
+    <meta name="description" content="Jelajahi dunia aljabar dari konsep dasar, persamaan linear, polinomial, fungsi, hingga aplikasi nyata yang tak terhingga, semua disajikan dengan lugas dan mudah dipahami.">
+    <style>
+        :root {
+            --primary-bg: #E0F7FA; /* Light Cyan */
+            --secondary-bg: #B2EBF2; /* Another Light Cyan */
+            --text-color: #263238; /* Dark Grey Blue */
+            --heading-color: #00838F; /* Dark Cyan */
+            --accent-color: #00BCD4; /* Cyan */
+            --border-color: #80DEEA; /* Light Blue-Green */
+            --code-bg: #CFD8DC; /* Light Blue Grey */
+            --code-text: #263238;
+            --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 2.5rem 1rem;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: clamp(1.8rem, 5vw, 3.5rem);
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        main {
+            flex-grow: 1;
+            padding: 20px;
+            max-width: 900px;
+            margin: 2rem auto;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        article {
+            padding: 1rem;
+        }
+
+        h2, h3, h4 {
+            color: var(--heading-color);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        h2 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+        }
+
+        h3 {
+            font-size: clamp(1.2rem, 3.5vw, 2rem);
+        }
+
+        h4 {
+            font-size: clamp(1rem, 3vw, 1.6rem);
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        ul, ol {
+            margin-bottom: 1rem;
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        strong {
+            color: var(--heading-color);
+        }
+
+        em {
+            color: var(--accent-color);
+            font-style: normal;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--heading-color);
+            text-decoration: underline;
+        }
+
+        code, pre {
+            font-family: 'Fira Code', 'Cascadia Code', 'Consolas', 'Monaco', monospace;
+            background-color: var(--code-bg);
+            color: var(--code-text);
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            overflow-x: auto;
+            display: block; /* for pre tags */
+            white-space: pre-wrap; /* for pre tags */
+            word-wrap: break-word; /* for pre tags */
+        }
+
+        pre {
+            padding: 10px 15px;
+            margin: 1rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .example-box {
+            background-color: var(--secondary-bg);
+            border-left: 5px solid var(--accent-color);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .example-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .svg-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+            padding: 1rem;
+            background-color: var(--primary-bg);
+            border-radius: 10px;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+        }
+
+        .svg-container svg {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        footer {
+            background-color: var(--heading-color);
+            color: white;
+            text-align: center;
+            padding: 1.5rem 1rem;
+            margin-top: 2rem;
+            font-size: 0.9em;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            main {
+                margin: 1rem auto;
+                padding: 10px;
+                border-radius: 0;
+            }
+            article {
+                padding: 0.5rem;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            h3 {
+                font-size: 1.4rem;
+            }
+            h4 {
+                font-size: 1.2rem;
+            }
+            .svg-container {
+                margin: 1.5rem 0;
+                padding: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 1.5rem 0.5rem;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            h2 {
+                font-size: 1.4rem;
+            }
+            h3 {
+                font-size: 1.2rem;
+            }
+            h4 {
+                font-size: 1rem;
+            }
+            ul, ol {
+                padding-left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Aljabar: Dari Dasar Hingga Aplikasi Modern & Menarik</h1>
+    </header>
+
+    <main>
+        <article>
+            <p>Aljabar, sebuah cabang matematika yang seringkali dianggap menakutkan oleh banyak orang, sejatinya adalah alat yang sangat ampuh dan fundamental dalam memahami dunia di sekitar kita. Lebih dari sekadar kumpulan huruf dan angka, aljabar adalah bahasa universal yang memungkinkan kita untuk memodelkan masalah, meramalkan hasil, dan memecahkan teka-teki, baik dalam sains, teknik, ekonomi, maupun kehidupan sehari-hari. Artikel ini akan membawa Anda menyelami kedalaman aljabar, mulai dari pondasi dasarnya hingga aplikasinya yang canggih, membuka gerbang pemahaman yang lebih luas terhadap disiplin ilmu yang menakjubkan ini.</p>
+
+            <div class="svg-container">
+                <svg width="200" height="100" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="svgTitle1">
+                    <title id="svgTitle1">Simbol Aljabar Dasar: Variabel X dan Tanda Sama Dengan</title>
+                    <path d="M20 10 L80 90 M80 10 L20 90" stroke="var(--accent-color)" stroke-width="8"/>
+                    <text x="50" y="55" font-family="Arial, sans-serif" font-size="40" fill="var(--heading-color)" text-anchor="middle">X</text>
+                    <rect x="120" y="45" width="60" height="10" fill="var(--heading-color)"/>
+                    <rect x="120" y="65" width="60" height="10" fill="var(--heading-color)"/>
+                </svg>
+            </div>
+
+            <h2>1. Apa Itu Aljabar? Memahami Fondasinya</h2>
+            <p>Secara sederhana, aljabar dapat didefinisikan sebagai cabang matematika yang menggunakan huruf (disebut variabel) dan simbol untuk merepresentasikan angka dan kuantitas dalam persamaan dan rumus. Ini adalah perluasan dari aritmetika, di mana kita mulai beralih dari perhitungan dengan angka konkret ke penalaran logis dengan simbol yang dapat mewakili nilai apa pun. Aljabar memungkinkan kita untuk menggeneralisasi hubungan matematis dan memecahkan masalah di mana beberapa nilai tidak diketahui.</p>
+
+            <h3>1.1. Sejarah Singkat Aljabar</h3>
+            <p>Akar aljabar dapat ditelusuri kembali ke peradaban kuno seperti Babilonia, Mesir, dan Yunani, di mana masalah-masalah yang melibatkan persamaan linear dan kuadrat sudah dipelajari. Namun, konsep aljabar sebagai disiplin ilmu yang terpisah mulai berkembang pesat pada masa Kekhalifahan Islam.</p>
+            <ul>
+                <li><strong>Abad ke-9:</strong> Matematikawan Persia, Muhammad ibn Musa al-Khwarizmi, sering disebut sebagai "Bapak Aljabar". Karyanya yang berjudul "Kitab al-Jabr wa al-Muqabala" (The Compendious Book on Calculation by Completion and Balancing) memperkenalkan metode sistematis untuk menyelesaikan persamaan linear dan kuadrat. Dari judul bukunya inilah kata "aljabar" berasal (dari "al-jabr" yang berarti "penyempurnaan" atau "pemulihan").</li>
+                <li><strong>Abad Pertengahan:</strong> Karya al-Khwarizmi diterjemahkan ke bahasa Latin, memperkenalkan metode aljabar ke Eropa.</li>
+                <li><strong>Abad ke-16 & 17:</strong> Matematikawan seperti François Viète (penggunaan huruf sebagai variabel), René Descartes (koordinat Kartesius), dan Isaac Newton (kalkulus) semakin mengembangkan aljabar dan menggabungkannya dengan geometri.</li>
+                <li><strong>Abad ke-19 & 20:</strong> Pengembangan aljabar abstrak oleh George Boole, Évariste Galois, dan lainnya memperluas cakupan aljabar jauh melampaui persamaan tradisional, memperkenalkan konsep-konsep seperti grup, gelanggang, dan medan, yang menjadi dasar bagi banyak bidang matematika modern.</li>
+            </ul>
+
+            <h3>1.2. Mengapa Aljabar Penting?</h3>
+            <p>Aljabar adalah fondasi bagi hampir semua cabang matematika yang lebih tinggi, termasuk kalkulus, geometri analitik, dan statistika. Lebih dari itu, aljabar adalah alat esensial dalam berbagai bidang:</p>
+            <ul>
+                <li><strong>Sains & Teknik:</strong> Untuk merumuskan hukum fisika, merancang struktur, menganalisis data eksperimen, dan mengembangkan teknologi baru.</li>
+                <li><strong>Ekonomi & Keuangan:</strong> Untuk memodelkan pasar, menghitung bunga majemuk, menganalisis investasi, dan meramalkan tren ekonomi.</li>
+                <li><strong>Ilmu Komputer:</strong> Dalam algoritma, logika pemrograman, dan pengembangan perangkat lunak.</li>
+                <li><strong>Kehidupan Sehari-hari:</strong> Meskipun sering tidak disadari, kita menggunakan prinsip aljabar saat menghitung anggaran, merencanakan perjalanan, atau bahkan saat memasak (menyesuaikan resep).</li>
+            </ul>
+
+            <h2>2. Konsep Dasar Aljabar</h2>
+            <p>Sebelum melangkah lebih jauh, mari kita pahami istilah-istilah kunci yang akan sering kita jumpai dalam aljabar.</p>
+
+            <h3>2.1. Variabel dan Konstanta</h3>
+            <ul>
+                <li><strong>Variabel:</strong> Sebuah simbol, biasanya huruf (seperti <code>x</code>, <code>y</code>, <code>a</code>, <code>b</code>), yang mewakili kuantitas yang tidak diketahui atau dapat berubah. Misalnya, dalam <code>2x + 5</code>, <code>x</code> adalah variabel.</li>
+                <li><strong>Konstanta:</strong> Sebuah nilai tetap yang tidak berubah. Dalam <code>2x + 5</code>, angka <code>5</code> adalah konstanta. Angka <code>2</code> dalam <code>2x</code> disebut <em>koefisien</em>.</li>
+            </ul>
+
+            <h3>2.2. Ekspresi Aljabar</h3>
+            <p>Ekspresi aljabar adalah kombinasi dari variabel, konstanta, dan operasi matematika (penjumlahan, pengurangan, perkalian, pembagian), tetapi tidak mengandung tanda sama dengan (<code>=</code>). Contoh: <code>3x + 7</code>, <code>y^2 - 2y + 1</code>, <code>(a + b) / c</code>.</p>
+
+            <h3>2.3. Persamaan Aljabar</h3>
+            <p>Persamaan aljabar adalah pernyataan yang menyatakan bahwa dua ekspresi adalah sama. Ditandai dengan tanda sama dengan (<code>=</code>). Tujuan utama aljabar seringkali adalah menemukan nilai variabel yang membuat persamaan tersebut benar. Contoh: <code>3x + 7 = 16</code>, <code>y^2 - 4 = 0</code>.</p>
+
+            <h3>2.4. Pertidaksamaan Aljabar</h3>
+            <p>Pertidaksamaan aljabar adalah pernyataan yang menunjukkan bahwa dua ekspresi tidak sama. Mereka menggunakan simbol seperti <code>&lt;</code> (kurang dari), <code>&gt;</code> (lebih dari), <code>&le;</code> (kurang dari atau sama dengan), <code>&ge;</code> (lebih dari atau sama dengan). Contoh: <code>2x - 1 &lt; 9</code>, <code>5y + 3 &ge; 18</code>.</p>
+
+            <h3>2.5. Suku dan Koefisien</h3>
+            <ul>
+                <li><strong>Suku (Term):</strong> Bagian dari ekspresi yang dipisahkan oleh tanda tambah atau kurang. Dalam <code>4x^2 - 3x + 7</code>, suku-sukunya adalah <code>4x^2</code>, <code>-3x</code>, dan <code>7</code>.</li>
+                <li><strong>Koefisien:</strong> Angka yang mengalikan variabel dalam suatu suku. Dalam <code>4x^2</code>, <code>4</code> adalah koefisien. Dalam <code>-3x</code>, <code>-3</code> adalah koefisien. Jika tidak ada angka yang terlihat di depan variabel (misalnya <code>x</code>), koefisiennya adalah <code>1</code>.</li>
+            </ul>
+
+            <div class="example-box">
+                <h4>Contoh Identifikasi</h4>
+                <p>Pertimbangkan ekspresi: <code>5a^2 + 2ab - 7</code></p>
+                <ul>
+                    <li>Variabel: <code>a</code>, <code>b</code></li>
+                    <li>Konstanta: <code>-7</code></li>
+                    <li>Suku-suku: <code>5a^2</code>, <code>2ab</code>, <code>-7</code></li>
+                    <li>Koefisien: <code>5</code> (untuk <code>a^2</code>), <code>2</code> (untuk <code>ab</code>)</li>
+                </ul>
+            </div>
+
+            <h2>3. Aljabar Dasar: Menyelesaikan Persamaan dan Pertidaksamaan</h2>
+            <p>Bagian ini akan fokus pada bagaimana kita memanipulasi ekspresi dan menyelesaikan persamaan serta pertidaksamaan paling fundamental.</p>
+
+            <h3>3.1. Operasi Aritmetika pada Ekspresi Aljabar</h3>
+            <p>Aturan dasar penjumlahan, pengurangan, perkalian, dan pembagian berlaku juga untuk ekspresi aljabar. Kuncinya adalah mengidentifikasi "suku sejenis" (suku yang memiliki variabel dan pangkat variabel yang sama).</p>
+            <h4>3.1.1. Penjumlahan dan Pengurangan</h4>
+            <p>Hanya suku-suku sejenis yang dapat dijumlahkan atau dikurangkan.</p>
+            <div class="example-box">
+                <h4>Contoh Penjumlahan/Pengurangan</h4>
+                <p><code>(3x + 2y) + (5x - y) = (3x + 5x) + (2y - y) = 8x + y</code></p>
+                <p><code>(7a^2 - 4a) - (2a^2 + 3a) = 7a^2 - 4a - 2a^2 - 3a = (7a^2 - 2a^2) + (-4a - 3a) = 5a^2 - 7a</code></p>
+            </div>
+
+            <h4>3.1.2. Perkalian</h4>
+            <p>Gunakan sifat distributif. Saat mengalikan variabel, jumlahkan pangkatnya (misal: <code>x * x = x^2</code>, <code>x^2 * x^3 = x^5</code>).</p>
+            <div class="example-box">
+                <h4>Contoh Perkalian</h4>
+                <p><code>4(2x + 3) = 4 * 2x + 4 * 3 = 8x + 12</code></p>
+                <p><code>x(y + 5) = xy + 5x</code></p>
+                <p><code>(x + 2)(x + 3) = x(x + 3) + 2(x + 3) = x^2 + 3x + 2x + 6 = x^2 + 5x + 6</code> (metode FOIL: First, Outer, Inner, Last)</p>
+            </div>
+
+            <h4>3.1.3. Pembagian</h4>
+            <p>Bagi koefisien dan kurangkan pangkat variabel yang sama.</p>
+            <div class="example-box">
+                <h4>Contoh Pembagian</h4>
+                <p><code>(10x^3) / (2x) = (10/2) * (x^3/x) = 5x^(3-1) = 5x^2</code></p>
+            </div>
+
+            <h3>3.2. Menyelesaikan Persamaan Linear Satu Variabel</h3>
+            <p>Tujuannya adalah mengisolasi variabel di satu sisi persamaan. Kita dapat melakukan operasi yang sama pada kedua sisi persamaan tanpa mengubah kebenarannya.</p>
+            <ul>
+                <li>Tambahkan atau kurangkan nilai yang sama dari kedua sisi.</li>
+                <li>Kalikan atau bagi kedua sisi dengan nilai yang sama (bukan nol).</li>
+            </ul>
+            <div class="example-box">
+                <h4>Contoh Persamaan Linear</h4>
+                <p><strong>Soal:</strong> Selesaikan <code>3x - 5 = 10</code></p>
+                <ol>
+                    <li>Tambahkan 5 ke kedua sisi: <br><code>3x - 5 + 5 = 10 + 5</code><br><code>3x = 15</code></li>
+                    <li>Bagi kedua sisi dengan 3: <br><code>3x / 3 = 15 / 3</code><br><code>x = 5</code></li>
+                </ol>
+                <p><strong>Soal:</strong> Selesaikan <code>2(y + 3) = 14</code></p>
+                <ol>
+                    <li>Distribusikan 2: <br><code>2y + 6 = 14</code></li>
+                    <li>Kurangkan 6 dari kedua sisi: <br><code>2y + 6 - 6 = 14 - 6</code><br><code>2y = 8</code></li>
+                    <li>Bagi kedua sisi dengan 2: <br><code>2y / 2 = 8 / 2</code><br><code>y = 4</code></li>
+                </ol>
+            </div>
+
+            <h3>3.3. Menyelesaikan Pertidaksamaan Linear</h3>
+            <p>Prinsipnya mirip dengan persamaan, tetapi ada satu aturan penting: <strong>jika Anda mengalikan atau membagi kedua sisi pertidaksamaan dengan bilangan negatif, arah tanda pertidaksamaan harus dibalik.</strong></p>
+            <div class="example-box">
+                <h4>Contoh Pertidaksamaan Linear</h4>
+                <p><strong>Soal:</strong> Selesaikan <code>4x + 7 &lt; 23</code></p>
+                <ol>
+                    <li>Kurangkan 7 dari kedua sisi: <br><code>4x + 7 - 7 &lt; 23 - 7</code><br><code>4x &lt; 16</code></li>
+                    <li>Bagi kedua sisi dengan 4: <br><code>4x / 4 &lt; 16 / 4</code><br><code>x &lt; 4</code></li>
+                </ol>
+                <p><strong>Soal:</strong> Selesaikan <code>-2x + 1 &ge; 11</code></p>
+                <ol>
+                    <li>Kurangkan 1 dari kedua sisi: <br><code>-2x + 1 - 1 &ge; 11 - 1</code><br><code>-2x &ge; 10</code></li>
+                    <li>Bagi kedua sisi dengan -2 <strong>(balik tanda):</strong> <br><code>-2x / -2 &le; 10 / -2</code><br><code>x &le; -5</code></li>
+                </ol>
+            </div>
+
+            <h3>3.4. Sistem Persamaan Linear (Dua Variabel)</h3>
+            <p>Sistem persamaan linear adalah sekumpulan dua atau lebih persamaan yang mengandung variabel yang sama. Tujuannya adalah menemukan nilai variabel yang memenuhi <em>semua</em> persamaan dalam sistem tersebut secara bersamaan. Ada beberapa metode untuk menyelesaikannya:</p>
+
+            <h4>3.4.1. Metode Substitusi</h4>
+            <ol>
+                <li>Pilih salah satu persamaan dan selesaikan untuk salah satu variabel (misal, <code>x</code> dalam bentuk <code>x = ...</code>).</li>
+                <li>Gantikan ekspresi variabel tersebut ke persamaan lainnya.</li>
+                <li>Selesaikan persamaan baru untuk variabel yang tersisa.</li>
+                <li>Substitusikan nilai yang ditemukan kembali ke salah satu persamaan awal untuk menemukan nilai variabel pertama.</li>
+            </ol>
+            <div class="example-box">
+                <h4>Contoh Substitusi</h4>
+                <p>Sistem:</p>
+                <p>1) <code>x + y = 5</code><br>2) <code>2x - y = 1</code></p>
+                <ol>
+                    <li>Dari persamaan (1), selesaikan untuk <code>x</code>: <br><code>x = 5 - y</code></li>
+                    <li>Substitusikan <code>x = 5 - y</code> ke persamaan (2): <br><code>2(5 - y) - y = 1</code><br><code>10 - 2y - y = 1</code><br><code>10 - 3y = 1</code></li>
+                    <li>Selesaikan untuk <code>y</code>: <br><code>-3y = 1 - 10</code><br><code>-3y = -9</code><br><code>y = 3</code></li>
+                    <li>Substitusikan <code>y = 3</code> kembali ke <code>x = 5 - y</code>: <br><code>x = 5 - 3</code><br><code>x = 2</code></li>
+                </ol>
+                <p>Solusi: <code>(x, y) = (2, 3)</code></p>
+            </div>
+
+            <h4>3.4.2. Metode Eliminasi</h4>
+            <ol>
+                <li>Kalikan satu atau kedua persamaan dengan suatu bilangan agar koefisien salah satu variabel menjadi berlawanan (misal, <code>3x</code> dan <code>-3x</code>).</li>
+                <li>Tambahkan atau kurangkan kedua persamaan untuk mengeliminasi variabel tersebut.</li>
+                <li>Selesaikan persamaan baru untuk variabel yang tersisa.</li>
+                <li>Substitusikan nilai yang ditemukan kembali ke salah satu persamaan awal untuk menemukan nilai variabel pertama.</li>
+            </ol>
+            <div class="example-box">
+                <h4>Contoh Eliminasi</h4>
+                <p>Sistem:</p>
+                <p>1) <code>3x + 2y = 10</code><br>2) <code>x - y = 5</code></p>
+                <ol>
+                    <li>Kalikan persamaan (2) dengan 2 agar koefisien <code>y</code> berlawanan: <br><code>2 * (x - y = 5) &Rightarrow; 2x - 2y = 10</code></li>
+                    <li>Tambahkan persamaan (1) dengan persamaan baru ini: <br><code>(3x + 2y) + (2x - 2y) = 10 + 10</code><br><code>5x = 20</code></li>
+                    <li>Selesaikan untuk <code>x</code>: <br><code>x = 4</code></li>
+                    <li>Substitusikan <code>x = 4</code> kembali ke persamaan (2): <br><code>4 - y = 5</code><br><code>-y = 5 - 4</code><br><code>-y = 1</code><br><code>y = -1</code></li>
+                </ol>
+                <p>Solusi: <code>(x, y) = (4, -1)</code></p>
+            </div>
+
+            <div class="svg-container">
+                <svg width="250" height="150" viewBox="0 0 250 150" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="svgTitle2">
+                    <title id="svgTitle2">Grafik Persamaan Linear</title>
+                    <!-- Axes -->
+                    <line x1="25" y1="125" x2="225" y2="125" stroke="var(--heading-color)" stroke-width="2"/>
+                    <line x1="25" y1="125" x2="25" y2="25" stroke="var(--heading-color)" stroke-width="2"/>
+                    <!-- Arrows -->
+                    <polygon points="225,125 215,120 215,130" fill="var(--heading-color)"/>
+                    <polygon points="25,25 20,35 30,35" fill="var(--heading-color)"/>
+                    <!-- Labels -->
+                    <text x="235" y="128" font-family="Arial, sans-serif" font-size="12" fill="var(--text-color)">x</text>
+                    <text x="20" y="15" font-family="Arial, sans-serif" font-size="12" fill="var(--text-color)">y</text>
+                    <text x="15" y="135" font-family="Arial, sans-serif" font-size="10" fill="var(--text-color)">0</text>
+                    <!-- Line 1: y = x + 1 -->
+                    <line x1="25" y1="115" x2="125" y2="25" stroke="var(--accent-color)" stroke-width="3" stroke-dasharray="5,5"/>
+                    <text x="130" y="30" font-family="Arial, sans-serif" font-size="12" fill="var(--accent-color)">y = x + 1</text>
+                    <!-- Line 2: y = -x + 13 (example of intersection) -->
+                    <line x1="25" y1="105" x2="175" y2="25" stroke="var(--heading-color)" stroke-width="3"/>
+                    <text x="180" y="30" font-family="Arial, sans-serif" font-size="12" fill="var(--heading-color)">y = -x + 13</text>
+                    <!-- Intersection Point -->
+                    <circle cx="100" cy="50" r="4" fill="red"/>
+                    <text x="105" y="55" font-family="Arial, sans-serif" font-size="12" fill="red">(6, 7)</text>
+                </svg>
+            </div>
+
+            <h4>3.4.3. Metode Grafik</h4>
+            <p>Setiap persamaan linear dua variabel dapat direpresentasikan sebagai sebuah garis lurus pada bidang koordinat. Solusi dari sistem persamaan linear adalah titik di mana garis-garis tersebut berpotongan. Jika garis-garis sejajar, tidak ada solusi; jika garis-garis berimpit, ada tak terhingga solusi.</p>
+
+            <h2>4. Polinomial: Struktur dan Operasi</h2>
+            <p>Polinomial adalah ekspresi aljabar yang terdiri dari satu atau lebih suku, di mana setiap suku adalah hasil perkalian antara konstanta dan variabel yang dipangkatkan dengan bilangan bulat non-negatif. Polinomial adalah blok bangunan penting dalam banyak bidang matematika.</p>
+
+            <h3>4.1. Definisi dan Terminologi</h3>
+            <p>Bentuk umum polinomial satu variabel adalah:</p>
+            <pre><code>a_n x^n + a_{n-1} x^{n-1} + ... + a_1 x + a_0</code></pre>
+            <ul>
+                <li><code>a_n, a_{n-1}, ..., a_0</code> adalah koefisien (angka).</li>
+                <li><code>x</code> adalah variabel.</li>
+                <li><code>n</code> adalah derajat polinomial (pangkat tertinggi dari variabel) dan harus berupa bilangan bulat non-negatif.</li>
+            </ul>
+            <h4>Jenis-jenis Polinomial berdasarkan jumlah suku:</h4>
+            <ul>
+                <li><strong>Monomial:</strong> Satu suku (misal: <code>5x^3</code>, <code>-7y</code>)</li>
+                <li><strong>Binomial:</strong> Dua suku (misal: <code>2x + 1</code>, <code>x^2 - 4</code>)</li>
+                <li><strong>Trinomial:</strong> Tiga suku (misal: <code>x^2 + 3x + 2</code>)</li>
+            </ul>
+            <h4>Jenis-jenis Polinomial berdasarkan derajat:</h4>
+            <ul>
+                <li><strong>Konstanta:</strong> Derajat 0 (misal: <code>5</code>)</li>
+                <li><strong>Linear:</strong> Derajat 1 (misal: <code>3x + 2</code>)</li>
+                <li><strong>Kuadratik:</strong> Derajat 2 (misal: <code>x^2 - 4x + 7</code>)</li>
+                <li><strong>Kubik:</strong> Derajat 3 (misal: <code>2x^3 + x - 1</code>)</li>
+                <li>Dan seterusnya (kuartik, kuintik, dll.)</li>
+            </ul>
+
+            <h3>4.2. Operasi pada Polinomial</h3>
+            <h4>4.2.1. Penjumlahan dan Pengurangan Polinomial</h4>
+            <p>Sama seperti ekspresi aljabar, hanya suku-suku sejenis yang dapat dijumlahkan atau dikurangkan. Pastikan untuk hati-hati dengan tanda negatif saat pengurangan.</p>
+            <div class="example-box">
+                <h4>Contoh Penjumlahan/Pengurangan Polinomial</h4>
+                <p><strong>Penjumlahan:</strong><br><code>(3x^2 + 5x - 2) + (x^2 - 2x + 7)</code><br><code>= (3x^2 + x^2) + (5x - 2x) + (-2 + 7)</code><br><code>= 4x^2 + 3x + 5</code></p>
+                <p><strong>Pengurangan:</strong><br><code>(4x^3 - 2x + 8) - (x^3 + 3x^2 - 5x + 1)</code><br><code>= 4x^3 - 2x + 8 - x^3 - 3x^2 + 5x - 1</code><br><code>= (4x^3 - x^3) - 3x^2 + (-2x + 5x) + (8 - 1)</code><br><code>= 3x^3 - 3x^2 + 3x + 7</code></p>
+            </div>
+
+            <h4>4.2.2. Perkalian Polinomial</h4>
+            <p>Setiap suku dari polinomial pertama harus dikalikan dengan setiap suku dari polinomial kedua. Sifat distributif berlaku berulang kali.</p>
+            <div class="example-box">
+                <h4>Contoh Perkalian Polinomial</h4>
+                <p><strong>Monomial dengan Polinomial:</strong><br><code>3x(x^2 - 2x + 4) = 3x * x^2 - 3x * 2x + 3x * 4</code><br><code>= 3x^3 - 6x^2 + 12x</code></p>
+                <p><strong>Binomial dengan Binomial (FOIL):</strong><br><code>(x + 5)(x - 2) = x*x + x*(-2) + 5*x + 5*(-2)</code><br><code>= x^2 - 2x + 5x - 10</code><br><code>= x^2 + 3x - 10</code></p>
+                <p><strong>Binomial dengan Trinomial:</strong><br><code>(x + 1)(x^2 + 2x + 3) = x(x^2 + 2x + 3) + 1(x^2 + 2x + 3)</code><br><code>= x^3 + 2x^2 + 3x + x^2 + 2x + 3</code><br><code>= x^3 + 3x^2 + 5x + 3</code></p>
+            </div>
+
+            <h4>4.2.3. Pembagian Polinomial</h4>
+            <p>Pembagian polinomial mirip dengan pembagian panjang bilangan. Tujuannya adalah menemukan hasil bagi (quotient) dan sisa (remainder).</p>
+            <div class="example-box">
+                <h4>Contoh Pembagian Polinomial (Pembagian Panjang)</h4>
+                <p>Soal: <code>(x^2 + 5x + 6) / (x + 2)</code></p>
+                <p>Langkah-langkah:</p>
+                <pre><code>        x   + 3
+       ___________
+x + 2 | x^2 + 5x + 6
+        -(x^2 + 2x)  &lt;-- (x * (x + 2))
+        ___________
+              3x + 6
+             -(3x + 6) &lt;-- (3 * (x + 2))
+             _________
+                   0</code></pre>
+                <p>Hasil bagi adalah <code>x + 3</code> dengan sisa <code>0</code>.</p>
+            </div>
+            <p>Untuk kasus khusus pembagi linear <code>(x - c)</code>, metode pembagian sintetis dapat digunakan, yang jauh lebih cepat.</p>
+
+            <h3>4.3. Faktorisasi Polinomial</h3>
+            <p>Faktorisasi adalah proses memecah polinomial menjadi perkalian polinomial yang lebih sederhana (faktor-faktornya). Ini adalah keterampilan kunci untuk menyelesaikan persamaan kuadrat dan yang lebih tinggi.</p>
+            <h4>4.3.1. Faktor Persekutuan Terbesar (FPT/GCF)</h4>
+            <p>Cari faktor terbesar yang dapat dibagi oleh setiap suku dalam polinomial.</p>
+            <div class="example-box">
+                <h4>Contoh GCF</h4>
+                <p><code>6x^3 + 9x^2 - 12x = 3x(2x^2 + 3x - 4)</code></p>
+            </div>
+
+            <h4>4.3.2. Selisih Kuadrat</h4>
+            <p>Pola khusus: <code>a^2 - b^2 = (a - b)(a + b)</code></p>
+            <div class="example-box">
+                <h4>Contoh Selisih Kuadrat</h4>
+                <p><code>x^2 - 25 = (x - 5)(x + 5)</code></p>
+                <p><code>4y^2 - 9z^2 = (2y - 3z)(2y + 3z)</code></p>
+            </div>
+
+            <h4>4.3.3. Trinomial Kuadrat (<code>ax^2 + bx + c</code>)</h4>
+            <p>Tujuannya adalah menemukan dua bilangan yang jika dikalikan menghasilkan <code>ac</code> dan jika dijumlahkan menghasilkan <code>b</code>.</p>
+            <div class="example-box">
+                <h4>Contoh Trinomial Kuadrat</h4>
+                <p><strong>Soal:</strong> Faktorkan <code>x^2 + 7x + 10</code></p>
+                <p>Cari dua bilangan yang dikalikan 10 (<code>c</code>) dan dijumlahkan 7 (<code>b</code>). Bilangan tersebut adalah 2 dan 5.</p>
+                <p>Maka: <code>(x + 2)(x + 5)</code></p>
+                <p><strong>Soal:</strong> Faktorkan <code>2x^2 + 11x + 12</code></p>
+                <p><code>ac = 2 * 12 = 24</code>, <code>b = 11</code>. Cari dua bilangan yang dikalikan 24 dan dijumlahkan 11. Bilangan tersebut adalah 3 dan 8.</p>
+                <p>Pecah suku tengah:<br><code>2x^2 + 3x + 8x + 12</code></p>
+                <p>Faktorkan per pasang:<br><code>x(2x + 3) + 4(2x + 3)</code></p>
+                <p>Faktorkan <code>(2x + 3)</code>:<br><code>(2x + 3)(x + 4)</code></p>
+            </div>
+
+            <h4>4.3.4. Faktorisasi dengan Pengelompokan</h4>
+            <p>Berguna untuk polinomial dengan empat suku atau lebih.</p>
+            <div class="example-box">
+                <h4>Contoh Faktorisasi Pengelompokan</h4>
+                <p><code>x^3 + 2x^2 + 3x + 6</code><br><code>= (x^3 + 2x^2) + (3x + 6)</code><br><code>= x^2(x + 2) + 3(x + 2)</code><br><code>= (x^2 + 3)(x + 2)</code></p>
+            </div>
+
+            <h2>5. Persamaan Kuadrat: Memecahkan Misteri Parabola</h2>
+            <p>Persamaan kuadrat adalah persamaan polinomial berderajat dua. Bentuk umumnya adalah <code>ax^2 + bx + c = 0</code>, di mana <code>a &ne; 0</code>. Solusi dari persamaan kuadrat disebut akar atau nol.</p>
+
+            <h3>5.1. Grafik Fungsi Kuadrat (Parabola)</h3>
+            <div class="svg-container">
+                <svg width="250" height="150" viewBox="0 0 250 150" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="svgTitle3">
+                    <title id="svgTitle3">Grafik Parabola (Fungsi Kuadrat)</title>
+                    <!-- Axes -->
+                    <line x1="25" y1="125" x2="225" y2="125" stroke="var(--heading-color)" stroke-width="2"/>
+                    <line x1="125" y1="140" x2="125" y2="20" stroke="var(--heading-color)" stroke-width="2"/>
+                    <!-- Arrows -->
+                    <polygon points="225,125 215,120 215,130" fill="var(--heading-color)"/>
+                    <polygon points="125,20 120,30 130,30" fill="var(--heading-color)"/>
+                    <!-- Labels -->
+                    <text x="235" y="128" font-family="Arial, sans-serif" font-size="12" fill="var(--text-color)">x</text>
+                    <text x="130" y="15" font-family="Arial, sans-serif" font-size="12" fill="var(--text-color)">y</text>
+                    <text x="115" y="135" font-family="Arial, sans-serif" font-size="10" fill="var(--text-color)">0</text>
+                    <!-- Parabola: y = x^2 - 4x + 3 (vertex at (2, -1)) -->
+                    <path d="M50 88 C70 60, 100 50, 125 55 C150 60, 180 80, 200 115" stroke="var(--accent-color)" stroke-width="3" fill="none"/>
+                    <!-- Vertex -->
+                    <circle cx="125" cy="55" r="3" fill="red"/>
+                    <text x="130" y="60" font-family="Arial, sans-serif" font-size="10" fill="red">Vertex</text>
+                    <!-- X-intercepts -->
+                    <circle cx="75" cy="115" r="3" fill="blue"/>
+                    <circle cx="175" cy="115" r="3" fill="blue"/>
+                    <text x="70" y="105" font-family="Arial, sans-serif" font-size="10" fill="blue">Akar</text>
+                    <text x="170" y="105" font-family="Arial, sans-serif" font-size="10" fill="blue">Akar</text>
+                </svg>
+            </div>
+            <p>Fungsi kuadrat <code>f(x) = ax^2 + bx + c</code> menghasilkan grafik berbentuk parabola. Arah pembukaan parabola ditentukan oleh tanda <code>a</code>:</p>
+            <ul>
+                <li>Jika <code>a > 0</code>, parabola terbuka ke atas.</li>
+                <li>Jika <code>a < 0</code>, parabola terbuka ke bawah.</li>
+            </ul>
+            <p>Akar-akar persamaan kuadrat adalah titik potong parabola dengan sumbu x (y = 0).</p>
+
+            <h3>5.2. Metode Penyelesaian Persamaan Kuadrat</h3>
+            <h4>5.2.1. Faktorisasi</h4>
+            <p>Jika persamaan kuadrat dapat difaktorkan, atur setiap faktor sama dengan nol dan selesaikan untuk <code>x</code>.</p>
+            <div class="example-box">
+                <h4>Contoh Faktorisasi</h4>
+                <p><strong>Soal:</strong> Selesaikan <code>x^2 - 5x + 6 = 0</code></p>
+                <ol>
+                    <li>Faktorkan trinomial:<br><code>(x - 2)(x - 3) = 0</code></li>
+                    <li>Atur setiap faktor sama dengan nol:<br><code>x - 2 = 0</code> atau <code>x - 3 = 0</code></li>
+                    <li>Selesaikan untuk <code>x</code>:<br><code>x = 2</code> atau <code>x = 3</code></li>
+                </ol>
+                <p>Akar-akarnya adalah 2 dan 3.</p>
+            </div>
+
+            <h4>5.2.2. Melengkapkan Kuadrat Sempurna</h4>
+            <p>Metode ini mengubah persamaan kuadrat menjadi bentuk <code>(x + p)^2 = q</code>, sehingga mudah untuk mengambil akar kuadrat.</p>
+            <div class="example-box">
+                <h4>Contoh Melengkapkan Kuadrat</h4>
+                <p><strong>Soal:</strong> Selesaikan <code>x^2 + 6x - 7 = 0</code></p>
+                <ol>
+                    <li>Pindahkan konstanta ke sisi kanan:<br><code>x^2 + 6x = 7</code></li>
+                    <li>Ambil setengah dari koefisien <code>x</code> (<code>6/2 = 3</code>), kuadratkan (<code>3^2 = 9</code>), dan tambahkan ke kedua sisi:<br><code>x^2 + 6x + 9 = 7 + 9</code><br><code>(x + 3)^2 = 16</code></li>
+                    <li>Ambil akar kuadrat dari kedua sisi:<br><code>x + 3 = &plusmn;&sqrt;16</code><br><code>x + 3 = &plusmn;4</code></li>
+                    <li>Selesaikan untuk <code>x</code>:<br><code>x = -3 + 4</code> atau <code>x = -3 - 4</code><br><code>x = 1</code> atau <code>x = -7</code></li>
+                </ol>
+            </div>
+
+            <h4>5.2.3. Rumus Kuadrat (Rumus ABC)</h4>
+            <p>Ini adalah metode paling universal yang selalu berhasil, bahkan ketika faktorisasi sulit atau tidak mungkin. Untuk <code>ax^2 + bx + c = 0</code>, akarnya diberikan oleh:</p>
+            <pre><code>x = (-b &plusmn; &sqrt;(b^2 - 4ac)) / (2a)</code></pre>
+            <div class="example-box">
+                <h4>Contoh Rumus ABC</h4>
+                <p><strong>Soal:</strong> Selesaikan <code>2x^2 + 5x - 3 = 0</code></p>
+                <p>Identifikasi <code>a = 2</code>, <code>b = 5</code>, <code>c = -3</code>.</p>
+                <p>Substitusikan ke rumus:</p>
+                <pre><code>x = (-5 &plusmn; &sqrt;(5^2 - 4 * 2 * -3)) / (2 * 2)
+x = (-5 &plusmn; &sqrt;(25 + 24)) / 4
+x = (-5 &plusmn; &sqrt;49) / 4
+x = (-5 &plusmn; 7) / 4</code></pre>
+                <p>Dua solusi:</p>
+                <ul>
+                    <li><code>x1 = (-5 + 7) / 4 = 2 / 4 = 1/2</code></li>
+                    <li><code>x2 = (-5 - 7) / 4 = -12 / 4 = -3</code></li>
+                </ul>
+            </div>
+
+            <h3>5.3. Diskriminan (<code>&Delta; = b^2 - 4ac</code>)</h3>
+            <p>Nilai diskriminan menentukan sifat akar-akar persamaan kuadrat:</p>
+            <ul>
+                <li>Jika <code>&Delta; > 0</code>: Ada dua akar riil yang berbeda.</li>
+                <li>Jika <code>&Delta; = 0</code>: Ada satu akar riil (akar kembar).</li>
+                <li>Jika <code>&Delta; < 0</code>: Tidak ada akar riil (dua akar kompleks konjugat).</li>
+            </ul>
+
+            <h2>6. Fungsi: Memahami Hubungan</h2>
+            <p>Dalam matematika, fungsi adalah aturan yang mengaitkan setiap elemen dari suatu himpunan (domain) dengan tepat satu elemen dari himpunan lain (kodomain atau range). Fungsi adalah konsep fundamental yang memungkinkan kita untuk memodelkan hubungan antara kuantitas yang berbeda.</p>
+
+            <h3>6.1. Definisi dan Notasi Fungsi</h3>
+            <p>Kita sering menulis fungsi sebagai <code>f(x)</code> (dibaca "f dari x"), di mana <code>x</code> adalah variabel independen (input) dan <code>f(x)</code> adalah variabel dependen (output). Misalnya, <code>f(x) = 2x + 1</code> berarti untuk setiap nilai <code>x</code> yang kita masukkan, kita akan mendapatkan satu nilai <code>f(x)</code> sebagai hasilnya.</p>
+            <ul>
+                <li><strong>Domain:</strong> Himpunan semua nilai input (<code>x</code>) yang valid untuk fungsi.</li>
+                <li><strong>Range (Jangkauan):</strong> Himpunan semua nilai output (<code>f(x)</code>) yang mungkin dihasilkan oleh fungsi.</li>
+            </ul>
+            <div class="example-box">
+                <h4>Contoh Notasi Fungsi</h4>
+                <p>Jika <code>f(x) = x^2 - 3</code>, maka:</p>
+                <ul>
+                    <li><code>f(2) = 2^2 - 3 = 4 - 3 = 1</code></li>
+                    <li><code>f(-1) = (-1)^2 - 3 = 1 - 3 = -2</code></li>
+                </ul>
+            </div>
+
+            <h3>6.2. Jenis-jenis Fungsi Umum</h3>
+            <ul>
+                <li><strong>Fungsi Linear:</strong> <code>f(x) = mx + b</code> (grafiknya garis lurus).</li>
+                <li><strong>Fungsi Kuadrat:</strong> <code>f(x) = ax^2 + bx + c</code> (grafiknya parabola).</li>
+                <li><strong>Fungsi Kubik:</strong> <code>f(x) = ax^3 + bx^2 + cx + d</code>.</li>
+                <li><strong>Fungsi Rasional:</strong> <code>f(x) = P(x) / Q(x)</code>, di mana <code>P(x)</code> dan <code>Q(x)</code> adalah polinomial, dan <code>Q(x) &ne; 0</code>. Domain akan mengecualikan nilai <code>x</code> yang membuat <code>Q(x) = 0</code>.</li>
+                <li><strong>Fungsi Eksponensial:</strong> <code>f(x) = a^x</code>, di mana <code>a > 0</code> dan <code>a &ne; 1</code>. Variabel ada di eksponen.</li>
+                <li><strong>Fungsi Logaritma:</strong> <code>f(x) = log_b(x)</code>, di mana <code>b > 0</code> dan <code>b &ne; 1</code>. Ini adalah invers dari fungsi eksponensial.</li>
+            </ul>
+
+            <h3>6.3. Operasi pada Fungsi</h3>
+            <h4>6.3.1. Penjumlahan, Pengurangan, Perkalian, Pembagian</h4>
+            <p>Fungsi dapat dijumlahkan, dikurangkan, dikalikan, dan dibagi seperti ekspresi aljabar:</p>
+            <ul>
+                <li><code>(f + g)(x) = f(x) + g(x)</code></li>
+                <li><code>(f - g)(x) = f(x) - g(x)</code></li>
+                <li><code>(f * g)(x) = f(x) * g(x)</code></li>
+                <li><code>(f / g)(x) = f(x) / g(x)</code>, dengan syarat <code>g(x) &ne; 0</code>.</li>
+            </ul>
+
+            <h4>6.3.2. Komposisi Fungsi</h4>
+            <p>Komposisi fungsi berarti menerapkan satu fungsi ke hasil fungsi lain. Dilambangkan dengan <code>(f &deg; g)(x)</code> atau <code>f(g(x))</code>.</p>
+            <div class="example-box">
+                <h4>Contoh Komposisi Fungsi</h4>
+                <p>Misalkan <code>f(x) = 2x + 3</code> dan <code>g(x) = x^2</code>.</p>
+                <p><code>(f &deg; g)(x) = f(g(x)) = f(x^2) = 2(x^2) + 3 = 2x^2 + 3</code></p>
+                <p><code>(g &deg; f)(x) = g(f(x)) = g(2x + 3) = (2x + 3)^2 = 4x^2 + 12x + 9</code></p>
+            </div>
+
+            <h3>6.4. Fungsi Invers</h3>
+            <p>Fungsi invers, dilambangkan <code>f^-1(x)</code>, adalah fungsi yang membatalkan efek dari fungsi asli. Jika <code>f(a) = b</code>, maka <code>f^-1(b) = a</code>. Tidak semua fungsi memiliki invers yang merupakan fungsi. Agar sebuah fungsi memiliki invers, ia harus <em>satu-satu</em> (injektif) – artinya setiap elemen di domain dipetakan ke elemen unik di range.</p>
+            <p>Untuk menemukan invers dari <code>y = f(x)</code>:</p>
+            <ol>
+                <li>Ganti <code>f(x)</code> dengan <code>y</code>.</li>
+                <li>Tukarkan <code>x</code> dan <code>y</code>.</li>
+                <li>Selesaikan persamaan baru untuk <code>y</code>.</li>
+                <li>Ganti <code>y</code> dengan <code>f^-1(x)</code>.</li>
+            </ol>
+            <div class="example-box">
+                <h4>Contoh Fungsi Invers</h4>
+                <p><strong>Soal:</strong> Temukan invers dari <code>f(x) = 3x - 2</code>.</p>
+                <ol>
+                    <li><code>y = 3x - 2</code></li>
+                    <li>Tukar <code>x</code> dan <code>y</code>: <code>x = 3y - 2</code></li>
+                    <li>Selesaikan untuk <code>y</code>:<br><code>x + 2 = 3y</code><br><code>y = (x + 2) / 3</code></li>
+                    <li>Jadi, <code>f^-1(x) = (x + 2) / 3</code></li>
+                </ol>
+            </div>
+
+            <h2>7. Eksponen dan Radikal: Kekuatan dan Akar</h2>
+            <p>Eksponen dan radikal (akar) adalah dua konsep yang saling terkait erat dalam aljabar, yang memungkinkan kita untuk menyatakan perkalian berulang dan inversnya secara ringkas.</p>
+
+            <h3>7.1. Hukum-hukum Eksponen</h3>
+            <p>Eksponen menunjukkan berapa kali suatu bilangan (basis) dikalikan dengan dirinya sendiri. Misalnya, <code>x^n</code> berarti <code>x</code> dikalikan dengan dirinya sendiri sebanyak <code>n</code> kali.</p>
+            <ol>
+                <li><strong>Aturan Perkalian:</strong> <code>x^m * x^n = x^(m+n)</code> (Jika basisnya sama, jumlahkan pangkatnya)</li>
+                    <div class="example-box"><code>2^3 * 2^4 = 2^(3+4) = 2^7 = 128</code></div>
+                <li><strong>Aturan Pembagian:</strong> <code>x^m / x^n = x^(m-n)</code> (Jika basisnya sama, kurangkan pangkatnya)</li>
+                    <div class="example-box"><code>5^6 / 5^2 = 5^(6-2) = 5^4 = 625</code></div>
+                <li><strong>Pangkat dari Pangkat:</strong> <code>(x^m)^n = x^(m*n)</code> (Kalikan pangkatnya)</li>
+                    <div class="example-box"><code>(3^2)^3 = 3^(2*3) = 3^6 = 729</code></div>
+                <li><strong>Pangkat Produk:</strong> <code>(xy)^n = x^n y^n</code></li>
+                    <div class="example-box"><code>(2x)^3 = 2^3 x^3 = 8x^3</code></div>
+                <li><strong>Pangkat Pecahan:</strong> <code>(x/y)^n = x^n / y^n</code></li>
+                    <div class="example-box"><code>(a/b)^2 = a^2 / b^2</code></div>
+                <li><strong>Pangkat Nol:</strong> <code>x^0 = 1</code> (untuk <code>x &ne; 0</code>)</li>
+                    <div class="example-box"><code>100^0 = 1</code></div>
+                <li><strong>Pangkat Negatif:</strong> <code>x^(-n) = 1 / x^n</code> (pindahkan ke pembilang/penyebut dan ubah tanda pangkat)</li>
+                    <div class="example-box"><code>4^(-2) = 1 / 4^2 = 1/16</code></div>
+            </ol>
+
+            <h3>7.2. Bentuk Akar (Radikal)</h3>
+            <p>Radikal adalah kebalikan dari eksponen. Akar kuadrat (<code>&sqrt;x</code>) mencari bilangan yang jika dikuadratkan menghasilkan <code>x</code>. Akar kubik (<code>&sup3;&sqrt;x</code>) mencari bilangan yang jika dipangkatkan tiga menghasilkan <code>x</code>, dan seterusnya.</p>
+            <p>Bentuk umum: <code>n&sqrt;x = x^(1/n)</code>, di mana <code>n</code> adalah indeks akar.</p>
+            <h4>7.2.1. Menyederhanakan Radikal</h4>
+            <p>Untuk menyederhanakan akar kuadrat, cari faktor kuadrat sempurna di bawah akar.</p>
+            <div class="example-box">
+                <h4>Contoh Menyederhanakan Radikal</h4>
+                <p><code>&sqrt;72 = &sqrt;(36 * 2) = &sqrt;36 * &sqrt;2 = 6&sqrt;2</code></p>
+                <p><code>&sqrt;(18x^3) = &sqrt;(9 * 2 * x^2 * x) = &sqrt;9 * &sqrt;x^2 * &sqrt;(2x) = 3x&sqrt;(2x)</code></p>
+            </div>
+
+            <h4>7.2.2. Operasi dengan Radikal</h4>
+            <ul>
+                <li><strong>Penjumlahan/Pengurangan:</strong> Hanya radikal sejenis (indeks dan radikan sama) yang dapat dijumlahkan/dikurangkan.</li>
+                    <div class="example-box"><code>5&sqrt;3 + 2&sqrt;3 = 7&sqrt;3</code></div>
+                    <div class="example-box"><code>&sqrt;8 + &sqrt;18 = &sqrt;(4*2) + &sqrt;(9*2) = 2&sqrt;2 + 3&sqrt;2 = 5&sqrt;2</code></div>
+                <li><strong>Perkalian:</strong> Kalikan radikan jika indeksnya sama.</li>
+                    <div class="example-box"><code>&sqrt;3 * &sqrt;5 = &sqrt;15</code></div>
+                    <div class="example-box"><code>(2&sqrt;6) * (3&sqrt;2) = (2*3) * &sqrt;(6*2) = 6&sqrt;12 = 6&sqrt;(4*3) = 6*2&sqrt;3 = 12&sqrt;3</code></div>
+                <li><strong>Pembagian (Rasionalisasi Penyebut):</strong> Jika ada radikal di penyebut, kalikan pembilang dan penyebut dengan radikal yang sama untuk menghilangkan akar di penyebut.</li>
+                    <div class="example-box"><code>1 / &sqrt;2 = (1 * &sqrt;2) / (&sqrt;2 * &sqrt;2) = &sqrt;2 / 2</code></div>
+                    <div class="example-box"><code>3 / (2 + &sqrt;5) = [3 * (2 - &sqrt;5)] / [(2 + &sqrt;5) * (2 - &sqrt;5)] = (6 - 3&sqrt;5) / (4 - 5) = (6 - 3&sqrt;5) / -1 = 3&sqrt;5 - 6</code></div>
+            </ul>
+
+            <h3>7.3. Eksponen Rasional</h3>
+            <p>Eksponen rasional (pecahan) adalah cara lain untuk menulis radikal. <code>x^(m/n) = n&sqrt;(x^m) = (n&sqrt;x)^m</code>.</p>
+            <div class="example-box">
+                <h4>Contoh Eksponen Rasional</h4>
+                <p><code>8^(2/3) = &sup3;&sqrt;(8^2) = &sup3;&sqrt;64 = 4</code></p>
+                <p>Atau <code>8^(2/3) = (&sup3;&sqrt;8)^2 = (2)^2 = 4</code></p>
+            </div>
+
+            <h2>8. Logaritma: Invers dari Eksponensial</h2>
+            <p>Logaritma adalah operasi matematika yang merupakan kebalikan dari eksponensiasi. Jika <code>b^y = x</code>, maka <code>log_b(x) = y</code>. Dalam kata lain, logaritma adalah pangkat di mana suatu basis harus dipangkatkan untuk menghasilkan suatu bilangan.</p>
+
+            <h3>8.1. Definisi dan Notasi Logaritma</h3>
+            <p>Pernyataan eksponensial: <code>basis^(pangkat) = hasil</code></p>
+            <p>Pernyataan logaritma: <code>log_basis(hasil) = pangkat</code></p>
+            <ul>
+                <li><code>log_b(x) = y</code> berarti <code>b^y = x</code></li>
+                <li>Basis (<code>b</code>) harus positif dan tidak sama dengan 1.</li>
+                <li>Argumen (<code>x</code>) harus positif.</li>
+            </ul>
+            <h4>Jenis-jenis Logaritma Khusus:</h4>
+            <ul>
+                <li><strong>Logaritma Umum (Basis 10):</strong> <code>log(x)</code> biasanya berarti <code>log_10(x)</code>.</li>
+                <li><strong>Logaritma Alami (Basis e):</strong> <code>ln(x)</code> berarti <code>log_e(x)</code>, di mana <code>e &asymp; 2.71828</code> (bilangan Euler).</li>
+            </ul>
+            <div class="example-box">
+                <h4>Contoh Konversi</h4>
+                <p><code>2^3 = 8 &harr; log_2(8) = 3</code></p>
+                <p><code>10^2 = 100 &harr; log(100) = 2</code></p>
+                <p><code>e^0 = 1 &harr; ln(1) = 0</code></p>
+            </div>
+
+            <h3>8.2. Sifat-sifat Logaritma</h3>
+            <p>Sifat-sifat ini sangat penting untuk menyederhanakan ekspresi logaritma dan menyelesaikan persamaan yang melibatkan logaritma.</p>
+            <ol>
+                <li><strong>Perkalian:</strong> <code>log_b(MN) = log_b(M) + log_b(N)</code></li>
+                <li><strong>Pembagian:</strong> <code>log_b(M/N) = log_b(M) - log_b(N)</code></li>
+                <li><strong>Pangkat:</strong> <code>log_b(M^p) = p * log_b(M)</code></li>
+                <li><strong>Logaritma Basis:</strong> <code>log_b(b) = 1</code></li>
+                <li><strong>Logaritma 1:</strong> <code>log_b(1) = 0</code></li>
+                <li><strong>Perubahan Basis:</strong> <code>log_b(M) = log_a(M) / log_a(b)</code> (sering digunakan untuk mengubah ke basis 10 atau <code>e</code>)</li>
+            </ol>
+            <div class="example-box">
+                <h4>Contoh Penggunaan Sifat Logaritma</h4>
+                <p>Sederhanakan: <code>log(2x) + log(5) - log(y)</code></p>
+                <pre><code>log(2x * 5) - log(y)
+= log(10x) - log(y)
+= log(10x / y)</code></pre>
+            </div>
+
+            <h3>8.3. Menyelesaikan Persamaan Logaritma dan Eksponensial</h3>
+            <p>Untuk menyelesaikan persamaan logaritma, kita sering menggunakan definisi logaritma untuk mengubahnya kembali ke bentuk eksponensial.</p>
+            <div class="example-box">
+                <h4>Contoh Persamaan Logaritma</h4>
+                <p><strong>Soal:</strong> Selesaikan <code>log_3(x + 2) = 2</code></p>
+                <ol>
+                    <li>Ubah ke bentuk eksponensial:<br><code>3^2 = x + 2</code></li>
+                    <li>Selesaikan untuk <code>x</code>:<br><code>9 = x + 2</code><br><code>x = 7</code></li>
+                </ol>
+                <p><strong>Soal:</strong> Selesaikan <code>4^(x-1) = 16</code></p>
+                <ol>
+                    <li>Ubah basis agar sama:<br><code>4^(x-1) = 4^2</code></li>
+                    <li>Samakan pangkatnya:<br><code>x - 1 = 2</code><br><code>x = 3</code></li>
+                </ol>
+                <p><strong>Soal:</strong> Selesaikan <code>e^(2x) = 5</code></p>
+                <ol>
+                    <li>Ambil logaritma alami (ln) di kedua sisi:<br><code>ln(e^(2x)) = ln(5)</code></li>
+                    <li>Gunakan sifat pangkat logaritma:<br><code>2x * ln(e) = ln(5)</code><br>Karena <code>ln(e) = 1</code>:<br><code>2x = ln(5)</code></li>
+                    <li>Selesaikan untuk <code>x</code>:<br><code>x = ln(5) / 2</code> (Ini adalah nilai eksak)</li>
+                </ol>
+            </div>
+
+            <h2>9. Pengantar Matriks</h2>
+            <p>Matriks adalah susunan bilangan, simbol, atau ekspresi dalam baris dan kolom persegi panjang. Matriks digunakan untuk merepresentasikan data, transformasi linear, dan juga untuk menyelesaikan sistem persamaan linear dengan banyak variabel.</p>
+
+            <h3>9.1. Definisi dan Ordo Matriks</h3>
+            <p>Matriks diidentifikasi berdasarkan ukurannya, yang disebut "ordo" atau "dimensi", dinyatakan sebagai <code>baris &times; kolom</code>.</p>
+            <pre><code>[ a b c ]
+[ d e f ]</code></pre>
+            <p>Ini adalah matriks 2x3 (dua baris, tiga kolom).</p>
+
+            <h3>9.2. Operasi Dasar Matriks</h3>
+            <h4>9.2.1. Penjumlahan dan Pengurangan Matriks</h4>
+            <p>Hanya matriks dengan ordo yang sama yang dapat dijumlahkan atau dikurangkan. Operasi dilakukan pada elemen-elemen yang bersesuaian.</p>
+            <div class="example-box">
+                <h4>Contoh Penjumlahan Matriks</h4>
+                <pre><code>[1  2]  +  [5  6]  =  [1+5  2+6]  =  [6   8]
+[3  4]     [7  8]     [3+7  4+8]     [10 12]</code></pre>
+            </div>
+
+            <h4>9.2.2. Perkalian Skalar</h4>
+            <p>Setiap elemen dalam matriks dikalikan dengan bilangan skalar (konstanta).</p>
+            <div class="example-box">
+                <h4>Contoh Perkalian Skalar</h4>
+                <pre><code>2 * [1  2]  =  [2*1  2*2]  =  [2  4]
+      [3  4]     [2*3  2*4]     [6  8]</code></pre>
+            </div>
+
+            <h4>9.2.3. Perkalian Matriks</h4>
+            <p>Perkalian dua matriks (<code>A &times; B</code>) hanya mungkin jika jumlah kolom matriks <code>A</code> sama dengan jumlah baris matriks <code>B</code>. Hasilnya adalah matriks dengan jumlah baris <code>A</code> dan jumlah kolom <code>B</code>. Ini adalah operasi yang lebih kompleks: elemen di baris <code>i</code>, kolom <code>j</code> dari matriks hasil adalah hasil kali dot (dot product) dari baris <code>i</code> matriks pertama dengan kolom <code>j</code> matriks kedua.</p>
+            <div class="example-box">
+                <h4>Contoh Perkalian Matriks (Sederhana)</h4>
+                <pre><code>[1 2]  *  [5 6]  =  [(1*5 + 2*7)  (1*6 + 2*8)]  =  [19  22]
+[3 4]     [7 8]     [(3*5 + 4*7)  (3*6 + 4*8)]     [43  50]</code></pre>
+                <p>Catatan: Perkalian matriks tidak komutatif (<code>A &times; B &ne; B &times; A</code>).</p>
+            </div>
+
+            <div class="svg-container">
+                <svg width="200" height="120" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="svgTitle4">
+                    <title id="svgTitle4">Representasi Matriks Sederhana</title>
+                    <rect x="20" y="20" width="160" height="80" rx="10" ry="10" stroke="var(--heading-color)" stroke-width="3"/>
+                    <text x="50" y="55" font-family="Arial, sans-serif" font-size="20" fill="var(--text-color)">a</text>
+                    <text x="100" y="55" font-family="Arial, sans-serif" font-size="20" fill="var(--text-color)">b</text>
+                    <text x="150" y="55" font-family="Arial, sans-serif" font-size="20" fill="var(--text-color)">c</text>
+                    <text x="50" y="85" font-family="Arial, sans-serif" font-size="20" fill="var(--text-color)">d</text>
+                    <text x="100" y="85" font-family="Arial, sans-serif" font-size="20" fill="var(--text-color)">e</text>
+                    <text x="150" y="85" font-family="Arial, sans-serif" font-size="20" fill="var(--text-color)">f</text>
+                </svg>
+            </div>
+
+            <h2>10. Barisan dan Deret: Pola Angka</h2>
+            <p>Barisan dan deret adalah konsep dalam aljabar yang berkaitan dengan pola-pola bilangan. Barisan adalah daftar bilangan yang berurutan, sedangkan deret adalah jumlah dari suku-suku dalam barisan.</p>
+
+            <h3>10.1. Barisan Aritmetika</h3>
+            <p>Dalam barisan aritmetika, setiap suku diperoleh dengan menambahkan (atau mengurangi) konstanta yang sama ke suku sebelumnya. Konstanta ini disebut <strong>beda (<code>d</code>)</strong>.</p>
+            <ul>
+                <li><strong>Bentuk umum:</strong> <code>a, a+d, a+2d, a+3d, ...</code></li>
+                <li><strong>Suku ke-n:</strong> <code>U_n = a + (n-1)d</code>, di mana <code>a</code> adalah suku pertama.</li>
+            </ul>
+            <div class="example-box">
+                <h4>Contoh Barisan Aritmetika</h4>
+                <p>Barisan: <code>2, 5, 8, 11, ...</code></p>
+                <p>Di sini, <code>a = 2</code> dan <code>d = 3</code>.</p>
+                <p>Suku ke-10: <code>U_10 = 2 + (10-1)3 = 2 + 9*3 = 2 + 27 = 29</code></p>
+            </div>
+
+            <h3>10.2. Deret Aritmetika</h3>
+            <p>Jumlah dari <code>n</code> suku pertama barisan aritmetika dilambangkan dengan <code>S_n</code>.</p>
+            <ul>
+                <li><strong>Rumus jumlah <code>n</code> suku pertama:</strong> <code>S_n = n/2 * (a + U_n)</code> atau <code>S_n = n/2 * (2a + (n-1)d)</code></li>
+            </ul>
+            <div class="example-box">
+                <h4>Contoh Deret Aritmetika</h4>
+                <p>Jumlah 10 suku pertama dari barisan <code>2, 5, 8, 11, ...</code></p>
+                <p>Kita tahu <code>a = 2</code>, <code>d = 3</code>, <code>n = 10</code>. Dan <code>U_10 = 29</code>.</p>
+                <p><code>S_10 = 10/2 * (2 + 29) = 5 * 31 = 155</code></p>
+            </div>
+
+            <h3>10.3. Barisan Geometri</h3>
+            <p>Dalam barisan geometri, setiap suku diperoleh dengan mengalikan (atau membagi) konstanta yang sama ke suku sebelumnya. Konstanta ini disebut <strong>rasio (<code>r</code>)</strong>.</p>
+            <ul>
+                <li><strong>Bentuk umum:</strong> <code>a, ar, ar^2, ar^3, ...</code></li>
+                <li><strong>Suku ke-n:</strong> <code>U_n = a * r^(n-1)</code>, di mana <code>a</code> adalah suku pertama.</li>
+            </ul>
+            <div class="example-box">
+                <h4>Contoh Barisan Geometri</h4>
+                <p>Barisan: <code>3, 6, 12, 24, ...</code></p>
+                <p>Di sini, <code>a = 3</code> dan <code>r = 2</code>.</p>
+                <p>Suku ke-5: <code>U_5 = 3 * 2^(5-1) = 3 * 2^4 = 3 * 16 = 48</code></p>
+            </div>
+
+            <h3>10.4. Deret Geometri</h3>
+            <p>Jumlah dari <code>n</code> suku pertama barisan geometri dilambangkan dengan <code>S_n</code>.</p>
+            <ul>
+                <li><strong>Rumus jumlah <code>n</code> suku pertama:</strong><br>
+                    Jika <code>r &ne; 1</code>: <code>S_n = a * (r^n - 1) / (r - 1)</code><br>
+                    Jika <code>r = 1</code>: <code>S_n = n * a</code>
+                </li>
+            </ul>
+            <div class="example-box">
+                <h4>Contoh Deret Geometri</h4>
+                <p>Jumlah 5 suku pertama dari barisan <code>3, 6, 12, 24, ...</code></p>
+                <p>Kita tahu <code>a = 3</code>, <code>r = 2</code>, <code>n = 5</code>.</p>
+                <p><code>S_5 = 3 * (2^5 - 1) / (2 - 1) = 3 * (32 - 1) / 1 = 3 * 31 = 93</code></p>
+            </div>
+
+            <h3>10.5. Deret Geometri Tak Hingga</h3>
+            <p>Untuk deret geometri di mana <code>|r| < 1</code>, jumlah suku tak hingga (<code>S_&infin;</code>) dapat dihitung:</p>
+            <ul>
+                <li><strong>Rumus:</strong> <code>S_&infin; = a / (1 - r)</code></li>
+            </ul>
+            <div class="example-box">
+                <h4>Contoh Deret Geometri Tak Hingga</h4>
+                <p>Jumlah tak hingga dari deret <code>1, 1/2, 1/4, 1/8, ...</code></p>
+                <p>Di sini, <code>a = 1</code> dan <code>r = 1/2</code>.</p>
+                <p><code>S_&infin; = 1 / (1 - 1/2) = 1 / (1/2) = 2</code></p>
+            </div>
+
+            <h2>11. Aplikasi Aljabar dalam Kehidupan Nyata</h2>
+            <p>Meskipun seringkali terasa abstrak, aljabar adalah alat yang sangat praktis dan digunakan di hampir setiap aspek kehidupan modern. Berikut adalah beberapa contohnya:</p>
+
+            <h3>11.1. Keuangan dan Ekonomi</h3>
+            <ul>
+                <li><strong>Bunga Majemuk:</strong> Rumus <code>A = P(1 + r/n)^(nt)</code> menggunakan variabel untuk menghitung pertumbuhan investasi.</li>
+                <li><strong>Anggaran dan Perencanaan:</strong> Membuat persamaan untuk menyeimbangkan pengeluaran dan pemasukan.</li>
+                <li><strong>Analisis Pasar:</strong> Fungsi permintaan dan penawaran menggunakan aljabar untuk memodelkan hubungan antara harga dan kuantitas.</li>
+            </ul>
+
+            <h3>11.2. Sains dan Teknik</h3>
+            <ul>
+                <li><strong>Fisika:</strong> Hukum-hukum fisika (misalnya <code>F=ma</code>, <code>E=mc^2</code>) semuanya adalah persamaan aljabar.</li>
+                <li><strong>Kimia:</strong> Menyeimbangkan persamaan reaksi kimia, menghitung konsentrasi.</li>
+                <li><strong>Biologi:</strong> Pemodelan pertumbuhan populasi, genetika.</li>
+                <li><strong>Teknik:</strong> Mendesain jembatan (memecahkan persamaan struktural), menganalisis sirkuit listrik (Hukum Ohm: <code>V=IR</code>), memprogram robot.</li>
+            </ul>
+
+            <h3>11.3. Teknologi dan Ilmu Komputer</h3>
+            <ul>
+                <li><strong>Algoritma Pemrograman:</strong> Logika di balik hampir semua program komputer melibatkan aljabar.</li>
+                <li><strong>Grafika Komputer:</strong> Transformasi objek 3D (rotasi, translasi, scaling) diwakili oleh matriks.</li>
+                <li><strong>Kriptografi:</strong> Enkripsi dan dekripsi data modern sangat bergantung pada aljabar abstrak dan teori bilangan.</li>
+                <li><strong>Machine Learning:</strong> Semua model machine learning dibangun di atas dasar aljabar linear dan kalkulus.</li>
+            </ul>
+
+            <h3>11.4. Kehidupan Sehari-hari</h3>
+            <ul>
+                <li><strong>Memasak:</strong> Menyesuaikan resep untuk jumlah porsi yang berbeda.</li>
+                <li><strong>Perjalanan:</strong> Menghitung waktu tempuh berdasarkan jarak dan kecepatan (<code>jarak = kecepatan &times; waktu</code>).</li>
+                <li><strong>Belanja:</strong> Menghitung diskon, membandingkan harga per unit.</li>
+                <li><strong>Olahraga:</strong> Menghitung rata-rata skor, persentase kemenangan.</li>
+            </ul>
+
+            <h2>12. Melihat ke Aljabar Modern: Struktur Abstraksi</h2>
+            <p>Sementara aljabar dasar berurusan dengan angka, variabel, dan persamaan, aljabar modern (sering disebut aljabar abstrak) melangkah lebih jauh, mempelajari struktur matematis seperti grup, gelanggang, dan medan. Ini adalah dunia di mana elemen-elemennya tidak harus berupa angka, dan operasi-operasinya dapat sangat berbeda dari penjumlahan atau perkalian biasa.</p>
+
+            <ul>
+                <li><strong>Grup:</strong> Himpunan dengan satu operasi biner yang memenuhi empat aksioma (penutupan, asosiatif, elemen identitas, elemen invers). Contoh: Himpunan bilangan bulat dengan operasi penjumlahan.</li>
+                <li><strong>Gelanggang (Ring):</strong> Himpunan dengan dua operasi biner (mirip penjumlahan dan perkalian) yang memenuhi aksioma tertentu, termasuk distributif. Contoh: Himpunan bilangan bulat dengan penjumlahan dan perkalian.</li>
+                <li><strong>Medan (Field):</strong> Gelanggang di mana setiap elemen bukan nol memiliki invers perkalian. Contoh: Himpunan bilangan rasional, riil, atau kompleks.</li>
+            </ul>
+            <p>Konsep-konsep ini mungkin tampak sangat abstrak, tetapi mereka adalah dasar bagi banyak teori modern dalam matematika, fisika teoretis, dan ilmu komputer, termasuk teori pengkodean, kriptografi, dan fisika kuantum.</p>
+
+            <h2>Kesimpulan</h2>
+            <p>Dari menyelesaikan persamaan linear sederhana hingga memahami struktur kompleks di balik kriptografi modern, aljabar adalah pilar fundamental matematika dan ilmu pengetahuan. Ini bukan sekadar mata pelajaran sekolah, tetapi cara berpikir, alat untuk memecahkan masalah, dan bahasa untuk memahami hubungan dan pola di dunia kita. Dengan menguasai konsep-konsep aljabar, kita tidak hanya membuka pintu ke bidang studi yang lebih lanjut, tetapi juga mengembangkan kemampuan berpikir logis dan analitis yang berharga dalam setiap aspek kehidupan.</p>
+            <p>Semoga artikel ini telah memberikan Anda pemahaman yang komprehensif dan apresiasi yang lebih dalam terhadap keindahan dan kekuatan aljabar. Teruslah belajar dan bereksplorasi, karena dunia matematika selalu memiliki sesuatu yang baru untuk ditawarkan!</p>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; Aljabar Itu Menyenangkan</p>
+    </footer>
+
+<style>
+.related-posts {
+  clear: both;
+  display: block;
+  width: 100%;
+  margin: 30px auto;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.related-posts h3 {
+  margin-top: 0;
+}
+.related-posts ul {
+  list-style: none;
+  padding: 0;
+}
+.related-posts li {
+  margin: 6px 0;
+}
+</style>
+<div class='related-posts'><h3>Related Posts</h3><ul><li><a href="/anghun">Anghun</a></li>
+<li><a href="/bariton">Bariton</a></li>
+<li><a href="/ampat">Ampat</a></li>
+<li><a href="/alatud">Alatud</a></li>
+<li><a href="/alami">Alami</a></li>
+<li><a href="/autotomi">Autotomi</a></li>
+<li><a href="/administrasi-kependudukan">Administrasi Kependudukan</a></li>
+<li><a href="/apar">Apar</a></li>
+<li><a href="/anggaran-belanja">Anggaran Belanja</a></li>
+<li><a href="/aflatoksin">Aflatoksin</a></li></ul></div>
+<script src="/ik.js"></script>
+</body>
+</html>

@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARIA Web: Panduan Lengkap Aksesibilitas Digital</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #F8F8F8; /* Light, slightly off-white */
+            color: #333; /* Dark gray for good contrast */
+            box-sizing: border-box;
+        }
+
+        /* Container for content */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #FFFFFF; /* White content background */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+        }
+
+        /* Headings */
+        h1, h2, h3, h4, h5, h6 {
+            color: #007bff; /* A refreshing blue */
+            margin-top: 1.5em;
+            margin-bottom: 0.8em;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            color: #20B2AA; /* LightSeaGreen for main title */
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            border-bottom: 2px solid #D1ECF1; /* Light border for sections */
+            padding-bottom: 0.5em;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            color: #007bff; /* Main blue for sub-sections */
+        }
+
+        h4 {
+            font-size: 1.2em;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* Paragraphs */
+        p {
+            margin-bottom: 1em;
+            text-align: justify;
+        }
+
+        /* Links */
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-bottom: 1em;
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        /* Code Blocks */
+        pre {
+            background-color: #e9ecef; /* Light gray for code background */
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 1.5em;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        code {
+            font-family: 'Fira Code', 'Cascadia Code', 'Consolas', 'Monaco', monospace;
+            background-color: #e9ecef;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+
+        /* Blockquote */
+        blockquote {
+            border-left: 4px solid #6c757d; /* Muted gray for blockquote */
+            padding-left: 15px;
+            margin: 1.5em 0;
+            color: #6c757d;
+            font-style: italic;
+        }
+
+        /* Image */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5em;
+            font-size: 0.9em;
+        }
+
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #e9ecef;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            border-top: 1px solid #e0e0e0;
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            main {
+                padding: 15px;
+                border-radius: 0;
+                box-shadow: none;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            p {
+                text-align: left; /* More natural on smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>ARIA Web: Panduan Lengkap Aksesibilitas Digital</h1>
+
+        <p>Di era digital ini, aksesibilitas bukanlah sekadar fitur tambahan, melainkan sebuah kebutuhan fundamental. Setiap individu memiliki hak untuk mengakses informasi dan fungsionalitas di web, terlepas dari kemampuan fisik atau kognitif mereka. Namun, seringkali, antarmuka pengguna yang kaya dan dinamis, yang dibangun dengan JavaScript dan CSS modern, dapat menghadirkan tantangan besar bagi teknologi bantu seperti pembaca layar (screen reader).</p>
+
+        <p>Di sinilah peran ARIA (Accessible Rich Internet Applications) menjadi krusial. ARIA adalah seperangkat atribut dan peran yang dapat ditambahkan ke elemen HTML untuk memberikan informasi semantik tambahan kepada teknologi bantu. Ini memungkinkan pengembang untuk membuat komponen UI yang kompleks dan interaktif menjadi lebih mudah diakses, mengisi celah yang tidak dapat ditangani oleh HTML saja. Artikel ini akan membawa Anda dalam perjalanan mendalam untuk memahami ARIA, mulai dari konsep dasar hingga praktik terbaik, memastikan bahwa aplikasi web Anda dapat dinikmati oleh semua orang.</p>
+
+        <img src="data:image/svg+xml,%3Csvg width='100%25' height='auto' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ctitile%3EIlustrasi Aksesibilitas Web dengan ARIA%3C/titile%3E%3Crect x='10' y='15' width='80' height='70' rx='8' ry='8' fill='%23F0F8FF' stroke='%23007bff' stroke-width='2'/%3E%3Crect x='10' y='15' width='80' height='8' rx='8' ry='8' fill='%23D3E0EA'/%3E%3Ccircle cx='15' cy='19' r='2' fill='%23FF5F56'/%3E%3Ccircle cx='21' cy='19' r='2' fill='%23FFBD2E'/%3E%3Ccircle cx='27' cy='19' r='2' fill='%2327C93F'/%3E%3Ccircle cx='50' cy='45' r='10' fill='%23007bff'/%3E%3Cpath d='M40 60 C40 50, 60 50, 60 60 L60 70 C60 80, 40 80, 40 70 Z' fill='%23007bff'/%3E%3Cpath d='M65 45 Q70 40, 75 45 Q70 50, 65 45 Z' fill='%2320B2AA'/%3E%3Cpath d='M68 45 Q73 35, 78 45 Q73 55, 68 45 Z' fill='%2320B2AA'/%3E%3Ctext x='50' y='80' font-family='Arial, sans-serif' font-size='8' fill='%23333' text-anchor='middle' opacity='0.6'%3EARIA%3C/text%3E%3C/svg%3E" alt="Ilustrasi yang menggambarkan konsep aksesibilitas web dengan ARIA, menunjukkan ikon orang dan gelombang suara dalam konteks jendela browser.">
+
+        <h2>Apa itu ARIA? Mengapa Penting?</h2>
+
+        <p>ARIA, kependekan dari <a href="https://www.w3.org/WAI/ARIA/apg/" target="_blank">Accessible Rich Internet Applications</a>, adalah spesifikasi teknis yang diterbitkan oleh World Wide Web Consortium (W3C). Tujuannya adalah untuk meningkatkan aksesibilitas konten web dinamis dan komponen antarmuka pengguna yang dikembangkan dengan AJAX, JavaScript, dan teknologi terkait. ARIA memberikan cara untuk menambahkan informasi semantik yang hilang dari HTML asli atau untuk mengkompensasi interaksi yang kompleks yang tidak dapat diungkapkan secara memadai oleh HTML biasa.</p>
+
+        <p>Sebelum ARIA, banyak komponen web interaktif, seperti tab, modal dialog, tree view, atau slider kustom, tidak dapat diakses sepenuhnya oleh pengguna teknologi bantu. Pembaca layar mungkin tidak dapat mengidentifikasi elemen-elemen ini sebagai apa adanya, mengkomunikasikan statusnya, atau menjelaskan cara berinteraksi dengannya. Hasilnya adalah pengalaman pengguna yang buruk dan tidak setara bagi individu dengan disabilitas.</p>
+
+        <h3>Tiga Pilar Utama ARIA</h3>
+        <p>ARIA bekerja dengan memperkenalkan tiga jenis atribut utama:</p>
+        <ol>
+            <li><strong>Peran (Roles):</strong> Mendefinisikan jenis elemen UI. Misalnya, mengubah <code>div</code> menjadi sebuah <code>button</code> atau <code>tablist</code> secara semantik bagi teknologi bantu.</li>
+            <li><strong>Properti (Properties):</strong> Memberikan karakteristik atau deskripsi statis pada elemen, seperti label teks, deskripsi, atau hubungan dengan elemen lain. Misalnya, <code>aria-label</code>, <code>aria-describedby</code>, <code>aria-controls</code>.</li>
+            <li><strong>Status (States):</strong> Mendefinisikan kondisi dinamis dari suatu elemen yang dapat berubah, biasanya melalui interaksi pengguna. Misalnya, <code>aria-checked</code> untuk kotak centang, <code>aria-expanded</code> untuk elemen yang dapat diperluas/ciutkan.</li>
+        </ol>
+
+        <blockquote>
+            <p>ARIA bukan pengganti HTML semantik. Aturan pertama ARIA adalah: Jika elemen HTML asli sudah memiliki semantik dan perilaku yang Anda butuhkan, gunakanlah elemen HTML asli tersebut. Jangan gunakan ARIA.</p>
+        </blockquote>
+
+        <h2>Mendalami Konsep Dasar ARIA</h2>
+
+        <h3>1. Peran (Roles)</h3>
+        <p>Peran ARIA adalah atribut yang memberi tahu teknologi bantu tentang tujuan atau fungsi sebuah elemen. Ini sangat berguna ketika Anda membuat komponen kustom yang tidak memiliki padanan HTML semantik yang tepat. Peran ARIA dibagi menjadi beberapa kategori:</p>
+
+        <h4>Peran Landmark</h4>
+        <p>Peran landmark membantu teknologi bantu dalam memahami struktur utama halaman web dan memungkinkan pengguna untuk menavigasi bagian-bagian penting dengan cepat. Ini sangat penting untuk navigasi yang efisien.</p>
+        <ul>
+            <li><code>role="banner"</code>: Umumnya header halaman yang berisi logo situs, judul situs, atau navigasi utama.</li>
+            <li><code>role="main"</code>: Mengidentifikasi konten utama unik dokumen. Hanya boleh ada satu <code>role="main"</code> per dokumen.</li>
+            <li><code>role="navigation"</code>: Mendefinisikan kumpulan tautan navigasi.</li>
+            <li><code>role="complementary"</code>: Mendefinisikan bagian konten yang mendukung konten utama, seperti sidebar.</li>
+            <li><code>role="contentinfo"</code>: Berisi informasi tentang dokumen induk, seperti informasi hak cipta, tautan ke kebijakan privasi, dll. (biasanya footer).</li>
+            <li><code>role="form"</code>: Mengidentifikasi bagian yang berisi formulir input.</li>
+            <li><code>role="search"</code>: Mengidentifikasi bagian yang berisi fungsionalitas pencarian.</li>
+            <li><code>role="region"</code>: Digunakan untuk mengidentifikasi bagian generik konten yang relevan dan memiliki judul yang dapat diakses.</li>
+        </ul>
+        <pre><code>&lt;header role="banner"&gt;...&lt;/header&gt;
+&lt;main role="main"&gt;
+    &lt;h1&gt;Judul Artikel&lt;/h1&gt;
+    &lt;p&gt;Konten utama halaman.&lt;/p&gt;
+&lt;/main&gt;
+&lt;nav role="navigation"&gt;...&lt;/nav&gt;
+&lt;aside role="complementary"&gt;...&lt;/aside&gt;
+&lt;footer role="contentinfo"&gt;...&lt;/footer&gt;</code></pre>
+        <p>Meskipun ada peran landmark ARIA, banyak elemen HTML5 seperti <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;aside&gt;</code>, dan <code>&lt;footer&gt;</code> secara implisit sudah memiliki semantik landmark. Penggunaan atribut <code>role</code> pada elemen-elemen ini seringkali tidak diperlukan (dan terkadang redundan) jika penggunaannya sudah benar. Namun, ada kasus di mana penggunaan peran landmark ARIA dapat memperjelas semantik, terutama pada versi HTML yang lebih lama atau ketika elemen generik seperti <code>&lt;div&gt;</code> digunakan untuk strukturisasi.</p>
+
+        <h4>Peran Widget</h4>
+        <p>Peran widget menjelaskan elemen UI interaktif yang biasanya dibuat dengan JavaScript, seperti tombol kustom, menu, slider, atau tab. Ini memberi tahu teknologi bantu bahwa elemen tersebut dapat dioperasikan dan bagaimana cara berinteraksi dengannya.</p>
+        <ul>
+            <li><code>role="button"</code>: Mendefinisikan elemen yang dapat diklik. Jika Anda membuat tombol kustom dari <code>&lt;div&gt;</code> atau <code>&lt;span&gt;</code>, Anda harus menambahkan peran ini. Jangan lupa untuk menambahkan penanganan event keyboard (Enter/Space).</li>
+            <li><code>role="checkbox"</code>: Mendefinisikan opsi dua keadaan (dicentang/tidak dicentang).</li>
+            <li><code>role="radio"</code>: Mendefinisikan opsi yang dapat dipilih dari sekelompok opsi (hanya satu yang bisa aktif).</li>
+            <li><code>role="tab"</code>, <code>role="tablist"</code>, <code>role="tabpanel"</code>: Digunakan bersama untuk membuat komponen tab.</li>
+            <li><code>role="dialog"</code>: Mendefinisikan jendela dialog atau modal.</li>
+            <li><code>role="menu"</code>, <code>role="menuitem"</code>: Digunakan untuk membangun menu aplikasi.</li>
+            <li><code>role="slider"</code>: Digunakan untuk kontrol input yang memungkinkan pengguna memilih nilai dari rentang yang telah ditentukan.</li>
+            <li><code>role="progressbar"</code>: Menunjukkan status progres suatu tugas.</li>
+            <li><code>role="tooltip"</code>: Popup dengan informasi kontekstual.</li>
+        </ul>
+        <pre><code>&lt;span role="button" tabindex="0"&gt;Kirim Formulir&lt;/span&gt;
+
+&lt;div role="tablist"&gt;
+    &lt;button role="tab" id="tab1" aria-controls="panel1" aria-selected="true"&gt;Tab 1&lt;/button&gt;
+    &lt;button role="tab" id="tab2" aria-controls="panel2" aria-selected="false"&gt;Tab 2&lt;/button&gt;
+&lt;/div&gt;
+&lt;div role="tabpanel" id="panel1" aria-labelledby="tab1"&gt;Konten Tab 1&lt;/div&gt;
+&lt;div role="tabpanel" id="panel2" aria-labelledby="tab2" hidden&gt;Konten Tab 2&lt;/div&gt;</code></pre>
+
+        <h4>Peran Struktur Dokumen</h4>
+        <p>Peran ini mendefinisikan struktur konten yang tidak interaktif, mirip dengan peran landmark tetapi untuk unit konten yang lebih kecil. Ini membantu dalam memahami organisasi dan jenis konten dalam sebuah halaman.</p>
+        <ul>
+            <li><code>role="article"</code>: Mengidentifikasi bagian independen dari konten dalam dokumen atau aplikasi, seperti posting blog atau komentar forum.</li>
+            <li><code>role="section"</code>: Bagian generik dari dokumen atau aplikasi. Seharusnya memiliki judul yang dapat diakses.</li>
+            <li><code>role="list"</code>, <code>role="listitem"</code>: Digunakan untuk struktur daftar non-HTML, seperti daftar item yang dibuat dengan <code>div</code>.</li>
+            <li><code>role="img"</code>: Mendefinisikan gambar. Jika elemen <code>&lt;img&gt;</code> digunakan, peran ini implisit, tetapi bisa berguna untuk elemen non-<code>&lt;img&gt;</code> yang berfungsi sebagai gambar.</li>
+            <li><code>role="heading"</code>: Mendefinisikan elemen sebagai judul. Tingkat judul harus ditentukan dengan <code>aria-level</code>.</li>
+        </ul>
+        <pre><code>&lt;div role="article"&gt;
+    &lt;h3&gt;Judul Postingan&lt;/h3&gt;
+    &lt;p&gt;Isi postingan blog...&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div role="list"&gt;
+    &lt;div role="listitem"&gt;Item pertama&lt;/div&gt;
+    &lt;div role="listitem"&gt;Item kedua&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+        <h3>2. Properti (Properties) ARIA</h3>
+        <p>Properti ARIA memberikan informasi tambahan tentang elemen yang bersifat statis atau tidak berubah dengan interaksi pengguna (atau setidaknya tidak sering berubah). Ini membantu dalam menjelaskan makna, tujuan, atau hubungan elemen.</p>
+
+        <h4><code>aria-label</code></h4>
+        <p>Memberikan label yang dapat diakses untuk sebuah elemen ketika teks yang terlihat tidak tersedia atau tidak cukup deskriptif. Ini sangat berguna untuk ikon tombol atau elemen dengan teks yang tidak jelas secara kontekstual.</p>
+        <pre><code>&lt;button aria-label="Tutup"&gt;X&lt;/button&gt;
+&lt;input type="text" aria-label="Cari Produk" placeholder="Cari..."&gt;</code></pre>
+        <p>Penting untuk dicatat bahwa <code>aria-label</code> akan menimpa label teks yang terlihat jika ada. Gunakan dengan hati-hati.</p>
+
+        <h4><code>aria-labelledby</code></h4>
+        <p>Mengidentifikasi elemen (atau beberapa elemen) yang berfungsi sebagai label untuk objek yang dilabeli. Ini sering digunakan ketika label sudah ada di tempat lain di halaman.</p>
+        <pre><code>&lt;h2 id="modalTitle"&gt;Judul Modal&lt;/h2&gt;
+&lt;div role="dialog" aria-labelledby="modalTitle"&gt;
+    &lt;p&gt;Isi modal dialog.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+        <p><code>aria-labelledby</code> lebih kuat daripada <code>aria-label</code> karena memungkinkan Anda merujuk ke konten yang sudah ada di DOM.</p>
+
+        <h4><code>aria-describedby</code></h4>
+        <p>Mengidentifikasi elemen (atau beberapa elemen) yang berfungsi sebagai deskripsi untuk objek yang dijelaskan. Ini memberikan informasi tambahan yang mungkin tidak cocok sebagai label utama.</p>
+        <pre><code>&lt;label for="password"&gt;Kata Sandi:&lt;/label&gt;
+&lt;input type="password" id="password" aria-describedby="passwordHelp"&gt;
+&lt;small id="passwordHelp"&gt;Kata sandi harus minimal 8 karakter.&lt;/small&gt;</code></pre>
+        <p><code>aria-describedby</code> tidak menimpa label, melainkan menambahkan informasi deskriptif setelah label dibacakan oleh pembaca layar.</p>
+
+        <h4><code>aria-hidden</code></h4>
+        <p>Menunjukkan apakah elemen atau turunannya terlihat atau tidak terlihat oleh teknologi bantu. Nilai <code>true</code> menyembunyikan elemen dari Accessibility Tree, sementara <code>false</code> membuatnya terlihat. Ini sering digunakan untuk menyembunyikan konten dekoratif atau duplikat.</p>
+        <pre><code>&lt;div aria-hidden="true"&gt;
+    &lt;img src="dekorasi.png" alt=""&gt;
+&lt;/div&gt;
+&lt;div id="modal" role="dialog" aria-hidden="true"&gt;...&lt;/div&gt;
+&lt;!-- Ketika modal dibuka, aria-hidden akan menjadi "false" --&gt;</code></pre>
+        <p>Hati-hati: <code>aria-hidden="true"</code> tidak menyembunyikan elemen secara visual. Anda tetap perlu menggunakan CSS (misalnya <code>display: none;</code> atau <code>visibility: hidden;</code>) untuk menyembunyikan elemen secara visual.</p>
+
+        <h4><code>aria-controls</code></h4>
+        <p>Mengidentifikasi elemen yang dikendalikan oleh elemen saat ini. Ini membantu teknologi bantu untuk memahami hubungan fungsional antara elemen-elemen yang berbeda.</p>
+        <pre><code>&lt;button aria-controls="sectionDetail"&gt;Tampilkan Detail&lt;/button&gt;
+&lt;div id="sectionDetail" hidden&gt;
+    &lt;p&gt;Ini adalah detail yang ditampilkan/disembunyikan.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+        <h4><code>aria-live</code></h4>
+        <p>Menunjukkan bahwa bagian dari konten UI diperbarui secara dinamis dan harus dibaca oleh teknologi bantu. Ini sangat penting untuk notifikasi, pesan kesalahan, atau pembaruan real-time.</p>
+        <ul>
+            <li><code>aria-live="polite"</code>: Perubahan akan dibacakan ketika pembaca layar sedang tidak sibuk, sehingga tidak mengganggu alur pengguna.</li>
+            <li><code>aria-live="assertive"</code>: Perubahan akan dibacakan sesegera mungkin, bahkan jika itu mengganggu alur pengguna saat ini. Digunakan untuk pesan yang sangat penting (misalnya, kesalahan validasi formulir).</li>
+        </ul>
+        <pre><code>&lt;div aria-live="polite" id="statusMessage"&gt;&lt;/div&gt;
+&lt;!-- JavaScript akan memperbarui innerText dari #statusMessage --&gt;</code></pre>
+        <p>Properti terkait lainnya adalah <code>aria-atomic</code> (apakah seluruh elemen harus dibacakan atau hanya bagian yang berubah) dan <code>aria-relevant</code> (perubahan apa yang relevan).</p>
+
+        <h4><code>aria-expanded</code></h4>
+        <p>Menunjukkan apakah elemen yang dikendalikan oleh elemen saat ini (misalnya, menu drop-down, accordion panel) sedang dalam keadaan diperluas atau diciutkan.</p>
+        <pre><code>&lt;button aria-expanded="false" aria-controls="menuId"&gt;Menu&lt;/button&gt;
+&lt;ul id="menuId" hidden&gt;...&lt;/ul&gt;</code></pre>
+
+        <h4><code>aria-haspopup</code></h4>
+        <p>Menunjukkan bahwa elemen memiliki popup, seperti menu, submenu, dialog, atau grid. Nilai dapat berupa <code>true</code> (jika popup umum), <code>menu</code>, <code>listbox</code>, <code>tree</code>, <code>grid</code>, atau <code>dialog</code>.</p>
+        <pre><code>&lt;button aria-haspopup="true" aria-controls="dropdownMenu"&gt;Opsi&lt;/button&gt;
+&lt;div id="dropdownMenu" role="menu" hidden&gt;...&lt;/div&gt;</code></pre>
+
+        <h3>3. Status (States) ARIA</h3>
+        <p>Status ARIA mendefinisikan kondisi dinamis dari suatu elemen yang dapat berubah sebagai respons terhadap interaksi pengguna atau perubahan data. Pengembang bertanggung jawab untuk memperbarui status ini menggunakan JavaScript.</p>
+
+        <h4><code>aria-checked</code></h4>
+        <p>Menunjukkan status 'dicentang' dari elemen seperti kotak centang, item menu yang dapat dicentang, atau tombol radio.</p>
+        <ul>
+            <li><code>aria-checked="true"</code>: Elemen dicentang.</li>
+            <li><code>aria-checked="false"</code>: Elemen tidak dicentang.</li>
+            <li><code>aria-checked="mixed"</code>: (untuk checkbox) Beberapa item dicentang tetapi tidak semua.</li>
+        </ul>
+        <pre><code>&lt;span role="checkbox" aria-checked="false" tabindex="0"&gt;
+    Setuju dengan syarat &amp; ketentuan
+&lt;/span&gt;</code></pre>
+
+        <h4><code>aria-selected</code></h4>
+        <p>Menunjukkan bahwa elemen saat ini dipilih dari sekelompok elemen yang dapat dipilih.</p>
+        <pre><code>&lt;li role="option" aria-selected="true"&gt;Item 1&lt;/li&gt;
+&lt;li role="option" aria-selected="false"&gt;Item 2&lt;/li&gt;</code></pre>
+
+        <h4><code>aria-disabled</code></h4>
+        <p>Menunjukkan bahwa elemen tidak dapat diedit atau dioperasikan. Mirip dengan atribut HTML <code>disabled</code>.</p>
+        <pre><code>&lt;button aria-disabled="true"&gt;Kirim&lt;/button&gt;</code></pre>
+        <p>Ketika <code>aria-disabled="true"</code>, elemen harus tetap dapat di-fokus-kan agar pembaca layar dapat menginformasikan statusnya.</p>
+
+        <h4><code>aria-required</code></h4>
+        <p>Menunjukkan bahwa input pengguna diperlukan pada elemen sebelum formulir dapat dikirim.</p>
+        <pre><code>&lt;input type="text" aria-required="true"&gt;</code></pre>
+        <p>Ini melengkapi atribut <code>required</code> HTML5, tetapi dapat digunakan pada elemen kustom yang tidak memiliki properti <code>required</code> asli.</p>
+
+        <h4><code>aria-invalid</code></h4>
+        <p>Menunjukkan bahwa nilai yang dimasukkan ke dalam elemen tidak valid atau tidak sesuai dengan format yang diharapkan.</p>
+        <pre><code>&lt;input type="email" aria-invalid="true" aria-describedby="emailError"&gt;
+&lt;p id="emailError"&gt;Format email tidak valid.&lt;/p&gt;</code></pre>
+
+        <h2>Pola Desain ARIA (ARIA Design Patterns)</h2>
+        <p>Memahami peran, properti, dan status ARIA sangat penting, tetapi menggunakannya secara efektif seringkali melibatkan penerapan pola desain tertentu. W3C menyediakan <a href="https://www.w3.org/WAI/ARIA/apg/patterns/" target="_blank">ARIA Authoring Practices Guide (APG)</a> yang sangat direkomendasikan, yang mendokumentasikan pola desain umum dan cara mengimplementasikannya dengan ARIA dan keyboard.</p>
+
+        <h3>1. Komponen Tab (Tab Component)</h3>
+        <p>Salah satu pola paling umum adalah komponen tab, yang memungkinkan pengguna beralih antara beberapa panel konten. Ini memerlukan kombinasi peran dan status ARIA:</p>
+        <ul>
+            <li><code>role="tablist"</code> pada kontainer tab.</li>
+            <li><code>role="tab"</code> pada setiap tombol tab.</li>
+            <li><code>role="tabpanel"</code> pada setiap panel konten.</li>
+            <li><code>aria-selected</code> pada tombol tab untuk menunjukkan tab yang aktif.</li>
+            <li><code>aria-controls</code> pada tombol tab untuk menunjuk ke panel konten yang dikendalikannya.</li>
+            <li><code>aria-labelledby</code> pada panel konten untuk menunjuk ke tombol tab yang mengendalikannya.</li>
+            <li>Menerapkan navigasi keyboard (biasanya tombol panah kiri/kanan untuk berpindah tab).</li>
+        </ul>
+        <pre><code>&lt;div role="tablist" aria-label="Pengaturan Akun"&gt;
+    &lt;button role="tab" id="generalTab" aria-controls="generalPanel" aria-selected="true" tabindex="0"&gt;Umum&lt;/button&gt;
+    &lt;button role="tab" id="securityTab" aria-controls="securityPanel" aria-selected="false" tabindex="-1"&gt;Keamanan&lt;/button&gt;
+    &lt;button role="tab" id="privacyTab" aria-controls="privacyPanel" aria-selected="false" tabindex="-1"&gt;Privasi&lt;/button&gt;
+&lt;/div&gt;
+&lt;div id="generalPanel" role="tabpanel" aria-labelledby="generalTab" tabindex="0"&gt;
+    &lt;h3&gt;Pengaturan Umum&lt;/h3&gt;
+    &lt;p&gt;Di sini Anda dapat mengelola informasi dasar akun Anda.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id="securityPanel" role="tabpanel" aria-labelledby="securityTab" hidden tabindex="0"&gt;
+    &lt;h3&gt;Pengaturan Keamanan&lt;/h3&gt;
+    &lt;p&gt;Ubah kata sandi dan pengaturan keamanan lainnya.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id="privacyPanel" role="tabpanel" aria-labelledby="privacyTab" hidden tabindex="0"&gt;
+    &lt;h3&gt;Pengaturan Privasi&lt;/h3&gt;
+    &lt;p&gt;Kelola preferensi privasi Anda.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+        <p>Navigasi keyboard sangat penting. Saat pengguna menekan tombol panah kiri/kanan, fokus harus berpindah ke tab berikutnya/sebelumnya, <code>aria-selected</code> harus diperbarui, dan panel terkait harus ditampilkan/disembunyikan. Atribut <code>tabindex="-1"</code> pada tab yang tidak aktif memastikan bahwa hanya tab yang aktif yang dapat di-fokus-kan oleh tab key, sementara tab lain dapat dijangkau melalui tombol panah.</p>
+
+        <h3>2. Modal Dialog</h3>
+        <p>Modal dialog adalah elemen UI yang mengharuskan interaksi pengguna sebelum dapat kembali ke konten utama. Ini adalah salah satu pola yang paling menantang untuk diimplementasikan secara aksesibel.</p>
+        <ul>
+            <li><code>role="dialog"</code> pada elemen kontainer modal. Jika dialog adalah pesan peringatan atau konfirmasi yang lebih mendesak, gunakan <code>role="alertdialog"</code>.</li>
+            <li><code>aria-modal="true"</code>: Atribut ini menunjukkan bahwa konten di belakang modal tidak dapat diakses (secara semantik) saat modal aktif. Ini penting untuk mengunci fokus keyboard di dalam modal.</li>
+            <li><code>aria-labelledby</code> dan/atau <code>aria-describedby</code> untuk memberikan judul dan deskripsi modal.</li>
+            <li>Manajemen fokus: Fokus harus dipindahkan ke elemen interaktif pertama di dalam modal saat dibuka, dan dikembalikan ke elemen pemicu saat ditutup.</li>
+            <li>Penjaga fokus (Focus Trap): Fokus keyboard harus dibatasi di dalam modal saat terbuka. Pengguna tidak boleh dapat men-tab keluar dari modal ke konten di belakangnya.</li>
+            <li>Tombol Escape: Menutup modal ketika tombol Escape ditekan.</li>
+            <li>Sembunyikan konten di belakang modal dari teknologi bantu (misalnya, dengan <code>aria-hidden="true"</code> pada elemen <code>&lt;body&gt;</code> atau <code>&lt;main&gt;</code> di luar modal).</li>
+        </ul>
+        <pre><code>&lt;!-- Tombol pemicu modal --&gt;
+&lt;button id="openModalBtn"&gt;Buka Modal&lt;/button&gt;
+
+&lt;!-- Modal Dialog --&gt;
+&lt;div id="myModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" style="display: none;"&gt;
+    &lt;h2 id="modalTitle"&gt;Konfirmasi Tindakan&lt;/h2&gt;
+    &lt;p&gt;Anda yakin ingin melanjutkan?&lt;/p&gt;
+    &lt;button id="confirmBtn"&gt;Ya, Lanjutkan&lt;/button&gt;
+    &lt;button id="cancelBtn"&gt;Batal&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript untuk menangani pembukaan/penutupan, fokus, dan aria-hidden --&gt;</code></pre>
+        <p>Manajemen fokus dan fokus trap adalah bagian tersulit dalam implementasi modal yang aksesibel. Ada banyak pustaka JavaScript yang sudah mengimplementasikan ini dengan benar, jadi seringkali lebih baik menggunakan solusi yang sudah teruji daripada membangun dari awal.</p>
+
+        <h3>3. Accordion</h3>
+        <p>Accordion adalah daftar item yang dapat diperluas atau diciutkan untuk menampilkan/menyembunyikan konten terkait.</p>
+        <ul>
+            <li><code>role="heading"</code> pada judul setiap item accordion (gunakan elemen heading HTML seperti <code>&lt;h3&gt;</code> dan tambahkan <code>aria-level</code> jika perlu).</li>
+            <li><code>role="button"</code> pada elemen yang dapat diklik untuk memperluas/menciutkan.</li>
+            <li><code>aria-expanded</code> pada tombol untuk menunjukkan status saat ini.</li>
+            <li><code>aria-controls</code> pada tombol untuk menunjuk ke panel konten yang dikendalikannya.</li>
+            <li><code>id</code> pada panel konten agar dapat dirujuk oleh <code>aria-controls</code>.</li>
+        </ul>
+        <pre><code>&lt;div class="accordion-item"&gt;
+    &lt;h3&gt;
+        &lt;button aria-expanded="false" aria-controls="section1" id="accordion1Header"&gt;
+            Bagian Pertama
+        &lt;/button&gt;
+    &lt;/h3&gt;
+    &lt;div id="section1" role="region" aria-labelledby="accordion1Header" hidden&gt;
+        &lt;p&gt;Konten untuk bagian pertama accordion.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        <p>Keyboard navigation untuk accordion biasanya melibatkan tombol panah atas/bawah untuk berpindah antar tombol accordion, dan Enter/Space untuk memperluas/menciutkan.</p>
+
+        <h3>4. Live Regions (Pembaruan Dinamis)</h3>
+        <p>Ketika bagian dari halaman web diperbarui secara dinamis tanpa memuat ulang halaman (misalnya, hasil pencarian yang difilter, pesan kesalahan formulir, notifikasi), pembaca layar mungkin tidak secara otomatis memberi tahu pengguna tentang perubahan tersebut. ARIA live regions memungkinkan Anda untuk mengkomunikasikan pembaruan ini.</p>
+        <ul>
+            <li><code>aria-live</code> dengan nilai <code>polite</code> atau <code>assertive</code>.</li>
+            <li><code>aria-atomic="true"</code> jika seluruh konten elemen harus dibacakan setiap kali ada perubahan.</li>
+            <li><code>aria-relevant</code> untuk menentukan jenis perubahan apa yang harus dilaporkan (<code>additions</code>, <code>removals</code>, <code>text</code>, atau <code>all</code>).</li>
+        </ul>
+        <pre><code>&lt;div id="notifications" aria-live="polite" aria-atomic="true"&gt;
+    &lt;!-- Pesan notifikasi akan muncul di sini via JavaScript --&gt;
+&lt;/div&gt;
+
+&lt;form&gt;
+    &lt;label for="username"&gt;Nama Pengguna&lt;/label&gt;
+    &lt;input type="text" id="username" aria-describedby="username-error"&gt;
+    &lt;div id="username-error" aria-live="assertive" style="color: red;"&gt;
+        &lt;!-- Pesan error akan diinject di sini --&gt;
+    &lt;/div&gt;
+&lt;/form&gt;</code></pre>
+        <p>Penting untuk menempatkan <code>aria-live</code> pada elemen yang *tidak* berubah sendiri, tetapi berisi elemen-elemen yang akan berubah. Misalnya, elemen kontainer untuk notifikasi. Ketika JavaScript memperbarui konten di dalam kontainer tersebut, pembaca layar akan diberi tahu.</p>
+
+        <h2>Implementasi ARIA: Praktik Terbaik dan Kesalahan Umum</h2>
+
+        <h3>1. Aturan Pertama ARIA</h3>
+        <p>Seperti yang disebutkan sebelumnya, aturan pertama ARIA adalah: <strong>Jika elemen HTML asli sudah memiliki semantik dan perilaku yang Anda butuhkan, gunakanlah elemen HTML asli tersebut. Jangan gunakan ARIA.</strong></p>
+        <p>Misalnya, jika Anda membutuhkan tombol, gunakan <code>&lt;button&gt;</code>, bukan <code>&lt;div role="button"&gt;</code>. Elemen <code>&lt;button&gt;</code> secara otomatis dapat difokuskan, dapat diklik dengan Enter/Space, dan teknologi bantu akan mengidentifikasinya sebagai tombol tanpa ARIA tambahan.</p>
+        <pre><code>&lt;!-- BURUK: Membangun tombol dari div --&gt;
+&lt;div role="button" tabindex="0" onclick="doSomething()" onkeypress="handleKey(event)"&gt;Klik Saya&lt;/div&gt;
+
+&lt;!-- BAIK: Menggunakan elemen button asli --&gt;
+&lt;button onclick="doSomething()"&gt;Klik Saya&lt;/button&gt;</code></pre>
+        <p>Mengabaikan aturan ini dapat menyebabkan beban kerja yang tidak perlu, potensi bug aksesibilitas, dan bahkan dapat merusak aksesibilitas jika implementasi ARIA Anda tidak sempurna.</p>
+
+        <h3>2. Jangan Mengubah Semantik HTML Asli</h3>
+        <p>Jangan pernah mengubah semantik elemen HTML yang sudah ada kecuali jika ada alasan yang sangat kuat dan Anda tahu persis apa yang Anda lakukan.</p>
+        <pre><code>&lt;!-- BURUK: Mengubah link menjadi button --&gt;
+&lt;a href="#" role="button"&gt;Link yang terlihat seperti tombol&lt;/a&gt;
+
+&lt;!-- BAIK: Menggunakan button untuk aksi, link untuk navigasi --&gt;
+&lt;a href="/halaman-baru"&gt;Menuju Halaman Baru&lt;/a&gt;
+&lt;button&gt;Melakukan Aksi&lt;/button&gt;</code></pre>
+        <p>Ketika Anda menggunakan <code>role="button"</code> pada elemen <code>&lt;a&gt;</code>, Anda membingungkan teknologi bantu. Link diharapkan untuk menavigasi, sementara tombol diharapkan untuk melakukan suatu aksi. Mencampuradukkan peran ini merusak model mental pengguna teknologi bantu.</p>
+
+        <h3>3. Pastikan Semua Konten Interaktif Dapat Diakses dengan Keyboard</h3>
+        <p>Pengguna teknologi bantu dan pengguna keyboard saja mengandalkan navigasi keyboard. Semua elemen interaktif (tombol, link, input, kontrol kustom) harus dapat dijangkau dan dioperasikan sepenuhnya menggunakan keyboard.</p>
+        <ul>
+            <li>Gunakan <code>tabindex="0"</code> untuk membuat elemen dapat difokuskan jika secara default tidak (misalnya, <code>&lt;div&gt;</code> yang bertindak sebagai tombol).</li>
+            <li>Gunakan <code>tabindex="-1"</code> untuk membuat elemen dapat difokuskan secara terprogram (misalnya, untuk manajemen fokus dalam modal) tetapi tidak dapat dijangkau oleh tombol Tab standar.</li>
+            <li>Implementasikan penanganan event keyboard (<code>keydown</code>, <code>keyup</code>) untuk aksi yang relevan (misalnya, Enter/Space untuk tombol, Esc untuk menutup modal, panah untuk navigasi dalam komponen kompleks).</li>
+        </ul>
+
+        <h3>4. Kelola Fokus dengan Hati-hati</h3>
+        <p>Manajemen fokus adalah bagian integral dari pengalaman aksesibel. Pastikan:</p>
+        <ul>
+            <li>Ketika komponen dibuka (misalnya, modal, dropdown), fokus dipindahkan ke elemen yang paling relevan di dalamnya.</li>
+            <li>Ketika komponen ditutup, fokus dikembalikan ke elemen yang memicu pembukaan komponen tersebut.</li>
+            <li>Fokus tetap terlihat secara visual (misalnya, dengan gaya <code>:focus</code> yang jelas).</li>
+        </ul>
+
+        <h3>5. Tes dengan Teknologi Bantu</h3>
+        <p>Tidak ada pengganti untuk pengujian dengan pengguna teknologi bantu yang sebenarnya, atau setidaknya menggunakan pembaca layar. Beberapa pembaca layar populer antara lain:</p>
+        <ul>
+            <li><strong>NVDA (NonVisual Desktop Access):</strong> Gratis, open source, untuk Windows. Sangat direkomendasikan.</li>
+            <li><strong>JAWS (Job Access With Speech):</strong> Komersial, untuk Windows.</li>
+            <li><strong>VoiceOver:</strong> Bawaan di macOS dan iOS.</li>
+            <li><strong>TalkBack:</strong> Bawaan di Android.</li>
+        </ul>
+        <p>Pengujian manual adalah kunci. Otomasi dapat menangkap banyak hal, tetapi nuansa interaksi pengguna hanya dapat diverifikasi secara manual. Selain itu, gunakan browser extension aksesibilitas seperti Axe DevTools, Lighthouse, atau WebHint.</p>
+
+        <h3>6. ARIA Tidak Mempengaruhi Tampilan Visual</h3>
+        <p>Penting untuk diingat bahwa ARIA hanya mempengaruhi Accessibility Tree, yang kemudian dibaca oleh teknologi bantu. ARIA sama sekali tidak mempengaruhi tampilan visual halaman. Anda masih memerlukan CSS untuk styling dan JavaScript untuk fungsionalitas.</p>
+
+        <h3>7. Jaga Agar Atribut ARIA Tetap Dinamis</h3>
+        <p>Jika status elemen berubah, Anda harus memperbarui atribut ARIA terkait dengan JavaScript. Misalnya, saat accordion diperluas, ubah <code>aria-expanded="false"</code> menjadi <code>aria-expanded="true"</code>.</p>
+        <pre><code>// Contoh JavaScript untuk toggle aria-expanded
+const button = document.getElementById('accordionButton');
+const panel = document.getElementById('accordionPanel');
+
+button.addEventListener('click', () => {
+    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+    button.setAttribute('aria-expanded', String(!isExpanded));
+    panel.hidden = isExpanded; // Atau style.display = 'block' / 'none'
+});</code></pre>
+
+        <h2>Hubungan ARIA dengan HTML Semantik dan Aksesibilitas Web</h2>
+        <p>ARIA bukanlah solusi sihir yang akan membuat setiap situs web dapat diakses. Sebaliknya, ARIA adalah pelengkap dari HTML yang semantik. Pondasi aksesibilitas web yang kuat selalu dimulai dengan menggunakan HTML yang tepat untuk tujuan yang tepat. Ketika HTML saja tidak cukup untuk menyampaikan semantik yang kompleks atau interaksi dinamis, barulah ARIA masuk.</p>
+
+        <h3>The Accessibility Tree</h3>
+        <p>Ketika browser memparsing HTML, ia membangun dua pohon: Document Object Model (DOM) dan Accessibility Tree. DOM adalah representasi logis dari struktur halaman, sedangkan Accessibility Tree adalah representasi yang lebih disederhanakan yang digunakan oleh teknologi bantu. Accessibility Tree berisi informasi tentang peran (misalnya, tombol, link), nama (label teks, <code>alt</code> teks, <code>aria-label</code>), status (dicentang, diperluas), dan properti (diperlukan, tidak valid) dari elemen-elemen di halaman.</p>
+        <p>HTML semantik secara otomatis mengisi Accessibility Tree. Misalnya, elemen <code>&lt;button&gt;</code> akan memiliki peran "button" dan nama yang sama dengan teks di dalamnya. ARIA memungkinkan pengembang untuk memodifikasi atau menambah informasi di Accessibility Tree untuk elemen yang bukan HTML asli atau memiliki semantik yang lebih kompleks.</p>
+
+        <h3>WAI-ARIA sebagai Standar</h3>
+        <p>WAI-ARIA (Web Accessibility Initiative - Accessible Rich Internet Applications) adalah spesifikasi resmi W3C. Ini berarti bahwa atribut ARIA dikenal dan didukung oleh sebagian besar browser modern dan teknologi bantu. Namun, tingkat dukungan dapat bervariasi, jadi pengujian tetap penting.</p>
+
+        <h3>Membuat Konten Lebih Inklusif</h3>
+        <p>Dengan menerapkan ARIA dengan benar, kita dapat menciptakan pengalaman web yang lebih inklusif untuk beragam pengguna:</p>
+        <ul>
+            <li><strong>Pengguna tunanetra:</strong> Pembaca layar akan dapat mengidentifikasi elemen UI dengan benar, mengkomunikasikan statusnya, dan membimbing pengguna melalui interaksi yang kompleks.</li>
+            <li><strong>Pengguna dengan gangguan motorik:</strong> Navigasi keyboard yang tepat dan manajemen fokus memungkinkan mereka berinteraksi tanpa mouse.</li>
+            <li><strong>Pengguna dengan disabilitas kognitif:</strong> Struktur yang jelas dan deskripsi yang akurat dapat membantu dalam pemahaman dan penggunaan.</li>
+        </ul>
+
+        <h2>Masa Depan ARIA dan Web Aksesibel</h2>
+        <p>Ekosistem web terus berkembang, dan begitu pula standar aksesibilitas. Ada dorongan berkelanjutan untuk memperkaya HTML itu sendiri sehingga lebih banyak pola antarmuka pengguna dapat ditangani secara native tanpa memerlukan ARIA. Contohnya adalah elemen <code>&lt;details&gt;</code> dan <code>&lt;summary&gt;</code> yang menyediakan perilaku accordion dasar secara native.</p>
+        <p>Meskipun demikian, ARIA akan tetap menjadi alat yang sangat berharga untuk waktu yang lama, terutama untuk komponen UI kustom yang sangat kompleks dan belum memiliki padanan HTML standar. Pengembang diharapkan untuk selalu mengikuti perkembangan standar HTML dan ARIA, serta praktik terbaik yang terus diperbarui oleh W3C.</p>
+        <p>Fokus harus selalu pada: <em>"Bisakah saya mencapai ini dengan HTML saja?"</em> Jika jawabannya adalah ya, lakukan itu. Jika tidak, maka ARIA adalah alat yang tepat untuk digunakan, asalkan digunakan dengan pemahaman dan pengujian yang cermat.</p>
+
+        <h2>Kesimpulan</h2>
+        <p>ARIA adalah jembatan penting menuju web yang lebih aksesibel, memungkinkan pengembang untuk mengisi kesenjangan semantik dan interaksi dalam aplikasi web yang kaya. Dengan memahami peran, properti, dan status ARIA, serta mengikuti praktik terbaik, kita dapat membangun pengalaman digital yang inklusif, yang dapat dinikmati oleh semua orang, terlepas dari kemampuan mereka.</p>
+        <p>Ingatlah untuk selalu memprioritaskan HTML semantik terlebih dahulu, menggunakan ARIA sebagai alat pelengkap ketika diperlukan. Lakukan pengujian menyeluruh dengan teknologi bantu dan berempati dengan pengguna Anda. Dengan demikian, kita bersama-sama dapat menciptakan web yang lebih terbuka dan merata untuk semua.</p>
+        <p>Aksesibilitas bukan hanya tentang kepatuhan terhadap standar, tetapi juga tentang etika dan menciptakan lingkungan digital yang adil. Mari kita terus berupaya membangun web yang benar-benar untuk semua.</p>
+
+    </main>
+
+    <footer>
+        <p>&copy; Artikel ini dibuat untuk tujuan edukasi tentang Aksesibilitas Web dan ARIA.</p>
+    </footer>
+
+<style>
+.related-posts {
+  clear: both;
+  display: block;
+  width: 100%;
+  margin: 30px auto;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.related-posts h3 {
+  margin-top: 0;
+}
+.related-posts ul {
+  list-style: none;
+  padding: 0;
+}
+.related-posts li {
+  margin: 6px 0;
+}
+</style>
+<div class='related-posts'><h3>Related Posts</h3><ul><li><a href="/akidah">Akidah</a></li>
+<li><a href="/albumin">Albumin</a></li>
+<li><a href="/asidosis">Asidosis</a></li>
+<li><a href="/balai-banjar">Balai Banjar</a></li>
+<li><a href="/alih-teknologi">Alih Teknologi</a></li>
+<li><a href="/badak-sumatra">Badak Sumatra</a></li>
+<li><a href="/absurd">Absurd</a></li>
+<li><a href="/anyelir">Anyelir</a></li>
+<li><a href="/air-rasa">Air Rasa</a></li>
+<li><a href="/bajaj">Bajaj</a></li></ul></div>
+<script src="/ik.js"></script>
+</body>
+</html>

@@ -1,0 +1,2173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Panduan lengkap AFUI: Framework UI mobile untuk aplikasi web hybrid yang cepat dan responsif. Pelajari fitur, instalasi, dan implementasi AFUI.">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <title>Panduan Lengkap AFUI: Mengembangkan Aplikasi Web Mobile Cepat</title>
+    <style>
+        /* Desain dasar: Warna sejuk cerah, rapi, mobile-friendly */
+        :root {
+            --primary-blue: hsl(200, 80%, 45%); /* Biru sedang, cerah */
+            --light-blue: hsl(200, 100%, 96%);  /* Biru sangat terang */
+            --dark-blue: hsl(200, 70%, 30%);    /* Biru gelap untuk teks penting */
+            --text-color: #333;                 /* Abu-abu gelap untuk teks umum */
+            --light-gray: #f9f9f9;              /* Abu-abu sangat terang untuk latar belakang blok */
+            --border-color: #e0e0e0;            /* Warna border ringan */
+            --shadow-light: rgba(0, 0, 0, 0.05); /* Bayangan tipis */
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-blue); /* Latar belakang body warna sejuk cerah */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        header {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 2.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 2px 10px var(--shadow-light);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8em;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.2em;
+            margin-top: 0.5rem;
+            opacity: 0.9;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px var(--shadow-light);
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        section {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        h2, h3, h4 {
+            color: var(--dark-blue);
+            font-weight: 600;
+            margin-top: 1.5em;
+            margin-bottom: 0.8em;
+        }
+
+        h2 {
+            font-size: 2.2em;
+            border-bottom: 2px solid var(--primary-blue);
+            padding-bottom: 0.5em;
+            margin-bottom: 1.5em;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 1.6em;
+            color: var(--primary-blue);
+            margin-top: 2em;
+        }
+
+        h4 {
+            font-size: 1.3em;
+            color: var(--dark-blue);
+            margin-top: 1.5em;
+        }
+
+        p {
+            margin-bottom: 1em;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1em;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--dark-blue);
+            text-decoration: underline;
+        }
+
+        code, pre {
+            font-family: 'Fira Code', 'Cascadia Code', 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+            background-color: var(--light-gray);
+            border-radius: 6px;
+        }
+
+        code {
+            padding: 0.2em 0.4em;
+            border: 1px solid var(--border-color);
+            color: #c7254e; /* Warna merah untuk inline code */
+        }
+
+        pre {
+            padding: 1em 1.2em;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            margin-top: 1.5em;
+            margin-bottom: 1.5em;
+            line-height: 1.4;
+            box-shadow: 0 2px 8px var(--shadow-light);
+            white-space: pre-wrap; /* Memungkinkan wrap pada pre */
+            word-wrap: break-word; /* Memastikan kata-kata panjang terpotong */
+        }
+
+        pre code {
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            color: #333;
+        }
+
+        blockquote {
+            background-color: var(--light-blue);
+            border-left: 5px solid var(--primary-blue);
+            margin: 1.5em 0;
+            padding: 1em 1.5em;
+            border-radius: 8px;
+            color: var(--dark-blue);
+            font-style: italic;
+        }
+
+        figure {
+            margin: 2em auto;
+            padding: 1em;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background-color: var(--light-gray);
+            text-align: center;
+            max-width: 80%;
+            box-shadow: 0 2px 10px var(--shadow-light);
+        }
+
+        figure img, figure svg {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        figcaption {
+            margin-top: 0.8em;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+            background-color: var(--dark-blue);
+            color: white;
+            font-size: 0.9em;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header {
+                padding: 2rem 1rem;
+            }
+            header h1 {
+                font-size: 2.2em;
+            }
+            header p {
+                font-size: 1em;
+            }
+            main {
+                margin: 1rem auto;
+                padding: 1.5rem 1rem;
+                border-radius: 0; /* Full width on smaller screens */
+                box-shadow: none;
+            }
+            h2 {
+                font-size: 1.8em;
+                text-align: left;
+                padding-bottom: 0.3em;
+            }
+            h3 {
+                font-size: 1.4em;
+            }
+            h4 {
+                font-size: 1.1em;
+            }
+            pre {
+                padding: 0.8em 1em;
+            }
+            figure {
+                max-width: 100%;
+                padding: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Panduan Lengkap AFUI</h1>
+        <p>Mengembangkan Aplikasi Web Mobile yang Cepat dan Responsif dengan Apache Cordova UI (App Framework UI)</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Pengantar ke AFUI: Fondasi Aplikasi Web Mobile Anda</h2>
+            <p>Dalam dunia pengembangan aplikasi web mobile yang terus berkembang, memilih <em>framework</em> UI yang tepat adalah kunci untuk menciptakan pengalaman pengguna yang mulus dan responsif. AFUI, kependekan dari App Framework UI, adalah salah satu <em>framework</em> yang didesain khusus untuk kebutuhan ini. Berasal dari Apache Cordova UI, AFUI menawarkan serangkaian komponen UI yang ringan namun kuat, dirancang untuk memberikan tampilan dan nuansa aplikasi <em>native</em> pada perangkat mobile, namun dibangun menggunakan teknologi web standar (HTML, CSS, JavaScript).</p>
+
+            <p>AFUI lahir dari kebutuhan untuk menyediakan solusi UI yang efisien bagi pengembang yang bekerja dengan aplikasi <em>hybrid</em>, khususnya mereka yang menggunakan Apache Cordova atau PhoneGap. Tujuannya adalah untuk menjembatani kesenjangan antara pengalaman web tradisional dan ekspektasi pengguna terhadap aplikasi <em>native</em>. Dengan AFUI, pengembang dapat membangun antarmuka pengguna yang menarik dan interaktif, lengkap dengan transisi halaman yang halus, elemen kontrol yang familiar, dan tata letak yang adaptif, tanpa harus mengorbankan performa.</p>
+
+            <p>Meskipun mungkin tidak sepopuler beberapa <em>framework</em> modern lainnya seperti React Native atau Ionic saat ini, AFUI memiliki sejarah panjang dan telah membuktikan kemampuannya sebagai pilihan yang solid untuk proyek-proyek tertentu. Keunggulannya terletak pada jejak kakinya yang kecil, kemudahan integrasi, dan filosofi "sekali tulis, jalankan di mana saja" yang diusungnya. Bagi pengembang yang mencari solusi minimalis namun fungsional untuk aplikasi <em>hybrid</em> atau web mobile yang fokus pada performa dan tampilan <em>native</em>, AFUI tetap menjadi pilihan yang patut dipertimbangkan.</p>
+
+            <p>Artikel ini akan membawa Anda menyelami AFUI secara mendalam. Kita akan membahas arsitektur dasarnya, komponen-komponen utama yang ditawarkannya, cara memulai proyek baru, serta tips dan trik untuk mengoptimalkan aplikasi Anda. Baik Anda seorang pemula yang baru mengenal pengembangan mobile atau pengembang berpengalaman yang mencari alternatif <em>framework</em> UI, panduan ini akan memberikan wawasan yang komprehensif tentang bagaimana AFUI dapat membantu Anda membangun aplikasi web mobile yang luar biasa.</p>
+
+            <figure>
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="100" height="100">
+                    <title>Ilustrasi Konsep Aplikasi Mobile</title>
+                    <rect x="15" y="5" width="70" height="90" rx="10" ry="10" fill="#E0F2F7" stroke="#3F51B5" stroke-width="2"/>
+                    <rect x="25" y="15" width="50" height="6" rx="2" ry="2" fill="#BBDEFB"/>
+                    <rect x="25" y="25" width="50" height="6" rx="2" ry="2" fill="#90CAF9"/>
+                    <rect x="20" y="38" width="60" height="8" rx="2" ry="2" fill="#64B5F6"/>
+                    <rect x="20" y="50" width="60" height="8" rx="2" ry="2" fill="#42A5F5"/>
+                    <rect x="20" y="62" width="60" height="8" rx="2" ry="2" fill="#2196F3"/>
+                    <circle cx="50" cy="84" r="4" fill="#3F51B5"/>
+                </svg>
+                <figcaption>Representasi visual aplikasi mobile dengan elemen UI dasar, mencerminkan tujuan AFUI.</figcaption>
+            </figure>
+        </section>
+
+        <section>
+            <h2>Mengapa Memilih AFUI untuk Proyek Anda?</h2>
+            <p>Dalam lanskap <em>framework</em> pengembangan aplikasi mobile yang ramai, pertanyaan "mengapa memilih AFUI?" adalah valid. AFUI menonjol dengan beberapa karakteristik unik yang membuatnya menjadi pilihan yang menarik, terutama untuk jenis proyek tertentu. Mari kita telaah beberapa alasan utama mengapa AFUI bisa menjadi pilihan yang tepat untuk pengembangan aplikasi web mobile Anda.</p>
+
+            <h3>Performa Optimal dengan Jejak Kaki Kecil</h3>
+            <p>Salah satu daya tarik terbesar AFUI adalah fokusnya pada performa. <em>Framework</em> ini dirancang agar sangat ringan, yang berarti ia membutuhkan lebih sedikit sumber daya sistem dan memuat lebih cepat dibandingkan dengan beberapa <em>framework</em> yang lebih berat. Dalam pengembangan mobile, di mana performa adalah segalanya dan kecepatan muat dapat secara signifikan memengaruhi pengalaman pengguna, jejak kaki yang kecil ini adalah keuntungan besar. AFUI mencapai ini dengan meminimalkan kode JavaScript dan CSS yang diperlukan untuk setiap komponen, memastikan bahwa aplikasi Anda tetap responsif bahkan pada perangkat dengan spesifikasi rendah.</p>
+            <p>AFUI menggunakan pendekatan minimalis dalam desain dan implementasinya. Ini berarti tidak ada beban kode yang tidak perlu yang memperlambat aplikasi Anda. Setiap komponen UI dirancang untuk menjadi seefisien mungkin, dan transisi halaman dioptimalkan untuk memberikan animasi yang halus dan bebas <em>stutter</em>, meniru pengalaman aplikasi <em>native</em> seakurat mungkin. Hal ini sangat krusial untuk aplikasi yang ditargetkan untuk pasar yang luas, di mana pengguna mungkin tidak selalu memiliki perangkat terbaru atau koneksi internet tercepat.</p>
+
+            <h3>Tampilan dan Nuansa Aplikasi Native yang Konsisten</h3>
+            <p>AFUI didesain untuk mereplikasi tampilan dan nuansa (<em>look and feel</em>) aplikasi <em>native</em> iOS dan Android. Ini bukan sekadar masalah estetika; ini tentang menciptakan pengalaman pengguna yang familier dan intuitif. Dengan AFUI, elemen-elemen UI seperti tombol, daftar, <em>toggle switch</em>, dan navigasi dirancang agar terlihat dan berfungsi seperti komponen <em>native</em> yang diharapkan pengguna. Konsistensi ini mengurangi kurva pembelajaran bagi pengguna dan meningkatkan kepuasan secara keseluruhan.</p>
+            <p>Kemampuan untuk menyesuaikan tema memungkinkan pengembang untuk dengan mudah beralih antara gaya iOS dan Android, atau bahkan menciptakan tema kustom yang sesuai dengan <em>branding</em> aplikasi mereka. Ini memberikan fleksibilitas tanpa mengorbankan konsistensi. Transisi halaman yang halus, efek sentuhan, dan responsivitas elemen UI semuanya berkontribusi pada ilusi bahwa pengguna sedang berinteraksi dengan aplikasi <em>native</em> sejati, meskipun sebenarnya dibangun dengan teknologi web.</p>
+
+            <h3>Integrasi Sempurna dengan Apache Cordova/PhoneGap</h3>
+            <p>AFUI secara historis dikembangkan sebagai bagian dari ekosistem Apache Cordova/PhoneGap. Ini berarti bahwa ia dirancang untuk berintegrasi secara mulus dengan proyek-proyek Cordova, memungkinkan pengembang untuk memanfaatkan API perangkat <em>native</em> sambil membangun UI mereka dengan HTML, CSS, dan JavaScript. Integrasi ini sangat kuat karena AFUI dan Cordova berbagi filosofi yang sama: memungkinkan pengembang web untuk membangun aplikasi <em>hybrid</em> yang kuat.</p>
+            <p>Pengembang dapat dengan mudah menggabungkan AFUI ke dalam proyek Cordova mereka, memanfaatkan fitur-fitur seperti akses kamera, GPS, penyimpanan lokal, dan notifikasi <em>push</em>, semuanya di bawah payung antarmuka pengguna yang konsisten dan menarik yang disediakan oleh AFUI. Sinergi antara AFUI dan Cordova mempercepat proses pengembangan dan menyederhanakan manajemen dependensi, karena keduanya dirancang untuk bekerja sama secara harmonis.</p>
+
+            <h3>Sederhana dan Mudah Dipelajari</h3>
+            <p>AFUI memiliki API yang relatif sederhana dan konvensi penamaan yang intuitif. Bagi pengembang web yang sudah terbiasa dengan HTML, CSS, dan JavaScript, mempelajari AFUI tidak memerlukan kurva pembelajaran yang curam. Komponen-komponennya didefinisikan dengan atribut <code>data-role</code> dan kelas CSS yang jelas, membuat kode lebih mudah dibaca dan dipelihara. Ini memungkinkan tim pengembangan untuk segera produktif tanpa harus menghabiskan banyak waktu untuk mempelajari paradigma baru.</p>
+            <p>Dokumentasi yang jelas dan contoh-contoh kode yang disediakan seringkali sudah cukup untuk memahami cara kerja sebagian besar komponen. Pendekatan "markup-driven" (didorong oleh markup) berarti banyak fungsionalitas UI dapat diimplementasikan langsung di HTML tanpa perlu menulis banyak kode JavaScript kustom, meskipun AFUI juga menyediakan API JavaScript yang kaya untuk interaksi yang lebih kompleks. Kesederhanaan ini mengurangi kompleksitas proyek dan memungkinkan pengembang untuk fokus pada logika bisnis aplikasi daripada bergulat dengan implementasi UI.</p>
+
+            <h3>Fleksibilitas dan Kustomisasi</h3>
+            <p>Meskipun AFUI menawarkan tampilan <em>native</em> secara <em>default</em>, ia juga sangat fleksibel dan dapat disesuaikan. Pengembang dapat dengan mudah menimpa gaya CSS bawaan untuk mencocokkan desain merek mereka atau memperluas fungsionalitas komponen menggunakan JavaScript. Struktur CSS AFUI yang terorganisir membuat kustomisasi menjadi tugas yang relatif mudah, memungkinkan pengembang untuk menciptakan pengalaman yang benar-benar unik tanpa harus memulai dari awal.</p>
+            <p>AFUI tidak mengunci pengembang ke dalam satu cara kerja tertentu. Anda dapat menggunakannya sebagai <em>framework</em> UI mandiri untuk proyek web mobile, atau mengintegrasikannya dengan perpustakaan JavaScript lainnya seperti jQuery (atau Zepto.js, yang sering direkomendasikan karena ukurannya yang lebih kecil) untuk manajemen DOM dan AJAX. Kemampuan untuk mengadaptasi AFUI sesuai dengan kebutuhan spesifik proyek dan preferensi tim adalah aset berharga yang meningkatkan produktivitas dan memungkinkan inovasi desain.</p>
+
+            <p>Dengan mempertimbangkan semua poin di atas, AFUI terbukti menjadi pilihan yang solid untuk pengembangan aplikasi web mobile dan <em>hybrid</em>. Kemampuannya untuk memberikan performa tinggi, tampilan <em>native</em>, dan kemudahan penggunaan, menjadikannya alat yang efektif bagi pengembang yang ingin menciptakan aplikasi yang berkualitas tanpa mengorbankan efisiensi.</p>
+        </section>
+
+        <section>
+            <h2>Memulai dengan AFUI: Konfigurasi Awal Proyek Anda</h2>
+            <p>Memulai proyek baru dengan AFUI adalah proses yang relatif mudah, melibatkan pengunduhan berkas yang diperlukan dan menyiapkan struktur HTML dasar. Bagian ini akan memandu Anda melalui langkah-langkah esensial untuk mengkonfigurasi proyek AFUI pertama Anda, memastikan Anda memiliki fondasi yang kokoh untuk pengembangan lebih lanjut.</p>
+
+            <h3>Langkah 1: Mengunduh AFUI</h3>
+            <p>AFUI dapat diunduh dari repositori GitHub resminya atau melalui CDN (Content Delivery Network). Untuk pengembangan lokal, mengunduh berkas adalah metode yang paling umum. Kunjungi <a href="https://github.com/01org/appframework" target="_blank">repositori GitHub AFUI</a> untuk mendapatkan versi terbaru. Anda biasanya akan menemukan berkas CSS dan JavaScript yang dikompilasi di dalam direktori <code>dist</code> atau <code>release</code> setelah mengunduh dan mengekstrak repositori.</p>
+            <p>Berupa berkas yang perlu Anda perhatikan adalah:</p>
+            <ul>
+                <li><code>appframework.min.css</code> atau <code>appframework.css</code>: Berkas CSS utama AFUI.</li>
+                <li><code>appframework.theme.min.css</code> atau <code>appframework.theme.css</code>: Berkas CSS tema (misalnya, iOS atau Android).</li>
+                <li><code>appframework.min.js</code> atau <code>appframework.js</code>: Berkas JavaScript inti AFUI.</li>
+                <li><code>appframework.ui.min.js</code> atau <code>appframework.ui.js</code>: Berkas JavaScript untuk komponen UI AFUI.</li>
+                <li>Opsional: <code>appframework.plugins.min.js</code> atau berkas plugin individual jika Anda membutuhkan fungsionalitas tambahan.</li>
+                <li>Opsional: <code>zepto.min.js</code> atau <code>jquery.min.js</code>: AFUI sering bergantung pada Zepto.js (versi ringan dari jQuery) untuk manipulasi DOM.</li>
+            </ul>
+            <p>Disarankan untuk menggunakan versi minifikasi (<code>.min.js</code> dan <code>.min.css</code>) untuk lingkungan produksi guna mengoptimalkan performa.</p>
+
+            <h3>Langkah 2: Struktur Direktori Proyek</h3>
+            <p>Setelah mengunduh, buat struktur direktori dasar untuk proyek Anda. Sebuah struktur umum mungkin terlihat seperti ini:</p>
+            <pre><code>
+my-afui-app/
+├── index.html
+├── css/
+│   ├── appframework.min.css
+│   ├── appframework.theme.min.css
+│   └── custom.css (untuk gaya kustom Anda)
+└── js/
+    ├── zepto.min.js (atau jquery.min.js)
+    ├── appframework.min.js
+    ├── appframework.ui.min.js
+    └── app.js (untuk logika JavaScript kustom Anda)
+            </code></pre>
+
+            <h3>Langkah 3: Menyiapkan Berkas HTML Dasar (index.html)</h3>
+            <p>Ini adalah bagian terpenting dari konfigurasi awal. Berkas <code>index.html</code> Anda akan menjadi kerangka aplikasi. Berikut adalah struktur dasar yang perlu Anda ikuti:</p>
+            <pre><code class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui"&gt;
+    &lt;meta name="apple-mobile-web-app-capable" content="yes"&gt;
+    &lt;meta name="apple-mobile-web-app-status-bar-style" content="black"&gt;
+    &lt;title&gt;Aplikasi AFUI Saya&lt;/title&gt;
+
+    &lt;!-- AFUI CSS --&gt;
+    &lt;link rel="stylesheet" href="css/appframework.min.css"&gt;
+    &lt;!-- Pilih tema (misal: iOS, Android, atau kustom Anda) --&gt;
+    &lt;link rel="stylesheet" href="css/appframework.ios.min.css"&gt;
+    &lt;!-- Gaya kustom Anda --&gt;
+    &lt;link rel="stylesheet" href="css/custom.css"&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;!-- Area untuk konten aplikasi Anda --&gt;
+    &lt;div id="afui"&gt;
+        &lt;!-- Halaman utama --&gt;
+        &lt;div class="panel" data-role="panel" id="main" data-title="Beranda"&gt;
+            &lt;header&gt;
+                &lt;h1&gt;Aplikasi AFUI&lt;/h1&gt;
+            &lt;/header&gt;
+            &lt;div class="content"&gt;
+                &lt;p&gt;Selamat datang di aplikasi AFUI pertama Anda!&lt;/p&gt;
+                &lt;a href="#about" class="button"&gt;Tentang Kami&lt;/a&gt;
+            &lt;/div&gt;
+            &lt;footer&gt;
+                &lt;p&gt;&amp;copy; Aplikasi Saya&lt;/p&gt;
+            &lt;/footer&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Halaman lainnya --&gt;
+        &lt;div class="panel" data-role="panel" id="about" data-title="Tentang" data-hash="about"&gt;
+            &lt;header&gt;
+                &lt;a href="#main" class="backButton"&gt;Kembali&lt;/a&gt;
+                &lt;h1&gt;Tentang&lt;/h1&gt;
+            &lt;/header&gt;
+            &lt;div class="content"&gt;
+                &lt;p&gt;Ini adalah halaman tentang aplikasi.&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- AFUI JavaScript --&gt;
+    &lt;script src="js/zepto.min.js"&gt;&lt;/script&gt;
+    &lt;script src="js/appframework.min.js"&gt;&lt;/script&gt;
+    &lt;script src="js/appframework.ui.min.js"&gt;&lt;/script&gt;
+    &lt;!-- Skrip kustom aplikasi Anda --&gt;
+    &lt;script src="js/app.js"&gt;&lt;/script&gt;
+    
+    &lt;script&gt;
+        // Inisialisasi AFUI setelah DOM siap
+        $.ui.autoLaunch = false; // Mencegah AFUI meluncurkan sendiri secara otomatis
+        $(document).ready(function(){
+            $.ui.launch(); // Luncurkan AFUI secara manual
+        });
+        
+        // Untuk proyek Cordova/PhoneGap, inisialisasi di event 'deviceready'
+        document.addEventListener("deviceready", function(){
+            // $.ui.launch(); // Jalankan jika $.ui.autoLaunch = false;
+        }, false);
+    &lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+            </code></pre>
+
+            <p><strong>Penjelasan Kode:</strong></p>
+            <ul>
+                <li><strong>Meta Tags:</strong>
+                    <ul>
+                        <li><code>charset="UTF-8"</code>: Menjamin karakter ditampilkan dengan benar.</li>
+                        <li><code>viewport</code>: Sangat penting untuk responsivitas mobile. Pengaturan ini memastikan halaman mengambil lebar perangkat dan mencegah <em>zooming</em> yang tidak diinginkan.</li>
+                        <li><code>apple-mobile-web-app-capable</code> &amp; <code>apple-mobile-web-app-status-bar-style</code>: Ini adalah meta tag khusus iOS yang memungkinkan aplikasi web Anda terlihat dan terasa seperti aplikasi <em>native</em> saat ditambahkan ke layar utama (home screen) perangkat iOS.</li>
+                    </ul>
+                </li>
+                <li><strong>Link CSS:</strong>
+                    <ul>
+                        <li>Anda perlu menyertakan berkas CSS dasar AFUI (<code>appframework.min.css</code>) dan berkas tema (misalnya, <code>appframework.ios.min.css</code> atau <code>appframework.android.min.css</code>). Pilih tema yang paling sesuai dengan target audiens atau preferensi desain Anda.</li>
+                        <li><code>custom.css</code> adalah tempat Anda akan menambahkan gaya Anda sendiri untuk menimpa atau memperluas gaya AFUI.</li>
+                    </ul>
+                </li>
+                <li><strong>Struktur Body:</strong>
+                    <ul>
+                        <li>Semua konten aplikasi AFUI Anda harus berada di dalam elemen dengan ID <code>afui</code>.</li>
+                        <li>AFUI menggunakan konsep <code>panel</code> (sering disebut sebagai "halaman") untuk setiap layar dalam aplikasi Anda. Setiap panel harus memiliki <code>data-role="panel"</code> dan ID unik.</li>
+                        <li>Setiap <code>panel</code> biasanya berisi <code>header</code>, <code>content</code>, dan <code>footer</code>, meskipun tidak semua harus ada di setiap panel.</li>
+                        <li><code>header</code>: Berisi judul halaman, tombol kembali (<code>backButton</code>), atau tombol navigasi lainnya.</li>
+                        <li><code>content</code>: Area utama di mana konten aplikasi Anda ditampilkan. Ini akan memiliki kemampuan <em>scrolling</em> bawaan jika konten melebihi tinggi layar.</li>
+                        <li><code>footer</code>: Area bawah halaman, sering digunakan untuk navigasi tab atau informasi hak cipta.</li>
+                        <li>Link antar halaman menggunakan atribut <code>href="#id_panel"</code>. AFUI akan secara otomatis menangani transisi.</li>
+                    </ul>
+                </li>
+                <li><strong>Link JavaScript:</strong>
+                    <ul>
+                        <li>Urutan sangat penting:
+                            <ol>
+                                <li><strong>Zepto.js (atau jQuery):</strong> AFUI bergantung padanya, jadi harus dimuat terlebih dahulu.</li>
+                                <li><strong>appframework.min.js:</strong> Berkas JavaScript inti AFUI.</li>
+                                <li><strong>appframework.ui.min.js:</strong> Berkas JavaScript yang berisi logika untuk komponen UI.</li>
+                                <li><strong>app.js:</strong> Berkas skrip kustom Anda, di mana Anda akan menulis logika aplikasi.</li>
+                            </ol>
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>Inisialisasi AFUI:</strong>
+                    <ul>
+                        <li>AFUI perlu diinisialisasi setelah DOM siap. Cara paling umum adalah menggunakan <code>$(document).ready(function(){ $.ui.launch(); });</code> jika Anda menggunakan Zepto/jQuery.</li>
+                        <li>Untuk aplikasi Cordova/PhoneGap, inisialisasi harus dilakukan di dalam <code>document.addEventListener("deviceready", function(){ ... }, false);</code> untuk memastikan semua plugin Cordova sudah dimuat. Anda bisa mengatur <code>$.ui.autoLaunch = false;</code> untuk mengontrol peluncuran secara manual.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <p>Dengan struktur dasar ini, Anda sudah memiliki aplikasi AFUI minimal yang dapat berjalan di browser atau dibungkus sebagai aplikasi <em>hybrid</em> menggunakan Cordova. Anda sekarang siap untuk mulai menambahkan komponen UI dan fungsionalitas yang lebih kompleks.</p>
+        </section>
+
+        <section>
+            <h2>Konsep Inti AFUI: Membangun Navigasi dan Tata Letak</h2>
+            <p>AFUI dibangun di atas beberapa konsep inti yang mendefinisikan cara aplikasi diorganisasikan dan bagaimana pengguna berinteraksi dengannya. Memahami konsep-konsep ini sangat penting untuk membangun aplikasi yang efisien dan mudah dinavigasi. Bagian ini akan membahas komponen-komponen struktural utama AFUI: Pages (Panel), Transisi, dan Tata Letak Dasar (Header, Content, Footer).</p>
+
+            <h3>Pages (Panel): Unit Konten Utama</h3>
+            <p>Di AFUI, setiap "layar" atau tampilan dalam aplikasi Anda direpresentasikan sebagai sebuah <code>panel</code>. Ini adalah elemen <code>&lt;div&gt;</code> yang memiliki atribut <code>data-role="panel"</code> dan ID unik. Hanya satu panel yang terlihat pada satu waktu, dan AFUI mengelola perpindahan antar panel dengan transisi yang halus.</p>
+            <pre><code class="language-html">
+&lt;!-- Panel Beranda --&gt;
+&lt;div class="panel" data-role="panel" id="homePage" data-title="Beranda"&gt;
+    &lt;header&gt;&lt;h1&gt;Beranda&lt;/h1&gt;&lt;/header&gt;
+    &lt;div class="content"&gt;
+        &lt;p&gt;Konten halaman beranda.&lt;/p&gt;
+        &lt;a href="#aboutPage"&gt;Ke Halaman Tentang&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Panel Tentang --&gt;
+&lt;div class="panel" data-role="panel" id="aboutPage" data-title="Tentang"&gt;
+    &lt;header&gt;
+        &lt;a href="#homePage" class="backButton"&gt;Kembali&lt;/a&gt;
+        &lt;h1&gt;Tentang Kami&lt;/h1&gt;
+    &lt;/header&gt;
+    &lt;div class="content"&gt;
+        &lt;p&gt;Informasi lebih lanjut tentang aplikasi ini.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+            </code></pre>
+            <p><strong>Fitur Penting Panel:</strong></p>
+            <ul>
+                <li><code>id</code>: ID unik untuk merujuk panel ini, terutama saat navigasi.</li>
+                <li><code>data-title</code>: Digunakan oleh AFUI untuk secara otomatis mengatur judul di header panel.</li>
+                <li><code>data-role="panel"</code>: Mengidentifikasi elemen ini sebagai panel AFUI.</li>
+                <li><code>data-load</code>, <code>data-unload</code>, <code>data-refresh</code>: Atribut opsional untuk memuat konten eksternal atau menjalankan skrip saat panel dimuat/dibongkar/di-<em>refresh</em>.</li>
+            </ul>
+
+            <h3>Transisi Halaman: Memberikan Pengalaman Native</h3>
+            <p>Salah satu aspek yang paling menonjol dari AFUI adalah transisi halaman yang halus, yang membuat aplikasi terasa lebih responsif dan <em>native</em>. Anda dapat menentukan jenis transisi yang digunakan saat berpindah antar panel menggunakan atribut <code>data-transition</code> pada tautan atau tombol.</p>
+            <pre><code class="language-html">
+&lt;a href="#nextPage" data-transition="slide"&gt;Geser ke Halaman Berikutnya&lt;/a&gt;
+&lt;a href="#otherPage" data-transition="fade"&gt;Pudar ke Halaman Lain&lt;/a&gt;
+            </code></pre>
+            <p><strong>Jenis Transisi yang Umum:</strong></p>
+            <ul>
+                <li><code>slide</code>: Halaman baru meluncur dari samping. (Default)</li>
+                <li><code>slideup</code>: Halaman baru meluncur dari bawah.</li>
+                <li><code>slidedown</code>: Halaman baru meluncur dari atas.</li>
+                <li><code>fade</code>: Halaman baru memudar masuk.</li>
+                <li><code>pop</code>: Halaman baru muncul dengan efek <em>pop</em>.</li>
+                <li><code>flip</code>: Halaman berputar seperti kartu.</li>
+            </ul>
+            <p>Anda juga dapat mengontrol transisi secara JavaScript menggunakan <code>$.ui.loadContent("#id_panel", false, false, "slide")</code>.</p>
+
+            <h3>Tata Letak Dasar: Header, Content, dan Footer</h3>
+            <p>Setiap panel AFUI umumnya mengikuti struktur tata letak dasar yang terdiri dari <code>header</code>, <code>content</code>, dan <code>footer</code>. Struktur ini membantu dalam mengatur konten dan navigasi aplikasi secara konsisten.</p>
+
+            <h4>Header</h4>
+            <p>Elemen <code>&lt;header&gt;</code> biasanya terletak di bagian atas panel dan berisi judul halaman, tombol kembali, atau tombol tindakan lainnya.</p>
+            <pre><code class="language-html">
+&lt;header&gt;
+    &lt;a href="#main" class="backButton"&gt;Kembali&lt;/a&gt; &lt;!-- Tombol kembali otomatis AFUI --&gt;
+    &lt;h1&gt;Judul Halaman&lt;/h1&gt;
+    &lt;a href="#settings" class="button icon gear"&gt;&lt;/a&gt; &lt;!-- Contoh tombol aksi --&gt;
+&lt;/header&gt;
+            </code></pre>
+            <ul>
+                <li><code>backButton</code>: Kelas khusus AFUI yang, saat diterapkan pada tautan, akan secara otomatis mengarahkan pengguna kembali ke panel sebelumnya.</li>
+                <li>Isi <code>&lt;h1&gt;</code> akan secara otomatis diperbarui dengan nilai <code>data-title</code> dari panel, jika tidak ada teks lain yang ditentukan.</li>
+            </ul>
+
+            <h4>Content</h4>
+            <p>Elemen <code>&lt;div class="content"&gt;</code> adalah area utama di mana semua konten spesifik halaman Anda ditempatkan. AFUI secara otomatis akan membuat area ini dapat di-<em>scroll</em> jika kontennya melebihi tinggi layar.</p>
+            <pre><code class="language-html">
+&lt;div class="content"&gt;
+    &lt;p&gt;Ini adalah area di mana teks, gambar, formulir, dan komponen UI lainnya ditempatkan.&lt;/p&gt;
+    &lt;p&gt;AFUI akan menangani scrolling secara otomatis jika konten melebihi tinggi yang tersedia.&lt;/p&gt;
+&lt;/div&gt;
+            </code></pre>
+            <p>Penting untuk menempatkan semua konten yang dapat di-<em>scroll</em> di dalam <code>.content</code> agar fungsionalitas <em>scrolling</em> AFUI bekerja dengan benar.</p>
+
+            <h4>Footer</h4>
+            <p>Elemen <code>&lt;footer&gt;</code> biasanya terletak di bagian bawah panel dan sering digunakan untuk navigasi tab, tombol tindakan utama, atau informasi tambahan.</p>
+            <pre><code class="language-html">
+&lt;footer&gt;
+    &lt;nav&gt;
+        &lt;a href="#home" class="icon home"&gt;Beranda&lt;/a&gt;
+        &lt;a href="#messages" class="icon message"&gt;Pesan&lt;/a&gt;
+        &lt;a href="#profile" class="icon user"&gt;Profil&lt;/a&gt;
+    &lt;/nav&gt;
+&lt;/footer&gt;
+            </code></pre>
+            <ul>
+                <li>Footer dapat berisi navigasi tab, seperti yang ditunjukkan di atas, menggunakan kelas <code>icon</code> untuk menampilkan ikon.</li>
+                <li>AFUI juga dapat mengelola footer tetap (fixed footer) yang tidak ikut di-<em>scroll</em>.</li>
+            </ul>
+
+            <p>Memahami dan menerapkan struktur dasar ini dengan benar adalah langkah pertama untuk membangun aplikasi AFUI yang terorganisir, intuitif, dan memiliki performa yang baik. Dengan panel, transisi, serta header, content, dan footer, Anda memiliki semua alat yang Anda butuhkan untuk membuat fondasi UI aplikasi web mobile Anda.</p>
+
+            <figure>
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="100" height="100">
+                    <title>Struktur Tata Letak Aplikasi AFUI</title>
+                    <rect x="10" y="5" width="80" height="90" rx="8" ry="8" fill="#F8F8F8" stroke="#ccc" stroke-width="1"/>
+                    <rect x="10" y="5" width="80" height="15" rx="8" ry="8" fill="#D1E9E9" stroke="#9AD3D3" stroke-width="1"/>
+                    <text x="50" y="14" font-family="Arial" font-size="6" fill="#333" text-anchor="middle">HEADER</text>
+                    <rect x="10" y="20" width="80" height="60" fill="#FFFFFF"/>
+                    <text x="50" y="50" font-family="Arial" font-size="6" fill="#666" text-anchor="middle">CONTENT AREA</text>
+                    <rect x="10" y="80" width="80" height="15" rx="8" ry="8" fill="#D1E9E9" stroke="#9AD3D3" stroke-width="1"/>
+                    <text x="50" y="89" font-family="Arial" font-size="6" fill="#333" text-anchor="middle">FOOTER</text>
+                </svg>
+                <figcaption>Diagram yang menunjukkan struktur dasar Header, Content, dan Footer dalam sebuah panel AFUI.</figcaption>
+            </figure>
+        </section>
+
+        <section>
+            <h2>Komponen UI AFUI: Membangun Antarmuka Interaktif</h2>
+            <p>AFUI menyediakan beragam komponen UI yang dirancang untuk mempercepat pengembangan dan memberikan tampilan <em>native</em>. Bagian ini akan menjelajahi komponen-komponen utama AFUI, memberikan contoh kode dan penjelasan tentang penggunaannya.</p>
+
+            <h3>Daftar (Lists)</h3>
+            <p>Daftar adalah salah satu komponen paling fundamental dalam aplikasi mobile. AFUI menyediakan berbagai jenis daftar yang responsif dan fungsional, dari daftar sederhana hingga yang lebih kompleks dengan ikon dan fungsionalitas <em>swipe</em>.</p>
+
+            <h4>Daftar Sederhana</h4>
+            <p>Untuk membuat daftar sederhana, gunakan elemen <code>&lt;ul&gt;</code> dengan atribut <code>data-role="list"</code>.</p>
+            <pre><code class="language-html">
+&lt;ul data-role="list"&gt;
+    &lt;li&gt;Item Daftar Pertama&lt;/li&gt;
+    &lt;li&gt;Item Daftar Kedua&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Item Daftar dengan Tautan&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+            </code></pre>
+
+            <h4>Daftar dengan Ikon dan Keterangan</h4>
+            <p>Anda dapat menambahkan ikon dan teks tambahan (seperti keterangan atau jumlah) ke item daftar.</p>
+            <pre><code class="language-html">
+&lt;ul data-role="list"&gt;
+    &lt;li&gt;
+        &lt;a href="#"&gt;
+            &lt;div class="icon home"&gt;&lt;/div&gt; &lt;!-- Contoh ikon --&gt;
+            Beranda
+            &lt;div class="afR"&gt; &lt;!-- afR untuk teks di kanan --&gt;
+                &lt;span class="badge"&gt;5&lt;/span&gt; &lt;!-- Badge notifikasi --&gt;
+            &lt;/div&gt;
+        &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href="#"&gt;
+            &lt;div class="icon user"&gt;&lt;/div&gt;
+            Profil Pengguna
+            &lt;div class="afR"&gt;
+                &lt;span class="count"&gt;Lihat&lt;/span&gt;
+            &lt;/div&gt;
+        &lt;/a&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+            </code></pre>
+            <p>AFUI menyediakan serangkaian kelas <code>icon</code> bawaan. Anda juga bisa mengintegrasikan ikon dari pustaka lain seperti Font Awesome.</p>
+
+            <h4>Daftar Terkelompok (Grouped Lists) dan Pembagi Daftar (List Dividers)</h4>
+            <p>Untuk mengelompokkan item daftar dan menambahkan pembagi yang berfungsi sebagai judul bagian, gunakan <code>data-role="grouped-list"</code> pada <code>&lt;ul&gt;</code> dan <code>data-role="list-divider"</code> pada <code>&lt;li&gt;</code>.</p>
+            <pre><code class="language-html">
+&lt;ul data-role="grouped-list"&gt;
+    &lt;li data-role="list-divider"&gt;Kategori A&lt;/li&gt;
+    &lt;li&gt;Item A1&lt;/li&gt;
+    &lt;li&gt;Item A2&lt;/li&gt;
+    &lt;li data-role="list-divider"&gt;Kategori B&lt;/li&gt;
+    &lt;li&gt;Item B1&lt;/li&gt;
+    &lt;li&gt;Item B2&lt;/li&gt;
+&lt;/ul&gt;
+            </code></pre>
+
+            <h4>Daftar dengan Aksi Swipe (Swipe Lists)</h4>
+            <p>Salah satu fitur interaktif AFUI adalah daftar yang dapat di-<em>swipe</em> untuk menampilkan tombol aksi.</p>
+            <pre><code class="language-html">
+&lt;ul data-role="list"&gt;
+    &lt;li data-role="collapsible" data-theme="b"&gt; &lt;!-- data-role="collapsible" untuk swipe --&gt;
+        &lt;a href="#"&gt;Item dengan Swipe Aksi&lt;/a&gt;
+        &lt;div class="afR"&gt;
+            &lt;a href="#" class="button red"&gt;Hapus&lt;/a&gt;
+            &lt;a href="#" class="button blue"&gt;Edit&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/li&gt;
+    &lt;li data-role="collapsible" data-theme="b"&gt;
+        &lt;a href="#"&gt;Item lainnya&lt;/a&gt;
+        &lt;div class="afR"&gt;
+            &lt;a href="#" class="button green"&gt;Arsip&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+            </code></pre>
+            <p>Atribut <code>data-role="collapsible"</code> pada <code>&lt;li&gt;</code> memungkinkan fungsionalitas <em>swipe</em>. Tombol aksi ditempatkan dalam <code>&lt;div class="afR"&gt;</code>.</p>
+
+            <h3>Formulir (Forms) dan Input</h3>
+            <p>AFUI menyediakan gaya yang konsisten untuk elemen formulir standar, membuatnya terlihat <em>native</em>.</p>
+
+            <h4>Input Teks</h4>
+            <pre><code class="language-html">
+&lt;div class="input-group"&gt;
+    &lt;label for="username"&gt;Nama Pengguna:&lt;/label&gt;
+    &lt;input type="text" id="username" placeholder="Masukkan nama pengguna"&gt;
+&lt;/div&gt;
+&lt;div class="input-group"&gt;
+    &lt;label for="password"&gt;Kata Sandi:&lt;/label&gt;
+    &lt;input type="password" id="password" placeholder="Masukkan kata sandi"&gt;
+&lt;/div&gt;
+            </code></pre>
+            <p>Gunakan <code>&lt;div class="input-group"&gt;</code> untuk membungkus label dan input agar gaya AFUI diterapkan dengan benar.</p>
+
+            <h4>Tombol (Buttons)</h4>
+            <p>Tombol dapat dibuat menggunakan <code>&lt;a&gt;</code> atau <code>&lt;button&gt;</code> dengan kelas <code>button</code>.</p>
+            <pre><code class="language-html">
+&lt;a href="#" class="button"&gt;Tombol Standar&lt;/a&gt;
+&lt;button class="button red"&gt;Tombol Aksi Penting&lt;/button&gt;
+&lt;a href="#" class="button green icon check"&gt;Simpan&lt;/a&gt; &lt;!-- Tombol dengan ikon --&gt;
+            </code></pre>
+            <p>Anda bisa menambahkan kelas warna seperti <code>red</code>, <code>green</code>, <code>blue</code>, dll., serta kelas <code>icon</code> untuk menambahkan ikon.</p>
+
+            <h4>Toggle Switch</h4>
+            <p>Input <em>checkbox</em> dapat diubah menjadi <em>toggle switch</em> bergaya <em>native</em>.</p>
+            <pre><code class="language-html">
+&lt;div class="input-group"&gt;
+    &lt;label for="notifications"&gt;Notifikasi:&lt;/label&gt;
+    &lt;input type="checkbox" id="notifications" data-role="toggle"&gt;
+&lt;/div&gt;
+            </code></pre>
+            <p>Atribut <code>data-role="toggle"</code> pada <code>&lt;input type="checkbox"&gt;</code> adalah kuncinya.</p>
+
+            <h4>Checkbox dan Radio Button</h4>
+            <p>AFUI juga menyediakan gaya kustom untuk <em>checkbox</em> dan <em>radio button</em> standar.</p>
+            <pre><code class="language-html">
+&lt;div class="input-group"&gt;
+    &lt;label&gt;
+        &lt;input type="checkbox" name="option1"&gt; Opsi 1
+    &lt;/label&gt;
+    &lt;label&gt;
+        &lt;input type="checkbox" name="option2" checked&gt; Opsi 2
+    &lt;/label&gt;
+&lt;/div&gt;
+
+&lt;div class="input-group"&gt;
+    &lt;label&gt;
+        &lt;input type="radio" name="gender" value="male"&gt; Pria
+    &lt;/label&gt;
+    &lt;label&gt;
+        &lt;input type="radio" name="gender" value="female" checked&gt; Wanita
+    &lt;/label&gt;
+&lt;/div&gt;
+            </code></pre>
+
+            <h4>Textarea dan Select</h4>
+            <p>Elemen <code>&lt;textarea&gt;</code> dan <code>&lt;select&gt;</code> juga mendapatkan gaya yang ditingkatkan.</p>
+            <pre><code class="language-html">
+&lt;div class="input-group"&gt;
+    &lt;label for="message"&gt;Pesan Anda:&lt;/label&gt;
+    &lt;textarea id="message" rows="4" placeholder="Tulis pesan di sini..."&gt;&lt;/textarea&gt;
+&lt;/div&gt;
+
+&lt;div class="input-group"&gt;
+    &lt;label for="country"&gt;Pilih Negara:&lt;/label&gt;
+    &lt;select id="country"&gt;
+        &lt;option value="id"&gt;Indonesia&lt;/option&gt;
+        &lt;option value="my"&gt;Malaysia&lt;/option&gt;
+        &lt;option value="sg"&gt;Singapura&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;
+            </code></pre>
+
+            <h3>Modals dan Popups</h3>
+            <p>Modals dan popups adalah elemen UI penting untuk menampilkan informasi penting atau meminta input pengguna tanpa menavigasi ke halaman baru.</p>
+            <pre><code class="language-html">
+&lt;!-- Tombol untuk membuka modal --&gt;
+&lt;a href="#myModal" data-modal='true' class="button"&gt;Buka Modal&lt;/a&gt;
+
+&lt;!-- Struktur Modal --&gt;
+&lt;div id="myModal" class="modal"&gt;
+    &lt;div class="modal-dialog"&gt;
+        &lt;div class="modal-content"&gt;
+            &lt;div class="modal-header"&gt;
+                &lt;h3 class="modal-title"&gt;Judul Modal&lt;/h3&gt;
+            &lt;/div&gt;
+            &lt;div class="modal-body"&gt;
+                &lt;p&gt;Ini adalah konten modal. Anda bisa menempatkan informasi atau formulir di sini.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="modal-footer"&gt;
+                &lt;a href="#" class="button modal-close"&gt;Tutup&lt;/a&gt;
+                &lt;a href="#" class="button primary"&gt;Aksi&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+            </code></pre>
+            <p>Atribut <code>data-modal='true'</code> pada tautan akan secara otomatis membuka modal yang ditunjuk oleh <code>href</code>. Kelas <code>modal-close</code> akan menutup modal.</p>
+
+            <h3>Side Panels (Drawer / Hamburger Menu)</h3>
+            <p>Panel samping sering digunakan untuk navigasi utama atau menu pengaturan yang tersembunyi. AFUI mendukung panel samping kiri dan kanan.</p>
+            <pre><code class="language-html">
+&lt;!-- Panel Kiri --&gt;
+&lt;div id="leftPanel" data-role="panel" data-position="left" data-display="reveal"&gt;
+    &lt;header&gt;&lt;h1&gt;Menu&lt;/h1&gt;&lt;/header&gt;
+    &lt;div class="content"&gt;
+        &lt;ul data-role="list"&gt;
+            &lt;li&gt;&lt;a href="#homePage" class="close-panel"&gt;Beranda&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#messagesPage" class="close-panel"&gt;Pesan&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#settingsPage" class="close-panel"&gt;Pengaturan&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Tombol untuk membuka panel --&gt;
+&lt;a href="#leftPanel" class="button icon menu"&gt;&lt;/a&gt;
+            </code></pre>
+            <ul>
+                <li><code>data-position="left"</code> atau <code>"right"</code>: Menentukan posisi panel.</li>
+                <li><code>data-display="reveal"</code> atau <code>"overlay"</code>: Menentukan bagaimana panel ditampilkan (menggeser konten atau menumpuk di atasnya).</li>
+                <li>Kelas <code>close-panel</code> pada tautan di dalam panel akan menutup panel saat diklik.</li>
+            </ul>
+
+            <h3>Grid System</h3>
+            <p>AFUI menyertakan sistem grid sederhana untuk membuat tata letak responsif.</p>
+            <pre><code class="language-html">
+&lt;div class="grid"&gt;
+    &lt;div class="col" style="width: 50%"&gt;Kolom 1 (50%)&lt;/div&gt;
+    &lt;div class="col" style="width: 50%"&gt;Kolom 2 (50%)&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="grid"&gt;
+    &lt;div class="col" style="width: 33%"&gt;Kolom A (33%)&lt;/div&gt;
+    &lt;div class="col" style="width: 67%"&gt;Kolom B (67%)&lt;/div&gt;
+&lt;/div&gt;
+            </code></pre>
+            <p>Gunakan <code>&lt;div class="grid"&gt;</code> sebagai pembungkus dan <code>&lt;div class="col"&gt;</code> untuk kolom, dengan lebar yang ditentukan oleh CSS <code>width</code> inline atau kelas kustom.</p>
+
+            <h3>Progress Indicators (Spinners)</h3>
+            <p>Spinners digunakan untuk menunjukkan bahwa proses sedang berlangsung.</p>
+            <pre><code class="language-html">
+&lt;div class="loader"&gt;&lt;/div&gt; &lt;!-- Spinner default --&gt;
+&lt;div class="loader white"&gt;&lt;/div&gt; &lt;!-- Spinner putih untuk latar gelap --&gt;
+            </code></pre>
+            <p>AFUI menyediakan gaya untuk kelas <code>loader</code> yang menampilkan indikator putar.</p>
+
+            <h3>Action Sheets</h3>
+            <p>Action sheets adalah pop-up kontekstual yang muncul dari bawah layar, menyediakan serangkaian pilihan atau tindakan kepada pengguna. Ini umum di perangkat iOS.</p>
+            <pre><code class="language-html">
+&lt;!-- Tombol untuk membuka Action Sheet --&gt;
+&lt;a href="#" class="button" id="openActionSheet"&gt;Buka Action Sheet&lt;/a&gt;
+
+&lt;!-- JavaScript untuk memicu Action Sheet --&gt;
+&lt;script&gt;
+    $(document).ready(function() {
+        $("#openActionSheet").on("click", function() {
+            $.ui.actionsheet([
+                { text: "Pilihan 1", handler: function() { alert("Pilihan 1 dipilih!"); } },
+                { text: "Pilihan 2", handler: function() { alert("Pilihan 2 dipilih!"); } },
+                { text: "Batal", handler: function() { $.ui.actionsheet({ cancelOnly: true }); } }
+            ]);
+        });
+    });
+&lt;/script&gt;
+            </code></pre>
+            <p>Action sheets biasanya diinisialisasi melalui JavaScript menggunakan <code>$.ui.actionsheet()</code>, di mana Anda dapat mendefinisikan array objek yang mewakili tombol-tombol aksi dan fungsi <em>handler</em>-nya.</p>
+
+            <figure>
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="100" height="100">
+                    <title>Ilustrasi Komponen UI Mobile</title>
+                    <rect x="10" y="5" width="80" height="90" rx="8" ry="8" fill="#F0F8FF" stroke="#A9D0F5" stroke-width="1"/>
+                    
+                    <!-- Header -->
+                    <rect x="10" y="5" width="80" height="10" rx="8" ry="8" fill="#B3E0F2"/>
+                    <path d="M15 10 L20 10 L20 12 L15 12 Z" fill="#333"/>
+                    <rect x="15" y="10" width="2" height="2" fill="#333"/>
+                    <text x="50" y="12" font-family="Arial" font-size="5" fill="#333" text-anchor="middle">Header</text>
+
+                    <!-- List Items -->
+                    <rect x="12" y="20" width="76" height="8" rx="2" ry="2" fill="#E8F6FA"/>
+                    <circle cx="17" cy="24" r="2" fill="#66B2FF"/>
+                    <text x="22" y="25" font-family="Arial" font-size="4" fill="#333">Item Daftar 1</text>
+                    
+                    <rect x="12" y="30" width="76" height="8" rx="2" ry="2" fill="#E8F6FA"/>
+                    <circle cx="17" cy="34" r="2" fill="#66B2FF"/>
+                    <text x="22" y="35" font-family="Arial" font-size="4" fill="#333">Item Daftar 2</text>
+
+                    <!-- Toggle Switch -->
+                    <text x="15" y="47" font-family="Arial" font-size="4" fill="#333">Pengaturan:</text>
+                    <rect x="70" y="44" width="10" height="6" rx="3" ry="3" fill="#A7D9F5"/>
+                    <circle cx="76" cy="47" r="2.5" fill="#FFF"/>
+
+                    <!-- Button -->
+                    <rect x="30" y="55" width="40" height="8" rx="4" ry="4" fill="#3F8FBD"/>
+                    <text x="50" y="60" font-family="Arial" font-size="4" fill="#FFF" text-anchor="middle">Tombol Aksi</text>
+
+                    <!-- Input Field -->
+                    <text x="15" y="70" font-family="Arial" font-size="4" fill="#333">Input Teks:</text>
+                    <rect x="30" y="68" width="40" height="7" rx="2" ry="2" fill="#F0F8FF" stroke="#A9D0F5" stroke-width="0.5"/>
+
+                    <!-- Footer -->
+                    <rect x="10" y="85" width="80" height="10" rx="8" ry="8" fill="#B3E0F2"/>
+                    <text x="50" y="91" font-family="Arial" font-size="4" fill="#333" text-anchor="middle">Footer Navigasi</text>
+                </svg>
+                <figcaption>Berbagai komponen UI mobile seperti daftar, toggle, tombol, dan input, yang dapat dibangun dengan AFUI.</figcaption>
+            </figure>
+
+            <p>Ini hanyalah beberapa dari banyak komponen yang disediakan oleh AFUI. Dengan memahami cara menggunakan setiap komponen ini, Anda dapat membangun antarmuka pengguna yang kaya dan interaktif untuk aplikasi web mobile Anda.</p>
+        </section>
+
+        <section>
+            <h2>Pengembangan Lanjutan dengan AFUI: Interaktivitas dan Integrasi</h2>
+            <p>Setelah menguasai dasar-dasar AFUI, langkah selanjutnya adalah menjelajahi fitur-fitur yang lebih canggih untuk menambahkan interaktivitas dinamis dan mengintegrasikan AFUI dengan fungsionalitas aplikasi <em>hybrid</em> Anda. Bagian ini akan membahas bagaimana menggunakan API JavaScript AFUI, mengelola <em>event</em>, dan praktik terbaik untuk performa dan integrasi Cordova.</p>
+
+            <h3>API JavaScript AFUI: Mengendalikan Aplikasi Anda</h3>
+            <p>Meskipun banyak fungsionalitas UI AFUI dapat diaktifkan melalui atribut <code>data-</code> di HTML, AFUI juga menyediakan API JavaScript yang kaya untuk kontrol yang lebih granular dan interaksi dinamis.</p>
+
+            <h4>Navigasi Programatis</h4>
+            <p>Anda dapat mengontrol navigasi antar panel secara programatis menggunakan <code>$.ui.loadContent()</code>.</p>
+            <pre><code class="language-javascript">
+// Navigasi ke panel dengan ID 'otherPage' dengan transisi 'slide'
+$.ui.loadContent("#otherPage", false, false, "slide");
+
+// Navigasi ke halaman eksternal (memuat konten ke dalam panel)
+// Ini juga bisa digunakan untuk memuat data dari API dan menampilkannya
+$.ui.loadContent("externalContent.html", false, false, "fade");
+            </code></pre>
+            <p>Fungsi ini sangat kuat karena memungkinkan Anda memuat konten secara dinamis, bahkan dari sumber eksternal, dan mengintegrasikannya ke dalam alur aplikasi Anda dengan transisi yang diinginkan.</p>
+
+            <h4>Mengelola Panel Samping (Side Panels)</h4>
+            <p>Untuk membuka atau menutup panel samping secara JavaScript:</p>
+            <pre><code class="language-javascript">
+// Membuka panel kiri
+$.ui.toggleSideMenu("left");
+
+// Menutup panel kiri
+$.ui.toggleSideMenu("left", false); // Parameter kedua 'false' untuk menutup
+            </code></pre>
+
+            <h4>Menampilkan Popups dan Modals</h4>
+            <p>Anda dapat memicu <em>popup</em> atau <em>modal</em> secara programatis:</p>
+            <pre><code class="language-javascript">
+// Menampilkan popup sederhana
+$.ui.popup({
+    title: "Notifikasi Penting",
+    message: "Data Anda telah berhasil disimpan.",
+    cancelText: "Tutup",
+    cancelCallback: function() { console.log("Popup ditutup"); }
+});
+
+// Menampilkan popup dengan dua tombol
+$.ui.popup({
+    title: "Konfirmasi Hapus",
+    message: "Apakah Anda yakin ingin menghapus item ini?",
+    cancelText: "Batal",
+    cancelCallback: function() { console.log("Aksi dibatalkan"); },
+    doneText: "Hapus",
+    doneCallback: function() { console.log("Item dihapus!"); },
+    cancelClass: 'button',
+    doneClass: 'button red'
+});
+            </code></pre>
+            <p>Metode <code>$.ui.popup()</code> adalah cara serbaguna untuk menampilkan dialog yang dapat disesuaikan, termasuk dialog konfirmasi dan peringatan.</p>
+
+            <h4>Menampilkan Indikator Loading</h4>
+            <pre><code class="language-javascript">
+// Menampilkan indikator loading
+$.ui.showMask("Memuat data...");
+
+// Menyembunyikan indikator loading
+$.ui.hideMask();
+            </code></pre>
+            <p>Ini sangat berguna saat melakukan operasi jaringan atau tugas berat lainnya untuk memberikan umpan balik visual kepada pengguna.</p>
+
+            <h3>Event Handling di AFUI</h3>
+            <p>AFUI memancarkan berbagai <em>event</em> yang dapat Anda tangani untuk menjalankan logika kustom pada siklus hidup aplikasi atau panel. Ini sangat mirip dengan cara kerja <em>event</em> jQuery.</p>
+            <pre><code class="language-javascript">
+// Event saat panel akan dimuat (sebelum ditampilkan)
+$("#myPanel").on("panelbeforeload", function(e) {
+    console.log("Panel '" + e.target.id + "' akan dimuat.");
+    // Lakukan inisialisasi atau pembersihan sebelum panel ditampilkan
+});
+
+// Event saat panel sudah dimuat dan ditampilkan
+$("#myPanel").on("pageshow", function(e) {
+    console.log("Panel '" + e.target.id + "' sudah ditampilkan.");
+    // Lakukan inisialisasi yang bergantung pada DOM panel
+});
+
+// Event saat panel akan dibongkar (sebelum transisi keluar)
+$("#myPanel").on("panelbeforeunload", function(e) {
+    console.log("Panel '" + e.target.id + "' akan dibongkar.");
+    // Bersihkan listener atau data yang tidak lagi diperlukan
+});
+
+// Event global saat terjadi perubahan hash (URL)
+$(document).on("hashchange", function(e) {
+    console.log("Hash URL berubah menjadi: " + location.hash);
+});
+            </code></pre>
+            <p>Memahami dan memanfaatkan <em>event</em> ini memungkinkan Anda untuk mengelola siklus hidup panel secara efektif, menginisialisasi komponen baru, memuat data dari API, atau membersihkan sumber daya saat panel tidak lagi digunakan.</p>
+
+            <h3>Integrasi dengan Apache Cordova/PhoneGap</h3>
+            <p>Seperti yang telah disebutkan, AFUI dirancang untuk bekerja dengan Cordova. Integrasi ini melibatkan memastikan bahwa inisialisasi AFUI dilakukan pada waktu yang tepat.</p>
+            <pre><code class="language-javascript">
+// Dalam app.js Anda
+document.addEventListener("deviceready", function() {
+    // Ini adalah tempat terbaik untuk menginisialisasi plugin Cordova
+    // dan juga tempat aman untuk meluncurkan AFUI jika autoLaunch dimatikan
+    
+    // Contoh penggunaan plugin Cordova (misal: Cordova-plugin-device)
+    console.log("Perangkat siap! Model perangkat: " + device.model);
+
+    // Pastikan AFUI diluncurkan setelah deviceready
+    if (!$.ui.is
+```
+*(Lanjutan dari jawaban sebelumnya, memecah untuk mematuhi batas karakter. Bagian ini akan melanjutkan konten untuk mencapai target 5000 kata dan menyertakan bagian akhir dari artikel.)*
+
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Panduan lengkap AFUI: Framework UI mobile untuk aplikasi web hybrid yang cepat dan responsif. Pelajari fitur, instalasi, dan implementasi AFUI.">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <title>Panduan Lengkap AFUI: Mengembangkan Aplikasi Web Mobile Cepat</title>
+    <style>
+        /* Desain dasar: Warna sejuk cerah, rapi, mobile-friendly */
+        :root {
+            --primary-blue: hsl(200, 80%, 45%); /* Biru sedang, cerah */
+            --light-blue: hsl(200, 100%, 96%);  /* Biru sangat terang */
+            --dark-blue: hsl(200, 70%, 30%);    /* Biru gelap untuk teks penting */
+            --text-color: #333;                 /* Abu-abu gelap untuk teks umum */
+            --light-gray: #f9f9f9;              /* Abu-abu sangat terang untuk latar belakang blok */
+            --border-color: #e0e0e0;            /* Warna border ringan */
+            --shadow-light: rgba(0, 0, 0, 0.05); /* Bayangan tipis */
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-blue); /* Latar belakang body warna sejuk cerah */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        header {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 2.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 2px 10px var(--shadow-light);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8em;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.2em;
+            margin-top: 0.5rem;
+            opacity: 0.9;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px var(--shadow-light);
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        section {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        h2, h3, h4 {
+            color: var(--dark-blue);
+            font-weight: 600;
+            margin-top: 1.5em;
+            margin-bottom: 0.8em;
+        }
+
+        h2 {
+            font-size: 2.2em;
+            border-bottom: 2px solid var(--primary-blue);
+            padding-bottom: 0.5em;
+            margin-bottom: 1.5em;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 1.6em;
+            color: var(--primary-blue);
+            margin-top: 2em;
+        }
+
+        h4 {
+            font-size: 1.3em;
+            color: var(--dark-blue);
+            margin-top: 1.5em;
+        }
+
+        p {
+            margin-bottom: 1em;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1em;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--dark-blue);
+            text-decoration: underline;
+        }
+
+        code, pre {
+            font-family: 'Fira Code', 'Cascadia Code', 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+            background-color: var(--light-gray);
+            border-radius: 6px;
+        }
+
+        code {
+            padding: 0.2em 0.4em;
+            border: 1px solid var(--border-color);
+            color: #c7254e; /* Warna merah untuk inline code */
+        }
+
+        pre {
+            padding: 1em 1.2em;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            margin-top: 1.5em;
+            margin-bottom: 1.5em;
+            line-height: 1.4;
+            box-shadow: 0 2px 8px var(--shadow-light);
+            white-space: pre-wrap; /* Memungkinkan wrap pada pre */
+            word-wrap: break-word; /* Memastikan kata-kata panjang terpotong */
+        }
+
+        pre code {
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            color: #333;
+        }
+
+        blockquote {
+            background-color: var(--light-blue);
+            border-left: 5px solid var(--primary-blue);
+            margin: 1.5em 0;
+            padding: 1em 1.5em;
+            border-radius: 8px;
+            color: var(--dark-blue);
+            font-style: italic;
+        }
+
+        figure {
+            margin: 2em auto;
+            padding: 1em;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background-color: var(--light-gray);
+            text-align: center;
+            max-width: 80%;
+            box-shadow: 0 2px 10px var(--shadow-light);
+        }
+
+        figure img, figure svg {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        figcaption {
+            margin-top: 0.8em;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+            background-color: var(--dark-blue);
+            color: white;
+            font-size: 0.9em;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header {
+                padding: 2rem 1rem;
+            }
+            header h1 {
+                font-size: 2.2em;
+            }
+            header p {
+                font-size: 1em;
+            }
+            main {
+                margin: 1rem auto;
+                padding: 1.5rem 1rem;
+                border-radius: 0; /* Full width on smaller screens */
+                box-shadow: none;
+            }
+            h2 {
+                font-size: 1.8em;
+                text-align: left;
+                padding-bottom: 0.3em;
+            }
+            h3 {
+                font-size: 1.4em;
+            }
+            h4 {
+                font-size: 1.1em;
+            }
+            pre {
+                padding: 0.8em 1em;
+            }
+            figure {
+                max-width: 100%;
+                padding: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Panduan Lengkap AFUI</h1>
+        <p>Mengembangkan Aplikasi Web Mobile yang Cepat dan Responsif dengan Apache Cordova UI (App Framework UI)</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Pengantar ke AFUI: Fondasi Aplikasi Web Mobile Anda</h2>
+            <p>Dalam dunia pengembangan aplikasi web mobile yang terus berkembang, memilih <em>framework</em> UI yang tepat adalah kunci untuk menciptakan pengalaman pengguna yang mulus dan responsif. AFUI, kependekan dari App Framework UI, adalah salah satu <em>framework</em> yang didesain khusus untuk kebutuhan ini. Berasal dari Apache Cordova UI, AFUI menawarkan serangkaian komponen UI yang ringan namun kuat, dirancang untuk memberikan tampilan dan nuansa aplikasi <em>native</em> pada perangkat mobile, namun dibangun menggunakan teknologi web standar (HTML, CSS, JavaScript).</p>
+
+            <p>AFUI lahir dari kebutuhan untuk menyediakan solusi UI yang efisien bagi pengembang yang bekerja dengan aplikasi <em>hybrid</em>, khususnya mereka yang menggunakan Apache Cordova atau PhoneGap. Tujuannya adalah untuk menjembatani kesenjangan antara pengalaman web tradisional dan ekspektasi pengguna terhadap aplikasi <em>native</em>. Dengan AFUI, pengembang dapat membangun antarmuka pengguna yang menarik dan interaktif, lengkap dengan transisi halaman yang halus, elemen kontrol yang familiar, dan tata letak yang adaptif, tanpa harus mengorbankan performa.</p>
+
+            <p>Meskipun mungkin tidak sepopuler beberapa <em>framework</em> modern lainnya seperti React Native atau Ionic saat ini, AFUI memiliki sejarah panjang dan telah membuktikan kemampuannya sebagai pilihan yang solid untuk proyek-proyek tertentu. Keunggulannya terletak pada jejak kakinya yang kecil, kemudahan integrasi, dan filosofi "sekali tulis, jalankan di mana saja" yang diusungnya. Bagi pengembang yang mencari solusi minimalis namun fungsional untuk aplikasi <em>hybrid</em> atau web mobile yang fokus pada performa dan tampilan <em>native</em>, AFUI tetap menjadi pilihan yang patut dipertimbangkan.</p>
+
+            <p>Artikel ini akan membawa Anda menyelami AFUI secara mendalam. Kita akan membahas arsitektur dasarnya, komponen-komponen utama yang ditawarkannya, cara memulai proyek baru, serta tips dan trik untuk mengoptimalkan aplikasi Anda. Baik Anda seorang pemula yang baru mengenal pengembangan mobile atau pengembang berpengalaman yang mencari alternatif <em>framework</em> UI, panduan ini akan memberikan wawasan yang komprehensif tentang bagaimana AFUI dapat membantu Anda membangun aplikasi web mobile yang luar biasa.</p>
+
+            <figure>
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="100" height="100">
+                    <title>Ilustrasi Konsep Aplikasi Mobile</title>
+                    <rect x="15" y="5" width="70" height="90" rx="10" ry="10" fill="#E0F2F7" stroke="#3F51B5" stroke-width="2"/>
+                    <rect x="25" y="15" width="50" height="6" rx="2" ry="2" fill="#BBDEFB"/>
+                    <rect x="25" y="25" width="50" height="6" rx="2" ry="2" fill="#90CAF9"/>
+                    <rect x="20" y="38" width="60" height="8" rx="2" ry="2" fill="#64B5F6"/>
+                    <rect x="20" y="50" width="60" height="8" rx="2" ry="2" fill="#42A5F5"/>
+                    <rect x="20" y="62" width="60" height="8" rx="2" ry="2" fill="#2196F3"/>
+                    <circle cx="50" cy="84" r="4" fill="#3F51B5"/>
+                </svg>
+                <figcaption>Representasi visual aplikasi mobile dengan elemen UI dasar, mencerminkan tujuan AFUI.</figcaption>
+            </figure>
+        </section>
+
+        <section>
+            <h2>Mengapa Memilih AFUI untuk Proyek Anda?</h2>
+            <p>Dalam lanskap <em>framework</em> pengembangan aplikasi mobile yang ramai, pertanyaan "mengapa memilih AFUI?" adalah valid. AFUI menonjol dengan beberapa karakteristik unik yang membuatnya menjadi pilihan yang menarik, terutama untuk jenis proyek tertentu. Mari kita telaah beberapa alasan utama mengapa AFUI bisa menjadi pilihan yang tepat untuk pengembangan aplikasi web mobile Anda.</p>
+
+            <h3>Performa Optimal dengan Jejak Kaki Kecil</h3>
+            <p>Salah satu daya tarik terbesar AFUI adalah fokusnya pada performa. <em>Framework</em> ini dirancang agar sangat ringan, yang berarti ia membutuhkan lebih sedikit sumber daya sistem dan memuat lebih cepat dibandingkan dengan beberapa <em>framework</em> yang lebih berat. Dalam pengembangan mobile, di mana performa adalah segalanya dan kecepatan muat dapat secara signifikan memengaruhi pengalaman pengguna, jejak kaki yang kecil ini adalah keuntungan besar. AFUI mencapai ini dengan meminimalkan kode JavaScript dan CSS yang diperlukan untuk setiap komponen, memastikan bahwa aplikasi Anda tetap responsif bahkan pada perangkat dengan spesifikasi rendah.</p>
+            <p>AFUI menggunakan pendekatan minimalis dalam desain dan implementasinya. Ini berarti tidak ada beban kode yang tidak perlu yang memperlambat aplikasi Anda. Setiap komponen UI dirancang untuk menjadi seefisien mungkin, dan transisi halaman dioptimalkan untuk memberikan animasi yang halus dan bebas <em>stutter</em>, meniru pengalaman aplikasi <em>native</em> seakurat mungkin. Hal ini sangat krusial untuk aplikasi yang ditargetkan untuk pasar yang luas, di mana pengguna mungkin tidak selalu memiliki perangkat terbaru atau koneksi internet tercepat.</p>
+
+            <h3>Tampilan dan Nuansa Aplikasi Native yang Konsisten</h3>
+            <p>AFUI didesain untuk mereplikasi tampilan dan nuansa (<em>look and feel</em>) aplikasi <em>native</em> iOS dan Android. Ini bukan sekadar masalah estetika; ini tentang menciptakan pengalaman pengguna yang familier dan intuitif. Dengan AFUI, elemen-elemen UI seperti tombol, daftar, <em>toggle switch</em>, dan navigasi dirancang agar terlihat dan berfungsi seperti komponen <em>native</em> yang diharapkan pengguna. Konsistensi ini mengurangi kurva pembelajaran bagi pengguna dan meningkatkan kepuasan secara keseluruhan.</p>
+            <p>Kemampuan untuk menyesuaikan tema memungkinkan pengembang untuk dengan mudah beralih antara gaya iOS dan Android, atau bahkan menciptakan tema kustom yang sesuai dengan <em>branding</em> aplikasi mereka. Ini memberikan fleksibilitas tanpa mengorbankan konsistensi. Transisi halaman yang halus, efek sentuhan, dan responsivitas elemen UI semuanya berkontribusi pada ilusi bahwa pengguna sedang berinteraksi dengan aplikasi <em>native</em> sejati, meskipun sebenarnya dibangun dengan teknologi web.</p>
+
+            <h3>Integrasi Sempurna dengan Apache Cordova/PhoneGap</h3>
+            <p>AFUI secara historis dikembangkan sebagai bagian dari ekosistem Apache Cordova/PhoneGap. Ini berarti bahwa ia dirancang untuk berintegrasi secara mulus dengan proyek-proyek Cordova, memungkinkan pengembang untuk memanfaatkan API perangkat <em>native</em> sambil membangun UI mereka dengan HTML, CSS, dan JavaScript. Integrasi ini sangat kuat karena AFUI dan Cordova berbagi filosofi yang sama: memungkinkan pengembang web untuk membangun aplikasi <em>hybrid</em> yang kuat.</p>
+            <p>Pengembang dapat dengan mudah menggabungkan AFUI ke dalam proyek Cordova mereka, memanfaatkan fitur-fitur seperti akses kamera, GPS, penyimpanan lokal, dan notifikasi <em>push</em>, semuanya di bawah payung antarmuka pengguna yang konsisten dan menarik yang disediakan oleh AFUI. Sinergi antara AFUI dan Cordova mempercepat proses pengembangan dan menyederhanakan manajemen dependensi, karena keduanya dirancang untuk bekerja sama secara harmonis.</p>
+
+            <h3>Sederhana dan Mudah Dipelajari</h3>
+            <p>AFUI memiliki API yang relatif sederhana dan konvensi penamaan yang intuitif. Bagi pengembang web yang sudah terbiasa dengan HTML, CSS, dan JavaScript, mempelajari AFUI tidak memerlukan kurva pembelajaran yang curam. Komponen-komponennya didefinisikan dengan atribut <code>data-role</code> dan kelas CSS yang jelas, membuat kode lebih mudah dibaca dan dipelihara. Ini memungkinkan tim pengembangan untuk segera produktif tanpa harus menghabiskan banyak waktu untuk mempelajari paradigma baru.</p>
+            <p>Dokumentasi yang jelas dan contoh-contoh kode yang disediakan seringkali sudah cukup untuk memahami cara kerja sebagian besar komponen. Pendekatan "markup-driven" (didorong oleh markup) berarti banyak fungsionalitas UI dapat diimplementasikan langsung di HTML tanpa perlu menulis banyak kode JavaScript kustom, meskipun AFUI juga menyediakan API JavaScript yang kaya untuk interaksi yang lebih kompleks. Kesederhanaan ini mengurangi kompleksitas proyek dan memungkinkan pengembang untuk fokus pada logika bisnis aplikasi daripada bergulat dengan implementasi UI.</p>
+
+            <h3>Fleksibilitas dan Kustomisasi</h3>
+            <p>Meskipun AFUI menawarkan tampilan <em>native</em> secara <em>default</em>, ia juga sangat fleksibel dan dapat disesuaikan. Pengembang dapat dengan mudah menimpa gaya CSS bawaan untuk mencocokkan desain merek mereka atau memperluas fungsionalitas komponen menggunakan JavaScript. Struktur CSS AFUI yang terorganisir membuat kustomisasi menjadi tugas yang relatif mudah, memungkinkan pengembang untuk menciptakan pengalaman yang benar-benar unik tanpa harus memulai dari awal.</p>
+            <p>AFUI tidak mengunci pengembang ke dalam satu cara kerja tertentu. Anda dapat menggunakannya sebagai <em>framework</em> UI mandiri untuk proyek web mobile, atau mengintegrasikannya dengan perpustakaan JavaScript lainnya seperti jQuery (atau Zepto.js, yang sering direkomendasikan karena ukurannya yang lebih kecil) untuk manajemen DOM dan AJAX. Kemampuan untuk mengadaptasi AFUI sesuai dengan kebutuhan spesifik proyek dan preferensi tim adalah aset berharga yang meningkatkan produktivitas dan memungkinkan inovasi desain.</p>
+
+            <p>Dengan mempertimbangkan semua poin di atas, AFUI terbukti menjadi pilihan yang solid untuk pengembangan aplikasi web mobile dan <em>hybrid</em>. Kemampuannya untuk memberikan performa tinggi, tampilan <em>native</em>, dan kemudahan penggunaan, menjadikannya alat yang efektif bagi pengembang yang ingin menciptakan aplikasi yang berkualitas tanpa mengorbankan efisiensi.</p>
+        </section>
+
+        <section>
+            <h2>Memulai dengan AFUI: Konfigurasi Awal Proyek Anda</h2>
+            <p>Memulai proyek baru dengan AFUI adalah proses yang relatif mudah, melibatkan pengunduhan berkas yang diperlukan dan menyiapkan struktur HTML dasar. Bagian ini akan memandu Anda melalui langkah-langkah esensial untuk mengkonfigurasi proyek AFUI pertama Anda, memastikan Anda memiliki fondasi yang kokoh untuk pengembangan lebih lanjut.</p>
+
+            <h3>Langkah 1: Mengunduh AFUI</h3>
+            <p>AFUI dapat diunduh dari repositori GitHub resminya atau melalui CDN (Content Delivery Network). Untuk pengembangan lokal, mengunduh berkas adalah metode yang paling umum. Kunjungi <a href="https://github.com/01org/appframework" target="_blank">repositori GitHub AFUI</a> untuk mendapatkan versi terbaru. Anda biasanya akan menemukan berkas CSS dan JavaScript yang dikompilasi di dalam direktori <code>dist</code> atau <code>release</code> setelah mengunduh dan mengekstrak repositori.</p>
+            <p>Berupa berkas yang perlu Anda perhatikan adalah:</p>
+            <ul>
+                <li><code>appframework.min.css</code> atau <code>appframework.css</code>: Berkas CSS utama AFUI.</li>
+                <li><code>appframework.theme.min.css</code> atau <code>appframework.theme.css</code>: Berkas CSS tema (misalnya, iOS atau Android).</li>
+                <li><code>appframework.min.js</code> atau <code>appframework.js</code>: Berkas JavaScript inti AFUI.</li>
+                <li><code>appframework.ui.min.js</code> atau <code>appframework.ui.js</code>: Berkas JavaScript untuk komponen UI AFUI.</li>
+                <li>Opsional: <code>appframework.plugins.min.js</code> atau berkas plugin individual jika Anda membutuhkan fungsionalitas tambahan.</li>
+                <li>Opsional: <code>zepto.min.js</code> atau <code>jquery.min.js</code>: AFUI sering bergantung pada Zepto.js (versi ringan dari jQuery) untuk manipulasi DOM.</li>
+            </ul>
+            <p>Disarankan untuk menggunakan versi minifikasi (<code>.min.js</code> dan <code>.min.css</code>) untuk lingkungan produksi guna mengoptimalkan performa.</p>
+
+            <h3>Langkah 2: Struktur Direktori Proyek</h3>
+            <p>Setelah mengunduh, buat struktur direktori dasar untuk proyek Anda. Sebuah struktur umum mungkin terlihat seperti ini:</p>
+            <pre><code>
+my-afui-app/
+├── index.html
+├── css/
+│   ├── appframework.min.css
+│   ├── appframework.theme.min.css
+│   └── custom.css (untuk gaya kustom Anda)
+└── js/
+    ├── zepto.min.js (atau jquery.min.js)
+    ├── appframework.min.js
+    ├── appframework.ui.min.js
+    └── app.js (untuk logika JavaScript kustom Anda)
+            </code></pre>
+
+            <h3>Langkah 3: Menyiapkan Berkas HTML Dasar (index.html)</h3>
+            <p>Ini adalah bagian terpenting dari konfigurasi awal. Berkas <code>index.html</code> Anda akan menjadi kerangka aplikasi. Berikut adalah struktur dasar yang perlu Anda ikuti:</p>
+            <pre><code class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui"&gt;
+    &lt;meta name="apple-mobile-web-app-capable" content="yes"&gt;
+    &lt;meta name="apple-mobile-web-app-status-bar-style" content="black"&gt;
+    &lt;title&gt;Aplikasi AFUI Saya&lt;/title&gt;
+
+    &lt;!-- AFUI CSS --&gt;
+    &lt;link rel="stylesheet" href="css/appframework.min.css"&gt;
+    &lt;!-- Pilih tema (misal: iOS, Android, atau kustom Anda) --&gt;
+    &lt;link rel="stylesheet" href="css/appframework.ios.min.css"&gt;
+    &lt;!-- Gaya kustom Anda --&gt;
+    &lt;link rel="stylesheet" href="css/custom.css"&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;!-- Area untuk konten aplikasi Anda --&gt;
+    &lt;div id="afui"&gt;
+        &lt;!-- Halaman utama --&gt;
+        &lt;div class="panel" data-role="panel" id="main" data-title="Beranda"&gt;
+            &lt;header&gt;
+                &lt;h1&gt;Aplikasi AFUI&lt;/h1&gt;
+            &lt;/header&gt;
+            &lt;div class="content"&gt;
+                &lt;p&gt;Selamat datang di aplikasi AFUI pertama Anda!&lt;/p&gt;
+                &lt;a href="#about" class="button"&gt;Tentang Kami&lt;/a&gt;
+            &lt;/div&gt;
+            &lt;footer&gt;
+                &lt;p&gt;&amp;copy; Aplikasi Saya&lt;/p&gt;
+            &lt;/footer&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Halaman lainnya --&gt;
+        &lt;div class="panel" data-role="panel" id="about" data-title="Tentang" data-hash="about"&gt;
+            &lt;header&gt;
+                &lt;a href="#main" class="backButton"&gt;Kembali&lt;/a&gt;
+                &lt;h1&gt;Tentang&lt;/h1&gt;
+            &lt;/header&gt;
+            &lt;div class="content"&gt;
+                &lt;p&gt;Ini adalah halaman tentang aplikasi.&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- AFUI JavaScript --&gt;
+    &lt;script src="js/zepto.min.js"&gt;&lt;/script&gt;
+    &lt;script src="js/appframework.min.js"&gt;&lt;/script&gt;
+    &lt;script src="js/appframework.ui.min.js"&gt;&lt;/script&gt;
+    &lt;!-- Skrip kustom aplikasi Anda --&gt;
+    &lt;script src="js/app.js"&gt;&lt;/script&gt;
+    
+    &lt;script&gt;
+        // Inisialisasi AFUI setelah DOM siap
+        $.ui.autoLaunch = false; // Mencegah AFUI meluncurkan sendiri secara otomatis
+        $(document).ready(function(){
+            $.ui.launch(); // Luncurkan AFUI secara manual
+        });
+        
+        // Untuk proyek Cordova/PhoneGap, inisialisasi di event 'deviceready'
+        document.addEventListener("deviceready", function(){
+            // $.ui.launch(); // Jalankan jika $.ui.autoLaunch = false;
+        }, false);
+    &lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+            </code></pre>
+
+            <p><strong>Penjelasan Kode:</strong></p>
+            <ul>
+                <li><strong>Meta Tags:</strong>
+                    <ul>
+                        <li><code>charset="UTF-8"</code>: Menjamin karakter ditampilkan dengan benar.</li>
+                        <li><code>viewport</code>: Sangat penting untuk responsivitas mobile. Pengaturan ini memastikan halaman mengambil lebar perangkat dan mencegah <em>zooming</em> yang tidak diinginkan.</li>
+                        <li><code>apple-mobile-web-app-capable</code> &amp; <code>apple-mobile-web-app-status-bar-style</code>: Ini adalah meta tag khusus iOS yang memungkinkan aplikasi web Anda terlihat dan terasa seperti aplikasi <em>native</em> saat ditambahkan ke layar utama (home screen) perangkat iOS.</li>
+                    </ul>
+                </li>
+                <li><strong>Link CSS:</strong>
+                    <ul>
+                        <li>Anda perlu menyertakan berkas CSS dasar AFUI (<code>appframework.min.css</code>) dan berkas tema (misalnya, <code>appframework.ios.min.css</code> atau <code>appframework.android.min.css</code>). Pilih tema yang paling sesuai dengan target audiens atau preferensi desain Anda.</li>
+                        <li><code>custom.css</code> adalah tempat Anda akan menambahkan gaya Anda sendiri untuk menimpa atau memperluas gaya AFUI.</li>
+                    </ul>
+                </li>
+                <li><strong>Struktur Body:</strong>
+                    <ul>
+                        <li>Semua konten aplikasi AFUI Anda harus berada di dalam elemen dengan ID <code>afui</code>.</li>
+                        <li>AFUI menggunakan konsep <code>panel</code> (sering disebut sebagai "halaman") untuk setiap layar dalam aplikasi Anda. Setiap panel harus memiliki <code>data-role="panel"</code> dan ID unik.</li>
+                        <li>Hanya satu panel yang terlihat pada satu waktu, dan AFUI mengelola perpindahan antar panel dengan transisi yang halus.</li>
+                        <li>Setiap <code>panel</code> biasanya berisi <code>header</code>, <code>content</code>, dan <code>footer</code>, meskipun tidak semua harus ada di setiap panel.</li>
+                        <li><code>header</code>: Berisi judul halaman, tombol kembali (<code>backButton</code>), atau tombol navigasi lainnya.</li>
+                        <li><code>content</code>: Area utama di mana konten aplikasi Anda ditampilkan. Ini akan memiliki kemampuan <em>scrolling</em> bawaan jika konten melebihi tinggi layar.</li>
+                        <li><code>footer</code>: Area bawah halaman, sering digunakan untuk navigasi tab atau informasi hak cipta.</li>
+                        <li>Link antar halaman menggunakan atribut <code>href="#id_panel"</code>. AFUI akan secara otomatis menangani transisi.</li>
+                    </ul>
+                </li>
+                <li><strong>Link JavaScript:</strong>
+                    <ul>
+                        <li>Urutan sangat penting:
+                            <ol>
+                                <li><strong>Zepto.js (atau jQuery):</strong> AFUI bergantung padanya, jadi harus dimuat terlebih dahulu.</li>
+                                <li><strong>appframework.min.js:</strong> Berkas JavaScript inti AFUI.</li>
+                                <li><strong>appframework.ui.min.js:</strong> Berkas JavaScript yang berisi logika untuk komponen UI.</li>
+                                <li><strong>app.js:</strong> Berkas skrip kustom Anda, di mana Anda akan menulis logika aplikasi.</li>
+                            </ol>
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>Inisialisasi AFUI:</strong>
+                    <ul>
+                        <li>AFUI perlu diinisialisasi setelah DOM siap. Cara paling umum adalah menggunakan <code>$(document).ready(function(){ $.ui.launch(); });</code> jika Anda menggunakan Zepto/jQuery.</li>
+                        <li>Untuk aplikasi Cordova/PhoneGap, inisialisasi harus dilakukan di dalam <code>document.addEventListener("deviceready", function(){ ... }, false);</code> untuk memastikan semua plugin Cordova sudah dimuat. Anda bisa mengatur <code>$.ui.autoLaunch = false;</code> untuk mengontrol peluncuran secara manual.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <p>Dengan struktur dasar ini, Anda sudah memiliki aplikasi AFUI minimal yang dapat berjalan di browser atau dibungkus sebagai aplikasi <em>hybrid</em> menggunakan Cordova. Anda sekarang siap untuk mulai menambahkan komponen UI dan fungsionalitas yang lebih kompleks.</p>
+        </section>
+
+        <section>
+            <h2>Konsep Inti AFUI: Membangun Navigasi dan Tata Letak</h2>
+            <p>AFUI dibangun di atas beberapa konsep inti yang mendefinisikan cara aplikasi diorganisasikan dan bagaimana pengguna berinteraksi dengannya. Memahami konsep-konsep ini sangat penting untuk membangun aplikasi yang efisien dan mudah dinavigasi. Bagian ini akan membahas komponen-komponen struktural utama AFUI: Pages (Panel), Transisi, dan Tata Letak Dasar (Header, Content, Footer).</p>
+
+            <h3>Pages (Panel): Unit Konten Utama</h3>
+            <p>Di AFUI, setiap "layar" atau tampilan dalam aplikasi Anda direpresentasikan sebagai sebuah <code>panel</code>. Ini adalah elemen <code>&lt;div&gt;</code> yang memiliki atribut <code>data-role="panel"</code> dan ID unik. Hanya satu panel yang terlihat pada satu waktu, dan AFUI mengelola perpindahan antar panel dengan transisi yang halus.</p>
+            <pre><code class="language-html">
+&lt;!-- Panel Beranda --&gt;
+&lt;div class="panel" data-role="panel" id="homePage" data-title="Beranda"&gt;
+    &lt;header&gt;&lt;h1&gt;Beranda&lt;/h1&gt;&lt;/header&gt;
+    &lt;div class="content"&gt;
+        &lt;p&gt;Konten halaman beranda.&lt;/p&gt;
+        &lt;a href="#aboutPage"&gt;Ke Halaman Tentang&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Panel Tentang --&gt;
+&lt;div class="panel" data-role="panel" id="aboutPage" data-title="Tentang"&gt;
+    &lt;header&gt;
+        &lt;a href="#homePage" class="backButton"&gt;Kembali&lt;/a&gt;
+        &lt;h1&gt;Tentang Kami&lt;/h1&gt;
+    &lt;/header&gt;
+    &lt;div class="content"&gt;
+        &lt;p&gt;Informasi lebih lanjut tentang aplikasi ini.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+            </code></pre>
+            <p><strong>Fitur Penting Panel:</strong></p>
+            <ul>
+                <li><code>id</code>: ID unik untuk merujuk panel ini, terutama saat navigasi.</li>
+                <li><code>data-title</code>: Digunakan oleh AFUI untuk secara otomatis mengatur judul di header panel.</li>
+                <li><code>data-role="panel"</code>: Mengidentifikasi elemen ini sebagai panel AFUI.</li>
+                <li><code>data-load</code>, <code>data-unload</code>, <code>data-refresh</code>: Atribut opsional untuk memuat konten eksternal atau menjalankan skrip saat panel dimuat/dibongkar/di-<em>refresh</em>.</li>
+            </ul>
+
+            <h3>Transisi Halaman: Memberikan Pengalaman Native</h3>
+            <p>Salah satu aspek yang paling menonjol dari AFUI adalah transisi halaman yang halus, yang membuat aplikasi terasa lebih responsif dan <em>native</em>. Anda dapat menentukan jenis transisi yang digunakan saat berpindah antar panel menggunakan atribut <code>data-transition</code> pada tautan atau tombol.</p>
+            <pre><code class="language-html">
+&lt;a href="#nextPage" data-transition="slide"&gt;Geser ke Halaman Berikutnya&lt;/a&gt;
+&lt;a href="#otherPage" data-transition="fade"&gt;Pudar ke Halaman Lain&lt;/a&gt;
+            </code></pre>
+            <p><strong>Jenis Transisi yang Umum:</strong></p>
+            <ul>
+                <li><code>slide</code>: Halaman baru meluncur dari samping. (Default)</li>
+                <li><code>slideup</code>: Halaman baru meluncur dari bawah.</li>
+                <li><code>slidedown</code>: Halaman baru meluncur dari atas.</li>
+                <li><code>fade</code>: Halaman baru memudar masuk.</li>
+                <li><code>pop</code>: Halaman baru muncul dengan efek <em>pop</em>.</li>
+                <li><code>flip</code>: Halaman berputar seperti kartu.</li>
+            </ul>
+            <p>Anda juga dapat mengontrol transisi secara JavaScript menggunakan <code>$.ui.loadContent("#id_panel", false, false, "slide")</code>.</p>
+
+            <h3>Tata Letak Dasar: Header, Content, dan Footer</h3>
+            <p>Setiap panel AFUI umumnya mengikuti struktur tata letak dasar yang terdiri dari <code>header</code>, <code>content</code>, dan <code>footer</code>. Struktur ini membantu dalam mengatur konten dan navigasi aplikasi secara konsisten.</p>
+
+            <h4>Header</h4>
+            <p>Elemen <code>&lt;header&gt;</code> biasanya terletak di bagian atas panel dan berisi judul halaman, tombol kembali, atau tombol tindakan lainnya.</p>
+            <pre><code class="language-html">
+&lt;header&gt;
+    &lt;a href="#main" class="backButton"&gt;Kembali&lt;/a&gt; &lt;!-- Tombol kembali otomatis AFUI --&gt;
+    &lt;h1&gt;Judul Halaman&lt;/h1&gt;
+    &lt;a href="#settings" class="button icon gear"&gt;&lt;/a&gt; &lt;!-- Contoh tombol aksi --&gt;
+&lt;/header&gt;
+            </code></pre>
+            <ul>
+                <li><code>backButton</code>: Kelas khusus AFUI yang, saat diterapkan pada tautan, akan secara otomatis mengarahkan pengguna kembali ke panel sebelumnya.</li>
+                <li>Isi <code>&lt;h1&gt;</code> akan secara otomatis diperbarui dengan nilai <code>data-title</code> dari panel, jika tidak ada teks lain yang ditentukan.</li>
+            </ul>
+
+            <h4>Content</h4>
+            <p>Elemen <code>&lt;div class="content"&gt;</code> adalah area utama di mana semua konten spesifik halaman Anda ditempatkan. AFUI secara otomatis akan membuat area ini dapat di-<em>scroll</em> jika kontennya melebihi tinggi layar.</p>
+            <pre><code class="language-html">
+&lt;div class="content"&gt;
+    &lt;p&gt;Ini adalah area di mana teks, gambar, formulir, dan komponen UI lainnya ditempatkan.&lt;/p&gt;
+    &lt;p&gt;AFUI akan menangani scrolling secara otomatis jika konten melebihi tinggi yang tersedia.&lt;/p&gt;
+&lt;/div&gt;
+            </code></pre>
+            <p>Penting untuk menempatkan semua konten yang dapat di-<em>scroll</em> di dalam <code>.content</code> agar fungsionalitas <em>scrolling</em> AFUI bekerja dengan benar.</p>
+
+            <h4>Footer</h4>
+            <p>Elemen <code>&lt;footer&gt;</code> biasanya terletak di bagian bawah panel dan sering digunakan untuk navigasi tab, tombol tindakan utama, atau informasi tambahan.</p>
+            <pre><code class="language-html">
+&lt;footer&gt;
+    &lt;nav&gt;
+        &lt;a href="#home" class="icon home"&gt;Beranda&lt;/a&gt;
+        &lt;a href="#messages" class="icon message"&gt;Pesan&lt;/a&gt;
+        &lt;a href="#profile" class="icon user"&gt;Profil&lt;/a&gt;
+    &lt;/nav&gt;
+&lt;/footer&gt;
+            </code></pre>
+            <ul>
+                <li>Footer dapat berisi navigasi tab, seperti yang ditunjukkan di atas, menggunakan kelas <code>icon</code> untuk menampilkan ikon.</li>
+                <li>AFUI juga dapat mengelola footer tetap (fixed footer) yang tidak ikut di-<em>scroll</em>.</li>
+            </ul>
+
+            <p>Memahami dan menerapkan struktur dasar ini dengan benar adalah langkah pertama untuk membangun aplikasi AFUI yang terorganisir, intuitif, dan memiliki performa yang baik. Dengan panel, transisi, serta header, content, dan footer, Anda memiliki semua alat yang Anda butuhkan untuk membuat fondasi UI aplikasi web mobile Anda.</p>
+
+            <figure>
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="100" height="100">
+                    <title>Struktur Tata Letak Aplikasi AFUI</title>
+                    <rect x="10" y="5" width="80" height="90" rx="8" ry="8" fill="#F8F8F8" stroke="#ccc" stroke-width="1"/>
+                    <rect x="10" y="5" width="80" height="15" rx="8" ry="8" fill="#D1E9E9" stroke="#9AD3D3" stroke-width="1"/>
+                    <text x="50" y="14" font-family="Arial" font-size="6" fill="#333" text-anchor="middle">HEADER</text>
+                    <rect x="10" y="20" width="80" height="60" fill="#FFFFFF"/>
+                    <text x="50" y="50" font-family="Arial" font-size="6" fill="#666" text-anchor="middle">CONTENT AREA</text>
+                    <rect x="10" y="80" width="80" height="15" rx="8" ry="8" fill="#D1E9E9" stroke="#9AD3D3" stroke-width="1"/>
+                    <text x="50" y="89" font-family="Arial" font-size="6" fill="#333" text-anchor="middle">FOOTER</text>
+                </svg>
+                <figcaption>Diagram yang menunjukkan struktur dasar Header, Content, dan Footer dalam sebuah panel AFUI.</figcaption>
+            </figure>
+        </section>
+
+        <section>
+            <h2>Komponen UI AFUI: Membangun Antarmuka Interaktif</h2>
+            <p>AFUI menyediakan beragam komponen UI yang dirancang untuk mempercepat pengembangan dan memberikan tampilan <em>native</em>. Bagian ini akan menjelajahi komponen-komponen utama AFUI, memberikan contoh kode dan penjelasan tentang penggunaannya.</p>
+
+            <h3>Daftar (Lists)</h3>
+            <p>Daftar adalah salah satu komponen paling fundamental dalam aplikasi mobile. AFUI menyediakan berbagai jenis daftar yang responsif dan fungsional, dari daftar sederhana hingga yang lebih kompleks dengan ikon dan fungsionalitas <em>swipe</em>.</p>
+
+            <h4>Daftar Sederhana</h4>
+            <p>Untuk membuat daftar sederhana, gunakan elemen <code>&lt;ul&gt;</code> dengan atribut <code>data-role="list"</code>.</p>
+            <pre><code class="language-html">
+&lt;ul data-role="list"&gt;
+    &lt;li&gt;Item Daftar Pertama&lt;/li&gt;
+    &lt;li&gt;Item Daftar Kedua&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;Item Daftar dengan Tautan&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+            </code></pre>
+
+            <h4>Daftar dengan Ikon dan Keterangan</h4>
+            <p>Anda dapat menambahkan ikon dan teks tambahan (seperti keterangan atau jumlah) ke item daftar.</p>
+            <pre><code class="language-html">
+&lt;ul data-role="list"&gt;
+    &lt;li&gt;
+        &lt;a href="#"&gt;
+            &lt;div class="icon home"&gt;&lt;/div&gt; &lt;!-- Contoh ikon --&gt;
+            Beranda
+            &lt;div class="afR"&gt; &lt;!-- afR untuk teks di kanan --&gt;
+                &lt;span class="badge"&gt;5&lt;/span&gt; &lt;!-- Badge notifikasi --&gt;
+            &lt;/div&gt;
+        &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;a href="#"&gt;
+            &lt;div class="icon user"&gt;&lt;/div&gt;
+            Profil Pengguna
+            &lt;div class="afR"&gt;
+                &lt;span class="count"&gt;Lihat&lt;/span&gt;
+            &lt;/div&gt;
+        &lt;/a&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+            </code></pre>
+            <p>AFUI menyediakan serangkaian kelas <code>icon</code> bawaan. Anda juga bisa mengintegrasikan ikon dari pustaka lain seperti Font Awesome.</p>
+
+            <h4>Daftar Terkelompok (Grouped Lists) dan Pembagi Daftar (List Dividers)</h4>
+            <p>Untuk mengelompokkan item daftar dan menambahkan pembagi yang berfungsi sebagai judul bagian, gunakan <code>data-role="grouped-list"</code> pada <code>&lt;ul&gt;</code> dan <code>data-role="list-divider"</code> pada <code>&lt;li&gt;</code>.</p>
+            <pre><code class="language-html">
+&lt;ul data-role="grouped-list"&gt;
+    &lt;li data-role="list-divider"&gt;Kategori A&lt;/li&gt;
+    &lt;li&gt;Item A1&lt;/li&gt;
+    &lt;li&gt;Item A2&lt;/li&gt;
+    &lt;li data-role="list-divider"&gt;Kategori B&lt;/li&gt;
+    &lt;li&gt;Item B1&lt;/li&gt;
+    &lt;li&gt;Item B2&lt;/li&gt;
+&lt;/ul&gt;
+            </code></pre>
+
+            <h4>Daftar dengan Aksi Swipe (Swipe Lists)</h4>
+            <p>Salah satu fitur interaktif AFUI adalah daftar yang dapat di-<em>swipe</em> untuk menampilkan tombol aksi.</p>
+            <pre><code class="language-html">
+&lt;ul data-role="list"&gt;
+    &lt;li data-role="collapsible" data-theme="b"&gt; &lt;!-- data-role="collapsible" untuk swipe --&gt;
+        &lt;a href="#"&gt;Item dengan Swipe Aksi&lt;/a&gt;
+        &lt;div class="afR"&gt;
+            &lt;a href="#" class="button red"&gt;Hapus&lt;/a&gt;
+            &lt;a href="#" class="button blue"&gt;Edit&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/li&gt;
+    &lt;li data-role="collapsible" data-theme="b"&gt;
+        &lt;a href="#"&gt;Item lainnya&lt;/a&gt;
+        &lt;div class="afR"&gt;
+            &lt;a href="#" class="button green"&gt;Arsip&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+            </code></pre>
+            <p>Atribut <code>data-role="collapsible"</code> pada <code>&lt;li&gt;</code> memungkinkan fungsionalitas <em>swipe</em>. Tombol aksi ditempatkan dalam <code>&lt;div class="afR"&gt;</code>.</p>
+
+            <h3>Formulir (Forms) dan Input</h3>
+            <p>AFUI menyediakan gaya yang konsisten untuk elemen formulir standar, membuatnya terlihat <em>native</em>.</p>
+
+            <h4>Input Teks</h4>
+            <pre><code class="language-html">
+&lt;div class="input-group"&gt;
+    &lt;label for="username"&gt;Nama Pengguna:&lt;/label&gt;
+    &lt;input type="text" id="username" placeholder="Masukkan nama pengguna"&gt;
+&lt;/div&gt;
+&lt;div class="input-group"&gt;
+    &lt;label for="password"&gt;Kata Sandi:&lt;/label&gt;
+    &lt;input type="password" id="password" placeholder="Masukkan kata sandi"&gt;
+&lt;/div&gt;
+            </code></pre>
+            <p>Gunakan <code>&lt;div class="input-group"&gt;</code> untuk membungkus label dan input agar gaya AFUI diterapkan dengan benar.</p>
+
+            <h4>Tombol (Buttons)</h4>
+            <p>Tombol dapat dibuat menggunakan <code>&lt;a&gt;</code> atau <code>&lt;button&gt;</code> dengan kelas <code>button</code>.</p>
+            <pre><code class="language-html">
+&lt;a href="#" class="button"&gt;Tombol Standar&lt;/a&gt;
+&lt;button class="button red"&gt;Tombol Aksi Penting&lt;/button&gt;
+&lt;a href="#" class="button green icon check"&gt;Simpan&lt;/a&gt; &lt;!-- Tombol dengan ikon --&gt;
+            </code></pre>
+            <p>Anda bisa menambahkan kelas warna seperti <code>red</code>, <code>green</code>, <code>blue</code>, dll., serta kelas <code>icon</code> untuk menambahkan ikon.</p>
+
+            <h4>Toggle Switch</h4>
+            <p>Input <em>checkbox</em> dapat diubah menjadi <em>toggle switch</em> bergaya <em>native</em>.</p>
+            <pre><code class="language-html">
+&lt;div class="input-group"&gt;
+    &lt;label for="notifications"&gt;Notifikasi:&lt;/label&gt;
+    &lt;input type="checkbox" id="notifications" data-role="toggle"&gt;
+&lt;/div&gt;
+            </code></pre>
+            <p>Atribut <code>data-role="toggle"</code> pada <code>&lt;input type="checkbox"&gt;</code> adalah kuncinya.</p>
+
+            <h4>Checkbox dan Radio Button</h4>
+            <p>AFUI juga menyediakan gaya kustom untuk <em>checkbox</em> dan <em>radio button</em> standar.</p>
+            <pre><code class="language-html">
+&lt;div class="input-group"&gt;
+    &lt;label&gt;
+        &lt;input type="checkbox" name="option1"&gt; Opsi 1
+    &lt;/label&gt;
+    &lt;label&gt;
+        &lt;input type="checkbox" name="option2" checked&gt; Opsi 2
+    &lt;/label&gt;
+&lt;/div&gt;
+
+&lt;div class="input-group"&gt;
+    &lt;label&gt;
+        &lt;input type="radio" name="gender" value="male"&gt; Pria
+    &lt;/label&gt;
+    &lt;label&gt;
+        &lt;input type="radio" name="gender" value="female" checked&gt; Wanita
+    &lt;/label&gt;
+&lt;/div&gt;
+            </code></pre>
+
+            <h4>Textarea dan Select</h4>
+            <p>Elemen <code>&lt;textarea&gt;</code> dan <code>&lt;select&gt;</code> juga mendapatkan gaya yang ditingkatkan.</p>
+            <pre><code class="language-html">
+&lt;div class="input-group"&gt;
+    &lt;label for="message"&gt;Pesan Anda:&lt;/label&gt;
+    &lt;textarea id="message" rows="4" placeholder="Tulis pesan di sini..."&gt;&lt;/textarea&gt;
+&lt;/div&gt;
+
+&lt;div class="input-group"&gt;
+    &lt;label for="country"&gt;Pilih Negara:&lt;/label&gt;
+    &lt;select id="country"&gt;
+        &lt;option value="id"&gt;Indonesia&lt;/option&gt;
+        &lt;option value="my"&gt;Malaysia&lt;/option&gt;
+        &lt;option value="sg"&gt;Singapura&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;
+            </code></pre>
+
+            <h3>Modals dan Popups</h3>
+            <p>Modals dan popups adalah elemen UI penting untuk menampilkan informasi penting atau meminta input pengguna tanpa menavigasi ke halaman baru.</p>
+            <pre><code class="language-html">
+&lt;!-- Tombol untuk membuka modal --&gt;
+&lt;a href="#myModal" data-modal='true' class="button"&gt;Buka Modal&lt;/a&gt;
+
+&lt;!-- Struktur Modal --&gt;
+&lt;div id="myModal" class="modal"&gt;
+    &lt;div class="modal-dialog"&gt;
+        &lt;div class="modal-content"&gt;
+            &lt;div class="modal-header"&gt;
+                &lt;h3 class="modal-title"&gt;Judul Modal&lt;/h3&gt;
+            &lt;/div&gt;
+            &lt;div class="modal-body"&gt;
+                &lt;p&gt;Ini adalah konten modal. Anda bisa menempatkan informasi atau formulir di sini.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="modal-footer"&gt;
+                &lt;a href="#" class="button modal-close"&gt;Tutup&lt;/a&gt;
+                &lt;a href="#" class="button primary"&gt;Aksi&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+            </code></pre>
+            <p>Atribut <code>data-modal='true'</code> pada tautan akan secara otomatis membuka modal yang ditunjuk oleh <code>href</code>. Kelas <code>modal-close</code> akan menutup modal.</p>
+
+            <h3>Side Panels (Drawer / Hamburger Menu)</h3>
+            <p>Panel samping sering digunakan untuk navigasi utama atau menu pengaturan yang tersembunyi. AFUI mendukung panel samping kiri dan kanan.</p>
+            <pre><code class="language-html">
+&lt;!-- Panel Kiri --&gt;
+&lt;div id="leftPanel" data-role="panel" data-position="left" data-display="reveal"&gt;
+    &lt;header&gt;&lt;h1&gt;Menu&lt;/h1&gt;&lt;/header&gt;
+    &lt;div class="content"&gt;
+        &lt;ul data-role="list"&gt;
+            &lt;li&gt;&lt;a href="#homePage" class="close-panel"&gt;Beranda&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#messagesPage" class="close-panel"&gt;Pesan&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#settingsPage" class="close-panel"&gt;Pengaturan&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Tombol untuk membuka panel --&gt;
+&lt;a href="#leftPanel" class="button icon menu"&gt;&lt;/a&gt;
+            </code></pre>
+            <ul>
+                <li><code>data-position="left"</code> atau <code>"right"</code>: Menentukan posisi panel.</li>
+                <li><code>data-display="reveal"</code> atau <code>"overlay"</code>: Menentukan bagaimana panel ditampilkan (menggeser konten atau menumpuk di atasnya).</li>
+                <li>Kelas <code>close-panel</code> pada tautan di dalam panel akan menutup panel saat diklik.</li>
+            </ul>
+
+            <h3>Grid System</h3>
+            <p>AFUI menyertakan sistem grid sederhana untuk membuat tata letak responsif.</p>
+            <pre><code class="language-html">
+&lt;div class="grid"&gt;
+    &lt;div class="col" style="width: 50%"&gt;Kolom 1 (50%)&lt;/div&gt;
+    &lt;div class="col" style="width: 50%"&gt;Kolom 2 (50%)&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="grid"&gt;
+    &lt;div class="col" style="width: 33%"&gt;Kolom A (33%)&lt;/div&gt;
+    &lt;div class="col" style="width: 67%"&gt;Kolom B (67%)&lt;/div&gt;
+&lt;/div&gt;
+            </code></pre>
+            <p>Gunakan <code>&lt;div class="grid"&gt;</code> sebagai pembungkus dan <code>&lt;div class="col"&gt;</code> untuk kolom, dengan lebar yang ditentukan oleh CSS <code>width</code> inline atau kelas kustom.</p>
+
+            <h3>Progress Indicators (Spinners)</h3>
+            <p>Spinners digunakan untuk menunjukkan bahwa proses sedang berlangsung.</p>
+            <pre><code class="language-html">
+&lt;div class="loader"&gt;&lt;/div&gt; &lt;!-- Spinner default --&gt;
+&lt;div class="loader white"&gt;&lt;/div&gt; &lt;!-- Spinner putih untuk latar gelap --&gt;
+            </code></pre>
+            <p>AFUI menyediakan gaya untuk kelas <code>loader</code> yang menampilkan indikator putar.</p>
+
+            <h3>Action Sheets</h3>
+            <p>Action sheets adalah pop-up kontekstual yang muncul dari bawah layar, menyediakan serangkaian pilihan atau tindakan kepada pengguna. Ini umum di perangkat iOS.</p>
+            <pre><code class="language-html">
+&lt;!-- Tombol untuk membuka Action Sheet --&gt;
+&lt;a href="#" class="button" id="openActionSheet"&gt;Buka Action Sheet&lt;/a&gt;
+
+&lt;!-- JavaScript untuk memicu Action Sheet --&gt;
+&lt;script&gt;
+    $(document).ready(function() {
+        $("#openActionSheet").on("click", function() {
+            $.ui.actionsheet([
+                { text: "Pilihan 1", handler: function() { alert("Pilihan 1 dipilih!"); } },
+                { text: "Pilihan 2", handler: function() { alert("Pilihan 2 dipilih!"); } },
+                { text: "Batal", handler: function() { $.ui.actionsheet({ cancelOnly: true }); } }
+            ]);
+        });
+    });
+&lt;/script&gt;
+            </code></pre>
+            <p>Action sheets biasanya diinisialisasi melalui JavaScript menggunakan <code>$.ui.actionsheet()</code>, di mana Anda dapat mendefinisikan array objek yang mewakili tombol-tombol aksi dan fungsi <em>handler</em>-nya.</p>
+
+            <figure>
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="100" height="100">
+                    <title>Ilustrasi Komponen UI Mobile</title>
+                    <rect x="10" y="5" width="80" height="90" rx="8" ry="8" fill="#F0F8FF" stroke="#A9D0F5" stroke-width="1"/>
+                    
+                    <!-- Header -->
+                    <rect x="10" y="5" width="80" height="10" rx="8" ry="8" fill="#B3E0F2"/>
+                    <path d="M15 10 L20 10 L20 12 L15 12 Z" fill="#333"/>
+                    <rect x="15" y="10" width="2" height="2" fill="#333"/>
+                    <text x="50" y="12" font-family="Arial" font-size="5" fill="#333" text-anchor="middle">Header</text>
+
+                    <!-- List Items -->
+                    <rect x="12" y="20" width="76" height="8" rx="2" ry="2" fill="#E8F6FA"/>
+                    <circle cx="17" cy="24" r="2" fill="#66B2FF"/>
+                    <text x="22" y="25" font-family="Arial" font-size="4" fill="#333">Item Daftar 1</text>
+                    
+                    <rect x="12" y="30" width="76" height="8" rx="2" ry="2" fill="#E8F6FA"/>
+                    <circle cx="17" cy="34" r="2" fill="#66B2FF"/>
+                    <text x="22" y="35" font-family="Arial" font-size="4" fill="#333">Item Daftar 2</text>
+
+                    <!-- Toggle Switch -->
+                    <text x="15" y="47" font-family="Arial" font-size="4" fill="#333">Pengaturan:</text>
+                    <rect x="70" y="44" width="10" height="6" rx="3" ry="3" fill="#A7D9F5"/>
+                    <circle cx="76" cy="47" r="2.5" fill="#FFF"/>
+
+                    <!-- Button -->
+                    <rect x="30" y="55" width="40" height="8" rx="4" ry="4" fill="#3F8FBD"/>
+                    <text x="50" y="60" font-family="Arial" font-size="4" fill="#FFF" text-anchor="middle">Tombol Aksi</text>
+
+                    <!-- Input Field -->
+                    <text x="15" y="70" font-family="Arial" font-size="4" fill="#333">Input Teks:</text>
+                    <rect x="30" y="68" width="40" height="7" rx="2" ry="2" fill="#F0F8FF" stroke="#A9D0F5" stroke-width="0.5"/>
+
+                    <!-- Footer -->
+                    <rect x="10" y="85" width="80" height="10" rx="8" ry="8" fill="#B3E0F2"/>
+                    <text x="50" y="91" font-family="Arial" font-size="4" fill="#333" text-anchor="middle">Footer Navigasi</text>
+                </svg>
+                <figcaption>Berbagai komponen UI mobile seperti daftar, toggle, tombol, dan input, yang dapat dibangun dengan AFUI.</figcaption>
+            </figure>
+
+            <p>Ini hanyalah beberapa dari banyak komponen yang disediakan oleh AFUI. Dengan memahami cara menggunakan setiap komponen ini, Anda dapat membangun antarmuka pengguna yang kaya dan interaktif untuk aplikasi web mobile Anda.</p>
+        </section>
+
+        <section>
+            <h2>Pengembangan Lanjutan dengan AFUI: Interaktivitas dan Integrasi</h2>
+            <p>Setelah menguasai dasar-dasar AFUI, langkah selanjutnya adalah menjelajahi fitur-fitur yang lebih canggih untuk menambahkan interaktivitas dinamis dan mengintegrasikan AFUI dengan fungsionalitas aplikasi <em>hybrid</em> Anda. Bagian ini akan membahas bagaimana menggunakan API JavaScript AFUI, mengelola <em>event</em>, dan praktik terbaik untuk performa dan integrasi Cordova.</p>
+
+            <h3>API JavaScript AFUI: Mengendalikan Aplikasi Anda</h3>
+            <p>Meskipun banyak fungsionalitas UI AFUI dapat diaktifkan melalui atribut <code>data-</code> di HTML, AFUI juga menyediakan API JavaScript yang kaya untuk kontrol yang lebih granular dan interaksi dinamis.</p>
+
+            <h4>Navigasi Programatis</h4>
+            <p>Anda dapat mengontrol navigasi antar panel secara programatis menggunakan <code>$.ui.loadContent()</code>.</p>
+            <pre><code class="language-javascript">
+// Navigasi ke panel dengan ID 'otherPage' dengan transisi 'slide'
+$.ui.loadContent("#otherPage", false, false, "slide");
+
+// Navigasi ke halaman eksternal (memuat konten ke dalam panel)
+// Ini juga bisa digunakan untuk memuat data dari API dan menampilkannya
+$.ui.loadContent("externalContent.html", false, false, "fade");
+            </code></pre>
+            <p>Fungsi ini sangat kuat karena memungkinkan Anda memuat konten secara dinamis, bahkan dari sumber eksternal, dan mengintegrasikannya ke dalam alur aplikasi Anda dengan transisi yang diinginkan.</p>
+
+            <h4>Mengelola Panel Samping (Side Panels)</h4>
+            <p>Untuk membuka atau menutup panel samping secara JavaScript:</p>
+            <pre><code class="language-javascript">
+// Membuka panel kiri
+$.ui.toggleSideMenu("left");
+
+// Menutup panel kiri
+$.ui.toggleSideMenu("left", false); // Parameter kedua 'false' untuk menutup
+            </code></pre>
+
+            <h4>Menampilkan Popups dan Modals</h4>
+            <p>Anda dapat memicu <em>popup</em> atau <em>modal</em> secara programatis:</p>
+            <pre><code class="language-javascript">
+// Menampilkan popup sederhana
+$.ui.popup({
+    title: "Notifikasi Penting",
+    message: "Data Anda telah berhasil disimpan.",
+    cancelText: "Tutup",
+    cancelCallback: function() { console.log("Popup ditutup"); }
+});
+
+// Menampilkan popup dengan dua tombol
+$.ui.popup({
+    title: "Konfirmasi Hapus",
+    message: "Apakah Anda yakin ingin menghapus item ini?",
+    cancelText: "Batal",
+    cancelCallback: function() { console.log("Aksi dibatalkan"); },
+    doneText: "Hapus",
+    doneCallback: function() { console.log("Item dihapus!"); },
+    cancelClass: 'button',
+    doneClass: 'button red'
+});
+            </code></pre>
+            <p>Metode <code>$.ui.popup()</code> adalah cara serbaguna untuk menampilkan dialog yang dapat disesuaikan, termasuk dialog konfirmasi dan peringatan.</p>
+
+            <h4>Menampilkan Indikator Loading</h4>
+            <pre><code class="language-javascript">
+// Menampilkan indikator loading
+$.ui.showMask("Memuat data...");
+
+// Menyembunyikan indikator loading
+$.ui.hideMask();
+            </code></pre>
+            <p>Ini sangat berguna saat melakukan operasi jaringan atau tugas berat lainnya untuk memberikan umpan balik visual kepada pengguna.</p>
+
+            <h3>Event Handling di AFUI</h3>
+            <p>AFUI memancarkan berbagai <em>event</em> yang dapat Anda tangani untuk menjalankan logika kustom pada siklus hidup aplikasi atau panel. Ini sangat mirip dengan cara kerja <em>event</em> jQuery.</p>
+            <pre><code class="language-javascript">
+// Event saat panel akan dimuat (sebelum ditampilkan)
+$("#myPanel").on("panelbeforeload", function(e) {
+    console.log("Panel '" + e.target.id + "' akan dimuat.");
+    // Lakukan inisialisasi atau pembersihan sebelum panel ditampilkan
+});
+
+// Event saat panel sudah dimuat dan ditampilkan
+$("#myPanel").on("pageshow", function(e) {
+    console.log("Panel '" + e.target.id + "' sudah ditampilkan.");
+    // Lakukan inisialisasi yang bergantung pada DOM panel
+});
+
+// Event saat panel akan dibongkar (sebelum transisi keluar)
+$("#myPanel").on("panelbeforeunload", function(e) {
+    console.log("Panel '" + e.target.id + "' akan dibongkar.");
+    // Bersihkan listener atau data yang tidak lagi diperlukan
+});
+
+// Event global saat terjadi perubahan hash (URL)
+$(document).on("hashchange", function(e) {
+    console.log("Hash URL berubah menjadi: " + location.hash);
+});
+            </code></pre>
+            <p>Memahami dan memanfaatkan <em>event</em> ini memungkinkan Anda untuk mengelola siklus hidup panel secara efektif, menginisialisasi komponen baru, memuat data dari API, atau membersihkan sumber daya saat panel tidak lagi digunakan.</p>
+
+            <h3>Integrasi dengan Apache Cordova/PhoneGap</h3>
+            <p>Seperti yang telah disebutkan, AFUI dirancang untuk bekerja dengan Cordova. Integrasi ini melibatkan memastikan bahwa inisialisasi AFUI dilakukan pada waktu yang tepat.</p>
+            <pre><code class="language-javascript">
+// Dalam app.js Anda
+document.addEventListener("deviceready", function() {
+    // Ini adalah tempat terbaik untuk menginisialisasi plugin Cordova
+    // dan juga tempat aman untuk meluncurkan AFUI jika autoLaunch dimatikan
+    
+    // Contoh penggunaan plugin Cordova (misal: Cordova-plugin-device)
+    if (window.device) {
+        console.log("Perangkat siap! Model perangkat: " + device.model);
+    } else {
+        console.log("Cordova device plugin tidak tersedia.");
+    }
+
+    // Pastikan AFUI diluncurkan setelah deviceready
+    if (!$.ui.isinit) { // Periksa apakah AFUI sudah diinisialisasi
+        $.ui.launch(); 
+        console.log("AFUI diluncurkan setelah deviceready.");
+    }
+
+}, false);
+
+// Jika Anda tidak menggunakan Cordova, cukup gunakan $(document).ready
+$(document).ready(function() {
+    if (!$.ui.isinit && !window.device) { // Hanya jalankan jika bukan Cordova dan belum diinisialisasi
+        $.ui.launch();
+        console.log("AFUI diluncurkan dari document.ready (non-Cordova).");
+    }
+});
+            </code></pre>
+            <p>Menempatkan inisialisasi AFUI dan logika terkait Cordova di dalam <code>deviceready</code> memastikan bahwa semua API <em>native</em> sudah tersedia sebelum aplikasi web mencoba menggunakannya. Ini mencegah kesalahan dan perilaku yang tidak terduga.</p>
+
+            <h3>Kustomisasi dan Theming</h3>
+            <p>AFUI dirancang agar mudah disesuaikan. Anda dapat menimpa gaya default dengan CSS kustom Anda sendiri.</p>
+            <pre><code class="language-css">
+/* Dalam berkas custom.css Anda */
+
+/* Mengubah warna header */
+.panel &gt; header {
+    background-color: #5C6BC0; /* Warna biru indigo kustom */
+    color: white;
+}
+
+/* Mengubah gaya tombol primer */
+.button.primary {
+    background-color: #8BC34A; /* Warna hijau kustom */
+    border-color: #689F38;
+}
+
+/* Mengubah ukuran font daftar */
+ul[data-role="list"] li {
+    font-size: 1.1em;
+    padding: 12px 15px;
+}
+            </code></pre>
+            <p>Dengan pemahaman dasar tentang CSS, Anda dapat mengubah hampir setiap aspek tampilan aplikasi AFUI Anda. AFUI juga sering dilengkapi dengan beberapa tema bawaan (seperti iOS dan Android) yang dapat Anda pilih.</p>
+
+            <h3>Manajemen State dan Data</h3>
+            <p>AFUI sendiri tidak menyediakan solusi manajemen <em>state</em> yang kompleks seperti Redux atau Vuex. Namun, Anda dapat mengintegrasikannya dengan pustaka lain atau menerapkan pola manajemen <em>state</em> sederhana Anda sendiri menggunakan variabel JavaScript global atau penyimpanan lokal (localStorage/sessionStorage).</p>
+            <pre><code class="language-javascript">
+// Contoh sederhana manajemen state
+var appState = {
+    userName: "",
+    isLoggedIn: false,
+    settings: {}
+};
+
+// Saat login
+$("#loginForm").on("submit", function(e) {
+    e.preventDefault();
+    // ... validasi dan otentikasi
+    appState.userName = "JohnDoe";
+    appState.isLoggedIn = true;
+    localStorage.setItem("user", JSON.stringify(appState));
+    $.ui.loadContent("#dashboardPage");
+});
+
+// Saat halaman dashboard ditampilkan
+$("#dashboardPage").on("pageshow", function() {
+    var storedState = localStorage.getItem("user");
+    if (storedState) {
+        appState = JSON.parse(storedState);
+        $("#welcomeMessage").text("Selamat datang, " + appState.userName + "!");
+    } else {
+        $.ui.loadContent("#loginPage"); // Arahkan kembali jika tidak login
+    }
+});
+            </code></pre>
+            <p>Untuk aplikasi yang lebih kompleks, pertimbangkan menggunakan solusi yang lebih terstruktur seperti Pustaka manajemen <em>state</em> sederhana atau pola MVVM (Model-View-ViewModel) jika Anda mengintegrasikan dengan <em>framework</em> yang lebih besar.</p>
+
+            <figure>
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="100" height="100">
+                    <title>Ilustrasi JavaScript dan Interaksi API</title>
+                    <rect x="10" y="5" width="80" height="90" rx="8" ry="8" fill="#F0F8FF" stroke="#A9D0F5" stroke-width="1"/>
+                    <rect x="15" y="15" width="70" height="60" fill="#E8F6FA" rx="5" ry="5" stroke="#A9D0F5"/>
+                    <text x="50" y="25" font-family="Arial" font-size="5" fill="#333" text-anchor="middle">&lt;script&gt;</text>
+                    <path d="M20 35 L40 35 L40 40 L20 40 Z" fill="#66B2FF"/>
+                    <text x="30" y="38" font-family="Arial" font-size="4" fill="#FFF" text-anchor="middle">API Call</text>
+                    <path d="M20 45 L40 45 L40 50 L20 50 Z" fill="#66B2FF"/>
+                    <text x="30" y="48" font-family="Arial" font-size="4" fill="#FFF" text-anchor="middle">Event Trigger</text>
+                    <path d="M20 55 L40 55 L40 60 L20 60 Z" fill="#66B2FF"/>
+                    <text x="30" y="58" font-family="Arial" font-size="4" fill="#FFF" text-anchor="middle">DOM Update</text>
+                    <path d="M55 45 L75 45 L75 50 L55 50 Z" fill="#B3E0F2"/>
+                    <text x="65" y="48" font-family="Arial" font-size="4" fill="#333" text-anchor="middle">UI Respon</text>
+                    <path d="M55 55 L75 55 L75 60 L55 60 Z" fill="#B3E0F2"/>
+                    <text x="65" y="58" font-family="Arial" font-size="4" fill="#333" text-anchor="middle">Navigasi</text>
+                    
+                    <path d="M40 37.5 L55 47.5" stroke="#3F51B5" stroke-width="0.5" marker-end="url(#arrowhead)"/>
+                    <path d="M40 47.5 L55 47.5" stroke="#3F51B5" stroke-width="0.5" marker-end="url(#arrowhead)"/>
+                    <path d="M40 57.5 L55 57.5" stroke="#3F51B5" stroke-width="0.5" marker-end="url(#arrowhead)"/>
+                    
+                    <defs>
+                        <marker id="arrowhead" markerWidth="5" markerHeight="3" refX="2" refY="1.5" orient="auto">
+                            <polygon points="0 0, 5 1.5, 0 3" fill="#3F51B5" />
+                        </marker>
+                    </defs>
+                </svg>
+                <figcaption>Ilustrasi alur kerja JavaScript dalam AFUI: dari panggilan API, pemicu event, hingga pembaruan UI dan navigasi.</figcaption>
+            </figure>
+        </section>
+
+        <section>
+            <h2>Optimalisasi dan Praktik Terbaik dengan AFUI</h2>
+            <p>Meskipun AFUI sudah dirancang untuk performa, ada beberapa praktik terbaik dan teknik optimalisasi yang dapat Anda terapkan untuk memastikan aplikasi Anda berjalan secepat dan semulus mungkin, serta mudah dikelola.</p>
+
+            <h3>1. Minimalisir Penggunaan DOM</h3>
+            <p>Setiap elemen DOM memiliki biaya dalam hal memori dan waktu <em>rendering</em>. Usahakan untuk menjaga struktur HTML Anda sebersih dan sesederhana mungkin. Hindari nesting yang terlalu dalam dan gunakan elemen semantik yang tepat. AFUI sudah cukup efisien, tetapi DOM yang terlalu kompleks dapat memperlambat kinerja, terutama pada perangkat mobile.</p>
+            <p>Jika Anda membuat daftar panjang, pertimbangkan untuk memuat item secara bertahap (<em>lazy loading</em>) atau menggunakan teknik virtualisasi daftar (meskipun ini memerlukan implementasi kustom karena AFUI tidak memilikinya secara bawaan) untuk hanya me-<em>render</em> elemen yang terlihat oleh pengguna.</p>
+
+            <h3>2. Optimalkan CSS dan JavaScript</h3>
+            <ul>
+                <li><strong>Minifikasi:</strong> Selalu gunakan versi minifikasi dari berkas CSS dan JavaScript AFUI (<code>.min.css</code>, <code>.min.js</code>) untuk produksi. Ini mengurangi ukuran berkas, yang berarti waktu unduh lebih cepat.</li>
+                <li><strong>Konkatenasi:</strong> Gabungkan berkas CSS dan JavaScript Anda menjadi sesedikit mungkin berkas. Ini mengurangi jumlah permintaan HTTP yang diperlukan oleh browser, yang penting untuk performa mobile.</li>
+                <li><strong>CSS Kustom Minimal:</strong> Batasi jumlah gaya kustom yang Anda tambahkan. Jika Anda dapat mencapai tampilan yang diinginkan dengan kelas AFUI yang ada, gunakanlah. Ketika menimpa gaya AFUI, pastikan Anda menargetkan secara spesifik untuk menghindari penulisan ulang aturan yang tidak perlu.</li>
+                <li><strong>Hapus Kode Tidak Terpakai:</strong> Tinjau kode JavaScript Anda dan hapus fungsi atau variabel yang tidak lagi digunakan. Ini mengurangi jejak kaki aplikasi Anda.</li>
+            </ul>
+
+            <h3>3. Hindari Operasi DOM yang Berlebihan</h3>
+            <p>Memanipulasi DOM (Document Object Model) adalah operasi yang mahal. Usahakan untuk:
+                <ul>
+                    <li><strong>Cache Selektor:</strong> Jika Anda sering mengakses elemen yang sama, simpan referensinya dalam variabel: <code>var myElement = $("#myId");</code></li>
+                    <li><strong>Batch Updates:</strong> Daripada memperbarui DOM dalam sebuah <em>loop</em>, kumpulkan perubahan dan terapkan sekaligus. Misalnya, buat fragmen HTML, lalu masukkan ke DOM.</li>
+                    <li><strong>Hindari Reflow/Repaint:</strong> Operasi seperti mengubah lebar, tinggi, atau posisi elemen dapat memicu <em>reflow</em> (penghitungan ulang tata letak) dan <em>repaint</em> (penggambaran ulang). Minimalkan operasi ini atau gunakan properti CSS yang lebih efisien seperti <code>transform</code> dan <code>opacity</code> untuk animasi.</li>
+                </ul>
+            </p>
+
+            <h3>4. Gunakan Transisi dan Animasi CSS</h3>
+            <p>AFUI sudah mengandalkan transisi CSS untuk perpindahan halaman yang halus. Untuk animasi kustom Anda, prioritaskan animasi berbasis CSS daripada JavaScript jika memungkinkan. Animasi CSS seringkali lebih lancar karena di-<em>render</em> oleh GPU.</p>
+            <pre><code class="language-css">
+/* Contoh animasi CSS sederhana */
+.my-animated-element {
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.my-animated-element.hidden {
+    transform: translateY(20px);
+    opacity: 0;
+}
+            </code></pre>
+
+            <h3>5. Manajemen Memori dan Sumber Daya</h3>
+            <ul>
+                <li><strong>Hapus Event Listener:</strong> Saat panel dibongkar atau elemen dihapus dari DOM, pastikan Anda menghapus <em>event listener</em> yang terkait untuk mencegah kebocoran memori. Event <code>panelbeforeunload</code> AFUI adalah tempat yang baik untuk ini.</li>
+                <li><strong>Gambar yang Dioptimalkan:</strong> Kompres gambar Anda dan gunakan format yang sesuai (misalnya, WebP untuk performa terbaik). Ukuran gambar yang besar adalah salah satu penyebab utama aplikasi web mobile yang lambat.</li>
+                <li><strong>Lazy Loading:</strong> Untuk gambar atau konten yang berada di bawah "lipatan" (tidak terlihat saat pertama kali dimuat), gunakan <em>lazy loading</em> untuk hanya memuatnya saat dibutuhkan.</li>
+            </ul>
+
+            <h3>6. Pengujian di Perangkat Nyata</h3>
+            <p>Selalu uji aplikasi Anda di berbagai perangkat mobile nyata, bukan hanya di emulator atau <em>developer tools</em> browser. Performa dan pengalaman pengguna dapat sangat bervariasi antar perangkat dan sistem operasi.</p>
+            <p>Perhatikan hal-hal seperti:
+                <ul>
+                    <li>Kecepatan transisi halaman.</li>
+                    <li>Responsivitas sentuhan.</li>
+                    <li>Performa <em>scrolling</em>.</li>
+                    <li>Penggunaan memori dan CPU (gunakan <em>profiler</em> di <em>developer tools</em> browser atau alat khusus Cordova/Android Studio/Xcode).</li>
+                </ul>
+            </p>
+
+            <h3>7. Pahami Keterbatasan AFUI (dan Framework Lain)</h3>
+            <p>Setiap <em>framework</em> memiliki kekuatan dan kelemahan. AFUI dirancang untuk menjadi ringan dan memberikan tampilan <em>native</em>, tetapi mungkin tidak memiliki semua fitur "dapur lengkap" atau ekosistem yang luas seperti <em>framework</em> yang lebih baru. Pahami kapan AFUI adalah pilihan terbaik dan kapan Anda mungkin perlu mencari alternatif atau memperluasnya dengan pustaka lain.</p>
+            <p>Misalnya, AFUI tidak memiliki sistem <em>routing</em> yang canggih di luar navigasi berbasis hash atau komponen manajemen <em>state</em> yang terintegrasi. Anda perlu melengkapi ini dengan solusi Anda sendiri jika diperlukan. Fleksibilitas ini bisa menjadi kekuatan bagi pengembang yang suka mengontrol setiap aspek, tetapi bisa menjadi kelemahan bagi mereka yang mencari solusi <em>out-of-the-box</em> yang lengkap.</p>
+
+            <p>Dengan mengikuti praktik terbaik ini, Anda tidak hanya akan membangun aplikasi AFUI yang fungsional, tetapi juga aplikasi yang dioptimalkan untuk performa dan memberikan pengalaman pengguna yang unggul di lingkungan mobile.</p>
+
+            <figure>
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="100" height="100">
+                    <title>Ilustrasi Optimalisasi dan Efisiensi</title>
+                    <rect x="10" y="10" width="80" height="80" rx="8" ry="8" fill="#E0F2F7" stroke="#3F51B5" stroke-width="1"/>
+                    <circle cx="50" cy="50" r="35" fill="#BBDEFB"/>
+                    <path d="M50 20 L55 30 L65 30 L60 40 L70 45 L60 55 L65 65 L55 60 L50 70 L45 60 L35 65 L40 55 L30 45 L40 40 L35 30 L45 30 Z" fill="#2196F3"/>
+                    <text x="50" y="52" font-family="Arial" font-size="6" fill="#FFF" text-anchor="middle">OPT</text>
+                    <path d="M50 20 L50 30" stroke="#3F51B5" stroke-width="1" />
+                    <path d="M50 70 L50 60" stroke="#3F51B5" stroke-width="1" />
+                    <path d="M25 50 L35 50" stroke="#3F51B5" stroke-width="1" />
+                    <path d="M75 50 L65 50" stroke="#3F51B5" stroke-width="1" />
+                    <text x="50" y="85" font-family="Arial" font-size="5" fill="#333" text-anchor="middle">Kecepatan &amp; Efisiensi</text>
+                </svg>
+                <figcaption>Simbol gigi roda di dalam lingkaran, merepresentasikan upaya optimalisasi dan fokus pada efisiensi performa aplikasi.</figcaption>
+            </figure>
+        </section>
+
+        <section>
+            <h2>Kesimpulan: Masa Depan dan Relevansi AFUI</h2>
+            <p>AFUI telah membuktikan dirinya sebagai <em>framework</em> UI yang handal dan efisien untuk pengembangan aplikasi web mobile dan <em>hybrid</em>. Dengan fokus pada performa, tampilan <em>native</em>, dan kemudahan penggunaan, ia menawarkan solusi yang kuat bagi pengembang yang mencari alternatif ringan untuk membangun antarmuka pengguna yang responsif.</p>
+
+            <p>Meskipun lanskap <em>framework</em> mobile terus berevolusi dengan munculnya teknologi-teknologi baru, AFUI tetap relevan untuk skenario tertentu. Keunggulannya dalam jejak kaki yang kecil menjadikannya pilihan ideal untuk proyek-proyek di mana ukuran aplikasi dan kecepatan muat adalah prioritas utama. Bagi pengembang yang sudah terbiasa dengan ekosistem jQuery/Zepto dan ingin mempertahankan pendekatan pengembangan web standar, AFUI menyediakan jembatan yang efektif ke dunia aplikasi mobile.</p>
+
+            <p>Kemampuannya untuk berintegrasi secara mulus dengan Apache Cordova adalah nilai tambah yang signifikan, memungkinkan pengembang untuk memanfaatkan fungsionalitas perangkat <em>native</em> sambil mempertahankan kecepatan dan fleksibilitas pengembangan web. Kustomisasi yang mudah dan struktur yang jelas juga memastikan bahwa AFUI dapat diadaptasi untuk memenuhi berbagai kebutuhan desain dan fungsionalitas.</p>
+
+            <p>Sebagai pengembang, kunci keberhasilan adalah memilih alat yang tepat untuk pekerjaan yang tepat. AFUI mungkin bukan solusi universal untuk setiap proyek mobile, tetapi untuk aplikasi yang membutuhkan performa tinggi, tampilan <em>native</em> yang konsisten, dan jejak kaki yang ringan, AFUI adalah pilihan yang solid dan patut untuk dipertimbangkan secara serius. Dengan pemahaman yang kuat tentang konsep inti dan praktik terbaiknya, Anda dapat memanfaatkan AFUI untuk membangun aplikasi web mobile yang tidak hanya berfungsi dengan baik, tetapi juga memberikan pengalaman pengguna yang menyenangkan dan efisien.</p>
+
+            <p>Semoga panduan ini memberikan Anda wawasan yang komprehensif dan bekal yang cukup untuk memulai perjalanan Anda dalam mengembangkan aplikasi web mobile yang cepat dan responsif menggunakan AFUI.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>Hak Cipta &copy; Artikel AFUI Ini. Semua hak dilindungi undang-undang.</p>
+    </footer>
+
+<style>
+.related-posts {
+  clear: both;
+  display: block;
+  width: 100%;
+  margin: 30px auto;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.related-posts h3 {
+  margin-top: 0;
+}
+.related-posts ul {
+  list-style: none;
+  padding: 0;
+}
+.related-posts li {
+  margin: 6px 0;
+}
+</style>
+<div class='related-posts'><h3>Related Posts</h3><ul><li><a href="/adem">Adem</a></li>
+<li><a href="/adipati">Adipati</a></li>
+<li><a href="/bareng">Bareng</a></li>
+<li><a href="/akar-bahar">Akar Bahar</a></li>
+<li><a href="/astatin">Astatin</a></li>
+<li><a href="/apostrof">Apostrof</a></li>
+<li><a href="/alkoholik">Alkoholik</a></li>
+<li><a href="/adiposit">Adiposit</a></li>
+<li><a href="/baga">Baga</a></li>
+<li><a href="/asam-lemak-omega-3">Asam Lemak Omega 3</a></li></ul></div>
+<script src="/ik.js"></script>
+</body>
+</html>

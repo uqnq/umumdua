@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algoritma Penjadwalan: Optimasi Efisiensi Sistem dan Sumber Daya</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;700&display=swap');
+
+        :root {
+            --primary-bg: #fdfdfd; /* Hampir putih */
+            --secondary-bg: #e0f7fa; /* Biru muda sangat cerah */
+            --text-color: #333; /* Abu-abu gelap */
+            --heading-color: #2c3e50; /* Biru-abu gelap */
+            --accent-color: #3498db; /* Biru cerah */
+            --light-accent: #85c1e9; /* Biru muda */
+            --border-color: #add8e6; /* Biru baja muda */
+            --code-bg: #f0f8ff; /* Alice blue */
+            --code-text: #c0392b; /* Merah bata untuk kode */
+            --link-color: #2980b9; /* Biru laut */
+            --link-hover: #1abc9c; /* Hijau toska cerah */
+        }
+
+        body {
+            font-family: 'Open Sans', 'Roboto', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            background-color: var(--secondary-bg);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        article {
+            background-color: var(--primary-bg);
+            max-width: 900px;
+            margin: 30px 20px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Roboto', sans-serif;
+            color: var(--heading-color);
+            margin-top: 1.5em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            color: var(--accent-color);
+            margin-bottom: 1em;
+            border-bottom: 2px solid var(--light-accent);
+            padding-bottom: 0.5em;
+        }
+
+        h2 {
+            font-size: 2em;
+            color: var(--heading-color);
+            border-left: 5px solid var(--accent-color);
+            padding-left: 10px;
+            margin-top: 2.5em;
+        }
+
+        h3 {
+            font-size: 1.6em;
+            color: var(--heading-color);
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 2em;
+        }
+
+        h4 {
+            font-size: 1.3em;
+            color: var(--heading-color);
+            margin-top: 1.8em;
+        }
+
+        p {
+            margin-bottom: 1em;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin-bottom: 1em;
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--link-hover);
+            text-decoration: underline;
+        }
+
+        code {
+            font-family: 'Roboto Mono', monospace;
+            background-color: var(--code-bg);
+            padding: 2px 4px;
+            border-radius: 4px;
+            color: var(--code-text);
+            font-size: 0.9em;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+            border: 1px solid var(--border-color);
+        }
+
+        pre code {
+            display: block;
+            padding: 0;
+            background: none;
+            color: var(--text-color);
+            font-size: 0.9em;
+        }
+
+        blockquote {
+            border-left: 5px solid var(--light-accent);
+            padding: 10px 20px;
+            margin: 1.5em 0;
+            background-color: var(--secondary-bg);
+            border-radius: 5px;
+            color: var(--heading-color);
+            font-style: italic;
+        }
+
+        img, svg {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        figcaption {
+            text-align: center;
+            font-style: italic;
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            article {
+                margin: 20px 15px;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.7em;
+            }
+
+            h3 {
+                font-size: 1.4em;
+            }
+
+            body {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            article {
+                margin: 15px 10px;
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            body {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <h1>Algoritma Penjadwalan: Optimasi Efisiensi Sistem dan Sumber Daya</h1>
+
+        <section>
+            <h2>Pengantar ke Dunia Algoritma Penjadwalan</h2>
+            <p>Dalam lanskap teknologi informasi dan operasional modern, konsep efisiensi dan optimasi adalah kunci untuk mencapai kinerja puncak. Salah satu pilar utama dalam pencarian efisiensi ini adalah <strong>algoritma penjadwalan</strong>. Secara sederhana, algoritma penjadwalan adalah serangkaian aturan atau metode yang digunakan untuk menentukan urutan eksekusi tugas, proses, atau aktivitas, serta alokasi sumber daya yang terbatas untuk tugas-tugas tersebut. Baik itu dalam sistem operasi komputer, manajemen proyek, manufaktur, komputasi awan, hingga lalu lintas jaringan, penjadwalan yang efektif adalah fondasi keberhasilan.</p>
+
+            <p>Pentingnya penjadwalan tidak bisa diremehkan. Tanpa penjadwalan yang tepat, sistem dapat mengalami kemacetan, penundaan yang tidak perlu, pemanfaatan sumber daya yang buruk, dan bahkan kegagalan total untuk memenuhi tenggat waktu krusial. Bayangkan sebuah pabrik tanpa jadwal produksi yang jelas, sebuah sistem operasi yang tidak dapat memutuskan proses mana yang harus dijalankan selanjutnya di antara ribuan proses, atau sebuah proyek konstruksi tanpa urutan tugas yang terstruktur. Kekacauan akan menjadi norma, dan produktivitas akan anjlok drastis, mengakibatkan kerugian waktu, biaya, dan reputasi.</p>
+
+            <p>Algoritma penjadwalan hadir untuk mengatasi tantangan ini. Mereka adalah "otak" di balik operasi yang efisien, membuat keputusan kompleks secara otomatis tentang kapan dan bagaimana sumber daya harus digunakan. Tujuan utama dari algoritma penjadwalan bervariasi tergantung pada konteks aplikasinya, namun secara umum meliputi:</p>
+            <ul>
+                <li><strong>Memaksimalkan Throughput:</strong> Yaitu, jumlah tugas yang diselesaikan per unit waktu. Semakin tinggi throughput, semakin produktif sistem tersebut.</li>
+                <li><strong>Meminimalkan Waktu Tunggu (Waiting Time):</strong> Waktu yang dihabiskan tugas dalam antrean siap (waiting queue) sebelum dieksekusi. Waktu tunggu yang rendah berarti responsivitas yang lebih baik.</li>
+                <li><strong>Meminimalkan Waktu Penyelesaian (Turnaround Time):</strong> Total waktu dari kedatangan tugas hingga penyelesaiannya. Ini mencakup waktu tunggu dan waktu eksekusi.</li>
+                <li><strong>Meminimalkan Waktu Respons (Response Time):</strong> Waktu dari permintaan hingga respons pertama dimulai. Ini sangat krusial untuk sistem interaktif di mana pengguna mengharapkan umpan balik yang cepat.</li>
+                <li><strong>Memastikan Keadilan (Fairness):</strong> Setiap tugas atau pengguna mendapatkan porsi sumber daya yang wajar, mencegah satu tugas memonopoli sumber daya.</li>
+                <li><strong>Memaksimalkan Pemanfaatan Sumber Daya:</strong> Menjaga sumber daya berharga (CPU, mesin, pekerja) tetap sibuk dan tidak menganggur, sehingga investasi pada sumber daya tersebut termanfaatkan secara optimal.</li>
+                <li><strong>Memenuhi Tenggat Waktu (Deadlines):</strong> Khususnya penting untuk sistem waktu nyata (real-time systems) di mana kegagalan memenuhi tenggat waktu dapat memiliki konsekuensi serius.</li>
+                <li><strong>Meminimalkan Biaya:</strong> Dalam konteks bisnis, penjadwalan juga sering bertujuan untuk mengurangi biaya operasional, seperti biaya energi atau biaya penalti keterlambatan.</li>
+            </ul>
+            <p>Artikel ini akan membawa kita menyelami berbagai aspek algoritma penjadwalan, mulai dari konsep dasar yang membentuk landasan teori, hingga implementasi spesifik di berbagai domain seperti sistem operasi, manajemen proyek, manufaktur, dan komputasi awan. Kami juga akan membahas tantangan inheren dalam penjadwalan dan mengintip arah masa depan di bidang yang terus berkembang ini. Kami akan menjelajahi bagaimana keputusan yang dibuat oleh algoritma ini membentuk tulang punggung efisiensi dan responsivitas di dunia digital dan fisik.</p>
+        </section>
+
+        <section>
+            <h2>Konsep Dasar dalam Penjadwalan</h2>
+            <p>Untuk memahami kompleksitas algoritma penjadwalan, penting untuk terlebih dahulu menguasai beberapa konsep fundamental yang menjadi dasar dari setiap masalah penjadwalan. Pemahaman ini akan membantu kita mengapresiasi nuansa dan kompromi di balik setiap pilihan algoritma.</p>
+
+            <h3>Entitas yang Dijadwalkan: Tugas, Proses, dan Pekerjaan</h3>
+            <p>Istilah-istilah ini sering digunakan secara bergantian, tetapi memiliki sedikit perbedaan kontekstual:</p>
+            <ul>
+                <li><strong>Tugas (Task):</strong> Istilah umum yang merujuk pada unit pekerjaan diskrit yang perlu diselesaikan. Ini bisa berupa komputasi kecil dalam sebuah program, produksi satu item di lini perakitan, atau langkah tunggal dalam sebuah proyek besar. Tugas biasanya memiliki durasi, sumber daya yang dibutuhkan, dan mungkin tenggat waktu.</li>
+                <li><strong>Proses (Process):</strong> Dalam konteks sistem operasi, proses adalah instance dari program yang sedang dieksekusi. Setiap proses memiliki lingkungan eksekusinya sendiri, termasuk ruang memori, register, status eksekusi (running, waiting, ready), dan data terkait. Penjadwalan proses adalah inti dari penjadwalan CPU.</li>
+                <li><strong>Pekerjaan (Job):</strong> Seringkali digunakan dalam konteks yang lebih luas, seperti sistem batch, manufaktur, atau komputasi terdistribusi. Sebuah pekerjaan dapat terdiri dari satu atau beberapa tugas yang saling terkait dan harus diselesaikan sebagai satu kesatuan logis.</li>
+            </ul>
+
+            <h3>Sumber Daya</h3>
+            <p>Sumber daya adalah entitas yang dibutuhkan oleh tugas atau proses untuk dieksekusi. Ketersediaan, jumlah, dan sifat sumber daya sangat mempengaruhi bagaimana penjadwalan harus dilakukan. Keterbatasan sumber daya adalah alasan utama mengapa penjadwalan diperlukan; jika sumber daya tak terbatas, semua tugas bisa dieksekusi secara paralel tanpa perlu urutan.</p>
+            <ul>
+                <li><strong>CPU (Central Processing Unit):</strong> Dalam sistem operasi, ini adalah otak yang menjalankan instruksi program. Jumlah inti CPU dan kecepatannya adalah sumber daya komputasi primer.</li>
+                <li><strong>Memori Utama (RAM):</strong> Ruang penyimpanan sementara yang dibutuhkan proses untuk menyimpan kode program dan data saat dieksekusi.</li>
+                <li><strong>Perangkat I/O (Input/Output):</strong> Disk drive, printer, kartu jaringan, sensor, aktuator, dan perangkat lain yang memungkinkan interaksi dengan dunia luar atau penyimpanan persisten.</li>
+                <li><strong>Mesin Produksi:</strong> Dalam lingkungan manufaktur, ini bisa berupa mesin bubut, mesin bor, stasiun perakitan, oven, atau robot.</li>
+                <li><strong>Tenaga Kerja (Manpower):</strong> Pekerja dengan keahlian tertentu yang dibutuhkan untuk melakukan tugas manual atau mengoperasikan mesin.</li>
+                <li><strong>Jaringan:</strong> Bandwidth atau kapasitas jalur komunikasi, yang penting untuk sistem terdistribusi dan komputasi awan.</li>
+            </ul>
+
+            <h3>Metrik Kinerja Penjadwalan</h3>
+            <p>Untuk mengevaluasi dan membandingkan efektivitas suatu algoritma penjadwalan, kita menggunakan berbagai metrik kuantitatif. Tujuannya adalah untuk mengoptimalkan satu atau lebih dari metrik ini:</p>
+            <ul>
+                <li><strong>Waktu Kedatangan (Arrival Time):</strong> Momen waktu di mana tugas atau proses menjadi tersedia di antrean siap untuk dijadwalkan.</li>
+                <li><strong>Waktu Eksekusi / Waktu Meledak (Burst Time / Execution Time):</strong> Waktu total yang dibutuhkan tugas untuk menyelesaikan eksekusinya pada CPU (atau sumber daya lain) setelah dimulai. Ini adalah waktu pemrosesan aktual yang dibutuhkan.</li>
+                <li><strong>Waktu Tunggu (Waiting Time):</strong> Durasi total yang dihabiskan tugas dalam antrean siap, menunggu untuk mendapatkan alokasi sumber daya. Ini adalah <code class="language-mathematics">Waktu Mulai Eksekusi Pertama - Waktu Kedatangan</code>, ditambah waktu tunggu tambahan jika proses di-preempt dan harus menunggu lagi. Tujuannya seringkali untuk meminimalkan waktu tunggu rata-rata.</li>
+                <li><strong>Waktu Penyelesaian (Turnaround Time):</strong> Total waktu yang dihabiskan tugas dalam sistem, dari kedatangannya hingga penyelesaian eksekusi total. Ini dihitung sebagai <code class="language-mathematics">Waktu Selesai Eksekusi - Waktu Kedatangan</code>. Meminimalkan waktu penyelesaian rata-rata adalah tujuan umum.</li>
+                <li><strong>Waktu Respons (Response Time):</strong> Khususnya penting untuk sistem interaktif. Ini adalah waktu dari kedatangan tugas hingga momen pertama kali CPU mulai mengeksekusinya (respons pertama). Ini berbeda dari waktu penyelesaian karena tidak menunggu tugas selesai sepenuhnya, hanya sampai pengguna melihat ada aktivitas.</li>
+                <li><strong>Throughput:</strong> Jumlah tugas atau proses yang berhasil diselesaikan per unit waktu. Algoritma yang baik berusaha memaksimalkan throughput.</li>
+                <li><strong>Pemanfaatan CPU/Sumber Daya:</strong> Persentase waktu sumber daya (misalnya, CPU) sibuk mengeksekusi tugas. Tujuannya adalah memaksimalkan pemanfaatan untuk menghindari sumber daya menganggur.</li>
+                <li><strong>Keadilan:</strong> Meskipun sulit diukur secara kuantitatif, keadilan mengacu pada seberapa merata sumber daya dialokasikan antar tugas atau pengguna. Sistem yang adil mencegah starvation (proses tertentu tidak pernah mendapatkan sumber daya) dan memastikan bahwa tidak ada satu proses pun yang memonopoli sumber daya terlalu lama.</li>
+                <li><strong>Keterlambatan (Lateness) dan Ketepatan Tenggat Waktu (Deadline Adherence):</strong> Untuk sistem dengan tenggat waktu, metrik ini mengukur seberapa jauh tugas selesai setelah tenggat waktu (<code class="language-mathematics">Waktu Selesai - Tenggat Waktu</code>). Keterlambatan negatif berarti selesai sebelum tenggat waktu. Tujuannya adalah meminimalkan keterlambatan atau memaksimalkan jumlah tugas yang memenuhi tenggat waktu.</li>
+            </ul>
+
+            <h3>Batasan dan Ketergantungan</h3>
+            <p>Selain sumber daya, penjadwalan juga harus mempertimbangkan batasan dan ketergantungan:</p>
+            <ul>
+                <li><strong>Batasan Pra-syarat (Precedence Constraints):</strong> Beberapa tugas tidak dapat dimulai sebelum tugas lain selesai. Misalnya, sebuah program tidak dapat dijalankan sebelum dikompilasi.</li>
+                <li><strong>Batasan Sumber Daya (Resource Constraints):</strong> Sumber daya mungkin tidak hanya terbatas dalam jumlah tetapi juga dalam jenisnya. Sebuah tugas mungkin membutuhkan sumber daya spesifik yang hanya tersedia pada mesin tertentu atau pada waktu tertentu.</li>
+                <li><strong>Batasan Tenggat Waktu (Deadlines):</strong> Tugas tertentu mungkin memiliki tenggat waktu yang harus dipenuhi, jika tidak ada konsekuensi yang tidak diinginkan.</li>
+            </ul>
+
+            <h3>Tipe Penjadwalan</h3>
+            <p>Penjadwalan dapat diklasifikasikan berdasarkan beberapa karakteristik penting yang mempengaruhi desain dan kinerja algoritma:</p>
+            <ul>
+                <li>
+                    <strong>Preemptive vs. Non-preemptive:</strong>
+                    <ul>
+                        <li><strong>Non-preemptive:</strong> Setelah tugas mulai dieksekusi dan dialokasikan sumber daya, ia akan berjalan sampai selesai atau secara sukarela melepaskan sumber dayanya (misalnya, menunggu I/O). Tugas ini tidak dapat diinterupsi oleh tugas lain yang memiliki prioritas lebih tinggi. FCFS dan SJF non-preemptive adalah contohnya.</li>
+                        <li><strong>Preemptive:</strong> Tugas yang sedang berjalan dapat dihentikan sementara (di-preempt) dan sumber dayanya (misalnya, CPU) dialokasikan ke tugas lain yang memiliki prioritas lebih tinggi atau yang gilirannya telah tiba (misalnya, setelah quantum waktu berakhir). Penjadwalan ini memungkinkan responsivitas yang lebih baik dan keadilan yang lebih tinggi. Contohnya adalah Round Robin dan SRTF.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Statik vs. Dinamis:</strong>
+                    <ul>
+                        <li><strong>Statik (Offline):</strong> Jadwal dibuat sepenuhnya sebelum eksekusi dimulai. Semua informasi tentang tugas (waktu kedatangan, waktu eksekusi, kebutuhan sumber daya) diasumsikan diketahui di awal. Cocok untuk lingkungan yang stabil dan dapat diprediksi, seperti dalam sistem produksi batch.</li>
+                        <li><strong>Dinamis (Online):</strong> Jadwal dibuat atau disesuaikan saat tugas tiba atau kondisi sistem berubah. Informasi tentang tugas mungkin tidak lengkap di awal, dan keputusan penjadwalan dibuat secara real-time. Lebih adaptif terhadap perubahan dan ketidakpastian, umum dalam sistem operasi dan komputasi awan.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Jangka Pendek, Menengah, dan Panjang:</strong> (Khusus dalam konteks Sistem Operasi)
+                    <ul>
+                        <li><strong>Penjadwal Jangka Panjang (Long-Term Scheduler):</strong> Memilih proses mana dari antrean disk (pool) yang akan dimuat ke memori utama untuk eksekusi. Mengontrol tingkat multiprogramming (jumlah proses yang aktif dalam memori).</li>
+                        <li><strong>Penjadwal Jangka Menengah (Medium-Term Scheduler):</strong> Bertanggung jawab untuk swapping proses keluar-masuk memori utama. Digunakan untuk mengurangi tingkat multiprogramming atau mengelola memori virtual.</li>
+                        <li><strong>Penjadwal Jangka Pendek (Short-Term Scheduler / CPU Scheduler):</strong> Ini adalah penjadwal paling sering yang memilih proses mana di antara proses yang siap yang akan dieksekusi oleh CPU selanjutnya. Ini adalah fokus utama sebagian besar diskusi tentang algoritma penjadwalan CPU.</li>
+                    </ul>
+                </li>
+            </ul>
+            <figure>
+                <svg width="600" height="200" viewBox="0 0 600 200" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="scheduling-concepts-title scheduling-concepts-desc">
+                    <title id="scheduling-concepts-title">Ilustrasi Konsep Penjadwalan</title>
+                    <desc id="scheduling-concepts-desc">Diagram aliran yang menunjukkan tugas, antrean siap, penjadwal, dan sumber daya, menggambarkan proses penjadwalan.</desc>
+                    <rect x="10" y="75" width="100" height="50" rx="8" fill="#AED6F1" stroke="#3498db" stroke-width="2"/>
+                    <text x="60" y="105" text-anchor="middle" font-family="Roboto, sans-serif" font-size="18" fill="#2C3E50">Tugas A</text>
+
+                    <rect x="10" y="10" width="100" height="50" rx="8" fill="#AED6F1" stroke="#3498db" stroke-width="2"/>
+                    <text x="60" y="40" text-anchor="middle" font-family="Roboto, sans-serif" font-size="18" fill="#2C3E50">Tugas B</text>
+
+                    <rect x="10" y="140" width="100" height="50" rx="8" fill="#AED6F1" stroke="#3498db" stroke-width="2"/>
+                    <text x="60" y="170" text-anchor="middle" font-family="Roboto, sans-serif" font-size="18" fill="#2C3E50">Tugas C</text>
+
+                    <path d="M110 100 H160" stroke="#3498db" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <path d="M110 35 H160" stroke="#3498db" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <path d="M110 165 H160" stroke="#3498db" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                    <rect x="160" y="50" width="120" height="100" rx="10" fill="#D5F5E3" stroke="#27AE60" stroke-width="2"/>
+                    <text x="220" y="105" text-anchor="middle" font-family="Roboto, sans-serif" font-size="18" fill="#2C3E50">Antrean Siap</text>
+
+                    <path d="M280 100 H330" stroke="#3498db" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                    <rect x="330" y="75" width="120" height="50" rx="10" fill="#FADBD8" stroke="#E74C3C" stroke-width="2"/>
+                    <text x="390" y="105" text-anchor="middle" font-family="Roboto, sans-serif" font-size="18" fill="#2C3E50">Penjadwal</text>
+
+                    <path d="M450 100 H500" stroke="#3498db" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+                    <rect x="500" y="75" width="90" height="50" rx="8" fill="#FFFACD" stroke="#F1C40F" stroke-width="2"/>
+                    <text x="545" y="105" text-anchor="middle" font-family="Roboto, sans-serif" font-size="18" fill="#2C3E50">Sumber Daya</text>
+
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#3498db" />
+                        </marker>
+                    </defs>
+                </svg>
+                <figcaption>Gambar 1: Aliran Konseptual Proses Penjadwalan dalam Sebuah Sistem</figcaption>
+            </figure>
+        </section>
+
+        <section>
+            <h2>Algoritma Penjadwalan dalam Sistem Operasi (CPU Scheduling)</h2>
+            <p>Penjadwalan CPU adalah salah satu fungsi terpenting dari sistem operasi modern. Tujuannya adalah untuk mengalokasikan CPU ke proses yang berbeda sehingga setiap proses mendapatkan waktu CPU yang adil dan efisien, sambil memenuhi tujuan kinerja seperti throughput tinggi dan waktu respons rendah. Penjadwal CPU bertanggung jawab untuk memilih dari proses-proses yang siap (berada dalam antrean siap) dan mengalokasikan CPU ke salah satu proses tersebut. Berikut adalah beberapa algoritma penjadwalan CPU yang paling umum:</p>
+
+            <h3>1. FCFS (First-Come, First-Served) / FIFO (First-In, First-Out)</h3>
+            <p>Ini adalah algoritma penjadwalan paling sederhana, di mana proses yang tiba pertama kali akan dilayani pertama kali. Konsepnya analog dengan antrean di bank atau supermarket. Ini adalah algoritma non-preemptive.</p>
+            <ul>
+                <li><strong>Cara Kerja:</strong> Proses dieksekusi dalam urutan kedatangan mereka di antrean siap. Setelah CPU dialokasikan ke suatu proses, proses tersebut akan berjalan sampai selesai atau sampai ia melakukan permintaan I/O (melepaskan CPU secara sukarela).</li>
+                <li><strong>Kelebihan:</strong>
+                    <ul>
+                        <li>Sangat sederhana dan mudah diimplementasikan karena tidak memerlukan perhitungan atau overhead yang kompleks.</li>
+                        <li>Menjamin bahwa setiap proses pada akhirnya akan dieksekusi, mencegah starvation.</li>
+                    </ul>
+                </li>
+                <li><strong>Kekurangan:</strong>
+                    <ul>
+                        <li><strong>Efek Konvoi (Convoy Effect):</strong> Jika proses dengan waktu eksekusi yang sangat panjang tiba di awal, semua proses berikutnya, meskipun singkat, harus menunggu sampai proses panjang tersebut selesai. Ini dapat menyebabkan waktu tunggu rata-rata yang sangat tinggi dan pemanfaatan sumber daya yang buruk.</li>
+                        <li>Tidak cocok untuk sistem interaktif karena waktu respons bisa sangat buruk dan tidak dapat diprediksi.</li>
+                        <li>Kinerja sangat bergantung pada urutan kedatangan proses.</li>
+                    </ul>
+                </li>
+                <li><strong>Contoh:</strong>
+                    <p>Misalkan ada 3 proses dengan waktu kedatangan yang sama (t=0):</p>
+                    <ul>
+                        <li>P1: Waktu Eksekusi = 24</li>
+                        <li>P2: Waktu Eksekusi = 3</li>
+                        <li>P3: Waktu Eksekusi = 3</li>
+                    </ul>
+                    <p>Jika urutan kedatangan adalah P1, P2, P3:</p>
+                    <pre><code>Gantt Chart (FCFS):
+| P1 (24) | P2 (3) | P3 (3) |
+0         24       27       30</code></pre>
+                    <ul>
+                        <li>Waktu Tunggu P1 = 0</li>
+                        <li>Waktu Tunggu P2 = 24</li>
+                        <li>Waktu Tunggu P3 = 27</li>
+                        <li>Rata-rata Waktu Tunggu = (0 + 24 + 27) / 3 = 17</li>
+                    </ul>
+                    <p>Namun, jika urutan kedatangan adalah P2, P3, P1:</p>
+                    <pre><code>Gantt Chart (FCFS):
+| P2 (3) | P3 (3) | P1 (24) |
+0        3        6        30</code></pre>
+                    <ul>
+                        <li>Waktu Tunggu P2 = 0</li>
+                        <li>Waktu Tunggu P3 = 3</li>
+                        <li>Waktu Tunggu P1 = 6</li>
+                        <li>Rata-rata Waktu Tunggu = (0 + 3 + 6) / 3 = 3</li>
+                    </ul>
+                    <p>Terlihat jelas bahwa urutan kedatangan sangat mempengaruhi waktu tunggu rata-rata, menunjukkan inefisiensi potensial.</p>
+                </li>
+            </ul>
+
+            <h3>2. SJF (Shortest Job First) / SPN (Shortest Process Next)</h3>
+            <p>Algoritma ini menjadwalkan proses dengan waktu eksekusi terpendek terlebih dahulu. SJF dapat bersifat non-preemptive atau preemptive, dan dikenal karena memberikan waktu tunggu rata-rata minimum.</p>
+
+            <h4>2.1. SJF Non-preemptive</h4>
+            <ul>
+                <li><strong>Cara Kerja:</strong> Ketika CPU bebas, penjadwal memeriksa antrean siap dan memilih proses yang tersedia dengan waktu eksekusi terpendek. Proses ini kemudian dijalankan sampai selesai tanpa interupsi. Jika ada beberapa proses dengan waktu eksekusi yang sama, FCFS biasanya digunakan sebagai tie-breaker.</li>
+                <li><strong>Kelebihan:</strong>
+                    <ul>
+                        <li>Optimal dalam meminimalkan waktu tunggu rata-rata dan waktu penyelesaian rata-rata di antara semua algoritma penjadwalan. Ini adalah sifat matematis yang telah terbukti.</li>
+                    </ul>
+                </li>
+                <li><strong>Kekurangan:</strong>
+                    <ul>
+                        <li><strong>Masalah Prediksi Waktu Eksekusi:</strong> Tantangan terbesar adalah bagaimana memprediksi waktu eksekusi proses secara akurat di awal. Dalam praktiknya, perkiraan sering dibuat berdasarkan riwayat eksekusi sebelumnya (misalnya, menggunakan rata-rata eksponensial).</li>
+                        <li><strong>Starvation:</strong> Proses yang sangat panjang mungkin tidak pernah mendapatkan CPU jika terus-menerus ada proses-proses pendek yang baru tiba. Proses panjang tersebut akan selalu "tertinggal" di antrean.</li>
+                        <li>Tidak cocok untuk sistem real-time karena proses panjang mungkin tidak dapat memenuhi tenggat waktu yang ketat.</li>
+                    </ul>
+                </li>
+                <li><strong>Contoh:</strong>
+                    <p>Proses (semua tiba pada t=0):</p>
+                    <ul>
+                        <li>P1: Waktu Eksekusi = 6</li>
+                        <li>P2: Waktu Eksekusi = 8</li>
+                        <li>P3: Waktu Eksekusi = 7</li>
+                        <li>P4: Waktu Eksekusi = 3</li>
+                    </ul>
+                    <p>Urutan eksekusi berdasarkan SJF:</p>
+                    <pre><code>Gantt Chart (SJF Non-preemptive):
+| P4 (3) | P1 (6) | P3 (7) | P2 (8) |
+0        3        9        16       24</code></pre>
+                    <ul>
+                        <li>Waktu Tunggu P4 = 0</li>
+                        <li>Waktu Tunggu P1 = 3</li>
+                        <li>Waktu Tunggu P3 = 9</li>
+                        <li>Waktu Tunggu P2 = 16</li>
+                        <li>Rata-rata Waktu Tunggu = (0 + 3 + 9 + 16) / 4 = 7</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>2.2. SRTF (Shortest Remaining Time First) / SJF Preemptive</h4>
+            <p>Ini adalah versi preemptive dari SJF, yang seringkali memberikan kinerja yang lebih baik dalam hal waktu respons dan waktu tunggu rata-rata.</p>
+            <ul>
+                <li><strong>Cara Kerja:</strong> CPU dialokasikan ke proses yang memiliki waktu eksekusi tersisa terpendek. Setiap kali proses baru tiba, atau proses yang sedang berjalan menyelesaikan sebagian dari eksekusinya, penjadwal akan memeriksa kembali antrean siap. Jika proses baru memiliki waktu eksekusi yang lebih pendek dari waktu sisa proses yang sedang berjalan, proses yang sedang berjalan di-preempt, dan proses baru dimulai.</li>
+                <li><strong>Kelebihan:</strong>
+                    <ul>
+                        <li>Memberikan waktu tunggu rata-rata dan waktu penyelesaian rata-rata yang lebih rendah dibandingkan SJF non-preemptive.</li>
+                        <li>Lebih responsif terhadap proses-proses pendek yang tiba di tengah-tengah eksekusi proses panjang.</li>
+                    </ul>
+                </li>
+                <li><strong>Kekurangan:</strong>
+                    <ul>
+                        <li>Memiliki overhead yang lebih tinggi karena seringnya pergantian konteks (context switching) saat proses di-preempt dan yang lain dimulai.</li>
+                        <li>Masih menghadapi masalah prediksi waktu eksekusi dan starvation (meskipun kurang parah daripada SJF non-preemptive).</li>
+                        <li>Membutuhkan pembaruan terus-menerus pada waktu sisa proses.</li>
+                    </ul>
+                </li>
+                <li><strong>Contoh:</strong>
+                    <p>Proses:</p>
+                    <ul>
+                        <li>P1: Waktu Eksekusi = 8, Waktu Kedatangan = 0</li>
+                        <li>P2: Waktu Eksekusi = 4, Waktu Kedatangan = 1</li>
+                        <li>P3: Waktu Eksekusi = 9, Waktu Kedatangan = 2</li>
+                        <li>P4: Waktu Eksekusi = 5, Waktu Kedatangan = 3</li>
+                    </ul>
+                    <pre><code>Gantt Chart (SRTF):
+| P1 (1) | P2 (4) | P4 (5) | P1 (7) | P3 (9) |
+0        1        5        10       17       26
+
+Penjelasan Alur Eksekusi:
+- Pada t=0, hanya P1 yang tiba. P1 dimulai. Sisa P1=8.
+- Pada t=1, P2 tiba. P2 (sisa 4) lebih pendek dari P1 (sisa 7). P1 di-preempt, P2 dimulai. Sisa P1=7, Sisa P2=4.
+- Pada t=2, P3 tiba. P2 (sisa 3) masih lebih pendek dari P3 (sisa 9) dan P1 (sisa 7). P2 terus berjalan.
+- Pada t=3, P4 tiba. P2 (sisa 2) masih terpendek dibandingkan P4 (sisa 5), P3 (sisa 9), P1 (sisa 7). P2 terus berjalan.
+- Pada t=5, P2 selesai. Proses yang tersisa: P1 (sisa 7), P3 (sisa 9), P4 (sisa 5). P4 memiliki sisa terpendek. P4 dimulai.
+- Pada t=10, P4 selesai. Proses yang tersisa: P1 (sisa 7), P3 (sisa 9). P1 memiliki sisa terpendek. P1 dimulai.
+- Pada t=17, P1 selesai. Proses yang tersisa: P3 (sisa 9). P3 dimulai.
+- Pada t=26, P3 selesai.</code></pre>
+                </li>
+            </ul>
+
+            <h3>3. Penjadwalan Prioritas (Priority Scheduling)</h3>
+            <p>Setiap proses diberi nilai prioritas, dan CPU dialokasikan ke proses dengan prioritas tertinggi. Proses dengan prioritas yang sama biasanya dijadwalkan menggunakan FCFS sebagai tie-breaker. Penjadwalan prioritas bisa preemptive atau non-preemptive.</p>
+            <ul>
+                <li><strong>Cara Kerja:</strong> Penjadwal selalu memilih proses dengan prioritas tertinggi dari antrean siap. Jika preemptive, proses prioritas lebih rendah yang sedang berjalan akan dihentikan jika proses prioritas tinggi yang baru tiba menjadi siap. Prioritas dapat ditentukan secara internal (misalnya, berdasarkan waktu eksekusi, kebutuhan memori, atau rasio I/O ke CPU) atau eksternal (misalnya, berdasarkan jenis tugas, kebijakan departemen, atau biaya yang dibayarkan pengguna).</li>
+                <li><strong>Kelebihan:</strong>
+                    <ul>
+                        <li>Dapat digunakan untuk memenuhi persyaratan sistem real-time atau untuk memberikan perlakuan khusus pada tugas-tugas penting atau waktu-sensitif.</li>
+                        <li>Fleksibel untuk mengimplementasikan kebijakan penjadwalan yang kompleks.</li>
+                    </ul>
+                </li>
+                <li><strong>Kekurangan:</strong>
+                    <ul>
+                        <li><strong>Starvation/Indefinite Blocking:</strong> Masalah utama adalah proses dengan prioritas rendah mungkin tidak pernah dieksekusi jika terus-menerus ada proses prioritas tinggi yang baru tiba atau proses prioritas tinggi yang tidak pernah selesai.</li>
+                        <li><strong>Solusi untuk Starvation: Aging:</strong> Secara bertahap meningkatkan prioritas proses yang telah menunggu terlalu lama. Ini memastikan bahwa seiring waktu, setiap proses akan mencapai prioritas yang cukup tinggi untuk dieksekusi.</li>
+                        <li>Penentuan prioritas yang tepat dapat menjadi masalah; penugasan prioritas yang tidak tepat dapat menyebabkan kinerja sistem yang buruk.</li>
+                    </ul>
+                </li>
+                <li><strong>Contoh:</strong>
+                    <p>Proses (semua tiba pada t=0):</p>
+                    <ul>
+                        <li>P1: Waktu Eksekusi = 10, Prioritas = 3 (lebih rendah jika angka lebih besar)</li>
+                        <li>P2: Waktu Eksekusi = 1, Prioritas = 1</li>
+                        <li>P3: Waktu Eksekusi = 2, Prioritas = 4</li>
+                        <li>P4: Waktu Eksekusi = 1, Prioritas = 5</li>
+                        <li>P5: Waktu Eksekusi = 5, Prioritas = 2</li>
+                    </ul>
+                    <p>Jika preemptive dan semua tiba pada t=0:</p>
+                    <pre><code>Gantt Chart (Priority Preemptive):
+| P2 (1) | P5 (5) | P1 (10) | P3 (2) | P4 (1) |
+0        1        6        16       18       19</code></pre>
+                    <ul>
+                        <li>Urutan berdasarkan prioritas tertinggi (angka terkecil): P2 (1), P5 (2), P1 (3), P3 (4), P4 (5).</li>
+                        <li>Waktu Tunggu P2 = 0</li>
+                        <li>Waktu Tunggu P5 = 1</li>
+                        <li>Waktu Tunggu P1 = 6</li>
+                        <li>Waktu Tunggu P3 = 16</li>
+                        <li>Waktu Tunggu P4 = 18</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>4. Round Robin (RR)</h3>
+            <p>Algoritma Round Robin dirancang khusus untuk sistem time-sharing (interaktif) di mana keadilan dan responsivitas adalah prioritas. Ini adalah algoritma preemptive.</p>
+            <ul>
+                <li><strong>Cara Kerja:</strong> Proses-proses dijaga dalam antrean siap FCFS. Penjadwal mengambil proses pertama dari antrean, memberikannya CPU untuk satu jatah waktu kecil yang disebut <em>quantum waktu</em> (time quantum).
+                    <ul>
+                        <li>Jika proses belum selesai setelah quantum waktu berakhir, ia di-preempt dan ditempatkan di akhir antrean siap.</li>
+                        <li>Jika proses selesai sebelum quantum waktu habis, ia melepaskan CPU secara sukarela.</li>
+                    </ul>
+                </li>
+                <li><strong>Kelebihan:</strong>
+                    <ul>
+                        <li>Memberikan responsivitas yang sangat baik untuk sistem interaktif karena setiap proses mendapatkan waktu CPU secara berkala.</li>
+                        <li>Menjamin keadilan karena setiap proses pada akhirnya mendapatkan giliran.</li>
+                        <li>Mencegah starvation secara efektif.</li>
+                    </ul>
+                </li>
+                <li><strong>Kekurangan:</strong>
+                    <ul>
+                        <li>Overhead tinggi karena seringnya pergantian konteks (context switching) jika quantum waktu terlalu kecil.</li>
+                        <li>Kinerja sangat bergantung pada ukuran quantum waktu:
+                            <ul>
+                                <li><strong>Quantum terlalu besar:</strong> RR akan mendekati perilaku FCFS. Responsivitas menurun.</li>
+                                <li><strong>Quantum terlalu kecil:</strong> Overhead pergantian konteks menjadi dominan, menghabiskan terlalu banyak waktu CPU untuk manajemen overhead daripada eksekusi proses yang sebenarnya, sehingga mengurangi efisiensi CPU secara keseluruhan. Quantum waktu yang ideal adalah sekitar 10-100 milidetik, dan overhead pergantian konteks biasanya kurang dari 1 milidetik.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>Contoh:</strong>
+                    <p>Proses: P1 (24), P2 (3), P3 (3). Quantum waktu = 4.</p>
+                    <pre><code>Gantt Chart (Round Robin, Quantum=4):
+| P1 (4) | P2 (3) | P3 (3) | P1 (4) | P1 (4) | P1 (4) | P1 (4) | P1 (4) |
+0        4        7        10       14       18       22       26       30</code></pre>
+                    <p>Perhitungan Waktu Tunggu (akumulasi):</p>
+                    <ul>
+                        <li>P1: Menunggu pada t=0 (0), menunggu setelah P2 dan P3 (10-4=6), menunggu setelah P1 berikutnya (14-7=7), menunggu setelah P1 berikutnya (18-10=8), menunggu setelah P1 berikutnya (22-14=8), menunggu setelah P1 berikutnya (26-18=8). Total Waktu Tunggu P1 = 0 + 6 + 7 + 8 + 8 + 8 = 37.</li>
+                        <li>P2: Menunggu 4 (mulai t=4). Total Waktu Tunggu P2 = 4.</li>
+                        <li>P3: Menunggu 7 (mulai t=7). Total Waktu Tunggu P3 = 7.</li>
+                    </ul>
+                    <p>Rata-rata Waktu Tunggu = (37 + 4 + 7) / 3 = 48 / 3 = 16. <br>
+                    <em>Catatan: Perhitungan waktu tunggu di RR bisa lebih kompleks karena proses dapat menunggu di beberapa interval.</em></p>
+                </li>
+            </ul>
+
+            <h3>5. Penjadwalan Antrean Multilevel (Multilevel Queue Scheduling)</h3>
+            <p>Algoritma ini mengelompokkan proses ke dalam beberapa antrean terpisah berdasarkan karakteristiknya (misalnya, proses foreground/interaktif, proses background/batch, proses sistem). Setiap antrean memiliki algoritma penjadwalannya sendiri.</p>
+            <ul>
+                <li><strong>Cara Kerja:</strong> Sistem operasi mempartisi antrean siap menjadi beberapa antrean terpisah. Misalnya:
+                    <ul>
+                        <li>Antrean 0: Proses Sistem (prioritas tertinggi, mungkin menggunakan FCFS atau Priority)</li>
+                        <li>Antrean 1: Proses Interaktif (prioritas tinggi, mungkin menggunakan Round Robin)</li>
+                        <li>Antrean 2: Proses Batch (prioritas rendah, mungkin menggunakan FCFS atau SJF non-preemptive)</li>
+                    </ul>
+                    Proses tidak dapat berpindah antar antrean setelah diklasifikasikan. Penjadwal utama memberikan prioritas ke antrean yang lebih tinggi.
+                </li>
+                <li><strong>Kelebihan:</strong>
+                    <ul>
+                        <li>Fleksibel untuk mengimplementasikan kebijakan penjadwalan yang berbeda untuk jenis proses yang berbeda.</li>
+                        <li>Mengurangi overhead karena proses di antrean tertentu hanya perlu dievaluasi terhadap proses lain di antrean yang sama.</li>
+                        <li>Cocok untuk sistem yang memiliki kategori proses yang jelas dengan kebutuhan yang berbeda.</li>
+                    </ul>
+                </li>
+                <li><strong>Kekurangan:</strong>
+                    <ul>
+                        <li>Dapat menyebabkan starvation bagi antrean berprioritas rendah jika antrean berprioritas tinggi selalu sibuk.</li>
+                        <li>Sulit untuk mengklasifikasikan proses ke antrean yang benar secara statis di awal, karena karakteristik proses dapat berubah selama eksekusi.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>6. Penjadwalan Antrean Multilevel Umpan Balik (Multilevel Feedback Queue Scheduling - MLFQ)</h3>
+            <p>Ini adalah perbaikan signifikan dari penjadwalan antrean multilevel, yang memungkinkan proses untuk berpindah antar antrean. MLFQ adalah algoritma yang paling umum digunakan di sistem operasi modern (seperti Linux dan varian Unix lainnya) karena fleksibilitas dan kemampuannya untuk beradaptasi.</p>
+            <ul>
+                <li><strong>Cara Kerja:</strong>
+                    <ul>
+                        <li>Proses baru masuk ke antrean dengan prioritas tertinggi (misalnya, Antrean 0) dan dijadwalkan menggunakan Round Robin dengan quantum waktu yang kecil. Tujuannya adalah memberikan respons cepat kepada proses interaktif.</li>
+                        <li>Jika proses tidak selesai dalam quantum waktu tersebut, ia dipindahkan ke antrean prioritas yang lebih rendah (Antrean 1), yang mungkin memiliki quantum waktu yang lebih besar atau menggunakan algoritma FCFS/SJF. Ini mengidentifikasi proses yang cenderung CPU-bound.</li>
+                        <li>Proses yang menghabiskan terlalu banyak waktu di CPU (menunjukkan bahwa itu adalah proses CPU-bound) akan terus diturunkan ke antrean yang lebih rendah, sehingga memberikan CPU kepada proses lain.</li>
+                        <li>Proses yang menjadi I/O-bound (sering menunggu I/O) mungkin dipindahkan ke antrean prioritas lebih tinggi (atau tetap di antrean asalnya jika sudah tinggi) setelah selesai I/O, untuk mendapatkan responsivitas yang lebih baik.</li>
+                        <li><strong>Aging</strong> dapat diimplementasikan untuk mencegah starvation, dengan memindahkan proses dari antrean prioritas rendah ke antrean prioritas lebih tinggi setelah menunggu periode tertentu atau setelah beberapa kali di-preempt tanpa dieksekusi.</li>
+                    </ul>
+                </li>
+                <li><strong>Kelebihan:</strong>
+                    <ul>
+                        <li>Sangat fleksibel dan dapat diatur untuk mengoptimalkan waktu respons untuk proses interaktif dan throughput untuk proses batch.</li>
+                        <li>Secara implisit mengidentifikasi jenis proses (CPU-bound vs. I/O-bound) dan menyesuaikan penjadwalannya tanpa perlu deklarasi eksplisit dari pengguna atau programmer.</li>
+                        <li>Mengatasi masalah starvation dan masalah prediksi waktu eksekusi dari SJF/SRTF karena menggunakan riwayat eksekusi untuk mengubah prioritas.</li>
+                    </ul>
+                </li>
+                <li><strong>Kekurangan:</strong>
+                    <ul>
+                        <li>Sangat kompleks untuk diimplementasikan dan dikonfigurasi secara optimal (jumlah antrean, algoritma per antrean, ukuran quantum waktu, parameter aging).</li>
+                        <li>Konfigurasi yang buruk dapat menyebabkan kinerja yang tidak optimal.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>7. Penjadwalan Waktu Nyata (Real-time Scheduling)</h3>
+            <p>Dalam sistem waktu nyata, kebenaran hasil tidak hanya bergantung pada hasil komputasi yang benar tetapi juga pada waktu hasil tersebut diproduksi. Kegagalan memenuhi tenggat waktu dapat memiliki konsekuensi serius (misalnya, sistem kontrol penerbangan, perangkat medis).</p>
+            <ul>
+                <li><strong>Jenis Sistem Waktu Nyata:</strong>
+                    <ul>
+                        <li><strong>Hard Real-time:</strong> Memiliki tenggat waktu yang ketat dan tidak dapat ditolerir. Kegagalan memenuhi tenggat waktu adalah kegagalan sistem.</li>
+                        <li><strong>Soft Real-time:</strong> Memiliki tenggat waktu yang diinginkan, tetapi sedikit keterlambatan dapat ditolerir dengan sedikit penurunan kualitas.</li>
+                    </ul>
+                </li>
+                <li><strong>Karakteristik:</strong>
+                    <ul>
+                        <li>Tugas memiliki tenggat waktu, waktu eksekusi, dan periode (jika periodik).</li>
+                        <li>Seringkali preemptive dan berbasis prioritas.</li>
+                    </ul>
+                </li>
+                <li><strong>Algoritma Umum:</strong>
+                    <ul>
+                        <li><strong>Rate Monotonic Scheduling (RMS):</strong> Algoritma penjadwalan statis (prioritas tetap) untuk tugas-tugas periodik. Tugas dengan periode terkecil (frekuensi tertinggi) diberi prioritas tertinggi. Optimal untuk set tugas tertentu.</li>
+                        <li><strong>Earliest Deadline First (EDF):</strong> Algoritma penjadwalan dinamis (prioritas berubah-ubah) di mana tugas dengan tenggat waktu terdekat diberi prioritas tertinggi. Optimal dalam arti dapat menjadwalkan set tugas apa pun yang dapat dijadwalkan oleh algoritma lain, asalkan pemanfaatan CPU tidak melebihi 100%.</li>
+                    </ul>
+                </li>
+            </ul>
+            <figure>
+                <svg width="600" height="250" viewBox="0 0 600 250" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="cpu-scheduling-gantt-title cpu-scheduling-gantt-desc">
+                    <title id="cpu-scheduling-gantt-title">Ilustrasi Bagan Gantt Penjadwalan CPU</title>
+                    <desc id="cpu-scheduling-gantt-desc">Sebuah bagan Gantt yang menunjukkan eksekusi proses P1, P2, P3 dari waktu 0 hingga 15. P1 berwarna biru, P2 hijau, P3 oranye. Terlihat P1 dan P2 dieksekusi secara bergantian dan P3 mengambil gilirannya.</desc>
+                    <!-- Time axis -->
+                    <line x1="50" y1="200" x2="550" y2="200" stroke="#34495e" stroke-width="2"/>
+                    <text x="50" y="215" font-family="Roboto, sans-serif" font-size="14" fill="#34495e">0</text>
+                    <text x="120" y="215" font-family="Roboto, sans-serif" font-size="14" fill="#34495e">2</text>
+                    <text x="220" y="215" font-family="Roboto, sans-serif" font-size="14" fill="#34495e">5</text>
+                    <text x="320" y="215" font-family="Roboto, sans-serif" font-size="14" fill="#34495e">8</text>
+                    <text x="420" y="215" font-family="Roboto, sans-serif" font-size="14" fill="#34495e">11</text>
+                    <text x="520" y="215" font-family="Roboto, sans-serif" font-size="14" fill="#34495e">14</text>
+                    <text x="540" y="215" font-family="Roboto, sans-serif" font-size="14" fill="#34495e">Waktu</text>
+
+                    <!-- P1 -->
+                    <rect x="50" y="150" width="70" height="40" fill="#85C1E9" stroke="#3498db" stroke-width="1.5"/>
+                    <text x="85" y="175" text-anchor="middle" font-family="Roboto, sans-serif" font-size="16" fill="#2C3E50">P1</text>
+                    <rect x="250" y="150" width="70" height="40" fill="#85C1E9" stroke="#3498db" stroke-width="1.5"/>
+                    <text x="285" y="175" text-anchor="middle" font-family="Roboto, sans-serif" font-size="16" fill="#2C3E50">P1</text>
+                     <rect x="420" y="150" width="100" height="40" fill="#85C1E9" stroke="#3498db" stroke-width="1.5"/>
+                    <text x="470" y="175" text-anchor="middle" font-family="Roboto, sans-serif" font-size="16" fill="#2C3E50">P1</text>
+
+                    <!-- P2 -->
+                    <rect x="120" y="100" width="100" height="40" fill="#A2D9CE" stroke="#2ECC71" stroke-width="1.5"/>
+                    <text x="170" y="125" text-anchor="middle" font-family="Roboto, sans-serif" font-size="16" fill="#2C3E50">P2</text>
+                    <rect x="350" y="100" width="70" height="40" fill="#A2D9CE" stroke="#2ECC71" stroke-width="1.5"/>
+                    <text x="385" y="125" text-anchor="middle" font-family="Roboto, sans-serif" font-size="16" fill="#2C3E50">P2</text>
+
+                    <!-- P3 -->
+                    <rect x="220" y="50" width="30" height="40" fill="#F8C471" stroke="#F1C40F" stroke-width="1.5"/>
+                    <text x="235" y="75" text-anchor="middle" font-family="Roboto, sans-serif" font-size="16" fill="#2C3E50">P3</text>
+                    <rect x="320" y="50" width="30" height="40" fill="#F8C471" stroke="#F1C40F" stroke-width="1.5"/>
+                    <text x="335" y="75" text-anchor="middle" font-family="Roboto, sans-serif" font-size="16" fill="#2C3E50">P3</text>
+
+                    <text x="20" y="175" font-family="Roboto, sans-serif" font-size="14" fill="#34495e">P1</text>
+                    <text x="20" y="125" font-family="Roboto, sans-serif" font-size="14" fill="#34495e">P2</text>
+                    <text x="20" y="75" font-family="Roboto, sans-serif" font-size="14" fill="#34495e">P3</text>
+                </svg>
+                <figcaption>Gambar 2: Contoh Bagan Gantt untuk Penjadwalan CPU (mengilustrasikan preemptive scheduling)</figcaption>
+            </figure>
+        </section>
+
+        <section>
+            <h2>Algoritma Penjadwalan dalam Manajemen Proyek</h2>
+            <p>Dalam manajemen proyek, penjadwalan berfokus pada urutan aktivitas, durasi, dan alokasi sumber daya untuk mencapai tujuan proyek dalam tenggat waktu dan anggaran yang ditentukan. Ini adalah area yang sangat berbeda dari penjadwalan CPU, dengan fokus pada ketergantungan tugas, jalur kritis, dan pengelolaan risiko.</p>
+
+            <h3>1. CPM (Critical Path Method) / Metode Jalur Kritis</h3>
+            <p>CPM adalah teknik manajemen proyek untuk menganalisis dan merepresentasikan tugas-tugas yang terlibat dalam proyek. Ini membantu mengidentifikasi tugas-tugas terlama yang harus diselesaikan tepat waktu agar proyek tidak tertunda. CPM umumnya digunakan untuk proyek di mana durasi tugas cukup pasti.</p>
+            <ul>
+                <li><strong>Cara Kerja:</strong>
+                    <ol>
+                        <li><strong>Identifikasi semua tugas:</strong> Daftar semua aktivitas yang diperlukan untuk menyelesaikan proyek. Tugas dapat dibagi menjadi subtugas yang lebih kecil.</li>
+                        <li><strong>Tentukan ketergantungan (Precedence Relationships):</strong> Tentukan tugas mana yang harus selesai sebelum tugas lain dapat dimulai. Ketergantungan umum meliputi:
+                            <ul>
+                                <li>Finish-to-Start (FS): Tugas B tidak bisa dimulai sampai Tugas A selesai.</li>
+                                <li>Start-to-Start (SS): Tugas B tidak bisa dimulai sampai Tugas A dimulai.</li>
+                                <li>Finish-to-Finish (FF): Tugas B tidak bisa selesai sampai Tugas A selesai.</li>
+                                <li>Start-to-Finish (SF): Tugas B tidak bisa selesai sampai Tugas A dimulai (jarang).</li>
+                            </ul>
+                        </li>
+                        <li><strong>Perkirakan durasi:</strong> Perkirakan waktu yang dibutuhkan untuk setiap tugas. Dalam CPM klasik, durasi ini diasumsikan pasti.</li>
+                        <li><strong>Buat diagram jaringan (Network Diagram):</strong> Gambarkan diagram (misalnya, Activity-on-Node atau Activity-on-Arrow) yang menunjukkan tugas dan ketergantungannya.</li>
+                        <li><strong>Hitung jalur kritis:</strong> Jalur kritis adalah urutan tugas terpanjang dari awal hingga akhir proyek. Tugas-tugas pada jalur kritis tidak memiliki kelonggaran waktu (slack time atau float); penundaan pada tugas ini akan menunda seluruh proyek.
+                            <ul>
+                                <li><strong>Early Start (ES):</strong> Waktu paling awal tugas dapat dimulai.</li>
+                                <li><strong>Early Finish (EF):</strong> Waktu paling awal tugas dapat selesai (ES + Durasi).</li>
+                                <li><strong>Late Start (LS):</strong> Waktu paling lambat tugas dapat dimulai tanpa menunda proyek.</li>
+                                <li><strong>Late Finish (LF):</strong> Waktu paling lambat tugas dapat selesai tanpa menunda proyek (LS + Durasi).</li>
+                                <li><strong>Slack/Float:</strong> Perbedaan antara LF dan EF, atau LS dan ES. Tugas dengan slack nol berada di jalur kritis.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </li>
+                <li><strong>Kelebihan:</strong>
+                    <ul>
+                        <li>Mengidentifikasi tugas-tugas kunci yang memerlukan perhatian ketat dan pemantauan terus-menerus.</li>
+                        <li>Membantu memprediksi waktu penyelesaian proyek secara keseluruhan dan mengelola harapan pemangku kepentingan.</li>
+                        <li>Memungkinkan manajer proyek untuk mengalokasikan sumber daya secara strategis ke tugas-tugas jalur kritis.</li>
+                        <li>Menjadi dasar untuk analisis "What-if" dan optimalisasi durasi proyek (crashing dan fast tracking).</li>
+                    </ul>
+                </li>
+                <li><strong>Kekurangan:</strong>
+                    <ul>
+                        <li>Mengasumsikan durasi tugas yang pasti, yang seringkali tidak realistis dalam proyek kompleks atau inovatif.</li>
+                        <li>Tidak secara langsung memperhitungkan ketersediaan sumber daya dan dapat menghasilkan jadwal yang tidak realistis jika sumber daya terbatas.</li>
+                        <li>Perubahan dalam proyek dapat memerlukan penghitungan ulang seluruh jalur kritis, yang bisa memakan waktu.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>2. PERT (Program Evaluation and Review Technique)</h3>
+            <p>PERT adalah metode yang dirancang untuk menganalisis dan merepresentasikan tugas-tugas yang terlibat dalam proyek yang durasinya tidak pasti atau tidak diketahui, biasanya digunakan untuk proyek penelitian dan pengembangan yang inovatif. PERT menggunakan pendekatan probabilistik.</p>
+            <ul>
+                <li><strong>Cara Kerja:</strong>
+                    <ul>
+                        <li>Setiap tugas memiliki tiga perkiraan waktu (estimasi durasi) untuk mencerminkan ketidakpastian:
+                            <ul>
+                                <li><code>t_o</code> (Waktu Optimis): Waktu terpendek jika semuanya berjalan sempurna (peluang ~1%).</li>
+                                <li><code>t_m</code> (Waktu Paling Mungkin): Waktu yang paling realistis atau sering terjadi.</li>
+                                <li><code>t_p</code> (Waktu Pesimis): Waktu terpanjang jika banyak hal berjalan salah (peluang ~1%).</li>
+                            </ul>
+                        </li>
+                        <li>Durasi tugas yang diharapkan (<code class="language-mathematics">t_e</code>) dihitung menggunakan rumus distribusi beta (sering disebut PERT formula): <code class="language-mathematics">t_e = (t_o + 4*t_m + t_p) / 6</code>.</li>
+                        <li>Varians (<code class="language-mathematics">sigma^2</code>) juga dihitung untuk setiap tugas: <code class="language-mathematics">((t_p - t_o) / 6)^2</code>. Ini mengukur tingkat ketidakpastian durasi tugas.</li>
+                        <li>Jalur kritis dihitung menggunakan durasi yang diharapkan (<code class="language-mathematics">t_e</code>) untuk setiap tugas.</li>
+                        <li>PERT memungkinkan manajer proyek untuk menghitung probabilitas penyelesaian proyek pada atau sebelum tanggal tertentu, dengan mempertimbangkan variasi dalam durasi tugas (menggunakan teorema limit pusat untuk mengestimasi distribusi durasi jalur kritis).</li>
+                    </ul>
+                </li>
+                <li><strong>Kelebihan:</strong>
+                    <ul>
+                        <li>Memperhitungkan ketidakpastian dalam estimasi waktu tugas, memberikan gambaran yang lebih realistis tentang durasi proyek.</li>
+                        <li>Memberikan perkiraan probabilistik waktu penyelesaian proyek, memungkinkan manajemen risiko yang lebih baik.</li>
+                        <li>Berguna untuk proyek-proyek penelitian dan pengembangan yang inovatif di mana estimasi waktu sulit dan tidak pasti.</li>
+                    </ul>
+                </li>
+                <li><strong>Kekurangan:</strong>
+                    <ul>
+                        <li>Lebih kompleks daripada CPM karena membutuhkan tiga estimasi waktu untuk setiap tugas, yang bisa sulit didapatkan dan rentan terhadap bias.</li>
+                        <li>Asumsi distribusi beta mungkin tidak selalu akurat mewakili distribusi durasi tugas yang sebenarnya.</li>
+                        <li>Perhitungan probabilitas bergantung pada asumsi bahwa jalur kritis tidak berubah sepanjang proyek.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>3. Resource Leveling</h3>
+            <p>Setelah jadwal proyek awal dibuat (misalnya dengan CPM atau PERT), seringkali terjadi bahwa sumber daya yang dibutuhkan pada periode waktu tertentu melebihi ketersediaan. Misalnya, ada sepuluh tugas yang membutuhkan seorang insinyur senior pada minggu yang sama, tetapi hanya ada lima insinyur senior yang tersedia. Resource leveling adalah teknik untuk menyesuaikan jadwal proyek agar penggunaan sumber daya tidak melebihi kapasitas yang tersedia, seringkali dengan mengorbankan durasi proyek.</p>
+            <ul>
+                <li><strong>Cara Kerja:</strong>
+                    <ul>
+                        <li><strong>Identifikasi over-alokasi:</strong> Analisis histogram sumber daya untuk menemukan periode di mana permintaan sumber daya melebihi penawaran.</li>
+                        <li><strong>Tunda tugas non-kritis:</strong> Penjadwal akan menunda tugas-tugas non-kritis (yang memiliki slack time) ke periode di mana sumber daya lebih tersedia. Tugas di jalur kritis tidak dapat ditunda tanpa menunda seluruh proyek.</li>
+                        <li><strong>Prioritaskan tugas:</strong> Jika beberapa tugas membutuhkan sumber daya yang sama pada waktu yang sama, tugas-tugas dengan prioritas lebih tinggi atau di jalur kritis akan didahulukan.</li>
+                        <li><strong>Minimalkan dampak:</strong> Menggunakan penundaan minimal untuk meminimalkan dampak negatif pada durasi proyek secara keseluruhan.</li>
+                    </ul>
+                </li>
+                <li><strong>Kelebihan:</strong>
+                    <ul>
+                        <li>Menghindari over-alokasi sumber daya yang tidak realistis, menciptakan jadwal yang lebih praktis dan dapat dicapai.</li>
+                        <li>Membantu menjaga motivasi tim dengan menghindari kelebihan beban kerja.</li>
+                        <li>Mengurangi biaya yang terkait dengan penyewaan sumber daya tambahan atau lembur.</li>
+                    </ul>
+                </li>
+                <li><strong>Kekurangan:</strong>
+                    <ul>
+                        <li>Seringkali memperpanjang durasi proyek secara keseluruhan, yang mungkin tidak dapat diterima jika ada tenggat waktu yang ketat.</li>
+                        <li>Dapat menciptakan jalur kritis baru atau mengubah yang sudah ada, memerlukan analisis ulang yang cermat.</li>
+                        <li>Kompleks dalam proyek besar dengan banyak sumber daya, banyak tugas, dan ketergantungan yang rumit, seringkali membutuhkan perangkat lunak manajemen proyek khusus.</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Algoritma Penjadwalan dalam Manufaktur dan Operasional</h2>
+            <p>Dalam industri manufaktur dan operasional, penjadwalan berfokus pada alokasi mesin, pekerja, dan bahan baku untuk memproduksi barang atau memberikan layanan. Tujuannya adalah untuk memaksimalkan throughput, meminimalkan biaya, mengurangi waktu tunggu, memenuhi tenggat waktu pengiriman, dan mengoptimalkan pemanfaatan fasilitas.</p>
+
+            <h3>1. Penjadwalan Toko Pekerjaan (Job Shop Scheduling - JSS)</h3>
+            <p>Ini adalah salah satu masalah penjadwalan yang paling klasik dan paling menantang dalam optimasi. Dalam masalah Job Shop Scheduling (JSS), ada sekumpulan pekerjaan, dan setiap pekerjaan terdiri dari urutan operasi yang harus dilakukan pada serangkaian mesin tertentu. Setiap mesin hanya dapat memproses satu operasi pada satu waktu.</p>
+            <ul>
+                <li><strong>Karakteristik:</strong>
+                    <ul>
+                        <li>Setiap pekerjaan memiliki urutan operasi yang unik (routing) yang harus diikuti secara sekuensial pada mesin yang berbeda.</li>
+                        <li>Mesin-mesin mungkin spesialis; tidak semua operasi dapat dilakukan pada semua mesin.</li>
+                        <li>Tujuannya seringkali adalah meminimalkan <em>makespan</em> (waktu total yang dibutuhkan untuk menyelesaikan semua pekerjaan dari awal hingga pekerjaan terakhir selesai). Tujuan lain bisa termasuk meminimalkan total waktu tunggu, keterlambatan, atau biaya.</li>
+                    </ul>
+                </li>
+                <li><strong>Kompleksitas:</strong> JSS adalah masalah NP-hard, artinya tidak ada algoritma waktu polinomial yang diketahui yang dapat menemukan solusi optimal untuk kasus umum dalam waktu yang wajar. Bahkan untuk masalah kecil, jumlah kemungkinan jadwal bisa sangat besar.</li>
+                <li><strong>Pendekatan:</strong> Karena kompleksitasnya, JSS sering diselesaikan menggunakan:
+                    <ul>
+                        <li><strong>Aturan Prioritas (Heuristik):</strong> Aturan praktis yang memberikan solusi "cukup baik" dengan cepat. Contoh:
+                            <ul>
+                                <li><strong>SPT (Shortest Processing Time):</strong> Operasi dengan waktu pemrosesan terpendek pada mesin berikutnya akan dieksekusi terlebih dahulu. Cenderung meminimalkan waktu penyelesaian rata-rata.</li>
+                                <li><strong>LPT (Longest Processing Time):</strong> Operasi dengan waktu pemrosesan terpanjang dieksekusi terlebih dahulu.</li>
+                                <li><strong>FIFO/FCFS:</strong> Operasi yang tiba pertama kali di antrean mesin diproses pertama.</li>
+                                <li><strong>EDD (Earliest Due Date):</strong> Operasi yang memiliki tenggat waktu terdekat diproses terlebih dahulu.</li>
+                                <li><strong>S/PT (Slack per Processing Time):</strong> Mengutamakan operasi dengan rasio slack terkecil terhadap waktu pemrosesan.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Metaheuristik:</strong> Algoritma pencarian yang lebih canggih yang mengeksplorasi ruang solusi secara cerdas untuk menemukan solusi yang mendekati optimal. Contoh: Genetic Algorithms (GA), Simulated Annealing (SA), Tabu Search, Particle Swarm Optimization (PSO).</li>
+                        <li><strong>Pemrograman Matematika:</strong> Model Integer Linear Programming (ILP) dapat digunakan untuk menemukan solusi optimal, tetapi hanya layak untuk skala masalah yang sangat kecil karena waktu komputasinya yang eksponensial.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>2. Penjadwalan Toko Aliran (Flow Shop Scheduling)</h3>
+            <p>Ini adalah kasus khusus dari Job Shop Scheduling di mana semua pekerjaan mengikuti urutan operasi yang sama pada serangkaian mesin yang identik dan berurutan.</p>
+            <ul>
+                <li><strong>Karakteristik:</strong>
+                    <ul>
+                        <li>Semua pekerjaan (Job) melewati mesin (Machine) dalam urutan yang sama (misalnya, M1 -> M2 -> M3).</li>
+                        <li>Waktu pemrosesan untuk setiap pekerjaan pada setiap mesin mungkin berbeda.</li>
+                        <li>Tujuan utamanya seringkali adalah meminimalkan makespan.</li>
+                    </ul>
+                </li>
+                <li><strong>Pendekatan:</strong>
+                    <ul>
+                        <li><strong>Algoritma Johnson:</strong> Solusi optimal untuk Flow Shop dua mesin yang bertujuan meminimalkan makespan. Algoritma ini sangat efisien dan memberikan urutan kerja yang optimal.</li>
+                        <li>Untuk lebih dari dua mesin, masalah ini juga menjadi NP-hard, dan heuristik serta metaheuristik seperti yang disebutkan untuk JSS digunakan.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>3. Penjadwalan Mesin Tunggal (Single Machine Scheduling)</h3>
+            <p>Ini adalah bentuk penjadwalan paling sederhana di mana semua pekerjaan harus diproses oleh satu mesin atau sumber daya. Meskipun terlihat sederhana, masalah ini merupakan blok bangunan fundamental untuk memahami masalah penjadwalan yang lebih kompleks.</p>
+            <ul>
+                <li><strong>Contoh Algoritma:</strong>
+                    <ul>
+                        <li><strong>SPT (Shortest Processing Time):</strong> Menjadwalkan pekerjaan dengan waktu pemrosesan terpendek terlebih dahulu. Optimal untuk meminimalkan waktu penyelesaian rata-rata, waktu tunggu rata-rata, dan jumlah pekerjaan dalam sistem.</li>
+                        <li><strong>EDD (Earliest Due Date):</strong> Menjadwalkan pekerjaan dengan tenggat waktu terdekat terlebih dahulu. Optimal untuk meminimalkan jumlah pekerjaan yang terlambat atau keterlambatan maksimum.</li>
+                        <li><strong>Weighted SPT:</strong> Mirip dengan SPT tetapi mempertimbangkan bobot pekerjaan (misalnya, prioritas atau nilai ekonomi). Pekerjaan dengan rasio bobot per waktu pemrosesan tertinggi dieksekusi terlebih dahulu. Optimal untuk meminimalkan jumlah keterlambatan berbobot atau total biaya penalti berbobot.</li>
+                        <li><strong>Minimalkan Maximum Lateness:</strong> Gunakan EDD.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>4. Penjadwalan Sistem Manufaktur Fleksibel (Flexible Manufacturing Systems - FMS)</h3>
+            <p>FMS adalah sistem manufaktur otomatis yang mampu memproduksi berbagai jenis produk. Penjadwalan di FMS lebih kompleks karena adanya fleksibilitas dalam routing pekerjaan (pekerjaan dapat diproses di beberapa mesin yang berbeda) dan adanya sumber daya yang dapat digunakan bersama.</p>
+            <ul>
+                <li><strong>Tantangan:</strong> Memilih mesin yang tepat untuk setiap operasi, mengoptimalkan urutan, dan mengelola pergerakan material.</li>
+                <li><strong>Pendekatan:</strong> Seringkali menggunakan kombinasi heuristik, metaheuristik, dan sistem berbasis aturan untuk menangani kompleksitas dan sifat dinamis FMS.</li>
+            </ul>
+            <figure>
+                <svg width="600" height="200" viewBox="0 0 600 200" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="factory-scheduling-svg-title factory-scheduling-svg-desc">
+                    <title id="factory-scheduling-svg-title">Ilustrasi Penjadwalan Manufaktur</title>
+                    <desc id="factory-scheduling-svg-desc">Diagram sederhana menunjukkan pekerjaan mengalir melalui mesin di pabrik. Sebuah blok penjadwal produksi mengarahkan pekerjaan di antara mesin-mesin.</desc>
+                    <!-- Mesin 1 -->
+                    <rect x="50" y="70" width="80" height="60" rx="5" fill="#D5F5E3" stroke="#2ECC71" stroke-width="2"/>
+                    <text x="90" y="105" text-anchor="middle" font-family="Roboto, sans-serif" font-size="16" fill="#2C3E50">M1</text>
+                    <text x="90" y="55" text-anchor="middle" font-family="Roboto, sans-serif" font-size="14" fill="#666">Mesin 1</text>
+
+                    <!-- Mesin 2 -->
+                    <rect x="200" y="70" width="80" height="60" rx="5" fill="#AED6F1" stroke="#3498db" stroke-width="2"/>
+                    <text x="240" y="105" text-anchor="middle" font-family="Roboto, sans-serif" font-size="16" fill="#2C3E50">M2</text>
+                    <text x="240" y="55" text-anchor="middle" font-family="Roboto, sans-serif" font-size="14" fill="#666">Mesin 2</text>
+
+                    <!-- Mesin 3 -->
+                    <rect x="350" y="70" width="80" height="60" rx="5" fill="#FADBD8" stroke="#E74C3C" stroke-width="2"/>
+                    <text x="390" y="105" text-anchor="middle" font-family="Roboto, sans-serif" font-size="16" fill="#2C3E50">M3</text>
+                    <text x="390" y="55" text-anchor="middle" font-family="Roboto, sans-serif" font-size="14" fill="#666">Mesin 3</text>
+
+                    <!-- Scheduler -->
+                    <rect x="220" y="140" width="160" height="40" rx="5" fill="#FFFACD" stroke="#F1C40F" stroke-width="2"/>
+                    <text x="300" y="165" text-anchor="middle" font-family="Roboto, sans-serif" font-size="16" fill="#2C3E50">Penjadwal Produksi</text>
+
+                    <!-- Aliran Pekerjaan -->
+                    <path d="M130 100 H200" stroke="#34495e" stroke-width="1.5" marker-end="url(#arrowhead-dark)"/>
+                    <path d="M280 100 H350" stroke="#34495e" stroke-width="1.5" marker-end="url(#arrowhead-dark)"/>
+                    
+                    <!-- Link to scheduler -->
+                    <path d="M100 130 V150 H220" stroke="#34495e" stroke-width="1.5"/>
+                    <path d="M250 130 V150 H220" stroke="#34495e" stroke-width="1.5"/>
+                    <path d="M400 130 V150 H380" stroke="#34495e" stroke-width="1.5"/>
+                    <path d="M300 180 V190" stroke="#34495e" stroke-width="1.5" marker-end="url(#arrowhead-dark)"/>
+
+                    <defs>
+                        <marker id="arrowhead-dark" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#34495e" />
+                        </marker>
+                    </defs>
+                </svg>
+                <figcaption>Gambar 3: Skema Umum Penjadwalan dalam Lingkungan Manufaktur</figcaption>
+            </figure>
+        </section>
+
+        <section>
+            <h2>Algoritma Penjadwalan dalam Komputasi Awan dan Sistem Terdistribusi</h2>
+            <p>Di era komputasi awan, penjadwalan menjadi semakin kompleks karena skala, heterogenitas, dan sifat dinamis sumber daya yang sangat besar. Penjadwalan di sini mencakup penempatan mesin virtual (VM), alokasi tugas ke VM atau kontainer, dan penyeimbangan beban di seluruh pusat data yang tersebar secara geografis.</p>
+
+            <h3>1. Penjadwalan Mesin Virtual (VM Scheduling)</h3>
+            <p>Penyedia layanan cloud (seperti AWS, Azure, Google Cloud) perlu menjadwalkan VM pelanggan ke host fisik (server) yang tersedia di pusat data mereka. Tujuannya adalah untuk memaksimalkan pemanfaatan sumber daya fisik, meminimalkan konsumsi energi, dan memastikan isolasi kinerja antar VM.</p>
+            <ul>
+                <li><strong>Tantangan Utama:</strong>
+                    <ul>
+                        <li><strong>Konsolidasi VM:</strong> Menempatkan banyak VM pada satu host fisik untuk menghemat energi dan lisensi perangkat lunak. Namun, ini berisiko "noisy neighbor" (di mana satu VM yang intensif sumber daya dapat memengaruhi kinerja VM lain pada host yang sama).</li>
+                        <li><strong>Migrasi VM:</strong> Memindahkan VM yang sedang berjalan dari satu host fisik ke host lain untuk penyeimbangan beban, pemeliharaan host, atau optimasi konsumsi energi.</li>
+                        <li><strong>Heterogenitas:</strong> Berbagai jenis VM dengan persyaratan sumber daya yang berbeda (CPU, memori, I/O, GPU) dan berbagai jenis host fisik.</li>
+                        <li><strong>Dinamisme:</strong> Permintaan VM datang dan pergi secara spontan, dan beban kerja VM dapat berfluktuasi secara drastis.</li>
+                        <li><strong>Multi-tenancy:</strong> Mengelola sumber daya yang sama untuk banyak pelanggan dengan kebutuhan dan prioritas yang berbeda.</li>
+                    </ul>
+                </li>
+                <li><strong>Pendekatan:</strong>
+                    <ul>
+                        <li><strong>Algoritma Heuristik:</strong> First Fit (menempatkan VM ke host pertama yang cukup besar), Best Fit (menempatkan VM ke host yang paling pas untuk meminimalkan fragmen), Worst Fit (menempatkan VM ke host dengan ruang kosong terbesar untuk mempertahankan ruang bagi VM besar lainnya).</li>
+                        <li><strong>Algoritma berbasis Penggunaan Sumber Daya:</strong> Memantau penggunaan CPU, memori, I/O pada host fisik dan memicu migrasi VM saat ambang batas tertentu terlampaui (misalnya, jika host terlalu panas atau terlalu sibuk).</li>
+                        <li><strong>Algoritma Pembelajaran Mesin:</strong> Menggunakan data historis untuk memprediksi pola penggunaan sumber daya dan membuat keputusan penempatan yang lebih cerdas, mengantisipasi beban daripada bereaksi terhadapnya.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>2. Penyeimbangan Beban (Load Balancing)</h3>
+            <p>Penyeimbangan beban adalah bentuk penjadwalan yang mendistribusikan beban kerja (misalnya, permintaan web, koneksi basis data, tugas komputasi) secara merata di antara beberapa server, VM, atau sumber daya. Ini memastikan bahwa tidak ada satu pun sumber daya yang kewalahan, meningkatkan ketersediaan, waktu respons, dan skalabilitas sistem.</p>
+            <ul>
+                <li><strong>Algoritma Umum:</strong>
+                    <ul>
+                        <li><strong>Round Robin:</strong> Permintaan didistribusikan secara berurutan ke setiap server dalam kumpulan. Sederhana tetapi tidak mempertimbangkan kapasitas atau beban server saat ini.</li>
+                        <li><strong>Least Connections:</strong> Permintaan baru dikirim ke server dengan jumlah koneksi aktif paling sedikit. Ini lebih cerdas karena mempertimbangkan beban saat ini.</li>
+                        <li><strong>Least Response Time:</strong> Mengirim permintaan ke server yang memiliki waktu respons terpendek. Memperhitungkan kinerja server dan latensi jaringan.</li>
+                        <li><strong>Weighted Round Robin/Least Connections:</strong> Memberikan bobot pada server berdasarkan kapasitas atau spesifikasinya, sehingga server yang lebih kuat menerima lebih banyak permintaan proporsional.</li>
+                        <li><strong>IP Hash:</strong> Menggunakan alamat IP klien untuk menentukan server, memastikan klien yang sama selalu diarahkan ke server yang sama. Ini penting untuk sesi persisten (session sticky).</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>3. Penjadwalan Tugas dalam Lingkungan Terdistribusi dan Orkeestrasi Kontainer</h3>
+            <p>Dalam kerangka kerja komputasi terdistribusi seperti Apache Hadoop (MapReduce) atau Apache Spark, tugas-tugas besar dibagi menjadi subtugas yang lebih kecil dan dijadwalkan untuk dieksekusi di banyak node dalam cluster. Demikian pula, dengan munculnya kontainer (Docker) dan microservices, orkestrasi kontainer (seperti Kubernetes) telah menjadi metode utama untuk menerapkan dan mengelola aplikasi terdistribusi.</p>
+            <ul>
+                <li><strong>Tantangan:</strong>
+                    <ul>
+                        <li><strong>Lokalitas Data (Data Locality):</strong> Mengirim tugas ke node di mana data yang dibutuhkan sudah ada untuk mengurangi transfer jaringan yang mahal dan meminimalkan latensi.</li>
+                        <li><strong>Toleransi Kesalahan (Fault Tolerance):</strong> Menangani kegagalan node atau kontainer dengan menjadwal ulang tugas yang gagal secara otomatis.</li>
+                        <li><strong>Heterogenitas:</strong> Node dalam cluster mungkin memiliki spesifikasi perangkat keras yang berbeda.</li>
+                        <li><strong>Manajemen Sumber Daya:</strong> Mengelola CPU, memori, disk, dan jaringan untuk ribuan kontainer dan memastikan tidak ada kelangkaan.</li>
+                        <li><strong>Ketersediaan Tinggi:</strong> Mendistribusikan replika aplikasi di berbagai node untuk menghindari satu titik kegagalan.</li>
+                    </ul>
+                </li>
+                <li><strong>Pendekatan (Contoh Kubernetes Scheduler):</strong>
+                    <ul>
+                        <li><strong>Filter (Predicates):</strong> Tahap pertama di mana scheduler menyaring node yang tidak dapat memenuhi persyaratan pod (kontainer) sama sekali (misalnya, tidak cukup CPU/memori, atau tidak memiliki port yang dibutuhkan).</li>
+                        <li><strong>Skoring (Priorities):</strong> Tahap kedua di mana scheduler memberi skor pada node yang tersisa berdasarkan serangkaian aturan (misalnya, node dengan sumber daya paling sedikit digunakan untuk menghindari "bin packing" yang terlalu padat, atau node dengan lokalitas data terbaik).</li>
+                        <li><strong>FIFO:</strong> Sederhana, tetapi tidak optimal untuk beban kerja yang beragam.</li>
+                        <li><strong>Fair Scheduler (Hadoop YARN):</strong> Memastikan setiap pengguna atau kelompok mendapatkan porsi sumber daya yang adil.</li>
+                        <li><strong>Capacity Scheduler (Hadoop YARN):</strong> Mengalokasikan kapasitas cluster ke antrean yang berbeda (misalnya, antrean untuk tim A, antrean untuk tim B), dan kemudian antrean tersebut menjadwalkan tugasnya sendiri.</li>
+                        <li><strong>Serverless Function Scheduling:</strong> Dalam platform serverless (misalnya, AWS Lambda), penjadwal harus dengan cepat "memulai" instance fungsi sebagai respons terhadap peristiwa, seringkali dengan cold start yang minimal.</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Algoritma Penjadwalan dalam Jaringan</h2>
+            <p>Penjadwalan juga memainkan peran krusial dalam jaringan komputer, terutama dalam mengelola antrean paket, mengalokasikan bandwidth, dan memastikan kualitas layanan (Quality of Service - QoS) untuk berbagai jenis lalu lintas.</p>
+
+            <h3>1. FCFS (First-Come, First-Served) / FIFO</h3>
+            <p>Di router dan switch jaringan, paket diproses dalam urutan kedatangannya. Ini adalah metode yang paling sederhana dan paling umum.</p>
+            <ul>
+                <li><strong>Kelebihan:</strong> Sangat sederhana, implementasi rendah overhead.</li>
+                <li><strong>Kekurangan:</strong> Dapat menyebabkan penundaan besar untuk lalu lintas sensitif waktu (misalnya, suara atau video) jika ada antrean besar dari lalu lintas "best-effort" (misalnya, unduhan file besar). Tidak ada jaminan QoS.</li>
+            </ul>
+
+            <h3>2. Penjadwalan Prioritas (Priority Queuing)</h3>
+            <p>Paket diberi prioritas berdasarkan jenis lalu lintas (misalnya, lalu lintas suara/video memiliki prioritas lebih tinggi dari lalu lintas email atau transfer file), dan paket prioritas tinggi diproses terlebih dahulu.</p>
+            <ul>
+                <li><strong>Kelebihan:</strong> Efektif dalam memberikan perlakuan istimewa kepada lalu lintas yang membutuhkan latensi rendah dan throughput terjamin.</li>
+                <li><strong>Kekurangan:</strong> Dapat menyebabkan starvation untuk lalu lintas prioritas rendah jika ada aliran lalu lintas prioritas tinggi yang terus-menerus. Membutuhkan klasifikasi paket yang akurat.</li>
+            </ul>
+
+            <h3>3. WFQ (Weighted Fair Queuing)</h3>
+            <p>WFQ adalah algoritma penjadwalan yang lebih canggih yang berusaha memberikan keadilan sekaligus memungkinkan prioritas. Ini membagi bandwidth yang tersedia di antara aliran lalu lintas yang berbeda berdasarkan "bobot" yang telah ditentukan sebelumnya.</p>
+            <ul>
+                <li><strong>Cara Kerja:</strong> Setiap aliran (misalnya, setiap koneksi TCP atau setiap jenis aplikasi) memiliki antrean sendiri. Paket dari antrean yang berbeda dilayani secara bergantian, tetapi aliran dengan bobot lebih tinggi mendapatkan porsi bandwidth yang lebih besar secara proporsional. Penjadwal melayani paket "secara virtual" pada saat yang sama, memberikan rasa keadilan. Misalnya, jika aliran A memiliki bobot 2 dan aliran B memiliki bobot 1, aliran A akan mendapatkan dua kali bandwidth dari aliran B.</li>
+                <li><strong>Kelebihan:</strong>
+                    <ul>
+                        <li>Memberikan keadilan antar aliran sambil memungkinkan diferensiasi layanan berdasarkan bobot.</li>
+                        <li>Mencegah aliran tunggal mengambil alih semua sumber daya jaringan, sehingga masalah "noisy neighbor" diminimalkan.</li>
+                        <li>Mendukung QoS yang lebih baik dibandingkan FCFS atau Priority Queuing murni.</li>
+                    </ul>
+                </li>
+                <li><strong>Kekurangan:</strong>
+                    <ul>
+                        <li>Lebih kompleks untuk diimplementasikan daripada FCFS atau penjadwalan prioritas murni karena memerlukan manajemen per-aliran.</li>
+                        <li>Membutuhkan klasifikasi aliran lalu lintas yang tepat dan penentuan bobot yang akurat.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>4. Penjadwalan Deficit Round Robin (DRR)</h3>
+            <p>DRR adalah varian dari Round Robin yang mengatasi masalah paket dengan ukuran bervariasi. Alih-alih quantum waktu, setiap antrean diberi "deficit counter". Ketika antrean gilirannya tiba, defisit counter ditambahkan dengan "quantum" yang ditentukan. Antrean dapat mengirim paket selama total ukuran paket tidak melebihi nilai deficit counter. Jika deficit counter menjadi negatif, ia menunggu giliran berikutnya.</p>
+            <ul>
+                <li><strong>Kelebihan:</strong> Memberikan keadilan yang lebih baik untuk paket dengan ukuran bervariasi dibandingkan Round Robin standar. Overhead lebih rendah dibandingkan WFQ.</li>
+                <li><strong>Kekurangan:</strong> Masih memerlukan manajemen antrean per-aliran.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Tantangan dalam Algoritma Penjadwalan</h2>
+            <p>Meskipun beragam dan canggih, algoritma penjadwalan menghadapi sejumlah tantangan inheren yang membuatnya menjadi bidang penelitian dan pengembangan yang aktif. Mengatasi tantangan ini adalah kunci untuk merancang sistem yang lebih efisien dan tangguh.</p>
+
+            <h3>1. Kompleksitas Komputasi (NP-hardness)</h3>
+            <p>Banyak masalah penjadwalan, terutama dalam skala besar atau dengan banyak batasan, tergolong dalam kelas masalah NP-hard (Non-deterministic Polynomial-time hard). Ini berarti bahwa, untuk instance masalah yang besar, tidak ada algoritma yang diketahui yang dapat menemukan solusi optimal dalam waktu polinomial (yaitu, waktu yang tumbuh secara proporsional dengan ukuran masalah). Sebagai contoh:</p>
+            <ul>
+                <li>Penjadwalan Pekerjaan Toko (Job Shop Scheduling) untuk lebih dari dua mesin.</li>
+                <li>Penjadwalan sumber daya dengan batasan ganda (misalnya, CPU dan memori secara bersamaan).</li>
+                <li>Permasalahan penempatan VM yang optimal dalam cloud computing.</li>
+            </ul>
+            <p>Karena itu, kita sering harus puas dengan solusi heuristik atau metaheuristik. Heuristik adalah aturan praktis yang memberikan solusi "cukup baik" dengan cepat, sementara metaheuristik (seperti algoritma genetika, simulated annealing) adalah algoritma pencarian yang lebih canggih yang mengeksplorasi ruang solusi untuk menemukan solusi yang mendekati optimal, meskipun tidak menjamin optimalitas absolut.</p>
+
+            <h3>2. Lingkungan Dinamis dan Tidak Pasti</h3>
+            <p>Dalam banyak aplikasi dunia nyata, informasi yang dibutuhkan untuk penjadwalan tidak lengkap, tidak pasti, atau berubah secara dinamis:</p>
+            <ul>
+                <li><strong>Waktu kedatangan tugas yang tidak diketahui:</strong> Proses baru dapat tiba kapan saja, dan penjadwal harus bereaksi secara real-time.</li>
+                <li><strong>Waktu eksekusi yang tidak pasti:</strong> Sangat sulit memprediksi berapa lama sebuah tugas akan berjalan hingga selesai, terutama di lingkungan komputasi yang bervariasi.</li>
+                <li><strong>Kegagalan sumber daya:</strong> Mesin dapat rusak, server dapat mati, jaringan dapat terganggu, atau pekerja dapat sakit. Penjadwal harus dapat beradaptasi dengan perubahan ketersediaan sumber daya ini.</li>
+                <li><strong>Perubahan prioritas atau tenggat waktu:</strong> Kondisi bisnis, kebutuhan pengguna, atau keadaan darurat dapat menyebabkan perubahan mendadak pada prioritas atau tenggat waktu tugas.</li>
+            </ul>
+            <p>Algoritma harus adaptif dan tangguh terhadap ketidakpastian ini, seringkali dengan mengorbankan optimalitas teoritis demi fleksibilitas dan ketahanan.</p>
+
+            <h3>3. Tujuan yang Bertentangan (Conflicting Objectives)</h3>
+            <p>Jarang sekali ada satu tujuan tunggal dalam penjadwalan. Seringkali, ada beberapa tujuan yang saling bertentangan yang harus dikelola oleh penjadwal, memaksa kompromi. Contohnya:</p>
+            <ul>
+                <li><strong>Memaksimalkan throughput vs. meminimalkan waktu respons:</strong> Mencoba menyelesaikan banyak tugas dengan cepat (throughput tinggi) seringkali berarti beberapa tugas mungkin menunggu lebih lama (waktu respons buruk). Sebaliknya, memberikan respons cepat ke setiap tugas kecil dapat menyebabkan overhead dan mengurangi throughput keseluruhan.</li>
+                <li><strong>Memaksimalkan pemanfaatan sumber daya vs. memastikan keadilan:</strong> Menjaga CPU tetap 100% sibuk mungkin berarti proses-proses tertentu memonopoli CPU, menyebabkan starvation untuk yang lain.</li>
+                <li><strong>Meminimalkan biaya vs. memenuhi tenggat waktu:</strong> Mengurangi biaya operasional (misalnya, dengan menggunakan lebih sedikit mesin atau daya) dapat menyebabkan penundaan dan kegagalan memenuhi tenggat waktu.</li>
+                <li><strong>Mengurangi konsumsi energi vs. menjaga kinerja tinggi:</strong> Mematikan server yang tidak digunakan untuk menghemat energi dapat meningkatkan latensi saat server baru perlu diaktifkan.</li>
+            </ul>
+            <p>Memilih algoritma yang "terbaik" seringkali melibatkan analisis multi-objektif, kompromi, dan penentuan bobot relatif untuk setiap tujuan, yang bisa menjadi keputusan kebijakan yang kompleks.</p>
+
+            <h3>4. Skalabilitas</h3>
+            <p>Dengan pertumbuhan sistem yang sangat besar (pusat data dengan puluhan ribu server, cluster komputasi awan yang sangat besar, pabrik besar dengan ribuan mesin, jaringan dengan jutaan perangkat), jumlah tugas dan sumber daya yang perlu dijadwalkan dapat mencapai skala yang belum pernah ada sebelumnya. Algoritma harus dapat bekerja secara efisien pada skala ini, yang berarti solusi terpusat mungkin tidak lagi praktis dan pendekatan terdistribusi atau hierarkis diperlukan untuk mendistribusikan beban penjadwalan itu sendiri.</p>
+
+            <h3>5. Ketersediaan dan Biaya Sumber Daya</h3>
+            <p>Sumber daya tidak hanya terbatas tetapi juga memiliki biaya. Penjadwalan harus mempertimbangkan biaya operasional (misalnya, biaya listrik, biaya lisensi perangkat lunak), biaya pemeliharaan, dan biaya akuisisi sumber daya untuk membuat keputusan yang efisien secara ekonomis. Dalam lingkungan komputasi awan, ini bisa berarti memilih VM dengan harga terendah sambil tetap memenuhi SLA (Service Level Agreement).</p>
+
+            <h3>6. Kesadaran Konteks dan Kebutuhan Domain</h3>
+            <p>Algoritma penjadwalan harus "sadar" akan konteks di mana mereka beroperasi. Algoritma yang optimal untuk penjadwalan CPU di sistem operasi tidak akan efektif untuk penjadwalan proyek konstruksi atau lini produksi. Setiap domain memiliki batasan, tujuan, dan karakteristik tugas yang unik, yang memerlukan desain algoritma yang spesifik atau adaptasi yang signifikan.</p>
+        </section>
+
+        <section>
+            <h2>Tren Modern dan Arah Masa Depan</h2>
+            <p>Bidang algoritma penjadwalan terus berkembang pesat, didorong oleh kebutuhan akan efisiensi yang lebih tinggi, adaptasi terhadap teknologi baru, dan penanganan kompleksitas yang semakin meningkat. Inovasi di area ini adalah kunci untuk membuka potensi penuh dari sistem komputasi dan operasional masa depan. Berikut adalah beberapa tren dan arah masa depan yang signifikan:</p>
+
+            <h3>1. Pembelajaran Mesin (Machine Learning) dalam Penjadwalan</h3>
+            <p>Dengan ketersediaan data historis yang melimpah dan kemajuan pesat dalam bidang kecerdasan buatan, pembelajaran mesin semakin banyak digunakan untuk meningkatkan kualitas dan adaptasi penjadwalan.</p>
+            <ul>
+                <li><strong>Prediksi Waktu Eksekusi yang Lebih Akurat:</strong> Algoritma ML (misalnya, regresi, jaringan saraf) dapat dilatih pada data eksekusi tugas sebelumnya untuk memprediksi durasi tugas yang lebih akurat, yang merupakan masukan penting untuk algoritma seperti SJF atau algoritma berbasis tenggat waktu. Ini mengurangi masalah ketidakpastian waktu eksekusi.</li>
+                <li><strong>Penentuan Prioritas Dinamis dan Adaptif:</strong> ML dapat belajar dari pola penggunaan sistem, beban kerja historis, dan umpan balik kinerja untuk secara dinamis menyesuaikan prioritas tugas atau bahkan memilih algoritma penjadwalan yang paling sesuai untuk beban kerja saat ini atau kondisi sistem yang sedang berlangsung. Ini memungkinkan sistem untuk menjadi lebih responsif dan efisien tanpa intervensi manual.</li>
+                <li><strong>Optimasi Penempatan Sumber Daya Cerdas:</strong> Dalam komputasi awan dan orkestrasi kontainer, ML dapat digunakan untuk memprediksi permintaan sumber daya, pola lonjakan beban, dan ketersediaan, kemudian mengoptimalkan penempatan VM atau kontainer untuk mengurangi latensi, biaya, dan risiko "noisy neighbor".</li>
+                <li><strong>Pembelajaran Penguatan (Reinforcement Learning - RL) untuk Penjadwalan:</strong> Agen RL dapat belajar untuk membuat keputusan penjadwalan secara adaptif dalam lingkungan dinamis dan tidak pasti. Dengan berinteraksi dengan lingkungan, mencoba berbagai kebijakan, dan belajar dari "hadiah" atau "hukuman" (berdasarkan metrik kinerja), agen RL dapat mengoptimalkan tujuan jangka panjang, bahkan dalam skenario yang sangat kompleks di mana aturan heuristik sulit dirumuskan.</li>
+                <li><strong>Deteksi Anomali dan Prediksi Kegagalan:</strong> ML dapat memprediksi potensi kegagalan sumber daya atau bottleneck dalam jadwal, memungkinkan penjadwal untuk secara proaktif merealokasi tugas atau memicu pemeliharaan.</li>
+            </ul>
+
+            <h3>2. Penjadwalan Terdistribusi dan Desentralisasi</h3>
+            <p>Seiring dengan berkembangnya arsitektur sistem terdistribusi, microservices, dan edge computing, penjadwalan terpusat menjadi hambatan kinerja dan titik kegagalan tunggal. Pendekatan desentralisasi menjadi semakin penting.</p>
+            <ul>
+                <li><strong>Penjadwalan Peer-to-Peer:</strong> Node-node berkolaborasi untuk membuat keputusan penjadwalan tanpa otoritas pusat. Ini meningkatkan skalabilitas dan ketahanan.</li>
+                <li><strong>Orkestrasi Microservices:</strong> Menjadwalkan layanan-layanan kecil dan independen dalam arsitektur microservice, seringkali dengan orkestrator seperti Kubernetes yang memiliki penjadwalnya sendiri yang bekerja dalam lingkungan terdistribusi.</li>
+                <li><strong>Penjadwalan Edge Computing:</strong> Mendistribusikan beban kerja ke perangkat di tepi jaringan (edge devices) untuk mengurangi latensi dan penggunaan bandwidth, memerlukan algoritma penjadwalan yang mempertimbangkan kedekatan geografis, kapasitas terbatas, dan konektivitas yang tidak stabil.</li>
+                <li><strong>Blockchain untuk Penjadwalan Sumber Daya:</strong> Eksplorasi penggunaan teknologi blockchain untuk menciptakan sistem penjadwalan yang transparan, aman, dan tanpa perantara untuk sumber daya terdistribusi, terutama dalam skenario multi-organisasi.</li>
+            </ul>
+
+            <h3>3. Penjadwalan Hemat Energi dan Berkelanjutan (Energy-Efficient & Sustainable Scheduling)</h3>
+            <p>Konsumsi energi di pusat data, fasilitas manufaktur, dan sistem komputasi secara umum merupakan perhatian besar karena dampak lingkungan dan biaya operasional. Algoritma penjadwalan semakin dirancang untuk mempertimbangkan konsumsi energi sebagai metrik optimasi.</p>
+            <ul>
+                <li><strong>Konsolidasi Beban Kerja:</strong> Menjadwalkan tugas sedemikian rupa sehingga sumber daya dapat dimatikan atau dimasukkan ke mode daya rendah saat tidak digunakan, dan mengonsolidasikan beban kerja ke jumlah minimum sumber daya yang diperlukan.</li>
+                <li><strong>Penjadwalan Sadar Suhu:</strong> Mengarahkan beban kerja ke server yang lebih dingin di pusat data untuk mengurangi kebutuhan pendinginan, yang merupakan komponen besar dari konsumsi energi.</li>
+                <li><strong>Penjadwalan dengan Sumber Energi Terbarukan:</strong> Menjadwalkan tugas yang dapat ditoleransi terhadap penundaan saat energi terbarukan (surya, angin) melimpah dan murah, dan menunda tugas non-kritis saat energi mahal atau berasal dari sumber yang kurang ramah lingkungan.</li>
+                <li><strong>Pemanfaatan Panas Buangan:</strong> Penjadwalan juga dapat mempertimbangkan bagaimana panas buangan dari komputasi dapat dimanfaatkan kembali untuk aplikasi lain.</li>
+            </ul>
+
+            <h3>4. Penjadwalan Toleran Terhadap Kesalahan (Fault-Tolerant Scheduling)</h3>
+            <p>Dalam sistem yang besar dan kompleks, kegagalan adalah hal yang tak terhindarkan. Algoritma penjadwalan modern harus mampu secara otomatis mendeteksi dan pulih dari kegagalan untuk menjaga ketersediaan dan keandalan sistem.</p>
+            <ul>
+                <li><strong>Penjadwalan Redundan:</strong> Menjalankan tugas yang sama di beberapa lokasi atau membuat replika layanan untuk memastikan penyelesaian bahkan jika satu instansi gagal.</li>
+                <li><strong>Checkpointing dan Pemulihan:</strong> Menyimpan status tugas secara berkala (checkpoint) sehingga dapat dilanjutkan dari titik terakhir yang diketahui baik setelah kegagalan, meminimalkan pekerjaan yang hilang.</li>
+                <li><strong>Replanning Dinamis:</strong> Algoritma yang dapat dengan cepat membuat jadwal baru atau menyesuaikan jadwal yang ada ketika kegagalan terdeteksi atau sumber daya baru tersedia.</li>
+            </ul>
+
+            <h3>5. Penjadwalan Berbasis Batasan dan Pemrograman Konstrain (Constraint-Based Scheduling)</h3>
+            <p>Daripada hanya menggunakan heuristik, pendekatan ini semakin menggunakan teknik Pemrograman Konstrain (Constraint Programming - CP) untuk memodelkan masalah penjadwalan sebagai serangkaian batasan dan tujuan yang harus dipenuhi atau dioptimalkan. CP memungkinkan pemodelan yang lebih kaya untuk masalah yang sangat kompleks dan seringkali menghasilkan solusi berkualitas tinggi, terutama untuk masalah yang tidak terlalu besar.</p>
+
+            <h3>6. Penjadwalan dalam Komputasi Kuantum (Quantum Computing)</h3>
+            <p>Meskipun masih dalam tahap awal pengembangan, penelitian mulai menjajaki bagaimana komputasi kuantum dapat digunakan untuk menyelesaikan masalah penjadwalan NP-hard yang sangat kompleks. Algoritma kuantum seperti Grover's algorithm untuk pencarian atau Quantum Annealing untuk masalah optimasi kombinatorial berpotensi menawarkan percepatan signifikan untuk menemukan solusi optimal pada masalah penjadwalan tertentu di masa depan, membuka pintu untuk efisiensi yang belum pernah terbayangkan sebelumnya.</p>
+        </section>
+
+        <section>
+            <h2>Kesimpulan</h2>
+            <p>Algoritma penjadwalan adalah tulang punggung efisiensi dan responsivitas di hampir setiap sistem komputasi dan operasional modern. Dari mengelola proses di dalam inti CPU hingga mengorkestrasi rantai pasokan global, dari melayani permintaan web di pusat data awan hingga mengoptimalkan jadwal produksi di pabrik, prinsip-prinsip penjadwalan yang efektif sangat penting. Kita telah melihat bagaimana berbagai algoritma dirancang untuk memenuhi tujuan yang berbeda, mulai dari kesederhanaan FCFS hingga kompleksitas adaptif MLFQ, dan dari penentuan jalur kritis proyek hingga penyeimbangan beban di pusat data awan.</p>
+
+            <p>Tantangan dalam penjadwalan bersifat fundamental dan abadi: kompleksitas komputasi yang tinggi (seringkali NP-hard), ketidakpastian dan dinamisme lingkungan, tujuan yang saling bertentangan yang memaksa kompromi, dan kebutuhan akan skalabilitas ke tingkat yang belum pernah terjadi sebelumnya. Namun, ini juga merupakan bidang yang sangat dinamis, dengan inovasi yang terus-menerus muncul dari integrasi pembelajaran mesin, pengembangan sistem terdistribusi dan edge computing, fokus pada efisiensi energi dan keberlanjutan, serta eksplorasi teknologi baru seperti komputasi kuantum.</p>
+
+            <p>Memilih algoritma penjadwalan yang tepat adalah keputusan krusial yang harus didasarkan pada pemahaman mendalam tentang sifat tugas yang akan dijadwalkan, karakteristik sumber daya yang tersedia, batasan-batasan yang ada, dan tujuan kinerja yang diinginkan. Tidak ada satu algoritma "terbaik" yang cocok untuk semua situasi; sebaliknya, pilihan yang efektif adalah hasil dari analisis yang cermat, evaluasi kompromi, dan seringkali, adaptasi yang bijaksana. Seiring dengan terus berkembangnya teknologi, peran algoritma penjadwalan akan menjadi semakin penting dan kompleks, membentuk sistem yang lebih cerdas, lebih efisien, lebih adaptif, dan lebih berkelanjutan di masa depan.</p>
+        </section>
+    </article>
+
+<style>
+.related-posts {
+  clear: both;
+  display: block;
+  width: 100%;
+  margin: 30px auto;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.related-posts h3 {
+  margin-top: 0;
+}
+.related-posts ul {
+  list-style: none;
+  padding: 0;
+}
+.related-posts li {
+  margin: 6px 0;
+}
+</style>
+<div class='related-posts'><h3>Related Posts</h3><ul><li><a href="/ahli-sufi">Ahli Sufi</a></li>
+<li><a href="/aria">Aria</a></li>
+<li><a href="/bakul">Bakul</a></li>
+<li><a href="/afdol">Afdol</a></li>
+<li><a href="/ambi">Ambi</a></li>
+<li><a href="/bambu-air">Bambu Air</a></li>
+<li><a href="/aliyah">Aliyah</a></li>
+<li><a href="/aglutinin">Aglutinin</a></li>
+<li><a href="/anggara">Anggara</a></li>
+<li><a href="/aceh-timur">Aceh Timur</a></li></ul></div>
+<script src="/ik.js"></script>
+</body>
+</html>

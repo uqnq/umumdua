@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dunia Aritmatika: Dasar, Konsep, dan Penerapannya</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Global Reset & Box-sizing */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Base Styles & Typography */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: hsl(210, 20%, 25%); /* Dark blue-grey for main text */
+            background-color: hsl(190, 80%, 98%); /* Very light cyan/blue background */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            color: hsl(200, 70%, 35%); /* Medium blue for headers */
+            margin-top: 1.8em;
+            margin-bottom: 0.8em;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: 2.8em; text-align: center; margin-top: 1em; margin-bottom: 0.5em; color: hsl(200, 80%, 25%); }
+        h2 { font-size: 2.2em; border-bottom: 2px solid hsl(190, 50%, 90%); padding-bottom: 0.3em; }
+        h3 { font-size: 1.7em; color: hsl(160, 70%, 30%); /* Medium green for sub-headers */ }
+        h4 { font-size: 1.3em; color: hsl(200, 60%, 45%); }
+        p { margin-bottom: 1em; }
+
+        a {
+            color: hsl(160, 70%, 40%); /* Medium green for links */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: hsl(160, 80%, 30%);
+            text-decoration: underline;
+        }
+
+        ul, ol {
+            margin-bottom: 1em;
+            padding-left: 1.8em;
+        }
+        li { margin-bottom: 0.5em; }
+
+        strong {
+            font-weight: 600;
+            color: hsl(210, 30%, 20%);
+        }
+
+        em {
+            font-style: italic;
+            color: hsl(210, 20%, 35%);
+        }
+
+        /* Layout & Container */
+        header {
+            background-color: hsl(200, 90%, 95%); /* Lighter blue for header background */
+            padding: 2em 1em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        main {
+            flex-grow: 1;
+            max-width: 900px;
+            margin: 2em auto;
+            padding: 0 1.5em;
+            background-color: #ffffff; /* White content background */
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+
+        section {
+            padding: 2em 0;
+            border-bottom: 1px dashed hsl(190, 50%, 95%);
+        }
+        section:last-of-type {
+            border-bottom: none;
+            padding-bottom: 3em; /* More space at the very end */
+        }
+
+        /* Images & SVGs */
+        img, svg {
+            max-width: 100%;
+            height: auto;
+            display: block; /* Centers block elements with margin: auto */
+            margin: 2.5em auto; /* More vertical space around images */
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            background-color: #fff; /* Ensure SVG background is white if transparent */
+            padding: 15px; /* Padding inside the shadow */
+        }
+
+        /* Code snippets */
+        code {
+            font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+            background-color: hsl(190, 80%, 96%);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: hsl(200, 70%, 30%);
+        }
+
+        pre {
+            background-color: hsl(190, 80%, 96%);
+            padding: 1em 1.5em;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+            font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+            border: 1px solid hsl(190, 50%, 90%);
+        }
+
+        /* Callout/Highlight Boxes */
+        .info-box {
+            background-color: hsl(160, 60%, 95%);
+            border-left: 5px solid hsl(160, 70%, 40%);
+            padding: 1.2em 1.5em;
+            margin: 1.5em 0;
+            border-radius: 8px;
+            color: hsl(160, 70%, 20%);
+        }
+        .info-box p:last-child {
+            margin-bottom: 0;
+        }
+        .info-box strong {
+            color: hsl(160, 70%, 20%);
+        }
+
+        /* Table styles (if any) */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            background-color: hsl(190, 80%, 98%);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        th, td {
+            padding: 1em 1.2em;
+            text-align: left;
+            border-bottom: 1px solid hsl(190, 50%, 90%);
+        }
+        th {
+            background-color: hsl(200, 70%, 90%);
+            color: hsl(200, 70%, 30%);
+            font-weight: 600;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        tr:nth-child(even) {
+            background-color: hsl(190, 80%, 96%);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 3em;
+            padding: 2em 1em;
+            background-color: hsl(200, 90%, 95%);
+            text-align: center;
+            color: hsl(210, 20%, 40%);
+            font-size: 0.9em;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.8em; }
+            h3 { font-size: 1.4em; }
+            main { margin: 1em auto; padding: 0 1em; border-radius: 0; box-shadow: none; }
+            section { padding: 1.5em 0; }
+            img, svg { margin: 1.5em auto; padding: 10px; }
+            header { padding: 1.5em 0.8em; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.7em; }
+            h2 { font-size: 1.5em; }
+            h3 { font-size: 1.2em; }
+            body { font-size: 0.95em; }
+            ul, ol { padding-left: 1.5em; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Dunia Aritmatika: Fondasi Pemikiran Logis dan Kuantitatif</h1>
+    </header>
+
+    <main>
+        <section id="pendahuluan">
+            <h2>Pendahuluan: Apa Itu Aritmatika?</h2>
+            <p><strong>Aritmatika</strong>, sebuah kata yang mungkin terdengar sederhana, namun merupakan pilar utama dari seluruh matematika dan ilmu pengetahuan. Ini adalah cabang matematika tertua dan paling fundamental, yang berurusan dengan studi tentang bilangan dan operasi dasar yang dapat dilakukan dengannya. Dari menghitung jari tangan hingga memahami kompleksitas algoritma komputer, aritmatika adalah fondasi yang tak tergantikan dalam setiap aspek kehidupan kita.</p>
+
+            <p>Secara etimologis, kata "aritmatika" berasal dari bahasa Yunani <em>arithmos</em> (bilangan) dan <em>techne</em> (seni). Jadi, aritmatika secara harfiah berarti "seni berhitung" atau "seni bilangan". Definisi ini dengan indah menangkap esensi disiplin ini: bukan hanya sekadar deretan angka, tetapi sebuah seni yang memungkinkan kita untuk mengukur, membandingkan, dan memanipulasi kuantitas di dunia nyata.</p>
+
+            <p>Sejak zaman prasejarah, manusia telah menggunakan konsep-konsep aritmatika untuk kebutuhan dasar seperti menghitung persediaan makanan, jumlah anggota suku, atau melacak siklus alam. Perkembangannya telah sejalan dengan evolusi peradaban manusia, dari sistem hitungan primitif hingga sistem bilangan yang kompleks yang kita gunakan saat ini. Tanpa aritmatika, tidak akan ada perdagangan, tidak ada konstruksi monumental, tidak ada navigasi bintang, dan tentu saja, tidak ada komputer.</p>
+
+            <p>Artikel ini akan membawa Anda dalam perjalanan mendalam menelusuri dunia aritmatika. Kita akan mengupas tuntas mulai dari konsep paling dasar, seperti jenis-jenis bilangan dan operasi fundamentalnya, hingga sifat-sifat yang mengatur interaksi antar bilangan. Kita juga akan mengeksplorasi sejarahnya yang kaya, melihat bagaimana aritmatika berkembang di berbagai peradaban, dan yang terpenting, bagaimana aritmatika menjadi alat yang sangat kuat dalam kehidupan sehari-hari, ilmu pengetahuan, dan teknologi modern.</p>
+
+            <p>Bersiaplah untuk menyegarkan kembali pemahaman Anda tentang penjumlahan, pengurangan, perkalian, dan pembagian, serta menemukan kembali keindahan dan kekuatan di balik setiap angka dan operasi.</p>
+
+            <svg role="img" aria-labelledby="aritmatika-umum-title aritmatika-umum-desc" viewBox="0 0 800 300">
+                <title id="aritmatika-umum-title">Simbol Aritmatika Umum</title>
+                <desc id="aritmatika-umum-desc">Ilustrasi simbol operasi aritmatika dasar: plus, minus, kali, bagi, dan sama dengan, dalam gaya modern.</desc>
+                <rect x="0" y="0" width="800" height="300" fill="transparent"/>
+                <!-- Plus sign -->
+                <path d="M100 125 H150 V75 H175 V125 H225 V150 H175 V200 H150 V150 H100 Z" fill="hsl(160, 70%, 40%)" transform="translate(0, 0)"/>
+                <!-- Minus sign -->
+                <rect x="275" y="137.5" width="100" height="25" fill="hsl(200, 70%, 35%)" transform="translate(0, 0)"/>
+                <!-- Multiplication sign (X) -->
+                <path d="M485 75 L400 225 L425 225 L510 75 L485 75 Z" fill="hsl(240, 60%, 55%)" transform="translate(0, 0)"/>
+                <path d="M400 75 L485 225 L460 225 L375 75 L400 75 Z" fill="hsl(240, 60%, 55%)" transform="translate(0, 0)"/>
+                <!-- Division sign (obelus) -->
+                <rect x="587.5" y="137.5" width="100" height="25" fill="hsl(30, 80%, 55%)" transform="translate(0, 0)"/>
+                <circle cx="637.5" cy="100" r="12.5" fill="hsl(30, 80%, 55%)" transform="translate(0, 0)"/>
+                <circle cx="637.5" cy="180" r="12.5" fill="hsl(30, 80%, 55%)" transform="translate(0, 0)"/>
+                <!-- Equal sign -->
+                <rect x="700" y="112.5" width="75" height="15" fill="hsl(10, 80%, 55%)" transform="translate(0, 0)"/>
+                <rect x="700" y="162.5" width="75" height="15" fill="hsl(10, 80%, 55%)" transform="translate(0, 0)"/>
+            </svg>
+        </section>
+
+        <section id="sejarah-aritmatika">
+            <h2>Sejarah Singkat Aritmatika</h2>
+            <p>Sejarah aritmatika adalah cerminan dari perjalanan intelektual manusia. Kebutuhan untuk menghitung, mengukur, dan mengalokasikan sumber daya mendorong pengembangan sistem angka dan metode perhitungan di berbagai peradaban kuno.</p>
+
+            <h3>Aritmatika Prasejarah dan Peradaban Awal</h3>
+            <p>Konsep bilangan dan perhitungan dasar sudah ada jauh sebelum munculnya tulisan. Bukti arkeologi seperti tulang Ishango (sekitar 20.000 SM) menunjukkan bahwa manusia prasejarah sudah menggunakan tanda hitungan untuk melacak waktu atau objek. Sistem hitungan awal seringkali berbasis jari (desimal) atau kadang-kadang berbasis 12 atau 60.</p>
+            <ul>
+                <li><strong>Mesopotamia (Sumeria, Babilonia):</strong> Sekitar 3000 SM, peradaban di Mesopotamia mengembangkan sistem bilangan berbasis 60 (seksagesimal) yang sangat maju. Sistem ini memungkinkan mereka melakukan perhitungan yang kompleks untuk astronomi, perdagangan, dan arsitektur. Penggunaan posisi nilai (mirip dengan sistem desimal modern) sudah dikenal, meskipun tidak ada simbol untuk nol.</li>
+                <li><strong>Mesir Kuno:</strong> Bangsa Mesir, sekitar 2700 SM, menggunakan sistem bilangan berbasis 10, tetapi bukan sistem posisi nilai. Mereka memiliki simbol untuk setiap kelipatan sepuluh (1, 10, 100, dst.). Perhitungan mereka melibatkan metode unik untuk perkalian (menggandakan) dan pembagian (kebalikan dari penggandaan).</li>
+                <li><strong>Lembah Indus:</strong> Bukti dari peradaban Harappa (sekitar 2500 SM) menunjukkan penggunaan timbangan dan ukuran standar, mengindikasikan pemahaman yang kuat tentang kuantitas dan perbandingan.</li>
+            </ul>
+
+            <h3>Yunani Kuno dan Roma</h3>
+            <p>Filosof dan matematikawan Yunani, seperti Pythagoras dan Euclid, memberikan kontribusi besar pada aspek teoritis matematika, termasuk bilangan. Mereka tertarik pada sifat-sifat bilangan (genap, ganjil, prima) dan rasio, meletakkan dasar bagi teori bilangan. Namun, sistem angka Romawi (I, V, X, L, C, D, M) kurang efisien untuk perhitungan kompleks karena tidak memiliki nilai posisi dan nol, sehingga mereka sering menggunakan abacus untuk perhitungan.</p>
+
+            <h3>India: Revolusi Nol dan Sistem Desimal</h3>
+            <p>Kontribusi paling revolusioner dalam sejarah aritmatika datang dari India. Antara abad ke-5 dan ke-7 M, matematikawan India mengembangkan sistem bilangan posisi nilai desimal yang kita gunakan saat ini, lengkap dengan konsep <strong>nol</strong> sebagai angka dan penanda tempat. Brahmagupta (abad ke-7) adalah salah satu yang pertama mengkodifikasi aturan untuk operasi dengan nol dan bilangan negatif. Sistem ini sangat efisien dan intuitif.</p>
+
+            <h3>Dunia Islam: Penyebaran dan Pengembangan</h3>
+            <p>Matematikawan Islam pada Abad Pertengahan memainkan peran krusial dalam menyerap, mengembangkan, dan menyebarkan pengetahuan matematika dari India ke dunia Barat. Al-Khwarizmi (abad ke-9) menulis buku "Tentang Perhitungan dengan Angka India" yang memperkenalkan sistem desimal dan algoritmanya ke Eropa. Kata "algoritma" sendiri berasal dari namanya. Mereka juga mengembangkan teknik-teknik aljabar yang kemudian menjadi dasar untuk perhitungan aritmatika yang lebih maju.</p>
+
+            <h3>Eropa dan Era Modern</h3>
+            <p>Melalui kontak dengan dunia Islam (misalnya, melalui Spanyol Moor), sistem angka Hindu-Arab akhirnya mencapai Eropa. Fibonacci (Leonardo Pisano) adalah salah satu tokoh kunci yang mempopulerkannya di Eropa dengan bukunya <em>Liber Abaci</em> (1202). Namun, butuh beberapa abad bagi sistem baru ini untuk sepenuhnya menggantikan sistem Romawi yang sudah mapan.</p>
+            <p>Sejak Renaisans, aritmatika terus berkembang dengan penemuan logaritma oleh John Napier (abad ke-17), kalkulus oleh Newton dan Leibniz (abad ke-17), hingga pengembangan komputer modern. Setiap inovasi ini dibangun di atas fondasi aritmatika dasar, memperluas kemampuan kita untuk memecahkan masalah kuantitatif yang semakin kompleks.</p>
+
+            <svg role="img" aria-labelledby="sejarah-aritmatika-title sejarah-aritmatika-desc" viewBox="0 0 800 300">
+                <title id="sejarah-aritmatika-title">Perkembangan Sistem Angka</title>
+                <desc id="sejarah-aritmatika-desc">Ilustrasi evolusi sistem angka, dimulai dari tanda hitungan, angka Romawi, abacus, dan angka Arab.</desc>
+                <rect x="0" y="0" width="800" height="300" fill="transparent"/>
+
+                <!-- Ancient Tally Marks -->
+                <g transform="translate(50, 50)">
+                    <text x="0" y="-15" font-family="'Poppins', sans-serif" font-size="20" fill="hsl(210, 20%, 35%)">Tally Marks</text>
+                    <line x1="0" y1="0" x2="0" y2="40" stroke="hsl(200, 70%, 35%)" stroke-width="5"/>
+                    <line x1="10" y1="0" x2="10" y2="40" stroke="hsl(200, 70%, 35%)" stroke-width="5"/>
+                    <line x1="20" y1="0" x2="20" y2="40" stroke="hsl(200, 70%, 35%)" stroke-width="5"/>
+                    <line x1="30" y1="0" x2="30" y2="40" stroke="hsl(200, 70%, 35%)" stroke-width="5"/>
+                    <line x1="5" y1="35" x2="35" y2="5" stroke="hsl(200, 70%, 35%)" stroke-width="5"/>
+                </g>
+
+                <!-- Roman Numerals -->
+                <g transform="translate(200, 50)">
+                    <text x="0" y="-15" font-family="'Poppins', sans-serif" font-size="20" fill="hsl(210, 20%, 35%)">Romawi</text>
+                    <text x="0" y="30" font-family="'Poppins', sans-serif" font-size="40" fill="hsl(160, 70%, 40%)">MDCCLXXVI</text>
+                </g>
+
+                <!-- Abacus -->
+                <g transform="translate(450, 50)">
+                    <text x="0" y="-15" font-family="'Poppins', sans-serif" font-size="20" fill="hsl(210, 20%, 35%)">Abacus</text>
+                    <rect x="0" y="0" width="150" height="80" rx="5" ry="5" fill="hsl(30, 80%, 90%)" stroke="hsl(30, 80%, 55%)" stroke-width="2"/>
+                    <line x1="75" y1="0" x2="75" y2="80" stroke="hsl(30, 80%, 55%)" stroke-width="2"/>
+                    <line x1="0" y1="40" x2="150" y2="40" stroke="hsl(30, 80%, 55%)" stroke-width="2"/>
+                    <circle cx="25" cy="20" r="8" fill="hsl(200, 70%, 35%)"/>
+                    <circle cx="25" cy="60" r="8" fill="hsl(160, 70%, 40%)"/>
+                    <circle cx="50" cy="20" r="8" fill="hsl(200, 70%, 35%)"/>
+                    <circle cx="50" cy="60" r="8" fill="hsl(160, 70%, 40%)"/>
+                    <circle cx="100" cy="20" r="8" fill="hsl(200, 70%, 35%)"/>
+                    <circle cx="100" cy="60" r="8" fill="hsl(160, 70%, 40%)"/>
+                    <circle cx="125" cy="20" r="8" fill="hsl(200, 70%, 35%)"/>
+                    <circle cx="125" cy="60" r="8" fill="hsl(160, 70%, 40%)"/>
+                </g>
+
+                <!-- Hindu-Arabic Numerals -->
+                <g transform="translate(680, 50)">
+                    <text x="0" y="-15" font-family="'Poppins', sans-serif" font-size="20" fill="hsl(210, 20%, 35%)">Hindu-Arab</text>
+                    <text x="0" y="30" font-family="'Poppins', sans-serif" font-size="40" fill="hsl(240, 60%, 55%)">12345</text>
+                    <text x="0" y="70" font-family="'Poppins', sans-serif" font-size="40" fill="hsl(240, 60%, 55%)">67890</text>
+                </g>
+            </svg>
+        </section>
+
+        <section id="jenis-bilangan">
+            <h2>Jenis-jenis Bilangan dalam Aritmatika</h2>
+            <p>Sebelum kita menyelami operasi aritmatika, penting untuk memahami berbagai jenis bilangan yang menjadi objek kajiannya. Setiap jenis bilangan memiliki karakteristik dan perannya sendiri dalam matematika.</p>
+
+            <h3>1. Bilangan Asli (Natural Numbers)</h3>
+            <p><strong>Bilangan asli</strong> adalah bilangan yang digunakan untuk menghitung objek. Mereka adalah bilangan bulat positif, mulai dari 1 dan seterusnya. Sering dilambangkan dengan huruf kapital <code>N</code>.
+            <code>N = {1, 2, 3, 4, ...}</code>
+            Bilangan asli adalah titik awal dari pemahaman kita tentang kuantitas.</p>
+
+            <h3>2. Bilangan Cacah (Whole Numbers)</h3>
+            <p><strong>Bilangan cacah</strong> adalah himpunan bilangan asli ditambah nol. Jadi, bilangan cacah mencakup nol dan semua bilangan bulat positif. Sering dilambangkan dengan <code>W</code>.
+            <code>W = {0, 1, 2, 3, 4, ...}</code>
+            Penambahan nol sangat penting karena memungkinkan kita untuk menyatakan "tidak ada" atau "kosong", sebuah konsep fundamental dalam perhitungan.</p>
+
+            <h3>3. Bilangan Bulat (Integers)</h3>
+            <p><strong>Bilangan bulat</strong> mencakup semua bilangan cacah ditambah negatif dari bilangan asli. Ini berarti bilangan bulat terdiri dari bilangan positif, negatif, dan nol. Sering dilambangkan dengan <code>Z</code> (dari bahasa Jerman "Zahlen" yang berarti "bilangan").
+            <code>Z = {..., -3, -2, -1, 0, 1, 2, 3, ...}</code>
+            Konsep bilangan negatif memungkinkan kita untuk menyatakan defisit, suhu di bawah nol, atau arah yang berlawanan.</p>
+
+            <h3>4. Bilangan Rasional (Rational Numbers)</h3>
+            <p><strong>Bilangan rasional</strong> adalah bilangan yang dapat dinyatakan sebagai pecahan <code>a/b</code>, di mana <code>a</code> dan <code>b</code> adalah bilangan bulat, dan <code>b</code> tidak sama dengan nol. Ini mencakup semua bilangan bulat, pecahan, dan desimal yang berakhir atau berulang. Sering dilambangkan dengan <code>Q</code> (dari "quotient" atau hasil bagi).
+            Contoh: <code>1/2</code>, <code>-3/4</code>, <code>5</code> (karena <code>5/1</code>), <code>0.75</code> (karena <code>3/4</code>), <code>0.333...</code> (karena <code>1/3</code>).
+            Bilangan rasional sangat penting dalam pengukuran dan pembagian, memungkinkan kita untuk menyatakan bagian dari suatu keseluruhan.</p>
+
+            <h3>5. Bilangan Irasional (Irrational Numbers)</h3>
+            <p><strong>Bilangan irasional</strong> adalah bilangan yang tidak dapat dinyatakan sebagai pecahan sederhana <code>a/b</code>. Dalam bentuk desimal, bilangan ini tidak berakhir dan tidak berulang.
+            Contoh paling terkenal adalah <code>π (pi)</code> (sekitar 3.14159...) dan akar kuadrat dari bilangan non-kuadrat sempurna, seperti <code>√2</code> (sekitar 1.41421...).
+            Bilangan irasional muncul secara alami dalam geometri dan perhitungan yang lebih tinggi.</p>
+
+            <h3>6. Bilangan Real (Real Numbers)</h3>
+            <p><strong>Bilangan real</strong> adalah himpunan semua bilangan rasional dan irasional. Ini mencakup setiap titik pada garis bilangan. Sering dilambangkan dengan <code>R</code>.
+            Singkatnya, semua bilangan yang kita gunakan dalam perhitungan sehari-hari, termasuk yang positif, negatif, nol, pecahan, dan desimal yang tidak berulang, adalah bilangan real.</p>
+
+            <div class="info-box">
+                <h4>Pentingnya Pemahaman Jenis Bilangan</h4>
+                <p>Memahami perbedaan antara jenis-jenis bilangan ini krusial karena aturan dan sifat operasi aritmatika dapat sedikit berbeda tergantung pada jenis bilangan yang sedang Anda kerjakan. Misalnya, tidak semua bilangan bulat memiliki invers perkalian yang merupakan bilangan bulat (misalnya, invers dari 2 adalah 1/2, yang bukan bilangan bulat).</p>
+            </div>
+
+            <svg role="img" aria-labelledby="jenis-bilangan-title jenis-bilangan-desc" viewBox="0 0 800 300">
+                <title id="jenis-bilangan-title">Hierarki Jenis Bilangan</title>
+                <desc id="jenis-bilangan-desc">Ilustrasi set bilangan yang saling mencakup: Natural, Whole, Integers, Rationals, dan Reals.</desc>
+                <rect x="0" y="0" width="800" height="300" fill="transparent"/>
+
+                <!-- Real Numbers (Largest) -->
+                <circle cx="400" cy="150" r="140" fill="hsl(190, 80%, 96%)" stroke="hsl(190, 50%, 70%)" stroke-width="3"/>
+                <text x="400" y="275" text-anchor="middle" font-family="'Poppins', sans-serif" font-size="22" fill="hsl(200, 70%, 35%)">Bilangan Real (R)</text>
+
+                <!-- Rational Numbers -->
+                <circle cx="400" cy="150" r="110" fill="hsl(160, 60%, 95%)" stroke="hsl(160, 70%, 40%)" stroke-width="3"/>
+                <text x="400" y="240" text-anchor="middle" font-family="'Poppins', sans-serif" font-size="20" fill="hsl(160, 70%, 20%)">Bilangan Rasional (Q)</text>
+                
+                <!-- Irrational Numbers (outside Rational, inside Real) -->
+                <text x="600" y="100" font-family="'Poppins', sans-serif" font-size="18" fill="hsl(240, 60%, 55%)">Irasional</text>
+                <text x="600" y="125" font-family="'Poppins', sans-serif" font-size="28" fill="hsl(240, 60%, 55%)">π</text>
+                <text x="600" y="160" font-family="'Poppins', sans-serif" font-size="28" fill="hsl(240, 60%, 55%)">√2</text>
+
+                <!-- Integers -->
+                <circle cx="400" cy="150" r="80" fill="hsl(240, 60%, 96%)" stroke="hsl(240, 60%, 55%)" stroke-width="3"/>
+                <text x="400" y="195" text-anchor="middle" font-family="'Poppins', sans-serif" font-size="18" fill="hsl(240, 60%, 30%)">Bilangan Bulat (Z)</text>
+                <text x="350" y="150" font-family="'Poppins', sans-serif" font-size="22" fill="hsl(240, 60%, 30%)">-2</text>
+                <text x="450" y="150" font-family="'Poppins', sans-serif" font-size="22" fill="hsl(240, 60%, 30%)">1</text>
+
+                <!-- Whole Numbers -->
+                <circle cx="400" cy="150" r="50" fill="hsl(30, 80%, 95%)" stroke="hsl(30, 80%, 55%)" stroke-width="3"/>
+                <text x="400" y="170" text-anchor="middle" font-family="'Poppins', sans-serif" font-size="16" fill="hsl(30, 80%, 30%)">Bil. Cacah (W)</text>
+                <text x="400" y="130" text-anchor="middle" font-family="'Poppins', sans-serif" font-size="20" fill="hsl(30, 80%, 30%)">0</text>
+
+                <!-- Natural Numbers (Innermost) -->
+                <circle cx="400" cy="150" r="30" fill="hsl(10, 80%, 95%)" stroke="hsl(10, 80%, 55%)" stroke-width="3"/>
+                <text x="400" y="155" text-anchor="middle" font-family="'Poppins', sans-serif" font-size="16" fill="hsl(10, 80%, 30%)">Bil. Asli (N)</text>
+                <text x="400" y="130" text-anchor="middle" font-family="'Poppins', sans-serif" font-size="14" fill="hsl(10, 80%, 30%)">1, 2</text>
+            </svg>
+        </section>
+
+        <section id="operasi-dasar">
+            <h2>Empat Operasi Dasar Aritmatika</h2>
+            <p>Inti dari aritmatika terletak pada empat operasi dasar: penjumlahan, pengurangan, perkalian, dan pembagian. Menguasai operasi ini adalah kunci untuk memahami konsep matematika yang lebih kompleks.</p>
+
+            <h3>1. Penjumlahan (+)</h3>
+            <p><strong>Penjumlahan</strong> adalah proses menggabungkan dua atau lebih kuantitas menjadi satu total. Ini adalah operasi yang paling mendasar dan sering menjadi yang pertama kali kita pelajari. Simbolnya adalah tanda plus (<code>+</code>).</p>
+            <p>Konsep penjumlahan dapat divisualisasikan sebagai penggabungan koleksi benda. Jika Anda memiliki 3 apel dan menambahkan 2 apel lagi, Anda akan memiliki 5 apel.
+            <code>3 + 2 = 5</code></p>
+
+            <h4>Terminologi Penjumlahan:</h4>
+            <ul>
+                <li><strong>Suku/Penjumlahan (Addend):</strong> Setiap bilangan yang dijumlahkan (misalnya, 3 dan 2 dalam contoh di atas).</li>
+                <li><strong>Jumlah (Sum/Total):</strong> Hasil dari operasi penjumlahan (misalnya, 5).</li>
+            </ul>
+
+            <h4>Sifat-sifat Penjumlahan:</h4>
+            <ul>
+                <li><strong>Komutatif:</strong> Urutan bilangan tidak mempengaruhi hasil. <code>a + b = b + a</code>. Contoh: <code>3 + 2 = 2 + 3 = 5</code>.</li>
+                <li><strong>Asosiatif:</strong> Pengelompokan bilangan tidak mempengaruhi hasil saat menjumlahkan tiga atau lebih bilangan. <code>(a + b) + c = a + (b + c)</code>. Contoh: <code>(1 + 2) + 3 = 1 + (2 + 3) = 6</code>.</li>
+                <li><strong>Elemen Identitas (Identitas Aditif):</strong> Bilangan nol (<code>0</code>) adalah identitas aditif, karena menambahkan nol ke bilangan apa pun tidak mengubah bilangan tersebut. <code>a + 0 = a</code>. Contoh: <code>7 + 0 = 7</code>.</li>
+            </ul>
+
+            <h4>Strategi Penjumlahan Mental:</h4>
+            <ul>
+                <li><strong>Membilang Maju:</strong> Untuk <code>5 + 3</code>, mulai dari 5 dan hitung 3 angka ke depan: 6, 7, 8.</li>
+                <li><strong>Membuat Sepuluh:</strong> Untuk <code>8 + 5</code>, pikirkan <code>8 + 2 + 3 = 10 + 3 = 13</code>.</li>
+                <li><strong>Memecah dan Menambah:</strong> Untuk <code>23 + 45</code>, pisahkan puluhan dan satuan: <code>(20 + 40) + (3 + 5) = 60 + 8 = 68</code>.</li>
+            </ul>
+
+            <h3>2. Pengurangan (-)</h3>
+            <p><strong>Pengurangan</strong> adalah operasi kebalikan dari penjumlahan. Ini melibatkan pengambilan satu kuantitas dari yang lain, menemukan selisihnya, atau menentukan berapa banyak yang tersisa. Simbolnya adalah tanda minus (<code>-</code>).</p>
+            <p>Konsep pengurangan dapat divisualisasikan sebagai "mengambil". Jika Anda memiliki 5 apel dan mengambil 2 apel, Anda akan memiliki 3 apel.
+            <code>5 - 2 = 3</code></p>
+
+            <h4>Terminologi Pengurangan:</h4>
+            <ul>
+                <li><strong>Minuend:</strong> Bilangan yang dikurangi (misalnya, 5).</li>
+                <li><strong>Subtrahend:</strong> Bilangan yang mengurangi (misalnya, 2).</li>
+                <li><strong>Selisih (Difference):</strong> Hasil dari operasi pengurangan (misalnya, 3).</li>
+            </ul>
+
+            <h4>Sifat-sifat Pengurangan:</h4>
+            <p>Tidak seperti penjumlahan, pengurangan bukanlah operasi komutatif atau asosiatif.
+            <code>5 - 2 ≠ 2 - 5</code> (hasilnya 3 vs -3)
+            <code>(10 - 3) - 2 ≠ 10 - (3 - 2)</code> (hasilnya 5 vs 9)</p>
+            <p>Penting untuk memahami bahwa pengurangan bilangan negatif ekuivalen dengan penjumlahan.
+            <code>a - (-b) = a + b</code>. Contoh: <code>5 - (-2) = 5 + 2 = 7</code>.</p>
+
+            <h4>Strategi Pengurangan Mental:</h4>
+            <ul>
+                <li><strong>Membilang Mundur:</strong> Untuk <code>8 - 3</code>, mulai dari 8 dan hitung mundur 3 angka: 7, 6, 5.</li>
+                <li><strong>Mencari Selisih:</strong> Untuk <code>15 - 8</code>, pikirkan "berapa yang harus ditambahkan ke 8 agar menjadi 15?" (yaitu 7).</li>
+                <li><strong>Mengurangi Sepuluh:</strong> Untuk <code>15 - 7</code>, pikirkan <code>15 - 5 - 2 = 10 - 2 = 8</code>.</li>
+            </ul>
+
+            <h3>3. Perkalian (×, *)</h3>
+            <p><strong>Perkalian</strong> dapat dipahami sebagai penjumlahan berulang atau sebagai cara untuk menghitung total item dalam sejumlah kelompok yang sama. Simbolnya adalah tanda kali (<code>×</code>) atau tanda bintang (<code>*</code>).</p>
+            <p>Jika Anda memiliki 3 kelompok yang masing-masing berisi 2 apel, totalnya adalah 6 apel.
+            <code>3 × 2 = 6</code> (3 kelompok 2) atau <code>2 + 2 + 2 = 6</code>.</p>
+
+            <h4>Terminologi Perkalian:</h4>
+            <ul>
+                <li><strong>Faktor (Factor/Multiplicand/Multiplier):</strong> Bilangan yang dikalikan (misalnya, 3 dan 2).</li>
+                <li><strong>Produk (Product):</strong> Hasil dari operasi perkalian (misalnya, 6).</li>
+            </ul>
+
+            <h4>Sifat-sifat Perkalian:</h4>
+            <ul>
+                <li><strong>Komutatif:</strong> Urutan faktor tidak mempengaruhi hasil. <code>a × b = b × a</code>. Contoh: <code>3 × 2 = 2 × 3 = 6</code>.</li>
+                <li><strong>Asosiatif:</strong> Pengelompokan faktor tidak mempengaruhi hasil saat mengalikan tiga atau lebih bilangan. <code>(a × b) × c = a × (b × c)</code>. Contoh: <code>(2 × 3) × 4 = 2 × (3 × 4) = 24</code>.</li>
+                <li><strong>Distributif (terhadap penjumlahan/pengurangan):</strong> Perkalian dapat didistribusikan ke setiap suku dalam tanda kurung. <code>a × (b + c) = (a × b) + (a × c)</code>. Contoh: <code>2 × (3 + 4) = (2 × 3) + (2 × 4) = 6 + 8 = 14</code>.</li>
+                <li><strong>Elemen Identitas (Identitas Multiplikatif):</strong> Bilangan satu (<code>1</code>) adalah identitas multiplikatif, karena mengalikan bilangan apa pun dengan satu tidak mengubah bilangan tersebut. <code>a × 1 = a</code>. Contoh: <code>7 × 1 = 7</code>.</li>
+                <li><strong>Sifat Nol:</strong> Mengalikan bilangan apa pun dengan nol akan selalu menghasilkan nol. <code>a × 0 = 0</code>. Contoh: <code>7 × 0 = 0</code>.</li>
+            </ul>
+
+            <h4>Tabel Perkalian:</h4>
+            <p>Menghafal tabel perkalian (biasanya hingga 10x10 atau 12x12) adalah keterampilan fundamental yang mempercepat perhitungan.</p>
+
+            <h3>4. Pembagian (÷, /)</h3>
+            <p><strong>Pembagian</strong> adalah operasi kebalikan dari perkalian. Ini melibatkan pembagian suatu kuantitas menjadi beberapa kelompok yang sama besar atau menentukan berapa banyak kelompok yang sama yang dapat dibuat dari suatu kuantitas. Simbolnya adalah tanda bagi (<code>÷</code>) atau garis miring (<code>/</code>).</p>
+            <p>Jika Anda memiliki 6 apel dan ingin membaginya menjadi 3 kelompok yang sama, setiap kelompok akan memiliki 2 apel.
+            <code>6 ÷ 3 = 2</code></p>
+            <p>Pembagian juga dapat dilihat sebagai berapa kali satu bilangan "masuk" ke bilangan lain.</p>
+
+            <h4>Terminologi Pembagian:</h4>
+            <ul>
+                <li><strong>Dividen:</strong> Bilangan yang dibagi (misalnya, 6).</li>
+                <li><strong>Pembagi (Divisor):</strong> Bilangan yang membagi dividen (misalnya, 3).</li>
+                <li><strong>Hasil Bagi (Quotient):</strong> Hasil dari operasi pembagian (misalnya, 2).</li>
+                <li><strong>Sisa (Remainder):</strong> Bagian yang tersisa jika dividen tidak dapat dibagi habis oleh pembagi. Contoh: <code>7 ÷ 3 = 2</code> sisa <code>1</code>.</li>
+            </ul>
+
+            <h4>Sifat-sifat Pembagian:</h4>
+            <p>Sama seperti pengurangan, pembagian bukanlah operasi komutatif atau asosiatif.
+            <code>6 ÷ 3 ≠ 3 ÷ 6</code> (hasilnya 2 vs 0.5)
+            <code>(24 ÷ 4) ÷ 2 ≠ 24 ÷ (4 ÷ 2)</code> (hasilnya 3 vs 12)</p>
+            <p><strong>Pembagian oleh Nol:</strong> Pembagian dengan nol adalah operasi yang <strong>tidak terdefinisi</strong>. Dalam matematika, Anda tidak dapat membagi suatu bilangan dengan nol. Ini karena tidak ada bilangan yang, ketika dikalikan dengan nol, akan menghasilkan bilangan selain nol.</p>
+
+            <h4>Aturan Keterbagian (Divisibility Rules):</h4>
+            <p>Aturan-aturan ini membantu menentukan apakah suatu bilangan dapat dibagi habis oleh bilangan lain tanpa melakukan pembagian panjang:</p>
+            <ul>
+                <li><strong>Oleh 2:</strong> Jika angka terakhir genap.</li>
+                <li><strong>Oleh 3:</strong> Jika jumlah digitnya habis dibagi 3.</li>
+                <li><strong>Oleh 4:</strong> Jika dua angka terakhirnya membentuk bilangan yang habis dibagi 4.</li>
+                <li><strong>Oleh 5:</strong> Jika angka terakhirnya 0 atau 5.</li>
+                <li><strong>Oleh 6:</strong> Jika habis dibagi 2 dan 3.</li>
+                <li><strong>Oleh 9:</strong> Jika jumlah digitnya habis dibagi 9.</li>
+                <li><strong>Oleh 10:</strong> Jika angka terakhirnya 0.</li>
+            </ul>
+
+            <svg role="img" aria-labelledby="operasi-dasar-title operasi-dasar-desc" viewBox="0 0 800 300">
+                <title id="operasi-dasar-title">Ilustrasi Empat Operasi Aritmatika</title>
+                <desc id="operasi-dasar-desc">Visualisasi empat operasi dasar: penjumlahan, pengurangan, perkalian, dan pembagian menggunakan objek sederhana.</desc>
+                <rect x="0" y="0" width="800" height="300" fill="transparent"/>
+
+                <!-- Addition -->
+                <g transform="translate(50, 50)">
+                    <text x="0" y="-15" font-family="'Poppins', sans-serif" font-size="20" fill="hsl(210, 20%, 35%)">Penjumlahan</text>
+                    <circle cx="20" cy="20" r="15" fill="hsl(160, 70%, 50%)"/>
+                    <circle cx="50" cy="20" r="15" fill="hsl(160, 70%, 50%)"/>
+                    <circle cx="80" cy="20" r="15" fill="hsl(160, 70%, 50%)"/>
+                    <text x="110" y="25" font-family="'Poppins', sans-serif" font-size="25" fill="hsl(200, 70%, 35%)">+</text>
+                    <circle cx="150" cy="20" r="15" fill="hsl(160, 70%, 50%)"/>
+                    <circle cx="180" cy="20" r="15" fill="hsl(160, 70%, 50%)"/>
+                    <text x="210" y="25" font-family="'Poppins', sans-serif" font-size="25" fill="hsl(200, 70%, 35%)">=</text>
+                    <circle cx="250" cy="20" r="15" fill="hsl(160, 70%, 50%)"/>
+                    <circle cx="280" cy="20" r="15" fill="hsl(160, 70%, 50%)"/>
+                    <circle cx="310" cy="20" r="15" fill="hsl(160, 70%, 50%)"/>
+                    <circle cx="340" cy="20" r="15" fill="hsl(160, 70%, 50%)"/>
+                    <circle cx="370" cy="20" r="15" fill="hsl(160, 70%, 50%)"/>
+                </g>
+
+                <!-- Subtraction -->
+                <g transform="translate(50, 150)">
+                    <text x="0" y="-15" font-family="'Poppins', sans-serif" font-size="20" fill="hsl(210, 20%, 35%)">Pengurangan</text>
+                    <circle cx="20" cy="20" r="15" fill="hsl(200, 70%, 50%)"/>
+                    <circle cx="50" cy="20" r="15" fill="hsl(200, 70%, 50%)"/>
+                    <circle cx="80" cy="20" r="15" fill="hsl(200, 70%, 50%)"/>
+                    <circle cx="110" cy="20" r="15" fill="hsl(200, 70%, 50%)"/>
+                    <circle cx="140" cy="20" r="15" fill="hsl(200, 70%, 50%)"/>
+                    <text x="170" y="25" font-family="'Poppins', sans-serif" font-size="25" fill="hsl(200, 70%, 35%)">-</text>
+                    <circle cx="210" cy="20" r="15" fill="hsl(200, 70%, 50%)"/>
+                    <circle cx="240" cy="20" r="15" fill="hsl(200, 70%, 50%)"/>
+                    <text x="270" y="25" font-family="'Poppins', sans-serif" font-size="25" fill="hsl(200, 70%, 35%)">=</text>
+                    <circle cx="310" cy="20" r="15" fill="hsl(200, 70%, 50%)"/>
+                    <circle cx="340" cy="20" r="15" fill="hsl(200, 70%, 50%)"/>
+                    <circle cx="370" cy="20" r="15" fill="hsl(200, 70%, 50%)"/>
+                </g>
+
+                <!-- Multiplication -->
+                <g transform="translate(420, 50)">
+                    <text x="0" y="-15" font-family="'Poppins', sans-serif" font-size="20" fill="hsl(210, 20%, 35%)">Perkalian</text>
+                    <circle cx="20" cy="20" r="15" fill="hsl(240, 60%, 50%)"/>
+                    <circle cx="50" cy="20" r="15" fill="hsl(240, 60%, 50%)"/>
+                    <text x="80" y="25" font-family="'Poppins', sans-serif" font-size="25" fill="hsl(200, 70%, 35%)">x</text>
+                    <circle cx="120" cy="20" r="15" fill="hsl(240, 60%, 50%)"/>
+                    <circle cx="150" cy="20" r="15" fill="hsl(240, 60%, 50%)"/>
+                    <circle cx="180" cy="20" r="15" fill="hsl(240, 60%, 50%)"/>
+                    <text x="210" y="25" font-family="'Poppins', sans-serif" font-size="25" fill="hsl(200, 70%, 35%)">=</text>
+                    <circle cx="250" cy="20" r="15" fill="hsl(240, 60%, 50%)"/>
+                    <circle cx="280" cy="20" r="15" fill="hsl(240, 60%, 50%)"/>
+                    <circle cx="310" cy="20" r="15" fill="hsl(240, 60%, 50%)"/>
+                    <circle cx="340" cy="20" r="15" fill="hsl(240, 60%, 50%)"/>
+                    <circle cx="370" cy="20" r="15" fill="hsl(240, 60%, 50%)"/>
+                    <circle cx="400" cy="20" r="15" fill="hsl(240, 60%, 50%)"/>
+                </g>
+
+                <!-- Division -->
+                <g transform="translate(420, 150)">
+                    <text x="0" y="-15" font-family="'Poppins', sans-serif" font-size="20" fill="hsl(210, 20%, 35%)">Pembagian</text>
+                    <circle cx="20" cy="20" r="15" fill="hsl(30, 80%, 50%)"/>
+                    <circle cx="50" cy="20" r="15" fill="hsl(30, 80%, 50%)"/>
+                    <circle cx="80" cy="20" r="15" fill="hsl(30, 80%, 50%)"/>
+                    <circle cx="110" cy="20" r="15" fill="hsl(30, 80%, 50%)"/>
+                    <circle cx="140" cy="20" r="15" fill="hsl(30, 80%, 50%)"/>
+                    <circle cx="170" cy="20" r="15" fill="hsl(30, 80%, 50%)"/>
+                    <text x="200" y="25" font-family="'Poppins', sans-serif" font-size="25" fill="hsl(200, 70%, 35%)">÷</text>
+                    <circle cx="240" cy="20" r="15" fill="hsl(30, 80%, 50%)"/>
+                    <circle cx="270" cy="20" r="15" fill="hsl(30, 80%, 50%)"/>
+                    <text x="300" y="25" font-family="'Poppins', sans-serif" font-size="25" fill="hsl(200, 70%, 35%)">=</text>
+                    <circle cx="340" cy="20" r="15" fill="hsl(30, 80%, 50%)"/>
+                    <circle cx="370" cy="20" r="15" fill="hsl(30, 80%, 50%)"/>
+                    <circle cx="400" cy="20" r="15" fill="hsl(30, 80%, 50%)"/>
+                </g>
+            </svg>
+        </section>
+
+        <section id="urutan-operasi">
+            <h2>Urutan Operasi (PEMDAS/BODMAS)</h2>
+            <p>Ketika suatu ekspresi matematika melibatkan lebih dari satu operasi, urutan di mana operasi-operasi tersebut dilakukan sangat penting untuk mendapatkan hasil yang benar. Aturan ini dikenal sebagai <strong>Urutan Operasi</strong> atau sering disingkat sebagai <strong>PEMDAS</strong> (Parentheses, Exponents, Multiplication and Division, Addition and Subtraction) atau <strong>BODMAS</strong> (Brackets, Orders, Division and Multiplication, Addition and Subtraction).</p>
+
+            <div class="info-box">
+                <h4>PEMDAS (AS) / BODMAS (UK)</h4>
+                <ul>
+                    <li><strong>P</strong>arentheses / <strong>B</strong>rackets (Tanda Kurung)</li>
+                    <li><strong>E</strong>xponents / <strong>O</strong>rders (Pangkat dan Akar)</li>
+                    <li><strong>M</strong>ultiplication and <strong>D</strong>ivision (Perkalian dan Pembagian) - dari kiri ke kanan</li>
+                    <li><strong>A</strong>ddition and <strong>S</strong>ubtraction (Penjumlahan dan Pengurangan) - dari kiri ke kanan</li>
+                </ul>
+            </div>
+
+            <p>Mari kita bahas satu per satu:</p>
+            <ol>
+                <li>
+                    <h4>Tanda Kurung (Parentheses/Brackets)</h4>
+                    <p>Operasi apa pun di dalam tanda kurung harus dilakukan pertama kali. Tanda kurung memberitahu kita untuk memperlakukan ekspresi di dalamnya sebagai satu kesatuan. Ini bisa berupa <code>()</code>, <code>[]</code>, atau <code>{}</code>.</p>
+                    <p>Contoh:
+                    <code>5 × (2 + 3)</code>
+                    Pertama, selesaikan dalam kurung: <code>2 + 3 = 5</code>
+                    Kemudian: <code>5 × 5 = 25</code></p>
+                </li>
+                <li>
+                    <h4>Pangkat dan Akar (Exponents/Orders)</h4>
+                    <p>Setelah tanda kurung, operasi pangkat (seperti <code>x²</code> atau <code>x³</code>) dan akar (seperti <code>√x</code>) harus dilakukan. "Orders" dalam BODMAS mengacu pada pangkat dan akar.</p>
+                    <p>Contoh:
+                    <code>10 + 2³</code>
+                    Pertama, selesaikan pangkat: <code>2³ = 2 × 2 × 2 = 8</code>
+                    Kemudian: <code>10 + 8 = 18</code></p>
+                </li>
+                <li>
+                    <h4>Perkalian dan Pembagian (Multiplication and Division)</h4>
+                    <p>Setelah pangkat, lakukan semua operasi perkalian dan pembagian dari kiri ke kanan. Kedua operasi ini memiliki prioritas yang sama. Jika ada keduanya dalam satu ekspresi, kerjakan yang muncul paling kiri terlebih dahulu.</p>
+                    <p>Contoh:
+                    <code>20 - 4 × 2 + 6 ÷ 3</code>
+                    Pertama, perkalian: <code>4 × 2 = 8</code>
+                    Ekspresi menjadi: <code>20 - 8 + 6 ÷ 3</code>
+                    Kemudian, pembagian: <code>6 ÷ 3 = 2</code>
+                    Ekspresi menjadi: <code>20 - 8 + 2</code></p>
+                </li>
+                <li>
+                    <h4>Penjumlahan dan Pengurangan (Addition and Subtraction)</h4>
+                    <p>Terakhir, lakukan semua operasi penjumlahan dan pengurangan dari kiri ke kanan. Kedua operasi ini juga memiliki prioritas yang sama.</p>
+                    <p>Melanjutkan contoh di atas:
+                    <code>20 - 8 + 2</code>
+                    Pertama, pengurangan (karena paling kiri): <code>20 - 8 = 12</code>
+                    Kemudian, penjumlahan: <code>12 + 2 = 14</code></p>
+                </li>
+            </ol>
+
+            <h4>Contoh Gabungan:</h4>
+            <p>Mari kita coba ekspresi yang lebih kompleks:</p>
+            <p><code>5 × (4 + 6) ÷ 2 - 3²</code></p>
+            <ol>
+                <li><strong>Parentheses/Brackets:</strong>
+                    <code>4 + 6 = 10</code>
+                    Ekspresi menjadi: <code>5 × 10 ÷ 2 - 3²</code></li>
+                <li><strong>Exponents/Orders:</strong>
+                    <code>3² = 9</code>
+                    Ekspresi menjadi: <code>5 × 10 ÷ 2 - 9</code></li>
+                <li><strong>Multiplication and Division (dari kiri ke kanan):</strong>
+                    <code>5 × 10 = 50</code>
+                    Ekspresi menjadi: <code>50 ÷ 2 - 9</code>
+                    <code>50 ÷ 2 = 25</code>
+                    Ekspresi menjadi: <code>25 - 9</code></li>
+                <li><strong>Addition and Subtraction (dari kiri ke kanan):</strong>
+                    <code>25 - 9 = 16</code></li>
+            </ol>
+            <p>Jadi, <code>5 × (4 + 6) ÷ 2 - 3² = 16</code>.</p>
+
+            <div class="info-box">
+                <p>Meskipun terlihat seperti aturan yang ketat, urutan operasi ini dirancang untuk memastikan konsistensi dan kejelasan dalam ekspresi matematika, sehingga setiap orang yang menghitung ekspresi yang sama akan mendapatkan hasil yang sama.</p>
+            </div>
+        </section>
+
+        <section id="sifat-aritmatika">
+            <h2>Sifat-sifat Penting dalam Aritmatika</h2>
+            <p>Selain operasi dasar, aritmatika juga diatur oleh beberapa sifat fundamental yang menjelaskan bagaimana bilangan berinteraksi satu sama lain. Sifat-sifat ini sangat penting karena mereka memberikan dasar teoritis untuk banyak teknik perhitungan dan manipulasi aljabar.</p>
+
+            <h3>1. Sifat Komutatif (Commutative Property)</h3>
+            <p>Sifat komutatif menyatakan bahwa urutan bilangan tidak mempengaruhi hasil operasi. Sifat ini berlaku untuk penjumlahan dan perkalian.</p>
+            <ul>
+                <li><strong>Penjumlahan:</strong> <code>a + b = b + a</code>
+                    Contoh: <code>5 + 3 = 3 + 5 = 8</code></li>
+                <li><strong>Perkalian:</strong> <code>a × b = b × a</code>
+                    Contoh: <code>4 × 7 = 7 × 4 = 28</code></li>
+            </ul>
+            <p>Penting untuk diingat bahwa sifat komutatif TIDAK berlaku untuk pengurangan dan pembagian.</p>
+            <ul>
+                <li>Pengurangan: <code>5 - 3 ≠ 3 - 5</code> (2 ≠ -2)</li>
+                <li>Pembagian: <code>10 ÷ 2 ≠ 2 ÷ 10</code> (5 ≠ 0.2)</li>
+            </ul>
+
+            <h3>2. Sifat Asosiatif (Associative Property)</h3>
+            <p>Sifat asosiatif menyatakan bahwa pengelompokan bilangan tidak mempengaruhi hasil operasi ketika ada tiga atau lebih bilangan yang terlibat. Sifat ini juga berlaku untuk penjumlahan dan perkalian.</p>
+            <ul>
+                <li><strong>Penjumlahan:</strong> <code>(a + b) + c = a + (b + c)</code>
+                    Contoh: <code>(2 + 3) + 4 = 2 + (3 + 4)</code>
+                    <code>5 + 4 = 2 + 7 = 9</code></li>
+                <li><strong>Perkalian:</strong> <code>(a × b) × c = a × (b × c)</code>
+                    Contoh: <code>(2 × 3) × 4 = 2 × (3 × 4)</code>
+                    <code>6 × 4 = 2 × 12 = 24</code></li>
+            </ul>
+            <p>Sama seperti komutatif, sifat asosiatif TIDAK berlaku untuk pengurangan dan pembagian.</p>
+            <ul>
+                <li>Pengurangan: <code>(10 - 5) - 2 ≠ 10 - (5 - 2)</code> (3 ≠ 7)</li>
+                <li>Pembagian: <code>(24 ÷ 6) ÷ 2 ≠ 24 ÷ (6 ÷ 2)</code> (2 ≠ 8)</li>
+            </ul>
+
+            <h3>3. Sifat Distributif (Distributive Property)</h3>
+            <p>Sifat distributif menjelaskan bagaimana perkalian berinteraksi dengan penjumlahan atau pengurangan. Ini adalah sifat yang sangat kuat, terutama dalam aljabar.</p>
+            <ul>
+                <li><strong>Perkalian terhadap Penjumlahan:</strong> <code>a × (b + c) = (a × b) + (a × c)</code>
+                    Contoh: <code>2 × (3 + 4) = (2 × 3) + (2 × 4)</code>
+                    <code>2 × 7 = 6 + 8 = 14</code></li>
+                <li><strong>Perkalian terhadap Pengurangan:</strong> <code>a × (b - c) = (a × b) - (a × c)</code>
+                    Contoh: <code>5 × (10 - 2) = (5 × 10) - (5 × 2)</code>
+                    <code>5 × 8 = 50 - 10 = 40</code></li>
+            </ul>
+            <p>Sifat distributif memungkinkan kita untuk memecah masalah perkalian yang lebih besar menjadi bagian-bagian yang lebih kecil dan lebih mudah dikelola.</p>
+
+            <h3>4. Elemen Identitas (Identity Element)</h3>
+            <p>Elemen identitas adalah bilangan yang, ketika dioperasikan dengan bilangan lain menggunakan operasi tertentu, tidak mengubah bilangan tersebut.</p>
+            <ul>
+                <li><strong>Identitas Penjumlahan (Aditif):</strong> Bilangan nol (<code>0</code>).
+                    <code>a + 0 = a</code> dan <code>0 + a = a</code>
+                    Contoh: <code>15 + 0 = 15</code></li>
+                <li><strong>Identitas Perkalian (Multiplikatif):</strong> Bilangan satu (<code>1</code>).
+                    <code>a × 1 = a</code> dan <code>1 × a = a</code>
+                    Contoh: <code>23 × 1 = 23</code></li>
+            </ul>
+
+            <h3>5. Elemen Invers (Inverse Element)</h3>
+            <p>Elemen invers adalah bilangan yang, ketika dioperasikan dengan bilangan lain menggunakan operasi tertentu, menghasilkan elemen identitas.</p>
+            <ul>
+                <li><strong>Invers Penjumlahan (Aditif):</strong> Untuk setiap bilangan <code>a</code>, invers aditifnya adalah <code>-a</code>.
+                    <code>a + (-a) = 0</code>
+                    Contoh: <code>5 + (-5) = 0</code>. Invers aditif dari 5 adalah -5.</li>
+                <li><strong>Invers Perkalian (Multiplikatif):</strong> Untuk setiap bilangan <code>a</code> (selain nol), invers multiplikatifnya adalah <code>1/a</code> (kebalikan).
+                    <code>a × (1/a) = 1</code>
+                    Contoh: <code>5 × (1/5) = 1</code>. Invers multiplikatif dari 5 adalah 1/5.</li>
+            </ul>
+            <div class="info-box">
+                <p>Pemahaman tentang sifat-sifat ini tidak hanya membantu dalam melakukan perhitungan tetapi juga dalam memahami struktur dasar sistem bilangan dan menjadi jembatan penting menuju aljabar, di mana manipulasi ekspresi sangat bergantung pada sifat-sifat ini.</p>
+            </div>
+        </section>
+
+        <section id="pecahan-desimal-persen">
+            <h2>Pecahan, Desimal, dan Persen: Bentuk Bilangan Rasional</h2>
+            <p>Bilangan rasional sering muncul dalam tiga bentuk yang berbeda namun saling terkait: pecahan, desimal, dan persen. Masing-masing memiliki kegunaan dan cara konversinya sendiri.</p>
+
+            <h3>1. Pecahan (Fractions)</h3>
+            <p><strong>Pecahan</strong> merepresentasikan bagian dari keseluruhan atau rasio antara dua bilangan. Pecahan terdiri dari pembilang (numerator) di atas dan penyebut (denominator) di bawah, dipisahkan oleh garis pecahan.</p>
+            <p><code>Pembilang / Penyebut</code></p>
+            <ul>
+                <li><strong>Pembilang:</strong> Menunjukkan berapa banyak bagian yang kita miliki.</li>
+                <li><strong>Penyebut:</strong> Menunjukkan berapa banyak total bagian yang sama yang membentuk keseluruhan.</li>
+            </ul>
+            <p>Contoh: <code>3/4</code> berarti 3 bagian dari 4 bagian total.</p>
+
+            <h4>Jenis-jenis Pecahan:</h4>
+            <ul>
+                <li><strong>Pecahan Biasa:</strong> Pembilang lebih kecil dari penyebut (misalnya, <code>1/2</code>).</li>
+                <li><strong>Pecahan Tak Wajar:</strong> Pembilang lebih besar atau sama dengan penyebut (misalnya, <code>5/3</code>).</li>
+                <li><strong>Pecahan Campuran:</strong> Kombinasi bilangan bulat dan pecahan biasa (misalnya, <code>1 2/3</code>, yang sama dengan <code>5/3</code>).</li>
+            </ul>
+
+            <h4>Operasi dengan Pecahan:</h4>
+            <ul>
+                <li><strong>Penjumlahan/Pengurangan:</strong> Membutuhkan penyebut yang sama (KPK).
+                    <code>1/2 + 1/3 = 3/6 + 2/6 = 5/6</code></li>
+                <li><strong>Perkalian:</strong> Kalikan pembilang dengan pembilang, penyebut dengan penyebut.
+                    <code>2/3 × 1/4 = (2 × 1) / (3 × 4) = 2/12 = 1/6</code></li>
+                <li><strong>Pembagian:</strong> Kalikan pecahan pertama dengan kebalikan (invers) pecahan kedua.
+                    <code>1/2 ÷ 1/3 = 1/2 × 3/1 = 3/2</code></li>
+            </ul>
+
+            <h3>2. Desimal (Decimals)</h3>
+            <p><strong>Desimal</strong> adalah cara lain untuk merepresentasikan bilangan yang bukan bilangan bulat, menggunakan sistem nilai tempat berbasis 10. Setiap digit di sebelah kanan titik desimal merepresentasikan pecahan dengan penyebut 10, 100, 1000, dst.</p>
+            <p>Contoh: <code>0.75</code> berarti 7 persepuluh dan 5 perseratus, atau 75 perseratus (<code>75/100</code>).</p>
+
+            <h4>Jenis Desimal:</h4>
+            <ul>
+                <li><strong>Desimal Terbatas:</strong> Memiliki jumlah digit terbatas setelah koma (misalnya, <code>0.25</code>, <code>1.5</code>).</li>
+                <li><strong>Desimal Berulang:</strong> Memiliki satu atau lebih digit yang berulang tanpa henti (misalnya, <code>0.333...</code>, <code>0.142857142857...</code>).</li>
+            </ul>
+
+            <h4>Operasi dengan Desimal:</h4>
+            <p>Operasi dengan desimal pada dasarnya mengikuti aturan operasi bilangan bulat, dengan perhatian khusus pada penempatan titik desimal.</p>
+            <ul>
+                <li><strong>Penjumlahan/Pengurangan:</strong> Sejajarkan titik desimal.</li>
+                <li><strong>Perkalian:</strong> Kalikan bilangan tanpa titik desimal, lalu hitung total tempat desimal pada faktor dan tempatkan titik desimal pada produk.</li>
+                <li><strong>Pembagian:</strong> Ubah pembagi menjadi bilangan bulat dengan menggeser titik desimal, dan geser titik desimal dividen sejauh yang sama.</li>
+            </ul>
+
+            <h3>3. Persen (Percentages)</h3>
+            <p><strong>Persen</strong> berarti "per seratus" atau "dari seratus". Ini adalah cara untuk mengekspresikan suatu bilangan sebagai bagian dari 100. Simbolnya adalah <code>%</code>.</p>
+            <p>Contoh: <code>25%</code> berarti 25 dari 100, atau <code>25/100</code>.</p>
+
+            <h4>Konversi Antar Bentuk:</h4>
+            <ul>
+                <li><strong>Pecahan ke Desimal:</strong> Bagi pembilang dengan penyebut.
+                    <code>3/4 = 3 ÷ 4 = 0.75</code></li>
+                <li><strong>Desimal ke Pecahan:</strong> Tulis desimal sebagai pecahan dengan penyebut pangkat 10, lalu sederhanakan.
+                    <code>0.75 = 75/100 = 3/4</code></li>
+                <li><strong>Desimal ke Persen:</strong> Kalikan dengan 100 dan tambahkan simbol <code>%</code>.
+                    <code>0.75 × 100% = 75%</code></li>
+                <li><strong>Persen ke Desimal:</strong> Bagi dengan 100 dan hilangkan simbol <code>%</code>.
+                    <code>75% ÷ 100 = 0.75</code></li>
+                <li><strong>Pecahan ke Persen:</strong> Konversi ke desimal dulu, lalu ke persen.
+                    <code>3/4 = 0.75 = 75%</code></li>
+                <li><strong>Persen ke Pecahan:</strong> Tulis sebagai pecahan dengan penyebut 100, lalu sederhanakan.
+                    <code>75% = 75/100 = 3/4</code></li>
+            </ul>
+
+            <div class="info-box">
+                <p>Kemampuan untuk dengan lancar mengonversi dan bekerja dengan pecahan, desimal, dan persen adalah keterampilan aritmatika yang sangat praktis dan sering digunakan dalam keuangan pribadi, statistik, diskon belanja, dan banyak bidang lainnya.</p>
+            </div>
+
+            <svg role="img" aria-labelledby="pecahan-desimal-persen-title pecahan-desimal-persen-desc" viewBox="0 0 800 300">
+                <title id="pecahan-desimal-persen-title">Konversi Pecahan, Desimal, Persen</title>
+                <desc id="pecahan-desimal-persen-desc">Diagram panah yang menunjukkan hubungan dan konversi antara pecahan, desimal, dan persen.</desc>
+                <rect x="0" y="0" width="800" height="300" fill="transparent"/>
+
+                <!-- Nodes -->
+                <rect x="100" y="100" width="180" height="60" rx="10" ry="10" fill="hsl(160, 70%, 90%)" stroke="hsl(160, 70%, 40%)" stroke-width="2"/>
+                <text x="190" y="138" text-anchor="middle" font-family="'Poppins', sans-serif" font-size="28" fill="hsl(160, 70%, 30%)">Pecahan</text>
+
+                <rect x="310" y="100" width="180" height="60" rx="10" ry="10" fill="hsl(200, 70%, 90%)" stroke="hsl(200, 70%, 35%)" stroke-width="2"/>
+                <text x="400" y="138" text-anchor="middle" font-family="'Poppins', sans-serif" font-size="28" fill="hsl(200, 70%, 20%)">Desimal</text>
+
+                <rect x="520" y="100" width="180" height="60" rx="10" ry="10" fill="hsl(240, 60%, 90%)" stroke="hsl(240, 60%, 55%)" stroke-width="2"/>
+                <text x="610" y="138" text-anchor="middle" font-family="'Poppins', sans-serif" font-size="28" fill="hsl(240, 60%, 30%)">Persen</text>
+
+                <!-- Arrows & Labels -->
+                <!-- Pecahan -> Desimal -->
+                <path d="M280 130 H310" stroke="hsl(210, 20%, 35%)" stroke-width="2" marker-end="url(#arrowhead)"/>
+                <text x="295" y="120" text-anchor="middle" font-family="'Open Sans', sans-serif" font-size="14" fill="hsl(210, 20%, 35%)">Bagi</text>
+
+                <!-- Desimal -> Pecahan -->
+                <path d="M310 130 H280" stroke="hsl(210, 20%, 35%)" stroke-width="2" marker-end="url(#arrowhead)"/>
+                <text x="295" y="155" text-anchor="middle" font-family="'Open Sans', sans-serif" font-size="14" fill="hsl(210, 20%, 35%)">Sederhanakan</text>
+
+                <!-- Desimal -> Persen -->
+                <path d="M490 130 H520" stroke="hsl(210, 20%, 35%)" stroke-width="2" marker-end="url(#arrowhead)"/>
+                <text x="505" y="120" text-anchor="middle" font-family="'Open Sans', sans-serif" font-size="14" fill="hsl(210, 20%, 35%)">x 100%</text>
+
+                <!-- Persen -> Desimal -->
+                <path d="M520 130 H490" stroke="hsl(210, 20%, 35%)" stroke-width="2" marker-end="url(#arrowhead)"/>
+                <text x="505" y="155" text-anchor="middle" font-family="'Open Sans', sans-serif" font-size="14" fill="hsl(210, 20%, 35%)">/ 100</text>
+
+                <!-- Pecahan -> Persen (via Desimal, implicit) -->
+                <path d="M200 160 Q200 200 400 200 Q600 200 610 160" stroke="hsl(210, 20%, 35%)" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                <text x="400" y="215" text-anchor="middle" font-family="'Open Sans', sans-serif" font-size="14" fill="hsl(210, 20%, 35%)">Bagi, lalu x 100%</text>
+
+                <!-- Persen -> Pecahan (via Desimal, implicit) -->
+                <path d="M610 100 Q600 60 400 60 Q200 60 190 100" stroke="hsl(210, 20%, 35%)" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                <text x="400" y="45" text-anchor="middle" font-family="'Open Sans', sans-serif" font-size="14" fill="hsl(210, 20%, 35%)">/ 100, lalu Sederhanakan</text>
+
+                <!-- Arrowhead definition -->
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="hsl(210, 20%, 35%)" />
+                    </marker>
+                </defs>
+            </svg>
+        </section>
+
+        <section id="faktor-kelipatan-prima">
+            <h2>Faktor, Kelipatan, dan Bilangan Prima</h2>
+            <p>Konsep faktor, kelipatan, dan bilangan prima adalah aspek penting dari teori bilangan yang memiliki aplikasi luas dalam aritmatika, aljabar, dan kriptografi.</p>
+
+            <h3>1. Faktor (Factors)</h3>
+            <p><strong>Faktor</strong> dari suatu bilangan adalah bilangan bulat yang dapat membagi habis bilangan tersebut tanpa sisa. Dengan kata lain, jika <code>a × b = c</code>, maka <code>a</code> dan <code>b</code> adalah faktor dari <code>c</code>.</p>
+            <p>Contoh: Faktor dari 12 adalah 1, 2, 3, 4, 6, dan 12. Karena:</p>
+            <ul>
+                <li><code>1 × 12 = 12</code></li>
+                <li><code>2 × 6 = 12</code></li>
+                <li><code>3 × 4 = 12</code></li>
+            </ul>
+
+            <h4>Faktor Persekutuan Terbesar (FPB / Greatest Common Divisor - GCD)</h4>
+            <p><strong>FPB</strong> dari dua atau lebih bilangan adalah faktor terbesar yang dimiliki bersama oleh bilangan-bilangan tersebut.</p>
+            <p>Contoh: Tentukan FPB dari 12 dan 18.</p>
+            <ul>
+                <li>Faktor dari 12: {1, 2, 3, 4, 6, 12}</li>
+                <li>Faktor dari 18: {1, 2, 3, 6, 9, 18}</li>
+                <li>Faktor persekutuan (bersama): {1, 2, 3, 6}</li>
+            </ul>
+            <p>FPB dari 12 dan 18 adalah <strong>6</strong>.</p>
+            <p>FPB sering digunakan untuk menyederhanakan pecahan.</p>
+
+            <h3>2. Kelipatan (Multiples)</h3>
+            <p><strong>Kelipatan</strong> dari suatu bilangan adalah hasil perkalian bilangan tersebut dengan bilangan bulat lainnya (biasanya bilangan asli). Dengan kata lain, jika <code>a × b = c</code>, maka <code>c</code> adalah kelipatan dari <code>a</code> (dan juga dari <code>b</code>).</p>
+            <p>Contoh: Kelipatan dari 3 adalah 3, 6, 9, 12, 15, ... (hasil dari <code>3 × 1, 3 × 2, 3 × 3</code>, dst.).</p>
+
+            <h4>Kelipatan Persekutuan Terkecil (KPK / Least Common Multiple - LCM)</h4>
+            <p><strong>KPK</strong> dari dua atau lebih bilangan adalah kelipatan terkecil (bukan nol) yang dimiliki bersama oleh bilangan-bilangan tersebut.</p>
+            <p>Contoh: Tentukan KPK dari 4 dan 6.</p>
+            <ul>
+                <li>Kelipatan dari 4: {4, 8, 12, 16, 20, 24, ...}</li>
+                <li>Kelipatan dari 6: {6, 12, 18, 24, 30, ...}</li>
+                <li>Kelipatan persekutuan (bersama): {12, 24, ...}</li>
+            </ul>
+            <p>KPK dari 4 dan 6 adalah <strong>12</strong>.</p>
+            <p>KPK sangat penting dalam penjumlahan dan pengurangan pecahan, karena digunakan untuk menemukan penyebut bersama.</p>
+
+            <h3>3. Bilangan Prima (Prime Numbers)</h3>
+            <p><strong>Bilangan prima</strong> adalah bilangan asli yang lebih besar dari 1 dan hanya memiliki dua faktor, yaitu 1 dan bilangan itu sendiri. Dengan kata lain, bilangan prima hanya bisa dibagi habis oleh 1 dan dirinya sendiri.</p>
+            <p>Contoh bilangan prima: 2, 3, 5, 7, 11, 13, 17, 19, 23, ...</p>
+            <ul>
+                <li>Angka 1 bukan bilangan prima (karena hanya punya 1 faktor).</li>
+                <li>Angka 2 adalah satu-satunya bilangan prima genap.</li>
+            </ul>
+
+            <h4>Bilangan Komposit (Composite Numbers)</h4>
+            <p><strong>Bilangan komposit</strong> adalah bilangan asli yang lebih besar dari 1 dan bukan bilangan prima. Ini berarti bilangan komposit memiliki lebih dari dua faktor.</p>
+            <p>Contoh bilangan komposit: 4 (faktor: 1, 2, 4), 6 (faktor: 1, 2, 3, 6), 8, 9, 10, 12, ...</p>
+
+            <h4>Faktorisasi Prima (Prime Factorization)</h4>
+            <p>Setiap bilangan komposit dapat dinyatakan sebagai produk unik dari bilangan prima. Proses ini disebut <strong>faktorisasi prima</strong>.</p>
+            <p>Contoh: Faktorisasi prima dari 12 adalah <code>2 × 2 × 3</code> atau <code>2² × 3</code>.</p>
+            <p>Faktorisasi prima sangat berguna untuk mencari FPB dan KPK:</p>
+            <ul>
+                <li><strong>Mencari FPB dengan faktorisasi prima:</strong> Ambil faktor prima yang sama dengan pangkat terendah.
+                    12 = <code>2² × 3¹</code>
+                    18 = <code>2¹ × 3²</code>
+                    FPB = <code>2¹ × 3¹ = 6</code></li>
+                <li><strong>Mencari KPK dengan faktorisasi prima:</strong> Ambil semua faktor prima (baik yang sama maupun yang tidak) dengan pangkat tertinggi.
+                    12 = <code>2² × 3¹</code>
+                    18 = <code>2¹ × 3²</code>
+                    KPK = <code>2² × 3² = 4 × 9 = 36</code></li>
+            </ul>
+
+            <div class="info-box">
+                <p>Konsep-konsep ini adalah fondasi untuk banyak bidang matematika yang lebih tinggi, termasuk kriptografi (misalnya, keamanan internet menggunakan bilangan prima yang sangat besar) dan teori bilangan.</p>
+            </div>
+        </section>
+
+        <section id="aritmatika-praktis">
+            <h2>Aritmatika dalam Kehidupan Sehari-hari</h2>
+            <p>Aritmatika bukanlah sekadar teori di buku pelajaran; ia adalah keterampilan praktis yang kita gunakan setiap hari, seringkali tanpa menyadarinya. Dari keuangan pribadi hingga kegiatan rutin, aritmatika hadir di mana-mana.</p>
+
+            <h3>1. Keuangan Pribadi</h3>
+            <ul>
+                <li><strong>Anggaran:</strong> Menjumlahkan pemasukan, mengurangi pengeluaran, menghitung sisa dana.</li>
+                <li><strong>Belanja:</strong> Menghitung total belanjaan, diskon (persen), kembalian, membandingkan harga per unit untuk menemukan penawaran terbaik.</li>
+                <li><strong>Tabungan dan Investasi:</strong> Menghitung bunga (sederhana atau majemuk), persentase keuntungan/kerugian.</li>
+                <li><strong>Pajak:</strong> Menghitung jumlah pajak yang harus dibayar berdasarkan persentase pendapatan atau nilai barang.</li>
+                <li><strong>Pinjaman:</strong> Memahami bunga pinjaman, total pembayaran bulanan, dan total yang harus dikembalikan.</li>
+            </ul>
+
+            <h3>2. Memasak dan Resep</h3>
+            <ul>
+                <li><strong>Mengukur Bahan:</strong> Menggunakan pecahan (misalnya, <code>1/2</code> cangkir) atau desimal (misalnya, <code>0.75</code> sendok teh).</li>
+                <li><strong>Mengubah Resep:</strong> Menggandakan atau mengurangi resep (misalnya, jika resep untuk 4 orang dan Anda ingin membuat untuk 6 orang, Anda akan mengalikan semua bahan dengan <code>1.5</code> atau <code>3/2</code>).</li>
+                <li><strong>Waktu Memasak:</strong> Menjumlahkan waktu persiapan dan waktu memasak.</li>
+            </ul>
+
+            <h3>3. Perjalanan dan Navigasi</h3>
+            <ul>
+                <li><strong>Jarak dan Waktu:</strong> Menghitung perkiraan waktu tempuh berdasarkan jarak dan kecepatan rata-rata (<code>Jarak = Kecepatan × Waktu</code>).</li>
+                <li><strong>Bahan Bakar:</strong> Menghitung konsumsi bahan bakar (liter per 100 km) dan biaya total perjalanan.</li>
+                <li><strong>Perbedaan Waktu:</strong> Menjumlahkan atau mengurangi zona waktu.</li>
+            </ul>
+
+            <h3>4. Konstruksi dan Perbaikan Rumah</h3>
+            <ul>
+                <li><strong>Pengukuran:</strong> Menghitung luas (perkalian), keliling (penjumlahan), volume (perkalian tiga dimensi) untuk material seperti cat, lantai, atau beton.</li>
+                <li><strong>Anggaran Proyek:</strong> Menjumlahkan biaya material, tenaga kerja, dll.</li>
+                <li><strong>Rasio:</strong> Menggunakan rasio untuk mencampur material (misalnya, rasio semen dan pasir).</li>
+            </ul>
+
+            <h3>5. Olahraga dan Permainan</h3>
+            <ul>
+                <li><strong>Skor:</strong> Menjumlahkan poin dalam berbagai permainan.</li>
+                <li><strong>Statistik:</strong> Menghitung rata-rata (mean), persentase (misalnya, persentase tembakan sukses dalam basket), rasio kemenangan/kekalahan.</li>
+                <li><strong>Strategi:</strong> Kadang-kadang melibatkan perhitungan peluang atau kombinasi sederhana.</li>
+            </ul>
+
+            <h3>6. Sains dan Teknologi</h3>
+            <ul>
+                <li><strong>Eksperimen:</strong> Mencatat dan menganalisis data numerik, menghitung rata-rata, persentase perubahan.</li>
+                <li><strong>Fisika dan Kimia:</strong> Hampir setiap rumus di bidang ini melibatkan operasi aritmatika.</li>
+                <li><strong>Pemrograman Komputer:</strong> Aritmatika adalah inti dari bagaimana komputer melakukan perhitungan. Setiap program, dari kalkulator sederhana hingga simulasi kompleks, mengandalkan operasi dasar ini.</li>
+            </ul>
+
+            <div class="info-box">
+                <p>Singkatnya, kemampuan aritmatika yang kuat bukan hanya tentang mendapatkan nilai bagus di sekolah, tetapi tentang kemampuan untuk berfungsi secara efektif di dunia yang semakin kuantitatif. Ini adalah alat penting untuk pengambilan keputusan yang terinformasi dan pemecahan masalah dalam berbagai konteks.</p>
+            </div>
+
+            <svg role="img" aria-labelledby="aritmatika-praktis-title aritmatika-praktis-desc" viewBox="0 0 800 300">
+                <title id="aritmatika-praktis-title">Aritmatika dalam Kehidupan Sehari-hari</title>
+                <desc id="aritmatika-praktis-desc">Ilustrasi berbagai skenario sehari-hari yang melibatkan aritmatika: belanja, jam, penggaris, dan grafik.</desc>
+                <rect x="0" y="0" width="800" height="300" fill="transparent"/>
+
+                <!-- Shopping cart -->
+                <g transform="translate(50, 50)">
+                    <rect x="0" y="0" width="80" height="60" rx="10" fill="hsl(160, 70%, 90%)" stroke="hsl(160, 70%, 40%)" stroke-width="2"/>
+                    <line x1="10" y1="10" x2="70" y2="10" stroke="hsl(160, 70%, 40%)" stroke-width="2"/>
+                    <line x1="10" y1="20" x2="70" y2="20" stroke="hsl(160, 70%, 40%)" stroke-width="2"/>
+                    <line x1="10" y1="30" x2="70" y2="30" stroke="hsl(160, 70%, 40%)" stroke-width="2"/>
+                    <rect x="0" y="55" width="80" height="20" fill="hsl(160, 70%, 50%)" stroke="hsl(160, 70%, 40%)" stroke-width="2"/>
+                    <circle cx="20" cy="75" r="10" fill="hsl(210, 20%, 35%)"/>
+                    <circle cx="60" cy="75" r="10" fill="hsl(210, 20%, 35%)"/>
+                    <path d="M70 55 L70 30 C70 10 90 10 90 30 L90 55" stroke="hsl(160, 70%, 40%)" stroke-width="2" fill="none"/>
+                    <text x="40" y="100" text-anchor="middle" font-family="'Open Sans', sans-serif" font-size="16" fill="hsl(210, 20%, 35%)">Belanja</text>
+                </g>
+
+                <!-- Clock -->
+                <g transform="translate(250, 50)">
+                    <circle cx="40" cy="40" r="40" fill="hsl(200, 70%, 90%)" stroke="hsl(200, 70%, 35%)" stroke-width="2"/>
+                    <line x1="40" y1="40" x2="40" y2="25" stroke="hsl(200, 70%, 35%)" stroke-width="3"/>
+                    <line x1="40" y1="40" x2="60" y2="40" stroke="hsl(200, 70%, 35%)" stroke-width="3"/>
+                    <text x="40" y="95" text-anchor="middle" font-family="'Open Sans', sans-serif" font-size="16" fill="hsl(210, 20%, 35%)">Waktu</text>
+                </g>
+
+                <!-- Ruler -->
+                <g transform="translate(450, 50)">
+                    <rect x="0" y="0" width="150" height="30" fill="hsl(240, 60%, 90%)" stroke="hsl(240, 60%, 55%)" stroke-width="2"/>
+                    <line x1="10" y1="0" x2="10" y2="30" stroke="hsl(240, 60%, 55%)" stroke-width="1"/>
+                    <line x1="20" y1="0" x2="20" y2="30" stroke="hsl(240, 60%, 55%)" stroke-width="1"/>
+                    <line x1="30" y1="0" x2="30" y2="30" stroke="hsl(240, 60%, 55%)" stroke-width="1"/>
+                    <line x1="40" y1="0" x2="40" y2="30" stroke="hsl(240, 60%, 55%)" stroke-width="1"/>
+                    <line x1="50" y1="0" x2="50" y2="30" stroke="hsl(240, 60%, 55%)" stroke-width="2"/>
+                    <line x1="60" y1="0" x2="60" y2="30" stroke="hsl(240, 60%, 55%)" stroke-width="1"/>
+                    <text x="75" y="65" text-anchor="middle" font-family="'Open Sans', sans-serif" font-size="16" fill="hsl(210, 20%, 35%)">Pengukuran</text>
+                </g>
+
+                <!-- Bar chart for data analysis -->
+                <g transform="translate(640, 50)">
+                    <line x1="0" y1="70" x2="80" y2="70" stroke="hsl(30, 80%, 55%)" stroke-width="2"/>
+                    <line x1="0" y1="0" x2="0" y2="70" stroke="hsl(30, 80%, 55%)" stroke-width="2"/>
+                    <rect x="10" y="30" width="20" height="40" fill="hsl(30, 80%, 60%)"/>
+                    <rect x="40" y="10" width="20" height="60" fill="hsl(30, 80%, 60%)"/>
+                    <text x="40" y="95" text-anchor="middle" font-family="'Open Sans', sans-serif" font-size="16" fill="hsl(210, 20%, 35%)">Analisis Data</text>
+                </g>
+            </svg>
+        </section>
+
+        <section id="tantangan-kesalahan">
+            <h2>Tantangan dan Kesalahan Umum dalam Aritmatika</h2>
+            <p>Meskipun aritmatika adalah fondasi, tidak jarang orang menghadapi kesulitan atau membuat kesalahan. Mengidentifikasi tantangan umum ini dapat membantu dalam proses belajar dan pemecahan masalah.</p>
+
+            <h3>1. Kurangnya Pemahaman Konseptual</h3>
+            <p>Banyak siswa atau individu hanya menghafal prosedur tanpa memahami "mengapa" di baliknya. Misalnya, mereka tahu cara melakukan pembagian panjang tetapi tidak benar-benar memahami apa arti sisa dalam konteks masalah nyata. Ini dapat menyebabkan kesulitan ketika menghadapi masalah yang sedikit berbeda atau ketika harus menerapkan konsep dalam situasi baru.</p>
+            <ul>
+                <li><strong>Solusi:</strong> Fokus pada pemahaman mendalam tentang setiap operasi. Gunakan visual, objek konkret, dan cerita masalah untuk membangun intuisi.</li>
+            </ul>
+
+            <h3>2. Kurangnya Praktek dan Otomatisasi</h3>
+            <p>Aritmatika, seperti halnya musik atau olahraga, membutuhkan latihan. Tanpa latihan yang cukup, fakta-fakta dasar (seperti tabel perkalian) tidak akan menjadi otomatis, yang memperlambat perhitungan dan meningkatkan kemungkinan kesalahan.</p>
+            <ul>
+                <li><strong>Solusi:</strong> Latihan teratur, baik melalui soal-soal latihan, permainan matematika, atau aplikasi edukasi. Membangun fondasi yang kuat dengan fakta-fakta dasar sangat penting.</li>
+            </ul>
+
+            <h3>3. Kesalahan dalam Urutan Operasi</h3>
+            <p>Melanggar aturan PEMDAS/BODMAS adalah salah satu kesalahan paling umum yang menyebabkan jawaban yang salah, terutama dalam ekspresi yang lebih kompleks. Misalnya, menghitung <code>2 + 3 × 4</code> sebagai <code>(2 + 3) × 4 = 20</code> (salah) daripada <code>2 + (3 × 4) = 14</code> (benar).</p>
+            <ul>
+                <li><strong>Solusi:</strong> Selalu periksa kembali urutan operasi. Gunakan tanda kurung secara eksplisit jika ada keraguan.</li>
+            </ul>
+
+            <h3>4. Kesalahan Saat Meminjam/Mengumpul (Borrowing/Carrying)</h3>
+            <p>Dalam operasi penjumlahan dan pengurangan multi-digit, kesalahan sering terjadi saat "meminjam" (borrowing) dalam pengurangan atau "mengumpul" (carrying) dalam penjumlahan, terutama saat ada banyak nol atau perubahan digit yang signifikan.</p>
+            <ul>
+                <li><strong>Solusi:</strong> Lakukan perhitungan secara perlahan dan hati-hati. Verifikasi setiap langkah.</li>
+            </ul>
+
+            <h3>5. Pembagian oleh Nol</h3>
+            <p>Seringkali ada kebingungan tentang mengapa pembagian dengan nol tidak terdefinisi. Upaya untuk melakukan operasi ini akan selalu mengarah pada paradoks matematika.</p>
+            <ul>
+                <li><strong>Solusi:</strong> Ingat bahwa pembagian adalah kebalikan dari perkalian. Jika <code>a/0 = x</code>, maka <code>0 × x = a</code>. Jika <code>a</code> bukan nol, tidak ada <code>x</code> yang dapat memenuhi ini. Jika <code>a</code> adalah nol, maka <code>0 × x = 0</code>, yang benar untuk semua <code>x</code>, sehingga <code>x</code> tidak unik. Oleh karena itu, tidak terdefinisi atau tidak tentu.</li>
+            </ul>
+
+            <h3>6. Kesalahan Tanda (Positif/Negatif)</h3>
+            <p>Bekerja dengan bilangan bulat (terutama negatif) dapat membingungkan. Kesalahan umum termasuk:</p>
+            <ul>
+                <li><code>-5 - 3</code> sering dianggap <code>-2</code> padahal seharusnya <code>-8</code>.</li>
+                <li><code>-5 × -3</code> sering dianggap <code>-15</code> padahal seharusnya <code>15</code>.</li>
+            </ul>
+            <ul>
+                <li><strong>Solusi:</strong> Pahami aturan perkalian/pembagian tanda (positif × positif = positif, negatif × negatif = positif, positif × negatif = negatif) dan visualisasikan penjumlahan/pengurangan bilangan negatif pada garis bilangan.</li>
+            </ul>
+
+            <h3>7. Kesalahan Pecahan dan Desimal</h3>
+            <p>Kesalahan umum termasuk:</p>
+            <ul>
+                <li>Menjumlahkan atau mengurangi pecahan tanpa penyebut yang sama.</li>
+                <li>Salah menempatkan titik desimal dalam perkalian atau pembagian desimal.</li>
+                <li>Mengacaukan konversi antara pecahan, desimal, dan persen.</li>
+            </ul>
+            <ul>
+                <li><strong>Solusi:</strong> Fokus pada langkah-langkah spesifik untuk setiap operasi pecahan/desimal. Latih konversi secara teratur.</li>
+            </ul>
+
+            <div class="info-box">
+                <p>Mengatasi tantangan ini memerlukan kesabaran, praktik yang konsisten, dan keinginan untuk memahami konsep di balik setiap prosedur. Jangan takut membuat kesalahan; mereka adalah bagian dari proses belajar.</p>
+            </div>
+        </section>
+
+        <section id="tips-belajar">
+            <h2>Tips Belajar dan Menguasai Aritmatika</h2>
+            <p>Menguasai aritmatika adalah perjalanan, bukan tujuan. Dengan strategi yang tepat, siapa pun dapat meningkatkan keterampilan aritmatika mereka.</p>
+
+            <h3>1. Pahami Konsep, Jangan Hanya Menghafal</h3>
+            <p>Daripada hanya menghafal prosedur, berusahalah untuk memahami <em>mengapa</em> suatu operasi bekerja seperti itu. Misalnya, mengapa "meminjam" dalam pengurangan bekerja? Mengapa perkalian adalah penjumlahan berulang? Pemahaman ini akan membangun intuisi dan fleksibilitas dalam memecahkan masalah.</p>
+
+            <h3>2. Latihan Secara Konsisten</h3>
+            <p>Konsistensi adalah kunci. Lakukan sedikit latihan setiap hari daripada sesi belajar yang panjang namun jarang. Ini membantu otak untuk terus memproses dan memperkuat koneksi saraf yang terkait dengan perhitungan.</p>
+            <ul>
+                <li>Gunakan aplikasi latihan matematika.</li>
+                <li>Buat kartu flash untuk fakta dasar (tabel perkalian, dll.).</li>
+                <li>Selesaikan soal-soal latihan dari buku atau sumber daring.</li>
+            </ul>
+
+            <h3>3. Mulai dari Dasar dan Bangun Bertahap</h3>
+            <p>Pastikan Anda memiliki dasar yang kuat sebelum beralih ke topik yang lebih kompleks. Jika Anda kesulitan dengan perkalian, jangan terburu-buru ke pecahan. Perkuat fondasi Anda terlebih dahulu.</p>
+
+            <h3>4. Gunakan Alat Bantu Visual</h3>
+            <p>Untuk konsep abstrak, visualisasi bisa sangat membantu. Gunakan:</p>
+            <ul>
+                <li><strong>Garis bilangan:</strong> Untuk memahami bilangan negatif, penjumlahan, dan pengurangan.</li>
+                <li><strong>Blok dasar sepuluh:</strong> Untuk penjumlahan, pengurangan, perkalian, dan pembagian multi-digit.</li>
+                <li><strong>Diagram lingkaran/batang:</strong> Untuk pecahan, desimal, dan persen.</li>
+            </ul>
+
+            <h3>5. Terapkan Aritmatika dalam Kehidupan Nyata</h3>
+            <p>Cari kesempatan untuk menggunakan aritmatika dalam kehidupan sehari-hari Anda:</p>
+            <ul>
+                <li>Hitung diskon saat berbelanja.</li>
+                <li>Perkirakan total biaya belanjaan Anda sebelum ke kasir.</li>
+                <li>Ukur bahan saat memasak.</li>
+                <li>Hitung durasi perjalanan.</li>
+                <li>Kelola anggaran pribadi Anda.</li>
+            </ul>
+            <p>Ini membantu melihat relevansi aritmatika dan membuatnya terasa lebih konkret.</p>
+
+            <h3>6. Periksa Pekerjaan Anda</h3>
+            <p>Mengembangkan kebiasaan memeriksa ulang perhitungan Anda adalah keterampilan yang sangat berharga. Gunakan operasi kebalikan untuk memverifikasi:</p>
+            <ul>
+                <li>Jika Anda menjumlahkan, periksa dengan pengurangan.</li>
+                <li>Jika Anda mengalikan, periksa dengan pembagian.</li>
+            </ul>
+
+            <h3>7. Jangan Takut Bertanya dan Membuat Kesalahan</h3>
+            <p>Matematika adalah proses belajar melalui kesalahan. Jika Anda tidak memahami sesuatu, jangan ragu untuk bertanya kepada guru, teman, atau mencari sumber daya tambahan. Setiap kesalahan adalah kesempatan untuk belajar dan memperbaiki.</p>
+
+            <h3>8. Tingkatkan Kecepatan dan Akurasi</h3>
+            <p>Setelah Anda memahami konsep dan prosedur, fokuslah pada peningkatan kecepatan tanpa mengorbankan akurasi. Ini datang dengan latihan berulang dan otomatisasi fakta-fakta dasar.</p>
+
+            <h3>9. Gunakan Teknologi dengan Bijak</h3>
+            <p>Kalkulator dan perangkat lunak dapat menjadi alat yang hebat untuk memeriksa pekerjaan Anda atau melakukan perhitungan yang sangat rumit. Namun, jangan biarkan mereka menggantikan pemahaman dan kemampuan Anda untuk melakukan perhitungan dasar secara mental atau manual.</p>
+
+            <div class="info-box">
+                <p>Dengan dedikasi dan strategi belajar yang efektif, aritmatika dapat menjadi subjek yang menyenangkan dan memberdayakan. Ini adalah keterampilan seumur hidup yang akan melayani Anda dengan baik di berbagai aspek kehidupan.</p>
+            </div>
+        </section>
+
+        <section id="kesimpulan">
+            <h2>Kesimpulan: Kekuatan Aritmatika yang Abadi</h2>
+            <p>Dari perhitungan sederhana yang dilakukan oleh manusia purba hingga algoritma kompleks yang menggerakkan dunia digital kita, <strong>aritmatika</strong> telah menjadi benang merah yang mengikat kemajuan peradaban. Kita telah melihat bagaimana disiplin ini, yang sering dianggap sebagai dasar matematika, sesungguhnya adalah inti dari pemikiran logis dan kuantitatif.</p>
+
+            <p>Perjalanan kita melalui aritmatika dimulai dengan memahami jenis-jenis bilangan yang berbeda – dari bilangan asli yang sederhana hingga bilangan real yang mencakup segalanya. Kita telah meninjau kembali empat operasi dasar: penjumlahan, pengurangan, perkalian, dan pembagian, menyegarkan kembali pemahaman kita tentang sifat-sifat unik masing-masing dan pentingnya urutan operasi untuk memastikan konsistensi dan akurasi.</p>
+
+            <p>Lebih jauh lagi, kita mengeksplorasi konsep-konsep seperti faktor, kelipatan, dan bilangan prima, yang merupakan blok bangunan untuk pemahaman yang lebih dalam tentang struktur bilangan. Kita juga membahas bagaimana pecahan, desimal, dan persen hanyalah wajah-wajah berbeda dari bilangan rasional yang sama, masing-masing dengan kegunaannya sendiri dalam aplikasi praktis.</p>
+
+            <p>Yang terpenting, kita menyadari bahwa aritmatika bukanlah subjek yang terisolasi dalam buku teks. Ia adalah keterampilan hidup esensial yang kita gunakan setiap hari dalam keuangan, memasak, perjalanan, pekerjaan, dan bahkan hobi. Kemampuan untuk berpikir secara aritmatika memungkinkan kita membuat keputusan yang lebih baik, memecahkan masalah, dan menavigasi dunia yang didorong oleh data.</p>
+
+            <p>Meskipun tantangan dan kesalahan umum mungkin muncul dalam proses pembelajaran, dengan pendekatan yang benar – fokus pada pemahaman konseptual, latihan yang konsisten, penggunaan alat bantu visual, dan penerapan dalam kehidupan nyata – siapa pun dapat menguasai seni berhitung ini.</p>
+
+            <p>Aritmatika lebih dari sekadar angka; ini adalah bahasa universal yang memungkinkan kita untuk memahami, mengukur, dan berinteraksi dengan dunia di sekitar kita. Teruslah berlatih, teruslah belajar, dan Anda akan terus menemukan keindahan dan kekuatan abadi dari aritmatika.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>Artikel ini didedikasikan untuk eksplorasi dasar-dasar aritmatika.</p>
+    </footer>
+
+<style>
+.related-posts {
+  clear: both;
+  display: block;
+  width: 100%;
+  margin: 30px auto;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.related-posts h3 {
+  margin-top: 0;
+}
+.related-posts ul {
+  list-style: none;
+  padding: 0;
+}
+.related-posts li {
+  margin: 6px 0;
+}
+</style>
+<div class='related-posts'><h3>Related Posts</h3><ul><li><a href="/barongko">Barongko</a></li>
+<li><a href="/acapkali">Acapkali</a></li>
+<li><a href="/arang-batok">Arang Batok</a></li>
+<li><a href="/baki">Baki</a></li>
+<li><a href="/balang">Balang</a></li>
+<li><a href="/anggrek-monyet">Anggrek Monyet</a></li>
+<li><a href="/bandaran">Bandaran</a></li>
+<li><a href="/adikarya">Adikarya</a></li>
+<li><a href="/akil-balig">Akil Balig</a></li>
+<li><a href="/anggur-beranak">Anggur Beranak</a></li></ul></div>
+<script src="/ik.js"></script>
+</body>
+</html>

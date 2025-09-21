@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akar Bilangan: Konsep, Metode, dan Aplikasi Lengkap</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <style>
+        /* Variabel Warna */
+        :root {
+            --primary-color: #3498db; /* Biru cerah */
+            --secondary-color: #2ecc71; /* Hijau cerah */
+            --accent-color: #f39c12; /* Oranye cerah untuk highlight */
+            --bg-color-light: #ecf0f1; /* Abu-abu terang, cerah */
+            --bg-color-white: #ffffff; /* Putih bersih */
+            --text-color-dark: #2c3e50; /* Biru gelap untuk teks */
+            --text-color-light: #ffffff; /* Putih untuk teks di latar gelap */
+            --border-color: #bdc3c7; /* Abu-abu sedang untuk batas */
+            --shadow-color: rgba(0, 0, 0, 0.1); /* Bayangan lembut */
+        }
+
+        /* Reset dan Gaya Dasar */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color-dark);
+            background-color: var(--bg-color-light);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex-grow: 1;
+            max-width: 960px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--bg-color-white);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            color: var(--text-color-light);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 5px solid var(--secondary-color);
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px var(--shadow-color);
+        }
+
+        header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        /* Judul Konten */
+        h2 {
+            color: var(--primary-color);
+            font-size: 2em;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+
+        h3 {
+            color: var(--text-color-dark);
+            font-size: 1.5em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 10px;
+        }
+
+        h4 {
+            color: var(--text-color-dark);
+            font-size: 1.2em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        /* Paragraf */
+        p {
+            margin-bottom: 1em;
+            line-height: 1.7;
+        }
+
+        /* Daftar (List) */
+        ul, ol {
+            margin-bottom: 1em;
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        /* Kode dan Contoh Matematika */
+        code {
+            background-color: var(--bg-color-light);
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+            color: var(--text-color-dark);
+        }
+
+        pre {
+            background-color: var(--bg-color-light);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+            margin-bottom: 1.5em;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Tabel */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5em;
+            background-color: var(--bg-color-white);
+            box-shadow: 0 2px 5px var(--shadow-color);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--text-color-light);
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f7f9fa; /* Warna selang-seling */
+        }
+
+        /* Gambar SVG */
+        img, svg {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px;
+            background-color: var(--bg-color-white);
+            box-shadow: 0 2px 8px var(--shadow-color);
+        }
+
+        /* Blockquote */
+        blockquote {
+            border-left: 5px solid var(--accent-color);
+            padding: 15px 20px;
+            margin: 1.5em 0;
+            background-color: #fcf8e3; /* Kuning sangat pucat */
+            color: #8a6d3b; /* Kuning gelap */
+            border-radius: 5px;
+            font-style: italic;
+        }
+
+        /* Link */
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: var(--text-color-dark);
+            color: var(--bg-color-light);
+            text-align: center;
+            font-size: 0.9em;
+            border-top: 5px solid var(--accent-color);
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            header p {
+                font-size: 1em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+            h3 {
+                font-size: 1.3em;
+            }
+            main {
+                margin: 10px;
+                padding: 15px;
+            }
+            th, td {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 30px 15px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.4em;
+            }
+            h3 {
+                font-size: 1.1em;
+            }
+            p, li {
+                font-size: 0.95em;
+            }
+        }
+
+        /* Gaya Khusus untuk Kotak Contoh/Penting */
+        .example-box, .info-box {
+            background-color: #e8f5e9; /* Sangat hijau muda */
+            border-left: 5px solid var(--secondary-color);
+            padding: 15px;
+            margin: 1.5em 0;
+            border-radius: 5px;
+        }
+
+        .info-box {
+            background-color: #e3f2fd; /* Sangat biru muda */
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .math-equation {
+            display: block;
+            text-align: center;
+            margin: 1em 0;
+            font-size: 1.2em;
+            font-family: 'Cambria Math', serif;
+            padding: 10px;
+            background-color: #fbfdff;
+            border: 1px dashed var(--border-color);
+            border-radius: 5px;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Akar Bilangan: Konsep Fundamental Matematika</h1>
+        <p>Menjelajahi Definisi, Metode Perhitungan, Sifat, dan Berbagai Aplikasinya</p>
+    </header>
+
+    <main>
+        <section id="pendahuluan">
+            <h2>Pendahuluan: Apa Itu Akar Bilangan?</h2>
+            <p>Dalam dunia matematika, ada banyak operasi yang membentuk dasar pemahaman kita tentang angka dan hubungannya. Salah satunya adalah operasi akar bilangan. Mungkin Anda sudah familier dengan istilah "akar kuadrat" atau simbol &radic; yang sering muncul di buku pelajaran matematika. Namun, apa sebenarnya makna di balik konsep ini? Mengapa akar bilangan begitu penting, dan bagaimana ia digunakan dalam berbagai aspek kehidupan dan ilmu pengetahuan?</p>
+            <p>Akar bilangan adalah operasi matematika yang "membalikkan" atau kebalikan dari pemangkatan (eksponensiasi). Jika pemangkatan berarti mengalikan suatu bilangan dengan dirinya sendiri sebanyak beberapa kali (misalnya, 2 pangkat 3 adalah 2 × 2 × 2 = 8), maka akar bilangan mencari tahu bilangan apa yang, jika dipangkatkan dengan eksponen tertentu, akan menghasilkan bilangan awal tersebut. Sebagai contoh, akar kuadrat dari 9 adalah 3, karena 3 dipangkatkan 2 (3<sup>2</sup>) menghasilkan 9. Demikian pula, akar kubik dari 8 adalah 2, karena 2 dipangkatkan 3 (2<sup>3</sup>) menghasilkan 8.</p>
+            <p>Konsep akar bilangan tidak hanya terbatas pada akar kuadrat atau kubik; ia dapat diperluas untuk akar pangkat <em>n</em>, di mana <em>n</em> adalah bilangan bulat positif apa pun. Pemahaman yang kokoh tentang akar bilangan adalah kunci untuk menguasai aljabar, geometri, kalkulus, dan berbagai bidang ilmu lainnya. Artikel ini akan membawa Anda dalam perjalanan mendalam untuk memahami akar bilangan, mulai dari definisi dasar, jenis-jenisnya, sifat-sifatnya, metode perhitungannya, penyederhanaan, operasi, hingga aplikasinya dalam kehidupan nyata. Mari kita selami lebih dalam!</p>
+            <figure>
+                <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 1L3 14H21L13 23"/>
+                    <polyline points="4 17 9 12 20 12"/>
+                </svg>
+                <figcaption>Simbol akar matematika, menunjukkan akar kuadrat. <br>Sebuah representasi visual dari fundamental operasi akar.</figcaption>
+            </figure>
+        </section>
+
+        <section id="definisi-dasar">
+            <h2>Definisi Dasar Akar Bilangan dan Notasi</h2>
+            <p>Secara formal, akar bilangan dapat didefinisikan sebagai berikut:</p>
+            <blockquote>
+                Jika <em>b<sup>n</sup> = a</em>, di mana <em>n</em> adalah bilangan bulat positif, maka <em>b</em> disebut akar pangkat <em>n</em> dari <em>a</em>.
+            </blockquote>
+            <p>Ini dinotasikan dengan simbol radikal &radic; atau dalam bentuk pangkat pecahan. Notasi yang paling umum adalah:</p>
+            <div class="math-equation">
+                <sup>n</sup>&radic;a = b
+            </div>
+            <p>atau dalam bentuk eksponen:</p>
+            <div class="math-equation">
+                a<sup>1/n</sup> = b
+            </div>
+            <ul>
+                <li><strong>Radikan (a):</strong> Bilangan di bawah tanda akar.</li>
+                <li><strong>Indeks/Pangkat Akar (n):</strong> Bilangan kecil yang diletakkan di atas sisi kiri tanda akar, menunjukkan pangkat berapa yang dicari. Jika tidak ada angka yang ditulis (misalnya, &radic;a), itu secara implisit berarti akar kuadrat (n=2).</li>
+                <li><strong>Akar (b):</strong> Hasil dari operasi akar bilangan.</li>
+            </ul>
+            <p>Sebagai contoh:</p>
+            <ul>
+                <li>&radic;25 = 5, karena 5<sup>2</sup> = 25. Di sini, 25 adalah radikan, indeksnya 2 (tidak ditulis), dan akarnya adalah 5.</li>
+                <li><sup>3</sup>&radic;64 = 4, karena 4<sup>3</sup> = 64. Di sini, 64 adalah radikan, indeksnya 3, dan akarnya adalah 4.</li>
+                <li><sup>4</sup>&radic;81 = 3, karena 3<sup>4</sup> = 81. Di sini, 81 adalah radikan, indeksnya 4, dan akarnya adalah 3.</li>
+            </ul>
+            <p>Penting untuk diingat bahwa jika <em>n</em> adalah bilangan genap (seperti 2, 4, 6), dan <em>a</em> adalah bilangan positif, maka akan ada dua nilai akar yang mungkin: satu positif dan satu negatif. Misalnya, &radic;25 bisa +5 atau -5, karena (+5)<sup>2</sup> = 25 dan (-5)<sup>2</sup> = 25. Namun, dalam konteks matematika dasar, simbol &radic; secara konvensional merujuk pada "akar utama" atau "akar positif" (principal root). Jadi, &radic;25 = 5 (positif).</p>
+            <p>Jika <em>n</em> adalah bilangan ganjil (seperti 3, 5, 7), maka hanya ada satu nilai akar real. Misalnya, <sup>3</sup>&radic;-27 = -3, karena (-3)<sup>3</sup> = -27.</p>
+        </section>
+
+        <section id="jenis-jenis-akar">
+            <h2>Jenis-Jenis Akar Bilangan</h2>
+            <p>Akar bilangan memiliki beberapa jenis berdasarkan indeks akarnya:</p>
+
+            <h3>1. Akar Kuadrat (Square Root)</h3>
+            <p>Ini adalah jenis akar yang paling umum dan sering ditemui. Akar kuadrat dari sebuah bilangan <em>a</em> adalah bilangan <em>b</em> yang, ketika dikalikan dengan dirinya sendiri, menghasilkan <em>a</em>. Indeksnya adalah 2, tetapi biasanya tidak ditulis. Notasinya adalah &radic;a atau a<sup>1/2</sup>.</p>
+            <ul>
+                <li>&radic;1 = 1 (1<sup>2</sup> = 1)</li>
+                <li>&radic;4 = 2 (2<sup>2</sup> = 4)</li>
+                <li>&radic;16 = 4 (4<sup>2</sup> = 16)</li>
+                <li>&radic;100 = 10 (10<sup>2</sup> = 100)</li>
+            </ul>
+            <p>Akar kuadrat dari bilangan positif selalu memiliki dua solusi (satu positif dan satu negatif), tetapi simbol &radic; secara default merujuk pada akar positif. Bilangan yang memiliki akar kuadrat berupa bilangan bulat disebut "kuadrat sempurna" (perfect squares), seperti 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, dst.</p>
+            <p>Akar kuadrat dari bilangan negatif, seperti &radic;-4, tidak memiliki solusi bilangan real. Ini adalah konsep yang mengarah pada bilangan imajiner dan kompleks (dibahas lebih lanjut nanti).</p>
+
+            <h3>2. Akar Kubik (Cube Root)</h3>
+            <p>Akar kubik dari sebuah bilangan <em>a</em> adalah bilangan <em>b</em> yang, ketika dikalikan dengan dirinya sendiri sebanyak tiga kali, menghasilkan <em>a</em>. Indeksnya adalah 3. Notasinya adalah <sup>3</sup>&radic;a atau a<sup>1/3</sup>.</p>
+            <ul>
+                <li><sup>3</sup>&radic;1 = 1 (1<sup>3</sup> = 1)</li>
+                <li><sup>3</sup>&radic;8 = 2 (2<sup>3</sup> = 8)</li>
+                <li><sup>3</sup>&radic;27 = 3 (3<sup>3</sup> = 27)</li>
+                <li><sup>3</sup>&radic;125 = 5 (5<sup>3</sup> = 125)</li>
+                <li><sup>3</sup>&radic;-64 = -4 ((-4)<sup>3</sup> = -64)</li>
+            </ul>
+            <p>Berbeda dengan akar kuadrat, akar kubik dari bilangan negatif dapat menghasilkan bilangan real negatif. Bilangan yang memiliki akar kubik berupa bilangan bulat disebut "kubik sempurna" (perfect cubes), seperti 1, 8, 27, 64, 125, 216, dst.</p>
+
+            <h3>3. Akar Pangkat <em>n</em> (nth Root)</h3>
+            <p>Ini adalah generalisasi dari akar kuadrat dan kubik. Akar pangkat <em>n</em> dari sebuah bilangan <em>a</em> adalah bilangan <em>b</em> yang, ketika dipangkatkan <em>n</em>, menghasilkan <em>a</em>. Indeksnya adalah <em>n</em>. Notasinya adalah <sup>n</sup>&radic;a atau a<sup>1/n</sup>.</p>
+            <ul>
+                <li><sup>4</sup>&radic;16 = 2 (karena 2<sup>4</sup> = 16)</li>
+                <li><sup>5</sup>&radic;32 = 2 (karena 2<sup>5</sup> = 32)</li>
+                <li><sup>6</sup>&radic;729 = 3 (karena 3<sup>6</sup> = 729)</li>
+            </ul>
+            <p>Aturan untuk nilai positif/negatif sama seperti sebelumnya: jika <em>n</em> genap, <sup>n</sup>&radic;a hanya didefinisikan untuk <em>a</em> &ge; 0, dan hasil utamanya adalah non-negatif. Jika <em>n</em> ganjil, <sup>n</sup>&radic;a didefinisikan untuk semua bilangan real <em>a</em>, dan hasilnya akan memiliki tanda yang sama dengan <em>a</em>.</p>
+
+            <h3>4. Akar Bilangan Negatif dan Bilangan Kompleks</h3>
+            <p>Seperti yang disinggung sebelumnya, akar genap dari bilangan negatif tidak ada di himpunan bilangan real. Misalnya, &radic;-1 tidak ada di real. Untuk mengatasi ini, matematika memperkenalkan konsep bilangan imajiner, di mana unit imajiner <em>i</em> didefinisikan sebagai <em>i</em> = &radic;-1. Dari sini, kita dapat mencari akar kuadrat dari bilangan negatif lainnya, misalnya:</p>
+            <div class="math-equation">
+                &radic;-4 = &radic;(4 &times; -1) = &radic;4 &times; &radic;-1 = 2i
+            </div>
+            <p>Bilangan kompleks adalah bilangan yang memiliki bagian real dan bagian imajiner, dalam bentuk <em>a + bi</em>. Akar pangkat <em>n</em> dari bilangan kompleks, termasuk bilangan negatif jika <em>n</em> genap, akan selalu menghasilkan <em>n</em> buah akar kompleks (termasuk real jika ada). Misalnya, akar kuadrat dari 4 adalah 2 dan -2 (dua akar real). Akar kuadrat dari -4 adalah 2i dan -2i (dua akar imajiner).</p>
+            <p>Penting untuk diingat bahwa dalam konteks pembelajaran dasar, seringkali diasumsikan bahwa kita hanya bekerja dengan akar real dan radikan positif ketika indeksnya genap, kecuali jika dinyatakan lain.</p>
+        </section>
+
+        <section id="sifat-sifat-akar">
+            <h2>Sifat-Sifat Akar Bilangan</h2>
+            <p>Sama seperti operasi matematika lainnya, akar bilangan memiliki sifat-sifat khusus yang membantu dalam penyederhanaan dan perhitungan. Memahami sifat-sifat ini sangat penting untuk manipulasi aljabar.</p>
+
+            <h3>1. Sifat Perkalian Akar</h3>
+            <p>Akar dari perkalian dua bilangan sama dengan perkalian akar masing-masing bilangan, asalkan indeks akarnya sama dan radikan tidak negatif (untuk indeks genap).</p>
+            <div class="math-equation">
+                <sup>n</sup>&radic;(a &times; b) = <sup>n</sup>&radic;a &times; <sup>n</sup>&radic;b
+            </div>
+            <p><strong>Contoh:</strong></p>
+            <ul>
+                <li>&radic;12 = &radic;(4 &times; 3) = &radic;4 &times; &radic;3 = 2&radic;3</li>
+                <li><sup>3</sup>&radic;54 = <sup>3</sup>&radic;(27 &times; 2) = <sup>3</sup>&radic;27 &times; <sup>3</sup>&radic;2 = 3<sup>3</sup>&radic;2</li>
+            </ul>
+            <p>Sifat ini sangat berguna untuk menyederhanakan bentuk akar dengan mencari faktor kuadrat sempurna, kubik sempurna, atau pangkat sempurna lainnya di dalam radikan.</p>
+
+            <h3>2. Sifat Pembagian Akar</h3>
+            <p>Akar dari pembagian dua bilangan sama dengan pembagian akar masing-masing bilangan, asalkan indeks akarnya sama, radikan tidak negatif (untuk indeks genap), dan penyebut tidak nol.</p>
+            <div class="math-equation">
+                <sup>n</sup>&radic;(a / b) = <sup>n</sup>&radic;a / <sup>n</sup>&radic;b
+            </div>
+            <p><strong>Contoh:</strong></p>
+            <ul>
+                <li>&radic;(16/9) = &radic;16 / &radic;9 = 4/3</li>
+                <li>&radic;(25/4) = &radic;25 / &radic;4 = 5/2</li>
+                <li><sup>3</sup>&radic;(8/27) = <sup>3</sup>&radic;8 / <sup>3</sup>&radic;27 = 2/3</li>
+            </ul>
+
+            <h3>3. Sifat Akar Pangkat (Pangkat dari Akar)</h3>
+            <p>Jika kita memiliki akar yang dipangkatkan, kita bisa memangkatkan radikan terlebih dahulu atau mencari akarnya terlebih dahulu.</p>
+            <div class="math-equation">
+                (<sup>n</sup>&radic;a)<sup>m</sup> = <sup>n</sup>&radic;(a<sup>m</sup>)
+            </div>
+            <p>Ini juga bisa ditulis dalam bentuk eksponen:</p>
+            <div class="math-equation">
+                (a<sup>1/n</sup>)<sup>m</sup> = a<sup>m/n</sup>
+            </div>
+            <p><strong>Contoh:</strong></p>
+            <ul>
+                <li>(&radic;5)<sup>2</sup> = &radic;(5<sup>2</sup>) = &radic;25 = 5</li>
+                <li>(&radic;7)<sup>4</sup> = &radic;(7<sup>4</sup>) = &radic;(2401) = 49 (atau (&radic;7)<sup>2</sup> &times; (&radic;7)<sup>2</sup> = 7 &times; 7 = 49)</li>
+                <li>(<sup>3</sup>&radic;8)<sup>2</sup> = (2)<sup>2</sup> = 4. Atau, <sup>3</sup>&radic;(8<sup>2</sup>) = <sup>3</sup>&radic;64 = 4.</li>
+            </ul>
+
+            <h3>4. Sifat Akar Berganda (Akar dalam Akar)</h3>
+            <p>Jika ada akar di dalam akar, kita dapat menggabungkannya dengan mengalikan indeks-indeks akarnya.</p>
+            <div class="math-equation">
+                <sup>m</sup>&radic;(<sup>n</sup>&radic;a) = <sup>m&times;n</sup>&radic;a
+            </div>
+            <p>Atau dalam bentuk eksponen:</p>
+            <div class="math-equation">
+                (a<sup>1/n</sup>)<sup>1/m</sup> = a<sup>1/(m&times;n)</sup>
+            </div>
+            <p><strong>Contoh:</strong></p>
+            <ul>
+                <li><sup>3</sup>&radic;(&radic;64) = <sup>3&times;2</sup>&radic;64 = <sup>6</sup>&radic;64 = 2 (karena 2<sup>6</sup> = 64)</li>
+                <li>&radic;(&radic;81) = <sup>2&times;2</sup>&radic;81 = <sup>4</sup>&radic;81 = 3 (karena 3<sup>4</sup> = 81)</li>
+            </ul>
+
+            <h3>5. Sifat Pangkat Pecahan dan Akar</h3>
+            <p>Sifat ini menunjukkan hubungan langsung antara notasi akar dan notasi pangkat pecahan, seperti yang sudah kita lihat sebelumnya.</p>
+            <div class="math-equation">
+                <sup>n</sup>&radic;(a<sup>m</sup>) = a<sup>m/n</sup>
+            </div>
+            <p><strong>Contoh:</strong></p>
+            <ul>
+                <li>&radic;(x<sup>6</sup>) = x<sup>6/2</sup> = x<sup>3</sup></li>
+                <li><sup>3</sup>&radic;(y<sup>9</sup>) = y<sup>9/3</sup> = y<sup>3</sup></li>
+                <li><sup>4</sup>&radic;(16<sup>3</sup>) = 16<sup>3/4</sup> = (2<sup>4</sup>)<sup>3/4</sup> = 2<sup>(4 &times; 3/4)</sup> = 2<sup>3</sup> = 8</li>
+            </ul>
+
+            <div class="info-box">
+                <h4>Penting untuk Diingat:</h4>
+                <p>Sifat-sifat ini berlaku untuk bilangan real positif. Untuk bilangan negatif, terutama ketika indeks akarnya genap, perlu kehati-hatian karena dapat melibatkan bilangan imajiner.</p>
+            </div>
+        </section>
+
+        <section id="metode-menghitung-akar">
+            <h2>Metode Menghitung Akar Bilangan</h2>
+            <p>Menghitung akar bilangan, terutama akar yang tidak sempurna, bisa menjadi tantangan. Untungnya, ada berbagai metode, dari yang paling dasar hingga yang lebih canggih, untuk menemukan nilai akar tersebut.</p>
+
+            <h3>1. Estimasi dan Uji Coba (Trial and Error)</h3>
+            <p>Metode ini adalah yang paling intuitif, terutama untuk akar kuadrat atau kubik dari bilangan kecil. Anda hanya perlu menebak dan menguji.</p>
+            <p><strong>Contoh: Menghitung &radic;50</strong></p>
+            <ol>
+                <li>Kita tahu 7<sup>2</sup> = 49 dan 8<sup>2</sup> = 64. Jadi, &radic;50 pasti berada di antara 7 dan 8, sangat dekat dengan 7.</li>
+                <li>Coba 7.07: 7.07<sup>2</sup> &approx; 49.9849 (sangat dekat!)</li>
+                <li>Coba 7.071: 7.071<sup>2</sup> &approx; 49.999241</li>
+                <li>Coba 7.07106: 7.07106<sup>2</sup> &approx; 49.9999908</li>
+            </ol>
+            <p>Metode ini memang tidak efisien untuk presisi tinggi, tetapi bagus untuk mendapatkan perkiraan kasar.</p>
+
+            <h3>2. Faktorisasi Prima (untuk Penyederhanaan)</h3>
+            <p>Metode ini tidak secara langsung "menghitung" nilai desimal akar, melainkan menyederhanakan bentuk akar dengan mengeluarkan faktor-faktor yang merupakan pangkat sempurna dari radikan.</p>
+            <p><strong>Contoh: Menghitung &radic;72</strong></p>
+            <ol>
+                <li>Faktorisasi prima dari 72: 72 = 2 &times; 36 = 2 &times; 6 &times; 6 = 2 &times; 2 &times; 3 &times; 2 &times; 3 = 2<sup>3</sup> &times; 3<sup>2</sup>.</li>
+                <li>Tulis ulang di bawah tanda akar: &radic;(2<sup>3</sup> &times; 3<sup>2</sup>) = &radic;(2<sup>2</sup> &times; 2 &times; 3<sup>2</sup>).</li>
+                <li>Keluarkan faktor kuadrat sempurna: &radic;(2<sup>2</sup> &times; 3<sup>2</sup>) &times; &radic;2 = (2 &times; 3) &times; &radic;2 = 6&radic;2.</li>
+            </ol>
+            <p><strong>Contoh: Menghitung <sup>3</sup>&radic;108</strong></p>
+            <ol>
+                <li>Faktorisasi prima dari 108: 108 = 2 &times; 54 = 2 &times; 2 &times; 27 = 2<sup>2</sup> &times; 3<sup>3</sup>.</li>
+                <li>Tulis ulang di bawah tanda akar: <sup>3</sup>&radic;(2<sup>2</sup> &times; 3<sup>3</sup>).</li>
+                <li>Keluarkan faktor kubik sempurna: <sup>3</sup>&radic;3<sup>3</sup> &times; <sup>3</sup>&radic;2<sup>2</sup> = 3<sup>3</sup>&radic;4.</li>
+            </ol>
+
+            <h3>3. Algoritma Babylonian (Metode Heron)</h3>
+            <p>Ini adalah metode iteratif kuno yang sangat efektif untuk menghitung akar kuadrat dengan tingkat presisi yang tinggi. Ini didasarkan pada ide bahwa jika <em>x</em> adalah perkiraan akar kuadrat dari <em>S</em>, maka <em>S/x</em> juga merupakan perkiraan, dan rata-rata dari <em>x</em> dan <em>S/x</em> akan menjadi perkiraan yang lebih baik.</p>
+            <p>Formulanya adalah:</p>
+            <div class="math-equation">
+                x<sub>n+1</sub> = 0.5 &times; (x<sub>n</sub> + S / x<sub>n</sub>)
+            </div>
+            <ul>
+                <li><em>S</em> adalah bilangan yang ingin dicari akar kuadratnya.</li>
+                <li><em>x<sub>n</sub></em> adalah perkiraan saat ini.</li>
+                <li><em>x<sub>n+1</sub></em> adalah perkiraan berikutnya (yang lebih baik).</li>
+            </ul>
+            <p><strong>Langkah-langkah untuk menghitung &radic;S:</strong></p>
+            <ol>
+                <li>Pilih perkiraan awal (<em>x<sub>0</sub></em>). Ini bisa tebakan apa saja, tetapi semakin dekat ke akar sebenarnya, semakin cepat konvergensinya. Umumnya, S/2 adalah pilihan yang baik jika S sangat besar, atau bilangan bulat terdekat.</li>
+                <li>Hitung <em>x<sub>1</sub></em> menggunakan rumus: <em>x<sub>1</sub> = 0.5 &times; (x<sub>0</sub> + S / x<sub>0</sub>)</em></li>
+                <li>Gunakan <em>x<sub>1</sub></em> sebagai <em>x<sub>n</sub></em> yang baru dan ulangi langkah 2 untuk mendapatkan <em>x<sub>2</sub></em>, <em>x<sub>3</sub></em>, dan seterusnya.</li>
+                <li>Berhenti ketika dua perkiraan berturut-turut cukup dekat (sesuai tingkat presisi yang diinginkan).</li>
+            </ol>
+            <p><strong>Contoh: Menghitung &radic;10 dengan Algoritma Babylonian</strong></p>
+            <p>Kita ingin mencari &radic;10. Kita tahu 3<sup>2</sup>=9 dan 4<sup>2</sup>=16, jadi &radic;10 ada antara 3 dan 4. Mari kita coba <em>x<sub>0</sub></em> = 3 sebagai perkiraan awal.</p>
+            <ul>
+                <li><strong>Iterasi 1:</strong>
+                    <div class="math-equation">
+                        x<sub>1</sub> = 0.5 &times; (3 + 10 / 3) = 0.5 &times; (3 + 3.333333) = 0.5 &times; 6.333333 = 3.166667
+                    </div>
+                </li>
+                <li><strong>Iterasi 2:</strong>
+                    <div class="math-equation">
+                        x<sub>2</sub> = 0.5 &times; (3.166667 + 10 / 3.166667) = 0.5 &times; (3.166667 + 3.157895) = 0.5 &times; 6.324562 = 3.162281
+                    </div>
+                </li>
+                <li><strong>Iterasi 3:</strong>
+                    <div class="math-equation">
+                        x<sub>3</sub> = 0.5 &times; (3.162281 + 10 / 3.162281) = 0.5 &times; (3.162281 + 3.162278) = 0.5 &times; 6.324559 = 3.1622795
+                    </div>
+                </li>
+            </ul>
+            <p>Nilai &radic;10 yang sebenarnya adalah sekitar 3.16227766... Dengan hanya tiga iterasi, kita sudah sangat dekat! Algoritma ini sangat efisien dan merupakan dasar bagi banyak kalkulator untuk menghitung akar kuadrat.</p>
+
+            <h3>4. Metode Newton-Raphson</h3>
+            <p>Metode Babylonian adalah kasus khusus dari metode Newton-Raphson, yang merupakan metode numerik yang lebih umum untuk menemukan akar dari suatu fungsi. Untuk menghitung <sup>n</sup>&radic;S, kita ingin mencari akar dari fungsi <em>f(x) = x<sup>n</sup> - S</em>. Rumus iterasinya adalah:</p>
+            <div class="math-equation">
+                x<sub>k+1</sub> = x<sub>k</sub> - f(x<sub>k</sub>) / f'(x<sub>k</sub>)
+            </div>
+            <p>Di mana <em>f'(x)</em> adalah turunan pertama dari <em>f(x)</em>. Jika <em>f(x) = x<sup>n</sup> - S</em>, maka <em>f'(x) = n &times; x<sup>n-1</sup></em>. Mengganti ini ke dalam rumus Newton-Raphson memberikan:</p>
+            <div class="math-equation">
+                x<sub>k+1</sub> = x<sub>k</sub> - (x<sub>k</sub><sup>n</sup> - S) / (n &times; x<sub>k</sub><sup>n-1</sup>)
+            </div>
+            <p>Ini dapat disederhanakan menjadi:</p>
+            <div class="math-equation">
+                x<sub>k+1</sub> = (1/n) &times; ((n-1) &times; x<sub>k</sub> + S / x<sub>k</sub><sup>n-1</sup>)
+            </div>
+            <p>Perhatikan bahwa jika <em>n=2</em> (akar kuadrat), rumus ini menjadi <em>x<sub>k+1</sub> = (1/2) &times; (x<sub>k</sub> + S / x<sub>k</sub>)</em>, persis seperti algoritma Babylonian! Metode Newton-Raphson adalah metode yang kuat dan digunakan secara luas dalam komputasi ilmiah.</p>
+
+            <h3>5. Menggunakan Kalkulator atau Komputer</h3>
+            <p>Dalam praktik sehari-hari, cara termudah dan tercepat untuk mendapatkan nilai akar dengan presisi tinggi adalah menggunakan kalkulator ilmiah atau fungsi akar di perangkat lunak komputer (misalnya, `SQRT()` di spreadsheet atau operator `** 0.5` di bahasa pemrograman).</p>
+            <p>Kalkulator modern menggunakan algoritma iteratif (seperti yang dijelaskan di atas) yang sangat cepat dan akurat untuk memberikan hasil yang diinginkan.</p>
+
+            <h3>6. Menggunakan Logaritma (untuk Pangkat Pecahan)</h3>
+            <p>Meskipun bukan metode "manual" untuk akar sederhana, konsep logaritma sangat terkait dengan akar bilangan, terutama ketika berhadapan dengan pangkat pecahan. Kita tahu bahwa <sup>n</sup>&radic;a = a<sup>1/n</sup>. Dengan menggunakan properti logaritma, kita bisa menulis:</p>
+            <div class="math-equation">
+                log(a<sup>1/n</sup>) = (1/n) &times; log(a)
+            </div>
+            <p>Ini berarti kita bisa mencari logaritma dari bilangan, membaginya dengan indeks akar, lalu mencari antilogaritma untuk mendapatkan hasilnya. Metode ini dulu digunakan dengan tabel logaritma sebelum ada kalkulator elektronik.</p>
+        </section>
+
+        <section id="penyederhanaan-bentuk-akar">
+            <h2>Penyederhanaan Bentuk Akar</h2>
+            <p>Menyederhanakan bentuk akar adalah proses menuliskan ekspresi akar sedemikian rupa sehingga radikannya tidak lagi memiliki faktor pangkat sempurna (sesuai indeks akar) selain 1. Ini membuat ekspresi lebih mudah dibaca, dibandingkan, dan dioperasikan.</p>
+
+            <h3>1. Mengeluarkan Faktor Pangkat Sempurna dari Radikan</h3>
+            <p>Langkah kuncinya adalah mencari faktor dari radikan yang merupakan pangkat sempurna (kuadrat sempurna untuk akar kuadrat, kubik sempurna untuk akar kubik, dst.).</p>
+            <p><strong>Langkah-langkah:</strong></p>
+            <ol>
+                <li>Faktorkan radikan menjadi faktor-faktor primanya.</li>
+                <li>Identifikasi kelompok faktor yang sama sejumlah indeks akar.</li>
+                <li>Keluarkan kelompok faktor tersebut dari tanda akar.</li>
+            </ol>
+            <p><strong>Contoh 1: Menyederhanakan &radic;48</strong></p>
+            <ul>
+                <li>Faktorisasi prima dari 48: 48 = 2 &times; 2 &times; 2 &times; 2 &times; 3 = 2<sup>4</sup> &times; 3.</li>
+                <li>Identifikasi kuadrat sempurna: 2<sup>4</sup> = (2<sup>2</sup>)<sup>2</sup> = 4<sup>2</sup> = 16.</li>
+                <li>&radic;48 = &radic;(16 &times; 3) = &radic;16 &times; &radic;3 = 4&radic;3.</li>
+            </ul>
+
+            <p><strong>Contoh 2: Menyederhanakan &radic;75a<sup>3</sup>b<sup>2</sup></strong></p>
+            <ul>
+                <li>Faktorkan radikan: 75 = 3 &times; 25 = 3 &times; 5<sup>2</sup>.</li>
+                <li>&radic;(3 &times; 5<sup>2</sup> &times; a<sup>2</sup> &times; a &times; b<sup>2</sup>)</li>
+                <li>Keluarkan kuadrat sempurna: &radic;5<sup>2</sup> &times; &radic;a<sup>2</sup> &times; &radic;b<sup>2</sup> &times; &radic;(3a)</li>
+                <li>Hasilnya: 5ab&radic;3a</li>
+            </ul>
+
+            <p><strong>Contoh 3: Menyederhanakan <sup>3</sup>&radic;108x<sup>5</sup></strong></p>
+            <ul>
+                <li>Faktorisasi prima dari 108: 108 = 4 &times; 27 = 2<sup>2</sup> &times; 3<sup>3</sup>.</li>
+                <li><sup>3</sup>&radic;(2<sup>2</sup> &times; 3<sup>3</sup> &times; x<sup>3</sup> &times; x<sup>2</sup>)</li>
+                <li>Keluarkan kubik sempurna: <sup>3</sup>&radic;3<sup>3</sup> &times; <sup>3</sup>&radic;x<sup>3</sup> &times; <sup>3</sup>&radic;(2<sup>2</sup>x<sup>2</sup>)</li>
+                <li>Hasilnya: 3x<sup>3</sup>&radic;4x<sup>2</sup></li>
+            </ul>
+
+            <h3>2. Merasionalisasi Penyebut (Rationalizing the Denominator)</h3>
+            <p>Merasionalisasi penyebut berarti menghilangkan akar dari penyebut pecahan. Ini dianggap sebagai bentuk yang lebih sederhana dalam matematika. Ada dua kasus utama:</p>
+
+            <h4>a. Penyebut Berupa Akar Tunggal</h4>
+            <p>Kalikan pembilang dan penyebut dengan akar yang sama di penyebut.</p>
+            <p><strong>Contoh 1: 5 / &radic;2</strong></p>
+            <div class="math-equation">
+                (5 / &radic;2) &times; (&radic;2 / &radic;2) = (5&radic;2) / (&radic;4) = 5&radic;2 / 2
+            </div>
+
+            <p><strong>Contoh 2: 6 / <sup>3</sup>&radic;3</strong></p>
+            <p>Untuk menghilangkan <sup>3</sup>&radic;3, kita perlu mengalikan dengan <sup>3</sup>&radic;3<sup>2</sup> agar menjadi <sup>3</sup>&radic;3<sup>3</sup> = 3.</p>
+            <div class="math-equation">
+                (6 / <sup>3</sup>&radic;3) &times; (<sup>3</sup>&radic;3<sup>2</sup> / <sup>3</sup>&radic;3<sup>2</sup>) = (6 &times; <sup>3</sup>&radic;9) / (<sup>3</sup>&radic;3<sup>3</sup>) = 6<sup>3</sup>&radic;9 / 3 = 2<sup>3</sup>&radic;9
+            </div>
+
+            <h4>b. Penyebut Berupa Penjumlahan atau Pengurangan Dua Akar (atau Akar dan Bilangan)</h4>
+            <p>Kalikan pembilang dan penyebut dengan konjugat dari penyebut. Konjugat dari (a + &radic;b) adalah (a - &radic;b), dan sebaliknya. Ini menggunakan identitas (x + y)(x - y) = x<sup>2</sup> - y<sup>2</sup>, yang akan menghilangkan akar.</p>
+            <p><strong>Contoh 1: 1 / (2 + &radic;3)</strong></p>
+            <p>Konjugat dari (2 + &radic;3) adalah (2 - &radic;3).</p>
+            <div class="math-equation">
+                [1 / (2 + &radic;3)] &times; [(2 - &radic;3) / (2 - &radic;3)] = (2 - &radic;3) / (2<sup>2</sup> - (&radic;3)<sup>2</sup>) = (2 - &radic;3) / (4 - 3) = 2 - &radic;3
+            </div>
+
+            <p><strong>Contoh 2: (&radic;5 + &radic;2) / (&radic;5 - &radic;2)</strong></p>
+            <p>Konjugat dari (&radic;5 - &radic;2) adalah (&radic;5 + &radic;2).</p>
+            <div class="math-equation">
+                [(\radic;5 + &radic;2) / (&radic;5 - &radic;2)] &times; [(&radic;5 + &radic;2) / (&radic;5 + &radic;2)]
+            </div>
+            <p>Pembilang: (&radic;5 + &radic;2)<sup>2</sup> = (&radic;5)<sup>2</sup> + 2&radic;5&radic;2 + (&radic;2)<sup>2</sup> = 5 + 2&radic;10 + 2 = 7 + 2&radic;10</p>
+            <p>Penyebut: (&radic;5)<sup>2</sup> - (&radic;2)<sup>2</sup> = 5 - 2 = 3</p>
+            <p>Hasilnya:</p>
+            <div class="math-equation">
+                (7 + 2&radic;10) / 3
+            </div>
+            <div class="example-box">
+                <h4>Mengapa penyederhanaan penting?</h4>
+                <p>Penyederhanaan membuat ekspresi matematika lebih ringkas, mudah dibaca, dan standar. Ini juga mempermudah perbandingan nilai dan melakukan operasi lebih lanjut seperti penjumlahan atau pengurangan, di mana akar-akar harus dalam bentuk yang sama untuk dapat digabungkan.</p>
+            </div>
+        </section>
+
+        <section id="operasi-aljabar">
+            <h2>Operasi Aljabar dengan Akar Bilangan</h2>
+            <p>Setelah memahami definisi, sifat, dan penyederhanaan, langkah selanjutnya adalah melakukan operasi aritmetika dasar dengan ekspresi akar.</p>
+
+            <h3>1. Penjumlahan dan Pengurangan Akar</h3>
+            <p>Akar dapat dijumlahkan atau dikurangi hanya jika mereka adalah "akar sejenis" (like radicals). Artinya, mereka harus memiliki indeks akar yang sama dan radikan yang sama. Jika mereka sejenis, kita hanya perlu menjumlahkan atau mengurangi koefisien di depan akar.</p>
+            <p><strong>Bukan Akar Sejenis:</strong> &radic;2 + &radic;3, <sup>3</sup>&radic;5 - &radic;5, 2&radic;7 + 3&radic;14.</p>
+            <p><strong>Contoh Penjumlahan:</strong></p>
+            <ul>
+                <li>2&radic;5 + 3&radic;5 = (2 + 3)&radic;5 = 5&radic;5</li>
+                <li>7<sup>3</sup>&radic;2 - 4<sup>3</sup>&radic;2 = (7 - 4)<sup>3</sup>&radic;2 = 3<sup>3</sup>&radic;2</li>
+            </ul>
+            <p>Jika akar awalnya tidak sejenis, kita harus mencoba menyederhanakannya terlebih dahulu untuk melihat apakah mereka bisa menjadi sejenis.</p>
+            <p><strong>Contoh: 3&radic;8 + 5&radic;18 - &radic;50</strong></p>
+            <ol>
+                <li>Sederhanakan masing-masing akar:
+                    <ul>
+                        <li>3&radic;8 = 3&radic;(4 &times; 2) = 3 &times; 2&radic;2 = 6&radic;2</li>
+                        <li>5&radic;18 = 5&radic;(9 &times; 2) = 5 &times; 3&radic;2 = 15&radic;2</li>
+                        <li>&radic;50 = &radic;(25 &times; 2) = 5&radic;2</li>
+                    </ul>
+                </li>
+                <li>Sekarang semua akar sejenis (&radic;2):
+                    <div class="math-equation">
+                        6&radic;2 + 15&radic;2 - 5&radic;2
+                    </div>
+                </li>
+                <li>Jumlahkan/kurangkan koefisien:
+                    <div class="math-equation">
+                        (6 + 15 - 5)&radic;2 = 16&radic;2
+                    </div>
+                </li>
+            </ol>
+
+            <h3>2. Perkalian Akar</h3>
+            <p>Untuk mengalikan akar, ada dua kasus:</p>
+
+            <h4>a. Indeks Akar Sama</h4>
+            <p>Jika indeks akar sama, kalikan radikan dan kalikan koefisiennya.</p>
+            <div class="math-equation">
+                (A<sup>n</sup>&radic;a) &times; (B<sup>n</sup>&radic;b) = (A &times; B)<sup>n</sup>&radic;(a &times; b)
+            </div>
+            <p><strong>Contoh:</strong></p>
+            <ul>
+                <li>&radic;2 &times; &radic;8 = &radic;(2 &times; 8) = &radic;16 = 4</li>
+                <li>3&radic;5 &times; 2&radic;10 = (3 &times; 2)&radic;(5 &times; 10) = 6&radic;50. Sederhanakan: 6&radic;(25 &times; 2) = 6 &times; 5&radic;2 = 30&radic;2.</li>
+                <li><sup>3</sup>&radic;4 &times; <sup>3</sup>&radic;16 = <sup>3</sup>&radic;(4 &times; 16) = <sup>3</sup>&radic;64 = 4</li>
+            </ul>
+
+            <h4>b. Indeks Akar Berbeda</h4>
+            <p>Jika indeks akar berbeda, kita perlu mengubahnya menjadi bentuk pangkat pecahan dan mencari KPK dari penyebut pecahan pangkat tersebut.</p>
+            <p><strong>Contoh: &radic;2 &times; <sup>3</sup>&radic;3</strong></p>
+            <ol>
+                <li>Ubah ke bentuk pangkat pecahan: 2<sup>1/2</sup> &times; 3<sup>1/3</sup>.</li>
+                <li>KPK dari 2 dan 3 adalah 6. Ubah pecahan pangkat agar penyebutnya 6:
+                    <ul>
+                        <li>2<sup>1/2</sup> = 2<sup>3/6</sup> = <sup>6</sup>&radic;2<sup>3</sup> = <sup>6</sup>&radic;8</li>
+                        <li>3<sup>1/3</sup> = 3<sup>2/6</sup> = <sup>6</sup>&radic;3<sup>2</sup> = <sup>6</sup>&radic;9</li>
+                    </ul>
+                </li>
+                <li>Sekarang indeks akar sama, kalikan radikan:
+                    <div class="math-equation">
+                        <sup>6</sup>&radic;8 &times; <sup>6</sup>&radic;9 = <sup>6</sup>&radic;(8 &times; 9) = <sup>6</sup>&radic;72
+                    </div>
+                </li>
+            </ol>
+
+            <h3>3. Pembagian Akar</h3>
+            <p>Mirip dengan perkalian, ada dua kasus untuk pembagian akar:</p>
+
+            <h4>a. Indeks Akar Sama</h4>
+            <p>Jika indeks akar sama, bagi radikan dan bagi koefisiennya. Biasanya diikuti dengan rasionalisasi penyebut.</p>
+            <div class="math-equation">
+                (A<sup>n</sup>&radic;a) / (B<sup>n</sup>&radic;b) = (A / B)<sup>n</sup>&radic;(a / b)
+            </div>
+            <p><strong>Contoh:</strong></p>
+            <ul>
+                <li>&radic;72 / &radic;2 = &radic;(72 / 2) = &radic;36 = 6</li>
+                <li>(10&radic;24) / (5&radic;3) = (10/5)&radic;(24/3) = 2&radic;8. Sederhanakan: 2&radic;(4 &times; 2) = 2 &times; 2&radic;2 = 4&radic;2.</li>
+            </ul>
+            <p>Jika penyebut masih mengandung akar, rasionalkan penyebut.</p>
+            <p><strong>Contoh: 8 / &radic;2</strong></p>
+            <div class="math-equation">
+                (8 / &radic;2) &times; (&radic;2 / &radic;2) = 8&radic;2 / 2 = 4&radic;2
+            </div>
+
+            <h4>b. Indeks Akar Berbeda</h4>
+            <p>Sama seperti perkalian, ubah ke bentuk pangkat pecahan dan samakan penyebut pangkatnya (melalui KPK). Lalu lakukan pembagian.</p>
+            <p><strong>Contoh: &radic;27 / <sup>3</sup>&radic;3</strong></p>
+            <ol>
+                <li>Ubah ke bentuk pangkat pecahan: 27<sup>1/2</sup> / 3<sup>1/3</sup>.</li>
+                <li>KPK dari 2 dan 3 adalah 6. Ubah pecahan pangkat:
+                    <ul>
+                        <li>27<sup>1/2</sup> = (3<sup>3</sup>)<sup>1/2</sup> = 3<sup>3/2</sup> = 3<sup>9/6</sup> = <sup>6</sup>&radic;3<sup>9</sup></li>
+                        <li>3<sup>1/3</sup> = 3<sup>2/6</sup> = <sup>6</sup>&radic;3<sup>2</sup></li>
+                    </ul>
+                </li>
+                <li>Bagi:
+                    <div class="math-equation">
+                        <sup>6</sup>&radic;3<sup>9</sup> / <sup>6</sup>&radic;3<sup>2</sup> = <sup>6</sup>&radic;(3<sup>9</sup> / 3<sup>2</sup>) = <sup>6</sup>&radic;3<sup>7</sup>
+                    </div>
+                </li>
+                <li>Sederhanakan:
+                    <div class="math-equation">
+                        <sup>6</sup>&radic;(3<sup>6</sup> &times; 3) = 3<sup>6</sup>&radic;3
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+        <section id="aplikasi-akar">
+            <h2>Aplikasi Akar Bilangan dalam Kehidupan Sehari-hari dan Sains</h2>
+            <p>Akar bilangan bukan sekadar konsep abstrak dalam matematika; ia memiliki berbagai aplikasi praktis yang membentuk dasar banyak teknologi dan pemahaman ilmiah kita.</p>
+
+            <h3>1. Geometri</h3>
+            <p>Akar kuadrat adalah elemen vital dalam geometri, terutama ketika berhadapan dengan jarak, area, dan volume.</p>
+            <ul>
+                <li><strong>Teorema Pythagoras:</strong> Mungkin ini adalah aplikasi akar kuadrat yang paling terkenal. Dalam segitiga siku-siku, kuadrat sisi miring (hipotenusa) sama dengan jumlah kuadrat dari dua sisi lainnya (a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup>). Untuk mencari panjang sisi miring, kita menggunakan akar kuadrat: c = &radic;(a<sup>2</sup> + b<sup>2</sup>). Ini fundamental dalam konstruksi, navigasi, dan desain. Misalnya, menentukan panjang tangga yang dibutuhkan untuk mencapai ketinggian tertentu atau jarak diagonal layar televisi.</li>
+                <li><strong>Jarak Antara Dua Titik:</strong> Dalam sistem koordinat Kartesius, jarak antara dua titik (x1, y1) dan (x2, y2) dihitung menggunakan rumus jarak, yang merupakan turunan dari teorema Pythagoras: d = &radic;((x2 - x1)<sup>2</sup> + (y2 - y1)<sup>2</sup>).</li>
+                <li><strong>Luas dan Volume:</strong> Akar kuadrat dan akar kubik digunakan untuk menemukan panjang sisi dari luas atau volume yang diketahui. Misalnya, jika luas persegi adalah <em>A</em>, maka panjang sisinya adalah &radic;<em>A</em>. Jika volume kubus adalah <em>V</em>, maka panjang sisinya adalah <sup>3</sup>&radic;<em>V</em>. Ini penting dalam arsitektur, teknik sipil, dan manufaktur.</li>
+                <li><strong>Radius Lingkaran/Bola:</strong> Jika Anda memiliki area lingkaran A, radiusnya adalah &radic;(A/&pi;). Jika volume bola V, radiusnya adalah <sup>3</sup>&radic;(3V/(4&pi;)).</li>
+            </ul>
+
+            <h3>2. Fisika</h3>
+            <p>Berbagai rumus dalam fisika melibatkan akar bilangan.</p>
+            <ul>
+                <li><strong>Kinematika:</strong> Dalam persamaan gerak, untuk mencari kecepatan akhir (v) jika diketahui kecepatan awal (u), percepatan (a), dan perpindahan (s), salah satu rumus adalah v<sup>2</sup> = u<sup>2</sup> + 2as. Maka v = &radic;(u<sup>2</sup> + 2as).</li>
+                <li><strong>Waktu Jatuh Bebas:</strong> Waktu yang dibutuhkan suatu objek untuk jatuh dari ketinggian <em>h</em> di bawah gravitasi (mengabaikan hambatan udara) adalah t = &radic;(2h/g), di mana <em>g</em> adalah percepatan gravitasi.</li>
+                <li><strong>Periode Ayunan Bandul:</strong> Periode (waktu untuk satu ayunan penuh) dari bandul sederhana adalah T = 2&pi;&radic;(L/g), di mana <em>L</em> adalah panjang tali bandul.</li>
+                <li><strong>Hukum Ohm (Daya):</strong> Dalam sirkuit listrik, daya (P) dapat dihitung dengan P = I<sup>2</sup>R, di mana I adalah arus dan R adalah resistansi. Jika kita ingin mencari arus, I = &radic;(P/R). Ini juga berlaku untuk tegangan: V = &radic;(PR).</li>
+                <li><strong>Teori Relativitas Einstein:</strong> Persamaan terkenal E = mc<sup>2</sup> tidak langsung melibatkan akar, tetapi banyak konsep terkait relativitas, seperti dilatasi waktu atau kontraksi panjang, melibatkan faktor Lorentz &gamma; = 1 / &radic;(1 - v<sup>2</sup>/c<sup>2</sup>), di mana <em>v</em> adalah kecepatan objek dan <em>c</em> adalah kecepatan cahaya.</li>
+            </ul>
+
+            <figure>
+                <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="1" y1="12" x2="23" y2="12"/>
+                    <line x1="12" y1="1" x2="12" y2="23"/>
+                    <path d="M4 18 C8 4 16 20 20 6"/>
+                </svg>
+                <figcaption>Grafik fungsi matematika menunjukkan titik potong dengan sumbu X, relevan dalam mencari akar persamaan.</figcaption>
+            </figure>
+
+            <h3>3. Teknik dan Ilmu Komputer</h3>
+            <ul>
+                <li><strong>Rekayasa Struktur:</strong> Perhitungan tegangan, regangan, dan momen inersia seringkali melibatkan akar kuadrat.</li>
+                <li><strong>Pengolahan Sinyal Digital:</strong> Algoritma untuk filter digital, kompresi data, dan analisis sinyal sering kali melibatkan operasi akar kuadrat untuk menghitung magnitud atau energi sinyal.</li>
+                <li><strong>Grafika Komputer:</strong> Jarak antara piksel, perhitungan vektor normal, dan berbagai transformasi dalam grafika 3D menggunakan akar kuadrat.</li>
+                <li><strong>Kriptografi:</strong> Beberapa algoritma kriptografi canggih dan metode keamanan data bergantung pada properti matematika dari akar, terutama dalam konteks teori bilangan.</li>
+            </ul>
+
+            <h3>4. Ekonomi dan Keuangan</h3>
+            <ul>
+                <li><strong>Bunga Majemuk:</strong> Untuk menghitung tingkat bunga (r) yang diperlukan untuk mencapai jumlah tertentu (A) dari modal awal (P) dalam periode waktu (t) dengan bunga majemuk, kita mungkin perlu menggunakan akar: A = P(1 + r)<sup>t</sup>. Jika ingin mencari (1+r) maka <sup>t</sup>&radic;(A/P) = 1+r.</li>
+                <li><strong>Statistika:</strong> Akar kuadrat digunakan dalam perhitungan standar deviasi, yang mengukur sebaran data di sekitar rata-rata. Rumusnya melibatkan akar kuadrat dari varians.</li>
+                <li><strong>Ekonomi Makro:</strong> Dalam model pertumbuhan ekonomi, seperti model Solow-Swan, seringkali ada fungsi produksi yang melibatkan pangkat dan akar untuk menunjukkan hubungan antara input (modal, tenaga kerja) dan output.</li>
+            </ul>
+
+            <h3>5. Musik</h3>
+            <p>Dalam teori musik, rasio frekuensi nada yang harmonis seringkali melibatkan akar. Misalnya, untuk membagi satu oktaf (rasio frekuensi 2:1) menjadi 12 semitone yang sama (equal temperament), rasio frekuensi antara setiap semitone adalah <sup>12</sup>&radic;2. Ini memastikan bahwa instrumen musik yang disetel dalam sistem ini terdengar harmonis di semua kunci.</p>
+
+            <h3>6. Biologi dan Kesehatan</h3>
+            <ul>
+                <li><strong>Penelitian Obat:</strong> Dalam farmakokinetik, akar kuadrat atau pangkat pecahan bisa muncul dalam model matematika yang menggambarkan laju penyerapan atau eliminasi obat dalam tubuh.</li>
+                <li><strong>Pertumbuhan Populasi:</strong> Model pertumbuhan populasi tertentu dapat menggunakan eksponen dan akar untuk memprediksi perubahan ukuran populasi seiring waktu.</li>
+            </ul>
+            <p>Dari semua contoh di atas, jelas bahwa akar bilangan adalah konsep fundamental yang meresap ke dalam berbagai disiplin ilmu, membantu kita memahami dan memodelkan dunia di sekitar kita. Pemahaman yang kuat tentang akar memungkinkan kita untuk memecahkan masalah praktis, merancang teknologi baru, dan menggali lebih dalam misteri alam semesta.</p>
+        </section>
+
+        <section id="kesalahan-umum">
+            <h2>Kesalahan Umum dan Miskonsepsi tentang Akar Bilangan</h2>
+            <p>Meskipun konsep akar bilangan terlihat lugas, ada beberapa kesalahan umum dan miskonsepsi yang sering dilakukan oleh pelajar. Menyadari kesalahan-kesalahan ini dapat membantu Anda menghindari perangkap yang sama.</p>
+            <ol>
+                <li><strong>&radic;(a + b) &ne; &radic;a + &radic;b:</strong> Ini adalah kesalahan yang sangat umum. Akar tidak bersifat distributif terhadap penjumlahan atau pengurangan.
+                    <ul>
+                        <li><strong>Contoh Salah:</strong> &radic;(9 + 16) = &radic;9 + &radic;16 = 3 + 4 = 7.</li>
+                        <li><strong>Perhitungan Benar:</strong> &radic;(9 + 16) = &radic;25 = 5.</li>
+                        <li>Jelas 7 &ne; 5. Selalu lakukan penjumlahan atau pengurangan di dalam radikan terlebih dahulu.</li>
+                    </ul>
+                </li>
+                <li><strong>&radic;x<sup>2</sup> = x atau |x|?:</strong> Ketika kita memiliki &radic;x<sup>2</sup>, hasilnya sebenarnya adalah nilai mutlak dari x, yaitu |x|.
+                    <ul>
+                        <li>Jika x = 3, maka &radic;3<sup>2</sup> = &radic;9 = 3. (Benar, 3 = |3|)</li>
+                        <li>Jika x = -3, maka &radic;(-3)<sup>2</sup> = &radic;9 = 3. (Bukan -3! Tetapi 3 = |-3|)</li>
+                    </ul>
+                    <p>Ini penting ketika variabel x bisa negatif. Jika x diasumsikan positif, maka &radic;x<sup>2</sup> = x.</p>
+                </li>
+                <li><strong>Membingungkan Indeks Akar dan Koefisien:</strong> Seringkali terjadi kekeliruan antara indeks akar (bilangan kecil di kiri atas simbol akar) dan koefisien (bilangan di depan simbol akar).
+                    <ul>
+                        <li>3&radic;5 (dibaca "tiga akar lima") artinya 3 dikalikan dengan &radic;5.</li>
+                        <li><sup>3</sup>&radic;5 (dibaca "akar kubik dari lima") artinya mencari bilangan yang jika dipangkatkan 3 hasilnya 5.</li>
+                        <li>Kedua ekspresi ini sangat berbeda maknanya.</li>
+                    </ul>
+                </li>
+                <li><strong>Tidak Menyederhanakan Akar Sepenuhnya:</strong> Setelah melakukan operasi atau perhitungan, seringkali akar dapat disederhanakan lebih lanjut. Mengabaikan langkah ini bisa menyebabkan jawaban yang kurang tepat atau tidak dalam bentuk standar.
+                    <ul>
+                        <li><strong>Contoh:</strong> 2&radic;12. Jika dibiarkan begitu saja, ini belum sederhana. Seharusnya 2&radic;(4 &times; 3) = 2 &times; 2&radic;3 = 4&radic;3.</li>
+                    </ul>
+                </li>
+                <li><strong>Kesalahan Tanda pada Akar Pangkat Genap dari Bilangan Negatif:</strong>
+                    <ul>
+                        <li>&radic;-4 tidak sama dengan -2. &radic;-4 adalah 2i (bilangan imajiner).</li>
+                        <li>Hanya akar pangkat ganjil dari bilangan negatif yang menghasilkan bilangan real negatif, misal <sup>3</sup>&radic;-8 = -2.</li>
+                    </ul>
+                </li>
+                <li><strong>Merasionalisasi Penyebut secara Tidak Tepat:</strong> Terutama saat penyebut berbentuk (a &plusmn; &radic;b), banyak yang lupa mengalikan dengan konjugat dan hanya mengalikan dengan &radic;b saja, yang tidak menghilangkan akar dari penyebut.</li>
+            </ol>
+            <div class="info-box">
+                <p>Kunci untuk menghindari kesalahan-kesalahan ini adalah dengan memahami definisi dan sifat dasar akar bilangan secara menyeluruh, serta mempraktikkannya dengan berbagai contoh soal.</p>
+            </div>
+        </section>
+
+        <section id="latihan-soal">
+            <h2>Latihan Soal dan Pembahasan</h2>
+            <p>Untuk menguatkan pemahaman, mari kita coba beberapa latihan soal.</p>
+
+            <h3>Soal 1: Penyederhanaan</h3>
+            <p>Sederhanakan ekspresi berikut: &radic;150 - &radic;54 + &radic;294</p>
+            <div class="example-box">
+                <p><strong>Pembahasan:</strong></p>
+                <ol>
+                    <li>Sederhanakan setiap akar secara terpisah:
+                        <ul>
+                            <li>&radic;150 = &radic;(25 &times; 6) = &radic;25 &times; &radic;6 = 5&radic;6</li>
+                            <li>&radic;54 = &radic;(9 &times; 6) = &radic;9 &times; &radic;6 = 3&radic;6</li>
+                            <li>&radic;294 = &radic;(49 &times; 6) = &radic;49 &times; &radic;6 = 7&radic;6</li>
+                        </ul>
+                    </li>
+                    <li>Substitusikan kembali ke ekspresi awal:
+                        <div class="math-equation">
+                            5&radic;6 - 3&radic;6 + 7&radic;6
+                        </div>
+                    </li>
+                    <li>Karena semua adalah akar sejenis (&radic;6), kita bisa menjumlahkan dan mengurangkan koefisiennya:
+                        <div class="math-equation">
+                            (5 - 3 + 7)&radic;6 = 9&radic;6
+                        </div>
+                    </li>
+                </ol>
+                <p><strong>Jawaban:</strong> 9&radic;6</p>
+            </div>
+
+            <h3>Soal 2: Perkalian dan Penyederhanaan</h3>
+            <p>Hitung dan sederhanakan: (3&radic;2 + &radic;5)(3&radic;2 - &radic;5)</p>
+            <div class="example-box">
+                <p><strong>Pembahasan:</strong></p>
+                <p>Ini adalah bentuk (a + b)(a - b) = a<sup>2</sup> - b<sup>2</sup>.</p>
+                <ol>
+                    <li>Identifikasi a dan b:
+                        <ul>
+                            <li>a = 3&radic;2</li>
+                            <li>b = &radic;5</li>
+                        </ul>
+                    </li>
+                    <li>Hitung a<sup>2</sup>:
+                        <div class="math-equation">
+                            (3&radic;2)<sup>2</sup> = 3<sup>2</sup> &times; (&radic;2)<sup>2</sup> = 9 &times; 2 = 18
+                        </div>
+                    </li>
+                    <li>Hitung b<sup>2</sup>:
+                        <div class="math-equation">
+                            (&radic;5)<sup>2</sup> = 5
+                        </div>
+                    </li>
+                    <li>Kurangkan hasilnya:
+                        <div class="math-equation">
+                            18 - 5 = 13
+                        </div>
+                    </li>
+                </ol>
+                <p><strong>Jawaban:</strong> 13</p>
+            </div>
+
+            <h3>Soal 3: Rasionalisasi Penyebut</h3>
+            <p>Rasionalkan penyebut dari: 10 / (&radic;7 - &radic;3)</p>
+            <div class="example-box">
+                <p><strong>Pembahasan:</strong></p>
+                <p>Kalikan pembilang dan penyebut dengan konjugat dari penyebut, yaitu (&radic;7 + &radic;3).</p>
+                <ol>
+                    <li>Pembilang:
+                        <div class="math-equation">
+                            10 &times; (&radic;7 + &radic;3) = 10&radic;7 + 10&radic;3
+                        </div>
+                    </li>
+                    <li>Penyebut (menggunakan (a - b)(a + b) = a<sup>2</sup> - b<sup>2</sup>):
+                        <div class="math-equation">
+                            (&radic;7 - &radic;3)(&radic;7 + &radic;3) = (&radic;7)<sup>2</sup> - (&radic;3)<sup>2</sup> = 7 - 3 = 4
+                        </div>
+                    </li>
+                    <li>Gabungkan kembali:
+                        <div class="math-equation">
+                            (10&radic;7 + 10&radic;3) / 4
+                        </div>
+                    </li>
+                    <li>Sederhanakan dengan membagi semua suku dengan faktor persekutuan terbesar (2):
+                        <div class="math-equation">
+                            (5&radic;7 + 5&radic;3) / 2
+                        </div>
+                    </li>
+                </ol>
+                <p><strong>Jawaban:</strong> (5&radic;7 + 5&radic;3) / 2</p>
+            </div>
+
+            <h3>Soal 4: Pangkat Pecahan</h3>
+            <p>Hitung nilai dari: 81<sup>3/4</sup></p>
+            <div class="example-box">
+                <p><strong>Pembahasan:</strong></p>
+                <p>Pangkat pecahan a<sup>m/n</sup> dapat ditulis sebagai <sup>n</sup>&radic;(a<sup>m</sup>) atau (<sup>n</sup>&radic;a)<sup>m</sup>. Lebih mudah menghitung akarnya dulu.</p>
+                <ol>
+                    <li>Hitung akar pangkat 4 dari 81:
+                        <div class="math-equation">
+                            <sup>4</sup>&radic;81 = 3 (karena 3 &times; 3 &times; 3 &times; 3 = 81)
+                        </div>
+                    </li>
+                    <li>Pangkatkan hasil dengan 3:
+                        <div class="math-equation">
+                            3<sup>3</sup> = 3 &times; 3 &times; 3 = 27
+                        </div>
+                    </li>
+                </ol>
+                <p><strong>Jawaban:</strong> 27</p>
+            </div>
+
+            <h3>Soal 5: Akar dalam Aljabar</h3>
+            <p>Sederhanakan ekspresi: &radic;(18x<sup>5</sup>y<sup>8</sup>)</p>
+            <div class="example-box">
+                <p><strong>Pembahasan:</strong></p>
+                <ol>
+                    <li>Faktorkan bilangan dan variabel untuk mencari kuadrat sempurna:
+                        <ul>
+                            <li>18 = 9 &times; 2 = 3<sup>2</sup> &times; 2</li>
+                            <li>x<sup>5</sup> = x<sup>4</sup> &times; x = (x<sup>2</sup>)<sup>2</sup> &times; x</li>
+                            <li>y<sup>8</sup> = (y<sup>4</sup>)<sup>2</sup></li>
+                        </ul>
+                    </li>
+                    <li>Substitusikan kembali ke dalam akar:
+                        <div class="math-equation">
+                            &radic;(3<sup>2</sup> &times; 2 &times; (x<sup>2</sup>)<sup>2</sup> &times; x &times; (y<sup>4</sup>)<sup>2</sup>)
+                        </div>
+                    </li>
+                    <li>Keluarkan faktor-faktor kuadrat sempurna:
+                        <div class="math-equation">
+                            &radic;(3<sup>2</sup>) &times; &radic;((x<sup>2</sup>)<sup>2</sup>) &times; &radic;((y<sup>4</sup>)<sup>2</sup>) &times; &radic;(2x)
+                        </div>
+                    </li>
+                    <li>Hasilnya:
+                        <div class="math-equation">
+                            3x<sup>2</sup>y<sup>4</sup>&radic;2x
+                        </div>
+                    </li>
+                </ol>
+                <p><strong>Jawaban:</strong> 3x<sup>2</sup>y<sup>4</sup>&radic;2x</p>
+            </div>
+        </section>
+
+        <section id="penutup">
+            <h2>Penutup</h2>
+            <p>Dari pembahasan mendalam ini, kita telah melihat bahwa akar bilangan adalah konsep yang fundamental dan multifaset dalam matematika. Dimulai dari definisi sederhana sebagai kebalikan dari pemangkatan, kita telah menjelajahi berbagai jenis akar seperti akar kuadrat, kubik, hingga akar pangkat <em>n</em> secara umum. Sifat-sifat akar, yang mencakup perkalian, pembagian, perpangkatan, dan akar berganda, memberikan kita alat untuk memanipulasi ekspresi aljabar dengan efisien.</p>
+            <p>Kita juga telah mengkaji beragam metode untuk menghitung akar, mulai dari estimasi manual, faktorisasi prima untuk penyederhanaan, hingga algoritma iteratif yang canggih seperti metode Babylonian dan Newton-Raphson yang digunakan dalam komputasi modern. Proses penyederhanaan bentuk akar dan rasionalisasi penyebut telah menunjukkan bagaimana ekspresi dapat diubah menjadi bentuk yang lebih ringkas dan standar.</p>
+            <p>Yang tak kalah penting, kita telah menyaksikan betapa luasnya aplikasi akar bilangan dalam berbagai bidang. Dari perhitungan jarak dalam geometri, persamaan gerak dalam fisika, desain struktur dalam teknik, hingga model keuangan dan bahkan teori musik, akar bilangan menjadi fondasi yang tak tergantikan. Kehadirannya di berbagai disiplin ilmu menekankan universalitas dan kekuatan matematika sebagai bahasa alam semesta.</p>
+            <p>Memahami akar bilangan bukan hanya tentang menghafal rumus atau mengikuti prosedur. Ini adalah tentang mengembangkan logika matematika, kemampuan memecahkan masalah, dan mengapresiasi keindahan hubungan antar bilangan. Dengan penguasaan konsep ini, Anda telah membuka pintu menuju pemahaman yang lebih mendalam tentang aljabar dan banyak cabang matematika lainnya. Teruslah berlatih, karena konsistensi adalah kunci untuk menguasai setiap aspek matematika.</p>
+            <figure>
+                <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2v20"/>
+                    <path d="M9 18h6"/>
+                    <path d="M9 12h6"/>
+                    <path d="M10 6h4"/>
+                    <circle cx="12" cy="2" r="2"/>
+                    <path d="M12 22s-2-2-2-4s2-4 2-4s2 2 2 4s-2 4-2 4z"/>
+                </svg>
+                <figcaption>Ilustrasi akar tumbuhan, melambangkan dasar atau asal dari suatu konsep yang kuat dan fundamental.</figcaption>
+            </figure>
+        </section>
+    </main>
+
+    <footer>
+        <p>Hak Cipta Dilindungi Undang-Undang. Semua materi dalam artikel ini disajikan untuk tujuan pendidikan.</p>
+    </footer>
+
+<style>
+.related-posts {
+  clear: both;
+  display: block;
+  width: 100%;
+  margin: 30px auto;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.related-posts h3 {
+  margin-top: 0;
+}
+.related-posts ul {
+  list-style: none;
+  padding: 0;
+}
+.related-posts li {
+  margin: 6px 0;
+}
+</style>
+<div class='related-posts'><h3>Related Posts</h3><ul><li><a href="/angsuran">Angsuran</a></li>
+<li><a href="/bakamla">Bakamla</a></li>
+<li><a href="/batak-simalungun">Batak Simalungun</a></li>
+<li><a href="/ada-ada">Ada Ada</a></li>
+<li><a href="/bangku">Bangku</a></li>
+<li><a href="/banu">Banu</a></li>
+<li><a href="/ayam-pelung">Ayam Pelung</a></li>
+<li><a href="/bakhil">Bakhil</a></li>
+<li><a href="/artropoda">Artropoda</a></li>
+<li><a href="/angkup">Angkup</a></li></ul></div>
+<script src="/ik.js"></script>
+</body>
+</html>

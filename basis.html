@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memahami Basis: Fondasi dalam Matematika dan Komputasi</title>
+    <meta name="description" content="Eksplorasi mendalam konsep basis dalam aljabar linear, sistem bilangan, dan aplikasinya.">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <style>
+        :root {
+            --bg-light: hsl(190, 80%, 98%); /* Sangat terang, biru kehijauan */
+            --text-dark: hsl(200, 20%, 20%); /* Abu-abu kebiruan gelap */
+            --heading-color: hsl(200, 70%, 40%); /* Biru sedang */
+            --accent-color: hsl(190, 70%, 60%); /* Biru kehijauan sedang */
+            --code-bg: hsl(190, 30%, 90%); /* Sedikit lebih gelap dari bg */
+            --border-color: hsl(190, 20%, 85%); /* Garis abu-abu kebiruan */
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            font-size: 1.1em;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 20px auto;
+            padding: 25px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            box-sizing: border-box;
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--heading-color);
+            line-height: 1.3;
+            margin-top: 1.5em;
+            margin-bottom: 0.8em;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 0.5em;
+            margin-bottom: 1em;
+            color: hsl(200, 80%, 30%);
+        }
+
+        h2 {
+            font-size: 2em;
+            border-left: 6px solid var(--accent-color);
+            padding-left: 15px;
+            margin-top: 2em;
+        }
+
+        h3 {
+            font-size: 1.6em;
+            color: hsl(200, 60%, 35%);
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 0.3em;
+            margin-top: 1.8em;
+        }
+
+        h4 {
+            font-size: 1.3em;
+            color: hsl(200, 50%, 40%);
+            margin-top: 1.5em;
+        }
+
+        p {
+            margin-bottom: 1em;
+            text-align: justify;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: hsl(190, 80%, 45%);
+            text-decoration: underline;
+        }
+
+        ul, ol {
+            margin-bottom: 1em;
+            padding-left: 25px;
+        }
+
+        ul li, ol li {
+            margin-bottom: 0.5em;
+        }
+
+        code {
+            background-color: var(--code-bg);
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.95em;
+            color: var(--text-dark);
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1.5em;
+            border: 1px solid var(--border-color);
+        }
+
+        pre code {
+            display: block;
+            padding: 0;
+            background: none;
+            font-size: 0.9em;
+            color: var(--text-dark);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        blockquote {
+            background-color: hsl(190, 50%, 95%);
+            border-left: 5px solid var(--accent-color);
+            margin: 1.5em 0;
+            padding: 1em 1.5em;
+            border-radius: 5px;
+            font-style: italic;
+            color: hsl(200, 20%, 30%);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2em 0;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden; /* For rounded corners to apply to inner cells */
+        }
+
+        table thead tr {
+            background-color: var(--accent-color);
+            color: white;
+            text-align: left;
+        }
+
+        table th, table td {
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: hsl(190, 80%, 99%);
+        }
+
+        table tbody tr:hover {
+            background-color: hsl(190, 50%, 95%);
+        }
+
+        figcaption {
+            font-size: 0.9em;
+            color: hsl(200, 20%, 40%);
+            text-align: center;
+            margin-top: 0.5em;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                font-size: 1em;
+            }
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+                padding-bottom: 0.3em;
+            }
+            h2 {
+                font-size: 1.8em;
+                padding-left: 10px;
+            }
+            h3 {
+                font-size: 1.4em;
+            }
+            h4 {
+                font-size: 1.2em;
+            }
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            table thead {
+                display: none; /* Hide table headers (but not their content) */
+            }
+            table tr {
+                margin-bottom: 15px;
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                box-shadow: 0 1px 5px rgba(0,0,0,0.03);
+            }
+            table td {
+                border: none;
+                border-bottom: 1px solid var(--border-color);
+                position: relative;
+                padding-left: 50%; /* Make space for the pseudo-element label */
+                text-align: right;
+            }
+            table td:last-child {
+                border-bottom: 0;
+            }
+            table td::before {
+                content: attr(data-label); /* Use data-label attribute for labels */
+                position: absolute;
+                left: 0;
+                width: 45%;
+                padding-left: 15px;
+                font-weight: bold;
+                text-align: left;
+                color: var(--heading-color);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Memahami Basis: Fondasi dalam Matematika dan Komputasi</h1>
+
+        <p>Konsep 'basis' adalah salah satu pilar fundamental yang menopang berbagai bidang ilmu, mulai dari matematika murni hingga ilmu komputer dan rekayasa. Secara intuitif, basis dapat dipahami sebagai serangkaian elemen dasar yang, ketika digabungkan atau dimanipulasi sesuai aturan tertentu, dapat membentuk atau merepresentasikan setiap elemen lain dalam suatu sistem. Artikel ini akan mengeksplorasi secara mendalam konsep basis dari dua perspektif utama: dalam aljabar linear dan dalam sistem bilangan, serta menyentuh aplikasinya yang luas dalam dunia nyata.</p>
+
+        <p>Meskipun kata 'basis' seringkali digunakan dalam percakapan sehari-hari untuk merujuk pada fondasi atau dasar dari sesuatu, dalam konteks ilmiah, ia memiliki definisi yang sangat spesifik dan kuat. Pemahaman yang kokoh tentang basis tidak hanya esensial untuk menguasai konsep-konsep lanjutan dalam disiplin ilmu terkait, tetapi juga untuk mengembangkan cara berpikir logis dan analitis yang kritis. Mari kita selami lebih dalam dunia basis ini.</p>
+
+        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDgwMCA0MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGRlZnM+CiAgICA8bWFya2VyIGlkPSJhcnJvd2hlYWQiIG1hcmtlclZpZXc9IjAgMCAxMCAxMCIgcmVmWCPSI1IiByZWZZPSI1IiBvcmllbnQ9ImF1dG8iPgogICAgICA8cGF0aCBkPSJNOSAxIDYgNSAxIDkgMSIgZmlsbD0iIzAwNzdERiIvPgogICAgPC9tYXJra2VyPgogICAgPGxpbmVhciBHcmFkaWVudCBpZD0iZ3JhZDEiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjQjFFNEE1IiAvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNFQkZGRjQiIC8+CiAgICA8L2xpbmVhciBHcmFkaWVudD4KICA8L2RlZnM+CgogIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZDEpIi8+CgogIDwhLS0gS29vcmRpbmF0IEF4ZXMgLS0+CiAgPHBhdGggZD0iTTUwIDQwMEw1MCAwTTYwIDQwMEw3NDAgNDAwIiBzdHJva2U9IiM1NTU1NTUiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CgogIDwhLS0gR3JpZCBsaW5lcyAtLT4KICA8bGluZSB4MT0iNTAiIHkxPSIyMDAiIHgyPSI3NTAiIHkyPSIyMDAiIHN0cm9rZT0iI0JCRTUwMCIgc3Ryb2tlLWRhc2hhcnJheT0iNSAxMCIgc3Ryb2tlLXdpZHRoPSIwLjUiLz4KICA8bGluZSB4MT0iNDAwIiB5MT0iNTAiIHgyPSI0MDAiIHkyPSIzNTAiIHN0cm9rZT0iI0JCRTUwMCIgc3Ryb2tlLWRhc2hhcnJheT0iNSAxMCIgc3Ryb2tlLXdpZHRoPSIwLjUiLz4KCiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI0MDAiIHI9IjUiIGZpbGw9IiM1NTU1NTUiLz4KICAgPHRleHQgeD0iNDAiIHk9IjQxNSIgZm9udC1mYW1pbHk9ImFyaWFsIiBmb250LXNpemU9IjE4IiBmaWxsPSIjNTU1NTU1IiBhbmNob3ItdGV4dD0iZW5kIj4wPC90ZXh0PgoKICA8IS0tIEJhc2lzIFZlY3RvcnMgLS0+CiAgPHBhdGggZD0iTTUwIDQwMEwzNTAgNDAwIiBzdHJva2U9IiMwMDc3REYiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBtYXJrZXItZW5kPSJ1cmwoI2Fycm93aGVhZCkiLz4KICA8dGV4dCB4PSIzMjAiIHk9IjM5MCIgZm9udC1mYW1pbHk9ImFyaWFsIiBmb250LXNpemU9IjIyIiBmaWxsPSIjMDA3N0RGIj5lPGltYWdlIGlkPSJiZWxvdy10aGlzIiB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHk9IjUiPjwvaW1hZ2U+PTE8L3RleHQ+CgogIDxwYXRoIGQ9Ik01MCA0MDBMNTAgMTUwIiBzdHJva2U9IiMwMDc3REYiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBtYXJrZXItZW5kPSJ1cmwoI2Fycm93aGVhZCkiLz4KICA8dGV4dCB4PSI2MCIgeT0iMTcwIiBmb250LWZhbWlseT0iYXJpYWwiIGZvbnQtc2l6ZT0iMjIiIGZpbGw9IiMwMDc3REYiPmVGMjwvdGV4dD4KCiAgPCEtLSBBcmJpdHJhcnkgVmVjdG9yIC0tPgogIDxwYXRoIGQ9Ik01MCA0MDBMNDAwIDMwMCIgc3Ryb2tlPSIjRTM1NzQ1IiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgbWFya2VyLWVuZD0idXJsKCNhcnJvd2hlYWQpIi8+CiAgPHRleHQgeD0iNDEwIiB5PSIzMDAiIGZvbnQtZmFtaWx5PSJhcmlhbCIgZm9udC1zaXplPSIyMiIgZmlsbD0iI0UzNTc0NSI+djwvdGV4dD4KCiAgPCEtLSBQcm9qZWN0aW9ucyAtLT4KICA8bGluZSB4MT0iNDAwIiB5MT0iMzAwIiB4Mj0iNDAwIiB5Mj0iNDAwIiBzdHJva2U9IiNFMzU3NDUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLW9wYWNpdHk9IjAuOCIgc3Ryb2tlLWRhc2hhcnJheT0iNSAxMCIvPgogIDxsaW5lIHgxPSI0MDAiIHkxPSIzMDAiIHgyPSI1MCIgeTI9IjMwMCIgc3Ryb2tlPSIjRTM1NzQ1IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1vcGFjaXR5PSIwLjgiIHN0cm9rZS1kYXNoYXJyYXk9IjUgMTAiLz4KCiAgPHRleHQgeD0iNDEwIiB5PSI0MTUiIGZvbnQtZmFtaWx5PSJhcmlhbCIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzU1NTU1NSI+YzEgZXkxPC90ZXh0PgogIDx0ZXh0IHg9IjQwIiB5PSIzMDAiIGZvbnQtZmFtaWx5PSJhcmlhbCIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzU1NTU1NSIgYW5jaG9yLXRleHQ9ImVuZCI+YzIgZXkyPC90ZXh0PgoKPC9zdmc+" alt="Ilustrasi Basis dalam Aljabar Linear: Bidang koordinat dengan dua vektor basis (e1 dan e2) yang saling tegak lurus, membentuk ruang. Sebuah vektor 'v' ditunjukkan sebagai kombinasi linear dari e1 dan e2, merepresentasikan bagaimana basis membentuk setiap vektor dalam ruang tersebut." />
+        <figcaption>Gambar 1: Representasi visual basis dalam ruang vektor. Dua vektor basis <code>e1</code> dan <code>e2</code> meregangkan bidang, sementara vektor <code>v</code> dapat direpresentasikan sebagai kombinasi linear dari keduanya.</figcaption>
+
+        <h2>1. Basis dalam Aljabar Linear</h2>
+
+        <p>Dalam aljabar linear, konsep basis sangatlah sentral, berfungsi sebagai fondasi untuk memahami struktur ruang vektor. Sebuah basis memberikan kerangka kerja yang unik dan efisien untuk mendeskripsikan setiap elemen (vektor) dalam suatu ruang vektor. Tanpa basis, kita tidak akan memiliki cara standar untuk mengukur atau membandingkan vektor, atau untuk memahami dimensi intrinsik dari sebuah ruang.</p>
+
+        <h3>1.1. Pengertian Ruang Vektor</h3>
+
+        <p>Sebelum mendefinisikan basis, kita perlu memahami apa itu ruang vektor. Secara sederhana, ruang vektor adalah himpunan objek yang disebut 'vektor', di mana dua operasi dapat didefinisikan: penjumlahan vektor dan perkalian skalar. Objek-objek ini harus memenuhi serangkaian aksioma tertentu (misalnya, asosiativitas penjumlahan, keberadaan elemen nol, keberadaan invers aditif, distributivitas perkalian skalar, dan lain-lain). Contoh ruang vektor yang paling umum adalah himpunan semua vektor di bidang kartesius (R<sup>2</sup>) atau ruang tiga dimensi (R<sup>3</sup>), namun ruang vektor bisa juga berupa himpunan polinomial, himpunan matriks, atau bahkan himpunan fungsi tertentu.</p>
+
+        <p>Ruang vektor (V) di atas medan skalar (F, biasanya bilangan riil R atau bilangan kompleks C) adalah himpunan tak kosong V bersama dengan dua operasi:</p>
+        <ol>
+            <li><strong>Penjumlahan Vektor:</strong> Untuk setiap <strong>u</strong>, <strong>v</strong> di V, terdapat <strong>u</strong> + <strong>v</strong> di V.</li>
+            <li><strong>Perkalian Skalar:</strong> Untuk setiap k di F dan <strong>v</strong> di V, terdapat k<strong>v</strong> di V.</li>
+        </ol>
+        <p>Kedua operasi ini harus memenuhi sepuluh aksioma yang menjamin sifat-sifat yang konsisten, seperti asosiativitas, komutativitas, keberadaan identitas nol, invers aditif, dan distributivitas.</p>
+
+        <h3>1.2. Kombinasi Linear, Kebebasan Linear, dan Ruang Rentang</h3>
+
+        <p>Tiga konsep penting ini adalah prasyarat untuk memahami basis:</p>
+
+        <h4>1.2.1. Kombinasi Linear</h4>
+        <p>Sebuah vektor <strong>v</strong> dikatakan sebagai kombinasi linear dari himpunan vektor {<strong>v1</strong>, <strong>v2</strong>, ..., <strong>vk</strong>} jika <strong>v</strong> dapat ditulis dalam bentuk:</p>
+        <p><code>v = c1*v1 + c2*v2 + ... + ck*vk</code></p>
+        <p>di mana c1, c2, ..., ck adalah skalar. Skalar-skalar ini berasal dari medan skalar (misalnya, bilangan riil). Konsep ini menunjukkan bagaimana vektor-vektor yang lebih kompleks dapat "dibangun" dari vektor-vektor yang lebih sederhana. Misalnya, dalam R<sup>2</sup>, vektor (5, 7) adalah kombinasi linear dari (1, 0) dan (0, 1) karena (5, 7) = 5*(1, 0) + 7*(0, 1).</p>
+        <p>Kombinasi linear adalah inti dari banyak operasi aljabar linear. Ini menggambarkan bagaimana kita dapat "mencampur" atau "menggabungkan" vektor-vektor yang ada untuk menghasilkan vektor baru. Dalam konteks fisika, misalnya, suatu gaya resultan bisa menjadi kombinasi linear dari beberapa gaya komponen yang bekerja pada suatu objek.</p>
+
+        <h4>1.2.2. Kebebasan Linear (Linear Independence)</h4>
+        <p>Suatu himpunan vektor {<strong>v1</strong>, <strong>v2</strong>, ..., <strong>vk</strong>} disebut bebas linear jika satu-satunya cara untuk membentuk vektor nol sebagai kombinasi linear dari vektor-vektor tersebut adalah dengan membuat semua skalar menjadi nol. Artinya:</p>
+        <p><code>c1*v1 + c2*v2 + ... + ck*vk = 0</code></p>
+        <p>Hanya jika <code>c1 = c2 = ... = ck = 0</code>. Jika ada skalar yang tidak nol yang menghasilkan vektor nol, maka himpunan tersebut disebut bergantung linear. Vektor-vektor yang bergantung linear berarti setidaknya satu vektor dalam himpunan tersebut dapat ditulis sebagai kombinasi linear dari vektor-vektor lainnya, yang mengindikasikan adanya redundansi dalam himpunan tersebut. Vektor-vektor bebas linear dapat dianggap sebagai vektor-vektor yang "unik" dan tidak dapat diungkapkan satu sama lain.</p>
+        <p>Kebebasan linear adalah properti krusial karena memastikan bahwa setiap vektor dalam basis memiliki kontribusi yang unik dan tidak dapat dihilangkan tanpa mengurangi kemampuan basis untuk merepresentasikan ruang vektor secara penuh. Redundansi akan menyebabkan representasi yang tidak efisien dan ambigu.</p>
+
+        <h4>1.2.3. Ruang Rentang (Span)</h4>
+        <p>Ruang rentang dari suatu himpunan vektor S = {<strong>v1</strong>, <strong>v2</strong>, ..., <strong>vk</strong>}, yang dinotasikan sebagai Span(S), adalah himpunan semua kemungkinan kombinasi linear dari vektor-vektor dalam S. Ini adalah "ruang" terkecil yang mengandung semua vektor di S dan juga tertutup terhadap operasi penjumlahan vektor dan perkalian skalar. Jika Span(S) sama dengan ruang vektor V, maka S dikatakan merentang V atau S adalah himpunan perentang untuk V.</p>
+        <p>Dengan kata lain, jika S merentang V, maka setiap vektor di V dapat diungkapkan sebagai kombinasi linear dari vektor-vektor di S. Ini adalah syarat keberadaan yang penting, memastikan bahwa basis dapat "mencapai" setiap sudut dari ruang vektor.</p>
+
+        <h3>1.3. Definisi Basis</h3>
+
+        <p>Akhirnya, kita dapat mendefinisikan basis. Suatu himpunan vektor B = {<strong>v1</strong>, <strong>v2</strong>, ..., <strong>vn</strong>} adalah basis untuk ruang vektor V jika B memenuhi dua syarat:</p>
+        <ol>
+            <li>B bebas linear (tidak ada redundansi).</li>
+            <li>B merentang V (mampu merepresentasikan setiap vektor di V).</li>
+        </ol>
+        <p>Dua syarat ini sangat penting. Kebebasan linear memastikan efisiensi dan tidak adanya redundansi, sementara ruang rentang memastikan kelengkapan. Basis adalah himpunan perentang terkecil dan himpunan bebas linear terbesar dalam ruang vektor tertentu.</p>
+        <p>Keunikan representasi adalah salah satu manfaat terbesar dari basis. Jika B adalah basis untuk V, maka setiap vektor <strong>v</strong> di V dapat ditulis sebagai kombinasi linear dari vektor-vektor di B dalam cara yang unik. Ini berarti koefisien skalar untuk setiap vektor basis adalah tunggal untuk setiap <strong>v</strong>. Properti ini sangat vital dalam aplikasi, seperti dalam koordinat vektor, yang akan kita bahas selanjutnya.</p>
+
+        <h3>1.4. Dimensi Ruang Vektor</h3>
+
+        <p>Salah satu fakta yang menakjubkan tentang basis adalah bahwa, meskipun suatu ruang vektor dapat memiliki banyak basis yang berbeda, semua basis tersebut akan selalu memiliki jumlah vektor yang sama. Jumlah vektor dalam setiap basis dari suatu ruang vektor V disebut dimensi dari V, dinotasikan sebagai dim(V). Sebagai contoh, R<sup>2</sup> memiliki dimensi 2, R<sup>3</sup> memiliki dimensi 3, dan ruang polinomial P<sub>n</sub> (polinomial berderajat kurang dari atau sama dengan n) memiliki dimensi n+1.</p>
+        <p>Konsep dimensi ini memberikan ukuran "ukuran" atau "kompleksitas" dari ruang vektor. Ruang nol (yang hanya mengandung vektor nol) memiliki dimensi 0. Ruang vektor tak hingga, seperti ruang semua fungsi kontinu, memiliki dimensi tak terbatas.</p>
+
+        <h3>1.5. Basis Standar</h3>
+
+        <p>Untuk beberapa ruang vektor yang umum, ada basis yang secara khusus dikenal sebagai basis standar karena kesederhanaan dan kemudahan penggunaannya:</p>
+        <ul>
+            <li><strong>Untuk R<sup>n</sup>:</strong> Basis standar terdiri dari vektor-vektor unit, yaitu {<strong>e1</strong>, <strong>e2</strong>, ..., <strong>en</strong>}, di mana <strong>ei</strong> adalah vektor dengan 1 pada posisi ke-i dan 0 pada posisi lainnya. Misalnya, untuk R<sup>3</sup>, basis standarnya adalah {(1, 0, 0), (0, 1, 0), (0, 0, 1)}.</li>
+            <li><strong>Untuk Ruang Polinomial P<sub>n</sub>:</strong> Basis standarnya adalah {1, x, x<sup>2</sup>, ..., x<sup>n</sup>}. Setiap polinomial berderajat n atau kurang dapat ditulis sebagai kombinasi linear dari elemen-elemen ini. Misalnya, untuk P<sub>2</sub>, basis standarnya adalah {1, x, x<sup>2</sup>}.</li>
+            <li><strong>Untuk Ruang Matriks M<sub>mxn</sub>:</strong> Basis standar terdiri dari matriks-matriks yang hanya memiliki satu elemen 1 pada posisi tertentu dan 0 pada posisi lainnya.</li>
+        </ul>
+        <p>Meskipun basis standar sangat berguna untuk contoh-contoh awal dan komputasi tertentu, penting untuk diingat bahwa basis bukanlah sesuatu yang unik; banyak basis tak terbatas dapat eksis untuk suatu ruang vektor (kecuali ruang nol).</p>
+
+        <h3>1.6. Perubahan Basis (Change of Basis)</h3>
+
+        <p>Karena sebuah ruang vektor dapat memiliki banyak basis yang berbeda, seringkali kita perlu mengubah representasi vektor dari satu basis ke basis lain. Proses ini disebut perubahan basis dan dilakukan menggunakan matriks transisi atau matriks perubahan basis. Jika kita memiliki vektor <strong>v</strong> dalam basis B, dan kita ingin merepresentasikannya dalam basis B', kita menggunakan matriks P<sub>B'←B</sub> sedemikian rupa sehingga:</p>
+        <p><code>[v]<sub>B'</sub> = P<sub>B'←B</sub> [v]<sub>B</sub></code></p>
+        <p>Matriks P<sub>B'←B</sub> dibentuk dengan menuliskan vektor-vektor dari basis B sebagai kombinasi linear dari vektor-vektor di basis B' dan menggunakan koefisien-koefisien ini sebagai kolom-kolom matriks. Perubahan basis adalah alat fundamental dalam transformasi koordinat, diagonalisasi matriks, dan banyak algoritma komputasi. Ini memungkinkan kita untuk memilih basis yang paling nyaman atau efisien untuk masalah tertentu, seperti memilih basis eigen untuk menyederhanakan transformasi linear.</p>
+
+        <p>Misalkan kita memiliki basis standar E = {(1,0), (0,1)} dan basis lain B = {(2,1), (1,1)} untuk R<sup>2</sup>. Untuk mencari koordinat vektor <code>v=(3,2)</code> dalam basis B, kita perlu menemukan <code>c1</code> dan <code>c2</code> sedemikian rupa sehingga <code>(3,2) = c1*(2,1) + c2*(1,1)</code>. Ini menghasilkan sistem persamaan linear:</p>
+        <pre><code>2c1 + c2 = 3
+c1 + c2 = 2</code></pre>
+        <p>Dengan menyelesaikan sistem ini, kita akan menemukan <code>c1 = 1</code> dan <code>c2 = 1</code>. Jadi, <code>[v]<sub>B</sub> = (1,1)</code>.</p>
+        <p>Matriks transisi dari B ke E adalah <code>[2 1; 1 1]</code> (kolomnya adalah vektor-vektor basis B). Matriks transisi dari E ke B adalah invers dari matriks ini, yaitu <code>[1 -1; -1 2]</code>. Anda dapat menggunakannya untuk mengubah koordinat dengan mudah.</p>
+
+        <h3>1.7. Basis Ortogonal dan Ortonormal</h3>
+
+        <p>Dalam konteks ruang hasil kali dalam (ruang vektor dengan definisi "panjang" dan "sudut"), kita dapat berbicara tentang basis ortogonal dan ortonormal. Basis ortogonal adalah basis di mana setiap pasangan vektor basis saling tegak lurus (hasil kali dalamnya nol). Basis ortonormal adalah basis ortogonal di mana setiap vektor basis juga memiliki panjang (norma) 1.</p>
+        <p>Basis ortonormal sangat diinginkan karena berbagai alasan:
+        <ul>
+            <li><strong>Proyeksi:</strong> Menghitung proyeksi vektor ke subruang menjadi sangat sederhana.</li>
+            <li><strong>Koordinat:</strong> Koefisien kombinasi linear (koordinat) dapat ditemukan hanya dengan menghitung hasil kali dalam.</li>
+            <li><strong>Stabilitas Numerik:</strong> Bekerja dengan basis ortonormal seringkali lebih stabil secara numerik dalam komputasi.</li>
+            <li><strong>Transformasi Unitari/Ortogonal:</strong> Matriks transisi antar basis ortonormal adalah matriks ortogonal (atau uniter dalam kasus kompleks), yang memiliki sifat invers yang mudah dan mempertahankan panjang vektor.</li>
+        </ul>
+        </p>
+
+        <h4>1.7.1. Proses Gram-Schmidt</h4>
+        <p>Salah satu metode paling terkenal untuk mengkonstruksi basis ortonormal dari basis yang tidak ortogonal adalah Proses Gram-Schmidt. Proses ini mengambil himpunan basis {<strong>v1</strong>, ..., <strong>vk</strong>} dan secara iteratif membangun himpunan basis ortogonal {<strong>u1</strong>, ..., <strong>uk</strong>}, yang kemudian dapat dinormalisasi untuk mendapatkan basis ortonormal {<strong>q1</strong>, ..., <strong>qk</strong>}.</p>
+        <p>Langkah-langkah umum proses Gram-Schmidt:</p>
+        <ol>
+            <li>Pilih vektor pertama <strong>u1</strong> = <strong>v1</strong>.</li>
+            <li>Untuk setiap vektor berikutnya <strong>vi</strong>, kurangkan proyeksi <strong>vi</strong> pada ruang yang direntang oleh vektor-vektor ortogonal yang telah dibangun sebelumnya (<strong>u1</strong>, ..., <strong>ui-1</strong>). Ini memastikan <strong>ui</strong> tegak lurus terhadap semua <strong>uj</strong> (j < i).
+                <p><code>u<sub>i</sub> = v<sub>i</sub> - proj<sub>u1</sub> v<sub>i</sub> - proj<sub>u2</sub> v<sub>i</sub> - ... - proj<sub>u<sub>i-1</sub></sub> v<sub>i</sub></code></p>
+                <p>di mana <code>proj<sub>u</sub> v = ((v · u) / (u · u)) * u</code>.</p>
+            <li>Setelah mendapatkan himpunan ortogonal {<strong>u1</strong>, ..., <strong>uk</strong>}, normalisasi setiap vektor dengan membaginya dengan panjangnya untuk mendapatkan basis ortonormal {<strong>q1</strong>, ..., <strong>qk</strong>}.
+                <p><code>q<sub>i</sub> = u<sub>i</sub> / ||u<sub>i</sub>||</code></p>
+            </li>
+        </ol>
+        <p>Proses Gram-Schmidt adalah alat yang sangat kuat dalam analisis numerik, pemrosesan sinyal, dan pembelajaran mesin, di mana properti ortogonalitas sangat diinginkan.</p>
+
+        <h3>1.8. Aplikasi Basis dalam Aljabar Linear</h3>
+
+        <p>Konsep basis memiliki aplikasi yang luas dan fundamental:</p>
+        <ul>
+            <li><strong>Sistem Koordinat:</strong> Setiap titik dalam ruang dapat diidentifikasi secara unik oleh koordinatnya relatif terhadap basis tertentu. Ini adalah dasar dari semua sistem koordinat dalam geometri dan fisika.</li>
+            <li><strong>Penyelesaian Sistem Persamaan Linear:</strong> Basis dan dimensi membantu dalam memahami struktur solusi dari sistem persamaan linear. Ruang nul (null space) dari suatu matriks adalah ruang vektor yang memiliki basisnya sendiri.</li>
+            <li><strong>Analisis Komponen Utama (PCA):</strong> Dalam statistik dan pembelajaran mesin, PCA menggunakan basis ortonormal baru (disebut komponen utama) untuk mengurangi dimensi data sambil mempertahankan varian informasi maksimal.</li>
+            <li><strong>Pemrosesan Sinyal dan Kompresi Data:</strong> Transformasi Fourier dan Wavelet menggunakan basis ortonormal (atau hampir ortonormal) dari fungsi-fungsi gelombang untuk merepresentasikan sinyal. Ini memungkinkan analisis sinyal dan kompresi data yang efisien (misalnya, JPEG, MP3). Basis-basis ini memungkinkan dekomposisi sinyal menjadi komponen-komponen frekuensi atau skala yang berbeda, yang dapat kemudian dianalisis atau disaring.</li>
+            <li><strong>Grafika Komputer:</strong> Rotasi, translasi, dan penskalaan objek 3D sering direpresentasikan menggunakan transformasi matriks yang sangat bergantung pada perubahan basis untuk memanipulasi objek dalam sistem koordinat yang berbeda (lokal, global, kamera).</li>
+            <li><strong>Mekanika Kuantum:</strong> Dalam mekanika kuantum, keadaan suatu sistem sering direpresentasikan sebagai vektor dalam ruang Hilbert (ruang vektor kompleks tak hingga dimensi). Basis ortonormal di sini sangat penting untuk merepresentasikan superposisi keadaan dan untuk menghitung probabilitas.</li>
+            <li><strong>Teori Kode:</strong> Basis juga digunakan dalam teori kode untuk membangun dan menganalisis kode koreksi kesalahan, yang vital untuk komunikasi data yang andal.</li>
+        </ul>
+        <p>Singkatnya, basis adalah alat abstrak yang memungkinkan kita untuk mengurai kompleksitas ruang vektor menjadi komponen-komponen yang lebih sederhana dan dapat dikelola, menyediakan kerangka kerja yang kuat untuk analisis dan manipulasi data.</p>
+
+        <h2>2. Basis dalam Sistem Bilangan</h2>
+
+        <p>Selain dalam aljabar linear, konsep 'basis' juga fundamental dalam sistem bilangan, di mana ia menentukan jumlah digit unik yang digunakan untuk merepresentasikan bilangan dan nilai posisi setiap digit. Basis dalam sistem bilangan sering disebut juga sebagai radiks (radix).</p>
+
+        <h3>2.1. Pengertian Sistem Bilangan Berbasis Posisi</h3>
+
+        <p>Sistem bilangan berbasis posisi adalah metode penulisan bilangan di mana nilai suatu digit bergantung pada posisinya dalam bilangan tersebut. Ini berbeda dengan sistem seperti angka Romawi, di mana simbol memiliki nilai tetap terlepas dari posisinya (walaupun ada aturan pengurangan). Mayoritas sistem bilangan modern, termasuk yang kita gunakan sehari-hari, adalah berbasis posisi.</p>
+        <p>Dalam sistem berbasis posisi, sebuah bilangan N dalam basis <code>b</code> (ditulis <code>N<sub>b</sub></code>) dengan digit <code>d<sub>n</sub>d<sub>n-1</sub>...d<sub>1</sub>d<sub>0</sub>.d<sub>-1</sub>d<sub>-2</sub>...d<sub>-m</sub></code> dapat direpresentasikan sebagai:</p>
+        <p><code>N<sub>b</sub> = d<sub>n</sub> * b<sup>n</sup> + d<sub>n-1</sub> * b<sup>n-1</sup> + ... + d<sub>1</sub> * b<sup>1</sup> + d<sub>0</sub> * b<sup>0</sup> + d<sub>-1</sub> * b<sup>-1</sup> + d<sub>-2</sub> * b<sup>-2</sup> + ... + d<sub>-m</sub> * b<sup>-m</sup></code></p>
+        <p>Di sini, <code>d<sub>i</sub></code> adalah digit pada posisi ke-i, dan nilainya harus kurang dari <code>b</code> (<code>0 <= d<sub>i</sub> < b</code>). Basis <code>b</code> menunjukkan jumlah total digit unik yang tersedia dalam sistem tersebut (termasuk nol).</p>
+
+        <h3>2.2. Basis Desimal (Basis-10)</h3>
+
+        <p>Basis-10, atau sistem desimal, adalah sistem bilangan yang paling dikenal dan digunakan dalam kehidupan sehari-hari. Ia menggunakan sepuluh digit unik: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9. Setiap posisi digit mewakili pangkat dari 10. Misalnya, bilangan 345 desimal berarti:</p>
+        <p><code>345<sub>10</sub> = 3 * 10<sup>2</sup> + 4 * 10<sup>1</sup> + 5 * 10<sup>0</sup> = 300 + 40 + 5 = 345</code></p>
+        <p>Sistem desimal kemungkinan besar berasal dari jumlah jari pada kedua tangan manusia, menjadikannya intuitif bagi kita. Namun, dalam komputasi, sistem ini tidak langsung efisien.</p>
+
+        <h3>2.3. Basis Biner (Basis-2)</h3>
+
+        <p>Basis-2, atau sistem biner, adalah fondasi dari semua komputasi digital. Ia hanya menggunakan dua digit: 0 dan 1. Setiap posisi digit mewakili pangkat dari 2. Angka 0 dan 1 ini secara fisik direpresentasikan oleh keadaan 'off' atau 'on', 'rendah' atau 'tinggi', 'tidak ada arus' atau 'ada arus' dalam sirkuit elektronik. Misalnya, bilangan 1011 biner berarti:</p>
+        <p><code>1011<sub>2</sub> = 1 * 2<sup>3</sup> + 0 * 2<sup>2</sup> + 1 * 2<sup>1</sup> + 1 * 2<sup>0</sup> = 8 + 0 + 2 + 1 = 11<sub>10</sub></code></p>
+        <p>Keunggulan sistem biner terletak pada kesederhanaan implementasinya dalam perangkat keras elektronik. Dua keadaan mudah dibedakan dan dipertahankan oleh sakelar atau transistor. Ini mengurangi kompleksitas desain sirkuit dan meningkatkan keandalan.</p>
+        <p>Unit dasar informasi biner adalah bit (binary digit). Kumpulan 8 bit disebut byte, dan merupakan unit dasar yang paling umum untuk penyimpanan dan pemrosesan informasi dalam komputer. Prefix seperti kilobyte (KB), megabyte (MB), gigabyte (GB) umumnya mengacu pada pangkat 2, meskipun kadang ada ambiguitas dengan pangkat 10.</p>
+
+        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDgwMCA0MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQxIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0MxRkRGRiIgLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjRkJGMDUzIiAvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CgogIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZDEpIi8+CgogIDwhLS0gVGhvc3UgQmxvY2sgLS0+CiAgPHJlY3QgeD0iMTAwIiB5PSIxMDAiIHdpZHRoPSI3MiIgaGVpZ2h0PSI3MiIgZmlsbD0iI0JCRTUwMCIgc3Ryb2tlPSIjMDA1NTlEIiBzdHJva2Utd2lkdGg9IjIiIHJ4PSIxMCIgcnk9IjEwIi8+CiAgPHRleHQgeD0iMTM2IiB5PSIxNDUiIGZvbnQtZmFtaWx5PSJhcmlhbCIgZm9udC1zaXplPSIyNCIgZmllbGw9IiNGRkZGRkYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPjIg<sup><small>2</small></sup></text>CgogIDwhLS0gRWlnaHQgQmxvY2sgLS0+CiAgPHJlY3QgeD0iMjEwIiB5PSIxNjAiIHdpZHRoPSI1MiIgaGVpZ2h0PSI1MiIgZmlsbD0iI0Q1RjU2QiIgc3Ryb2tlPSIjMDA1NTlEIiBzdHJva2Utd2lkdGg9IjIiIHJ4PSI4IiBryT0iOCIvPgogIDx0ZXh0IHg9IjIzNiIgeT0iMTg1IiBmb250LWZhbWlseT0iYXJpYWwiIGZvbnQtc2l6ZT0iMjIiIGZpbGw9IiNGRkZGRkYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPjIg<sup><small>1</small></sup></text>CgogIDwhLS0gRm91ciBCbG9jayAtLT4KICA8cmVjdCB4PSIzMDAiIHk9IjIwMCIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjRjZGNTQzIiBzdHJva2U9IiMwMDU1OUQiIHN0cm9rZS13aWR0aD0iMiIgcnhlPSI1IiByeT0iNSIvPgogIDx0ZXh0IHg9IjMxNiIgeT0iMjIwIiBmb250LWZhbWlseT0iYXJpYWwiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiNGRkZGRkYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPjIg<sup><small>0</small></sup></text>CgogIDwhLS0gTGlua2luZyBhcnJvd3MgLS0+CgogIDxwYXRoIGQ9Ik0zODAgMTgwTDUwMCAxODAiIHN0cm9rZT0iIzc3Nzc3NyIgc3Ryb2tlLXdpZHRoPSIzIiBmaWxsPSJub25lIiBtYXJrZXItZW5kPSJ1cmwoI2Fycm93aGVhZCkiLz4KICAgPHBhdGggZD0iTTUyMCAxODBMNjMwIDE4MCIgc3Ryb2tlPSIjNzc3Nzc3IiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiIG1hcmtlci1lbmQ9InVybCgjYXJyb3doZWFkKSIvPgoKICA8IS0tIEJpbmFyeSBOdW1iZXIgLS0+CiAgPHJlY3QgeD0iNTAwIiB5PSIxNTYiIHdpZHRoPSI1MiIgaGVpZ2h0PSI1MiIgZmlsbD0iI0JCRTUwMCIgc3Ryb2tlPSIjMDA1NTlEIiBzdHJva2Utd2lkdGg9IjIiIHJ4PSI4IiBryT0iOCIvPgogIDx0ZXh0IHg9IjUyNiIgeT0iMTg1IiBmb250LWZhbWlseT0iYXJpYWwiIGZvbnQtc2l6ZT0iMjIiIGZpbGw9IiNGRkZGRkYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPjE8L3RleHQ+CgogIDxyZWN0IHg9IjU2NCIgeT0iMTU2IiB3aWR0aD0iNTIiIGhlaWdodD0iNTIiIGZpbGw9IiNEQUY4QTUiIHN0cm9rZT0iIzAwNTU5RCIgc3Ryb2tlLXdpZHRoPSIyIiByeD0iOCIgcnk9IjgiLz4KICA8dGV4dCB4PSI1OTAiIHk9IjE4NSIgZm9udC1mYW1pbHk9ImFyaWFsIiBmb250LXNpemU9IjIyIiBmaWxsPSIjRkZGRkZGIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj4wPC90ZXh0PgoKICA8cmVjdCB4PSI2MjgiIHk9IjE1NiIgd2lkdGg9IjUyIiBoZWlnaHQ9IjUyIiBmaWxsPSIjQkZFNTAwIiBzdHJva2U9IiMwMDU1OUQiIHN0cm9rZS13aWR0aD0iMiIgcnk9IjgiIHJ4PSI4Ii8+CiAgPHRleHQgeD0iNjU0IiB5PSIxODUiIGZvbnQtZmFtaWx5PSJhcmlhbCIgZm9udC1zaXplPSIyMiIgZmlsbD0iI0ZGRkZGRiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+MTwvdGV4dD4KCiAgPHJlY3QgeD0iNjk0IiB5PSIxNTYiIHdpZHRoPSI1MiIgaGVpZ2h0PSI1MiIgZmlsbD0iI0JGRTUwMCIgc3Ryb2tlPSIjMDA1NTlEIiBzdHJva2Utd2lkdGg9IjIiIHJ4PSI4IiBryT0iOCIvPgogIDx0ZXh0IHg9IjcyMCIgeT0iMTg1IiBmb250LWZhbWlseT0iYXJpYWwiIGZvbnQtc2l6ZT0iMjIiIGZpbGw9IiNGRkZGRkYiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+MTwvdGV4dD4KCiAgPHRleHQgeD0iNjI4IiB5PSIxMTUiIGZvbnQtZmFtaWx5PSJhcmlhbCIgZm9udC1zaXplPSIzMCIgZmlsbD0iIzAwNTU5RCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+MTAxMVxiMnM8L3RleHQ+CgogIDwhLS0gUG93ZXJzIG9mIDIgLS0+CiAgPHRleHQgeD0iNTAwIiB5PSIyMzgiIGZvbnQtZmFtaWx5PSJhcmlhbCIgZm9udC1zaXplPSIxOCIgZmllbGw9IiM1NTU1NTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPjI<sup><small>3</small></sup>ID0gODwvdGV4dD4KICA8dGV4dCB4PSI1NjQiIHk9IjIzOCIgZm9udC1mYW1pbHk9ImFyaWFsIiBmb250LXNpemU9IjE4IiBmaWxsPSIjNTU1NTU1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj4y<sup><small>2</small></sup>ID0gNDwvdGV4dD4KICA8dGV4dCB4PSI2MjgiIHk9IjIzOCIgZm9udC1mYW1pbHk9ImFyaWFsIiBmb250LXNpemU9IjE4IiBmaWxsPSIjNTU1NTU1IiB0ZXh0LWFuY2hvcnM9Im1pZGRsZSI+Mj<sup><small>1</small></sup>ID0gMjwvdGV4dD4KICA8dGV4dCB4PSI2OTQiIHk9IjIzOCIgZm9udC1mYW1pbHk9ImFyaWFsIiBmb250LXNpemU9IjE4IiBmaWxsPSIjNTU1NTU1IiB0ZXh0LWFuY2hvcnM9Im1pZGRsZSI+Mj<sup><small>0</small></sup>ID0gMTwvdGV4dD4KCgogIDx0ZXh0IHg9IjQwMCIgeT0iMzUwIiBmb250LWZhbWlseT0iYXJpYWwiIGZvbnQtc2l6ZT0iMjYiIGZpbGw9IiM1NTU1NTUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkRpZ2l0IHxQZWx1YW5nIFBvc2lzaT0+VmFsdWUgRGVzaW1hbDwvdGV4dD4KCgogIDwhLS0gSGV4YWRlY2ltYWwgRXhhbXBsZSAtLT4KICA8cmVjdCB4PSI4MCIgeT0iMzEwIiB3aWR0aD0iNzIiIGhlaWdodD0iNzIiIGZpbGw9IiNBQ0REMzYiIHN0cm9rZT0iIzAwNTU5RCIgc3Ryb2tlLXdpZHRoPSIyIiByeD0iMTAiIHJ5PSIxMCIvPgogIDx0ZXh0IHg9IjExNiIgeT0iMzU1IiBmb250LWZhbWlseT0iYXJpYWwiIGZvbnQtc2l6ZT0iMjQiIGZpbGw9IiNGRkZGRkYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkE8L3RleHQ+CgogIDxyZWN0IHg9IjE5MCIgeT0iMzEwIiB3aWR0aD0iNzIiIGhlaWdodD0iNzIiIGZpbGw9IiNBQ0REMzYiIHN0cm9rZT0iIzAwNTU5RCIgc3Ryb2tlLXdpZHRoPSIyIiByeD0iMTAiIHJ5PSIxMCIvPgogIDx0ZXh0IHg9IjIyNiIgeT0iMzU1IiBmb250LWZhbWlseT0iYXJpYWwiIGZvbnQtc2l6ZT0iMjQiIGZpbGw9IiNGRkZGRkYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPjU8L3RleHQ+CgogIDx0ZXh0IHg9IjE1MyIgeT0iMjk1IiBmb250LWZhbWlseT0iYXJpYWwiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiMwMDU1OUQiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkE1XGhiMTZzPC90dGV4dD4KPC9zdmc+" alt="Ilustrasi Basis dalam Sistem Bilangan: Menunjukkan bagaimana nilai sebuah bilangan biner (1011_2) dihitung dari penjumlahan pangkat-pangkat 2 yang dikalikan dengan digit biner (0 atau 1). Juga menunjukkan contoh representasi bilangan heksadesimal (A5_16)." />
+        <figcaption>Gambar 2: Representasi visual sistem bilangan biner dan heksadesimal. Bilangan biner <code>1011<sub>2</sub></code> dikonversi ke desimal sebagai <code>1*2<sup>3</sup> + 0*2<sup>2</sup> + 1*2<sup>1</sup> + 1*2<sup>0</sup> = 11<sub>10</sub></code>. Juga contoh heksadesimal <code>A5<sub>16</sub></code>.</figcaption>
+
+        <h3>2.4. Basis Oktal (Basis-8)</h3>
+
+        <p>Basis-8, atau sistem oktal, menggunakan delapan digit unik: 0, 1, 2, 3, 4, 5, 6, 7. Setiap posisi digit mewakili pangkat dari 8. Sistem oktal pernah populer dalam komputasi di masa lalu sebagai cara yang lebih ringkas untuk merepresentasikan bilangan biner, karena setiap tiga digit biner dapat direpresentasikan oleh satu digit oktal (karena 2<sup>3</sup> = 8). Misalnya, bilangan 27 oktal berarti:</p>
+        <p><code>27<sub>8</sub> = 2 * 8<sup>1</sup> + 7 * 8<sup>0</sup> = 16 + 7 = 23<sub>10</sub></code></p>
+        <p>Meskipun kurang umum dibandingkan heksadesimal saat ini, oktal masih kadang digunakan dalam konteks tertentu, terutama pada sistem Unix/Linux untuk izin file (chmod).</p>
+
+        <h3>2.5. Basis Heksadesimal (Basis-16)</h3>
+
+        <p>Basis-16, atau sistem heksadesimal, menggunakan enam belas digit unik: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F. Di sini, huruf A hingga F masing-masing mewakili nilai desimal 10 hingga 15. Setiap posisi digit mewakili pangkat dari 16. Heksadesimal sangat populer dalam ilmu komputer dan pemrograman karena menyediakan cara yang ringkas untuk merepresentasikan bilangan biner. Setiap digit heksadesimal dapat merepresentasikan tepat empat digit biner (karena 2<sup>4</sup> = 16). Ini sangat memudahkan membaca dan menulis alamat memori, nilai warna, dan data biner lainnya yang panjang.</p>
+        <p>Contoh: Bilangan A5 heksadesimal berarti:</p>
+        <p><code>A5<sub>16</sub> = A * 16<sup>1</sup> + 5 * 16<sup>0</sup> = 10 * 16 + 5 * 1 = 160 + 5 = 165<sub>10</sub></code></p>
+        <p>Contoh lain, nilai warna dalam HTML sering ditulis dalam heksadesimal, misalnya <code>#FF00FF</code>. Ini berarti merah (FF), hijau (00), dan biru (FF) dengan intensitas penuh, menghasilkan warna magenta. Setiap komponen warna (merah, hijau, biru) direpresentasikan oleh dua digit heksadesimal, yang setara dengan satu byte (8 bit).</p>
+
+        <h3>2.6. Konversi Antar Basis</h3>
+
+        <p>Kemampuan untuk mengonversi bilangan antar basis adalah keterampilan penting dalam komputasi. Berikut adalah metode umum untuk konversi:</p>
+
+        <h4>2.6.1. Konversi dari Basis Lain ke Basis-10 (Desimal)</h4>
+        <p>Untuk mengonversi bilangan dari basis <code>b</code> ke basis-10, gunakan ekspansi deret pangkat, seperti yang telah dijelaskan sebelumnya:</p>
+        <p><code>d<sub>n</sub>...d<sub>0</sub>.d<sub>-1</sub>...d<sub>-m</sub> (basis b) = d<sub>n</sub>*b<sup>n</sup> + ... + d<sub>0</sub>*b<sup>0</sup> + d<sub>-1</sub>*b<sup>-1</sup> + ...</code></p>
+        <p><strong>Contoh (Biner ke Desimal):</strong> Konversi <code>1101.01<sub>2</sub></code> ke desimal.</p>
+        <pre><code>1*2^3 + 1*2^2 + 0*2^1 + 1*2^0 + 0*2^-1 + 1*2^-2
+= 1*8 + 1*4 + 0*2 + 1*1 + 0*0.5 + 1*0.25
+= 8 + 4 + 0 + 1 + 0 + 0.25
+= 13.25<sub>10</sub></code></pre>
+        <p><strong>Contoh (Heksadesimal ke Desimal):</strong> Konversi <code>2AF<sub>16</sub></code> ke desimal.</p>
+        <pre><code>2*16^2 + A*16^1 + F*16^0
+= 2*256 + 10*16 + 15*1  (ingat A=10, F=15)
+= 512 + 160 + 15
+= 687<sub>10</sub></code></pre>
+
+        <h4>2.6.2. Konversi dari Basis-10 (Desimal) ke Basis Lain</h4>
+        <p>Untuk mengonversi bilangan bulat dari basis-10 ke basis <code>b</code>, gunakan metode pembagian berulang dengan basis <code>b</code>. Sisa pembagian akan membentuk digit-digit dari bilangan dalam basis baru, dimulai dari yang paling kanan (LSD - Least Significant Digit). Untuk bagian pecahan, gunakan metode perkalian berulang dengan basis <code>b</code>.</p>
+        <p><strong>Contoh (Desimal ke Biner):</strong> Konversi <code>25<sub>10</sub></code> ke biner.</p>
+        <pre><code>25 / 2 = 12 sisa 1 (LSD)
+12 / 2 = 6  sisa 0
+6  / 2 = 3  sisa 0
+3  / 2 = 1  sisa 1
+1  / 2 = 0  sisa 1 (MSD)
+
+Baca sisa dari bawah ke atas: 11001<sub>2</sub></code></pre>
+        <p><strong>Contoh (Desimal Pecahan ke Biner):</strong> Konversi <code>0.625<sub>10</sub></code> ke biner.</p>
+        <pre><code>0.625 * 2 = 1.25  -> digit 1 (MSD pecahan)
+0.25  * 2 = 0.5   -> digit 0
+0.5   * 2 = 1.0   -> digit 1 (LSD pecahan)
+
+Baca digit dari atas ke bawah: 0.101<sub>2</sub></code></pre>
+        <p>Maka, <code>25.625<sub>10</sub> = 11001.101<sub>2</sub></code>.</p>
+
+        <h4>2.6.3. Konversi Antara Biner, Oktal, dan Heksadesimal</h4>
+        <p>Konversi antara basis biner, oktal, dan heksadesimal sangat mudah karena basis-basis ini adalah pangkat dari 2 (2<sup>1</sup>=Biner, 2<sup>3</sup>=Oktal, 2<sup>4</sup>=Heksadesimal).</p>
+        <ul>
+            <li><strong>Biner ke Oktal:</strong> Kelompokkan digit biner dari kanan ke kiri menjadi kelompok tiga digit. Jika digit di awal tidak cukup, tambahkan nol di depan. Kemudian, konversi setiap kelompok tiga digit biner menjadi satu digit oktal.</li>
+            <p><strong>Contoh:</strong> Konversi <code>1101101<sub>2</sub></code> ke oktal.</p>
+            <pre><code>Kelompokkan: 001 101 101 (tambahkan nol di depan)
+Konversi:    1   5   5
+Hasil:       155<sub>8</sub></code></pre>
+
+            <li><strong>Oktal ke Biner:</strong> Konversi setiap digit oktal menjadi tiga digit biner.</li>
+            <p><strong>Contoh:</strong> Konversi <code>372<sub>8</sub></code> ke biner.</p>
+            <pre><code>3   7   2
+011 111 010
+Hasil: 011111010<sub>2</sub> (atau 11111010<sub>2</sub> jika leading zero diabaikan)</code></pre>
+
+            <li><strong>Biner ke Heksadesimal:</strong> Kelompokkan digit biner dari kanan ke kiri menjadi kelompok empat digit. Jika digit di awal tidak cukup, tambahkan nol di depan. Kemudian, konversi setiap kelompok empat digit biner menjadi satu digit heksadesimal.</li>
+            <p><strong>Contoh:</strong> Konversi <code>111011010<sub>2</sub></code> ke heksadesimal.</p>
+            <pre><code>Kelompokkan: 0001 1101 1010 (tambahkan nol di depan)
+Konversi:    1    D    A
+Hasil:       1DA<sub>16</sub></code></pre>
+
+            <li><strong>Heksadesimal ke Biner:</strong> Konversi setiap digit heksadesimal menjadi empat digit biner.</li>
+            <p><strong>Contoh:</strong> Konversi <code>F6C<sub>16</sub></code> ke biner.</p>
+            <pre><code>F     6     C
+1111  0110  1100
+Hasil: 111101101100<sub>2</sub></code></pre>
+        </ul>
+
+        <h3>2.7. Aritmatika dalam Berbagai Basis</h3>
+
+        <p>Operasi aritmatika dasar (penjumlahan, pengurangan, perkalian, pembagian) dapat dilakukan langsung dalam basis non-desimal, mengikuti aturan yang sama seperti dalam desimal, tetapi dengan 'membawa' atau 'meminjam' berdasarkan nilai basis.</p>
+
+        <h4>2.7.1. Penjumlahan Biner</h4>
+        <p>Aturan dasar penjumlahan biner:</p>
+        <ul>
+            <li>0 + 0 = 0</li>
+            <li>0 + 1 = 1</li>
+            <li>1 + 0 = 1</li>
+            <li>1 + 1 = 0, bawa 1 (karena 1+1 = 2, yang dalam biner adalah 10)</li>
+            <li>1 + 1 + 1 = 1, bawa 1 (karena 1+1+1 = 3, yang dalam biner adalah 11)</li>
+        </ul>
+        <p><strong>Contoh:</strong> Jumlahkan <code>1011<sub>2</sub></code> dan <code>1101<sub>2</sub></code>.</p>
+        <pre><code>  1011<sub>2</sub>
++ 1101<sub>2</sub>
+-------
+11000<sub>2</sub></code></pre>
+        <p>Langkah-langkah:</p>
+        <ol>
+            <li>Paling kanan: 1 + 1 = 0, bawa 1.</li>
+            <li>Posisi kedua: 1 (bawaan) + 1 + 0 = 0, bawa 1.</li>
+            <li>Posisi ketiga: 1 (bawaan) + 0 + 1 = 0, bawa 1.</li>
+            <li>Posisi paling kiri: 1 (bawaan) + 1 + 1 = 1, bawa 1.</li>
+            <li>Digit terakhir: 1 (bawaan)</li>
+        </ol>
+
+        <h4>2.7.2. Pengurangan Biner</h4>
+        <p>Aturan dasar pengurangan biner:</p>
+        <ul>
+            <li>0 - 0 = 0</li>
+            <li>1 - 0 = 1</li>
+            <li>1 - 1 = 0</li>
+            <li>0 - 1 = 1, pinjam 1 (dari kolom sebelah kiri, pinjaman 1 menjadi 2 dalam basis 2. Jadi 2-1=1)</li>
+        </ul>
+        <p><strong>Contoh:</strong> Kurangkan <code>101<sub>2</sub></code> dari <code>1100<sub>2</sub></code>.</p>
+        <pre><code>  1100<sub>2</sub>
+-  101<sub>2</sub>
+-------
+   111<sub>2</sub></code></pre>
+        <p>Langkah-langkah:</p>
+        <ol>
+            <li>Paling kanan: 0 - 1. Pinjam dari kolom sebelah. Kolom kedua (0) juga perlu pinjam dari kolom ketiga (1). Jadi, 0 menjadi 2. Kemudian, pinjam 1 dari 2 itu, sehingga 0 di kolom kedua menjadi 1 dan 0 di kolom pertama menjadi 2. Jadi, 2 - 1 = 1.</li>
+            <li>Posisi kedua: Sekarang 1 - 0 = 1.</li>
+            <li>Posisi ketiga: Sekarang 0 (karena sudah dipinjam) - 1. Perlu pinjam dari kolom keempat. 1 menjadi 0, 0 menjadi 2. Jadi, 2 - 1 = 1.</li>
+            <li>Posisi paling kiri: 0 - 0 = 0.</li>
+        </ol>
+
+        <h3>2.8. Aplikasi Basis dalam Komputasi</h3>
+
+        <p>Sistem bilangan berbasis posisi, terutama biner dan heksadesimal, adalah tulang punggung dari semua teknologi digital:</p>
+        <ul>
+            <li><strong>Arsitektur Komputer:</strong> Mikroprosesor, memori, dan semua komponen elektronik internal beroperasi menggunakan sinyal biner (0 dan 1). Setiap instruksi, data, dan alamat memori direpresentasikan dalam biner.</li>
+            <li><strong>Pemrograman:</strong> Programmer sering berinteraksi dengan nilai heksadesimal saat bekerja dengan alamat memori, register, kode warna (RGB), dan representasi data tingkat rendah. Beberapa bahasa pemrograman (misalnya C/C++) mendukung penulisan literal biner dan heksadesimal.</li>
+            <li><strong>Jaringan Komputer:</strong> Alamat IP (IPv4 dan IPv6) adalah contoh umum penggunaan biner dan heksadesimal. Alamat IPv4 ditulis dalam desimal berdot, tetapi secara internal dan untuk subnetting, pemahaman biner sangat penting. Alamat IPv6 ditulis dalam heksadesimal.</li>
+            <li><strong>Kriptografi:</strong> Operasi bitwise pada data biner adalah elemen penting dalam banyak algoritma enkripsi dan dekripsi.</li>
+            <li><strong>Grafika Digital:</strong> Warna pada layar komputer direpresentasikan menggunakan kombinasi nilai merah, hijau, dan biru (RGB), di mana setiap komponen biasanya adalah nilai dari 0 hingga 255 (atau 00 hingga FF dalam heksadesimal).</li>
+            <li><strong>Digital Forensik:</strong> Analisis data pada hard drive atau perangkat penyimpanan sering melibatkan pemeriksaan data mentah dalam format heksadesimal untuk mencari bukti atau informasi tersembunyi.</li>
+            <li><strong>Sistem Operasi:</strong> Hak akses file di sistem operasi seperti Linux/Unix sering diatur menggunakan angka oktal (misalnya, <code>chmod 755</code>).</li>
+        </ul>
+        <p>Dengan demikian, pemahaman tentang basis dalam sistem bilangan bukan hanya konsep akademis, tetapi juga keahlian praktis yang sangat dibutuhkan di berbagai bidang teknologi.</p>
+
+        <h2>3. Konsep Basis Lainnya</h2>
+
+        <p>Di luar matematika murni dan komputasi, istilah 'basis' juga muncul dalam konteks lain, seringkali dengan makna yang serupa yaitu sebagai fondasi, elemen dasar, atau titik referensi.</p>
+
+        <h3>3.1. Basis Data (Database)</h3>
+
+        <p>Dalam ilmu komputer, "basis data" atau "database" adalah koleksi data terorganisir yang disimpan dan diakses secara elektronik dari suatu sistem komputer. Meskipun namanya mengandung kata 'basis', ini sedikit berbeda dari definisi formal di atas. Dalam konteks ini, 'basis' merujuk pada fondasi atau koleksi fundamental dari informasi. Basis data memungkinkan penyimpanan, pengelolaan, dan pengambilan data secara efisien dan terstruktur. Struktur data dalam basis data (misalnya, tabel dalam basis data relasional) dapat dianggap sebagai 'basis' di mana informasi yang lebih kompleks dibangun dan diorganisir.</p>
+        <p>Misalnya, dalam model relasional, "basis data" adalah kumpulan tabel yang saling berhubungan. Setiap tabel memiliki skema (struktur) yang menentukan kolom dan tipe data, yang bisa dianggap sebagai "basis" struktural untuk menyimpan data. Kemudian, data aktual (rekaman atau baris) diisi ke dalam tabel tersebut, memperluas "basis" informasi yang ada.</p>
+
+        <h3>3.2. Basis Pengetahuan (Knowledge Base)</h3>
+
+        <p>Dalam bidang kecerdasan buatan (AI) dan sistem pakar, basis pengetahuan (knowledge base) adalah repositori terorganisir dari informasi atau fakta, serta aturan inferensi, yang digunakan oleh sistem AI untuk memecahkan masalah atau membuat keputusan. Ini adalah "basis" informasi yang memungkinkan sistem untuk 'berpikir' atau 'belajar'. Contohnya termasuk basis pengetahuan medis untuk diagnosis atau basis pengetahuan hukum untuk analisis kasus. Struktur representasi pengetahuan dalam basis ini (misalnya, ontologi, semantic networks, aturan produksi) bisa dianggap sebagai basis konseptual di mana informasi yang lebih spesifik dan inferensi dibangun.</p>
+        <p>Basis pengetahuan dibangun dengan mengumpulkan, mengorganisir, dan menyajikan fakta dan aturan dari domain ahli tertentu. Ini bukan hanya kumpulan data mentah, melainkan data yang telah diberi struktur dan makna, memungkinkan sistem untuk menarik kesimpulan baru. Ini adalah fondasi intelektual untuk kemampuan "kecerdasan" sistem AI.</p>
+
+        <h3>3.3. Basis dalam Argumen atau Teori</h3>
+
+        <p>Dalam filsafat, logika, atau diskusi umum, 'basis' sering merujuk pada dasar, landasan, atau premis yang menjadi titik tolak suatu argumen atau teori. Misalnya, "teori ini memiliki basis empiris yang kuat" berarti teori tersebut didukung oleh bukti-bukti yang teramati. "Basis moral dari keputusan ini" merujuk pada prinsip-prinsip etika yang mendasarinya. Dalam konteks ini, basis adalah elemen-elemen fundamental yang mendukung validitas atau kredibilitas sesuatu.</p>
+        <p>Sebuah argumen yang kuat harus memiliki basis yang kokoh, artinya premis-premisnya harus diterima sebagai benar atau setidaknya sangat mungkin benar. Jika basisnya goyah, maka kesimpulan yang ditarik dari argumen tersebut juga akan diragukan. Begitu pula, sebuah teori ilmiah membutuhkan basis observasional atau eksperimental yang kuat untuk diakui validitasnya.</p>
+        <p>Dalam bahasa sehari-hari, kita sering mendengar frasa seperti "atas dasar apa Anda mengatakan itu?" atau "ini adalah basis untuk negosiasi kita." Dalam setiap kasus, 'basis' merujuk pada elemen-elemen fundamental yang di atasnya sesuatu yang lebih kompleks dibangun atau disimpulkan.</p>
+
+        <h2>Kesimpulan</h2>
+
+        <p>Dari eksplorasi yang mendalam ini, jelas bahwa konsep 'basis' adalah ide yang sangat kuat dan universal, meskipun manifestasinya bervariasi di berbagai disiplin ilmu. Dalam aljabar linear, basis adalah himpunan vektor bebas linear dan merentang yang menyediakan kerangka unik untuk representasi vektor dan memahami dimensi ruang. Dalam sistem bilangan, basis mendefinisikan fundamentalitas numerik, menentukan bagaimana angka direpresentasikan dan dimanipulasi, dengan implikasi besar untuk teknologi digital.</p>
+
+        <p>Baik sebagai fondasi struktural untuk ruang vektor, sebagai 'abjad' yang menentukan cara kita menulis dan memahami angka, maupun sebagai pilar pendukung argumen dan koleksi pengetahuan, 'basis' selalu menunjuk pada elemen-elemen fundamental yang membentuk kerangka kerja dari suatu sistem yang lebih besar. Pemahaman yang kuat tentang basis tidak hanya esensial bagi para akademisi dan profesional di bidang matematika dan komputasi, tetapi juga memberikan wawasan tentang struktur fundamental dunia di sekitar kita, dari cara komputer beroperasi hingga logika di balik pemikiran dan argumen kita.</p>
+        <p>Dengan demikian, basis adalah lebih dari sekadar definisi teknis; ia adalah metafora kuat untuk fondasi, blok bangunan, dan prinsip-prinsip yang memungkinkan kompleksitas dan pemahaman. Menguasai konsep basis berarti menguasai inti dari banyak disiplin ilmu, membuka pintu menuju pemahaman yang lebih dalam tentang bagaimana dunia terstruktur dan bagaimana informasi diproses dan direpresentasikan.</p>
+
+        <p>Keindahan dari konsep basis terletak pada kemampuannya untuk mengurai entitas yang rumit menjadi komponen-komponen yang lebih sederhana dan fundamental. Ini adalah esensi dari pemikiran analitis: kemampuan untuk mengidentifikasi elemen-elemen dasar yang membentuk suatu keseluruhan, dan kemudian memahami bagaimana elemen-elemen tersebut berinteraksi untuk menciptakan fenomena yang lebih kompleks. Baik itu dalam memproyeksikan vektor ke subruang, mengubah bilangan dari satu format ke format lain, atau membangun basis data yang efisien, prinsip-prinsip yang mendasari konsep basis selalu relevan dan tak tergantikan.</p>
+        <p>Dalam era digital saat ini, di mana data berlimpah dan komputasi menjadi tulang punggung hampir setiap aspek kehidupan, pemahaman tentang bagaimana informasi direpresentasikan pada tingkat paling dasar — yaitu, dalam basis biner, oktal, dan heksadesimal — adalah sebuah keharusan. Ini bukan hanya untuk insinyur perangkat keras atau pengembang perangkat lunak, tetapi untuk siapa saja yang ingin memahami cara kerja teknologi modern.</p>
+        <p>Demikian pula, aplikasi basis dalam aljabar linear terus berkembang, dengan kontribusi besar pada bidang-bidang baru seperti pembelajaran mendalam (deep learning), visi komputer, dan pemrosesan bahasa alami. Algoritma-algoritma canggih di balik teknologi ini seringkali memanfaatkan perubahan basis, dekomposisi matriks, dan manipulasi ruang vektor untuk mengekstrak fitur penting dari data dan membangun model prediktif yang kuat.</p>
+        <p>Oleh karena itu, 'basis' bukan sekadar topik yang harus dipelajari dalam kurikulum tertentu, melainkan sebuah cara berpikir fundamental yang menembus berbagai lapisan pengetahuan dan aplikasi. Ini adalah tentang mengidentifikasi 'apa yang esensial' untuk membangun, menganalisis, dan memahami sistem yang kompleks. Menggenggam makna sejati dari basis adalah langkah pertama menuju penguasaan banyak konsep yang membentuk dunia modern.</p>
+    </div>
+
+<style>
+.related-posts {
+  clear: both;
+  display: block;
+  width: 100%;
+  margin: 30px auto;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.related-posts h3 {
+  margin-top: 0;
+}
+.related-posts ul {
+  list-style: none;
+  padding: 0;
+}
+.related-posts li {
+  margin: 6px 0;
+}
+</style>
+<div class='related-posts'><h3>Related Posts</h3><ul><li><a href="/asam-kuat">Asam Kuat</a></li>
+<li><a href="/asam-palmitat">Asam Palmitat</a></li>
+<li><a href="/babi-laut">Babi Laut</a></li>
+<li><a href="/adagio">Adagio</a></li>
+<li><a href="/apa">Apa</a></li>
+<li><a href="/adanya">Adanya</a></li>
+<li><a href="/amperemeter">Amperemeter</a></li>
+<li><a href="/aau">Aau</a></li>
+<li><a href="/batu-api">Batu Api</a></li>
+<li><a href="/adres">Adres</a></li></ul></div>
+<script src="/ik.js"></script>
+</body>
+</html>

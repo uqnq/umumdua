@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angka Biner: Bahasa Dasar Komputer dan Dunia Digital</title>
+    <link rel="icon" href="/favicon.svg">
+    <style>
+        /* Variabel CSS untuk tema warna sejuk cerah */
+        :root {
+            --bg-light: #F8FDFE; /* Sangat terang, hampir putih dengan sentuhan cyan */
+            --text-dark: #2C3E50; /* Biru-abu gelap untuk teks utama */
+            --accent-blue: #3498DB; /* Biru cerah untuk tautan dan highlight */
+            --code-bg: #ECF7F9; /* Background kode yang sedikit lebih gelap dari bg-light */
+            --header-color: #288BC6; /* Biru sedang untuk judul */
+            --border-light: #D0EFF2; /* Garis tipis untuk elemen tertentu */
+            --shadow-light: rgba(0, 0, 0, 0.05); /* Bayangan lembut */
+        }
+
+        /* Reset dan Box-sizing */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Body & Tipografi Dasar */
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            padding: 20px;
+            scroll-behavior: smooth;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #FFFFFF; /* Konten artikel lebih putih */
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px var(--shadow-light);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--header-color);
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            text-align: center;
+            margin-bottom: 1em;
+            padding-bottom: 0.5em;
+            border-bottom: 2px solid var(--border-light);
+            color: var(--accent-blue); /* Judul utama sedikit lebih menonjol */
+        }
+
+        h2 {
+            font-size: 1.8em;
+            margin-top: 1.5em;
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 0.3em;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            margin-top: 1.2em;
+        }
+
+        h4 {
+            font-size: 1.2em;
+            margin-top: 1em;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 1em;
+        }
+
+        a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #2072B3; /* Sedikit lebih gelap saat hover */
+            text-decoration: underline;
+        }
+
+        ul, ol {
+            margin-bottom: 1em;
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        /* Gambar */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5em auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px var(--shadow-light);
+        }
+
+        /* Kode dan Contoh */
+        code, pre {
+            font-family: 'Fira Mono', 'Consolas', 'Monaco', monospace;
+            background-color: var(--code-bg);
+            border-radius: 4px;
+            padding: 0.1em 0.4em;
+            font-size: 0.9em;
+            color: var(--text-dark);
+        }
+
+        pre {
+            display: block;
+            padding: 1em;
+            margin: 1em 0;
+            overflow-x: auto;
+            border: 1px solid var(--border-light);
+        }
+
+        .example-block {
+            background-color: var(--code-bg);
+            border-left: 5px solid var(--accent-blue);
+            padding: 1em;
+            margin: 1.5em 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .example-block h4 {
+            color: var(--header-color);
+            margin-top: 0;
+            margin-bottom: 0.5em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            font-size: 0.9em;
+        }
+
+        table th, table td {
+            border: 1px solid var(--border-light);
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: var(--code-bg);
+            font-weight: 600;
+            color: var(--header-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            main {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            table thead, table tbody, table th, table td, table tr {
+                display: block;
+            }
+            table tr {
+                margin-bottom: 10px;
+            }
+            table td {
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+            }
+            table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                width: 50%;
+                padding-left: 10px;
+                font-weight: bold;
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            h2 {
+                font-size: 1.3em;
+            }
+            h3 {
+                font-size: 1.1em;
+            }
+            body {
+                padding: 10px;
+            }
+            main {
+                padding: 15px;
+            }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: var(--text-dark);
+            font-size: 0.9em;
+            border-top: 1px solid var(--border-light);
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Angka Biner: Bahasa Dasar Komputer dan Dunia Digital</h1>
+
+        <img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTIwMCA4MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRiZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNFQ0Y3RjkiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjRjBGQkZDIi8+CiAgICA8L2xpbmVhcUdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkTSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMzNDk4REIiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMjU3M0JDIi8+CiAgICA8L2xpbmVhckdyYXZkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkYmcpIi8+CiAgPGNpcmNsZSBjeD0iNjAwIiBjeT0iNDAwIiByPSIyODAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xKSIvPgogIDxjaXJjbGUgY3g9IjYwMCIgY3k9IjQwMCIgcj0iMjQwIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMTUpIi8+CiAgPHRleHQgeD0iNjAwIiB5PSIzNzAiIGZvbnQtZmFtaWx5PSJNb25vbmV0LCBDb25zb2xhcywgTW9uYWNvLCBtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTIwIiBmaWxsPSJ1cmwoI2dyYWRNKSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgb3BhY2l0eT0iMC44Ij4wPC90ZXh0PgogIDx0ZXh0IHg9IjYwMCIgeT0iNTIwIiBmb250LWZhbWlseT0iTW9ub25ldCwgQ29uc29sYXMsIE1vbmFjbywgbW9ub3NwYWNlIiBmb250LXNpemU9IjEyMCIgZmlsbD0idXJsKCNncmFkTykiIHRleHQtYW5jaG9yPSJtaWRkbGUiIG9wYWNpdHk9IjAuOCI+MTwvdGV4dD4KICAKICA8ZyBzdHJva2U9InVybCgjZ3JhZE0pIiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiIHN0cm9rZS1vcGFjaXR5PSIxIj4KICAgIDxjaXJjbGUgY3g9IjM1MCIgY3k9IjI1MCIgcj0iMjAiLz4KICAgIDxjaXJjbGUgY3g9IjQ1MCIgY3k9IjY1MCIgcj0iMjAiLz4KICAgIDxjaXJjbGUgY3g9Ijc1MCIgY3k9IjE1MCIgcj0iMjAiLz4KICAgIDxjaXJjbGUgY3g9Ijg1MCIgY3k9IjU1MCIgcj0iMjAiLz4KICAgIDxjaXJjbGUgY3g9IjI1MCIgY3k9IjUwMCIgcj0iMjAiLz4KICAgIDxjaXJjbGUgY3g9Izk1MCIgY3k9IjMwMCIgcj0iMjAiLz4KICAgIAogICAgPHBhdGggZD0iTTM1MCAyNTBsMTAwIDQwME00NTAgNjUwbDMwMC01MDAiLz4KICAgIDxwYXRoIGQ9Ik03NTAgMTUwTDg1MCA1NTBNODUwIDU1MkwyNTAgNTAwIi8+CiAgICA8cGF0aCBkPSJNMjUwIDUwMEw5NTAgMzAwTTk1MCAzMDBMMzUwIDI1MCIvPgogIDwvZz4KICAgCiAgPHRleHQgeD0iMzUwIiB5PSIyNjAiIGZvbnQtZmFtaWx5PSJNb25vbmV0IiBmb250LXNpemU9IjI0IiBmaWxsPSIjMkM1MzgwIj4wPC90ZXh0PgogIDx0ZXh0IHg9IjQ1MCIgeT0iNjYwIiBmb250LWZhమీW1vbm9uZXQiIGZvbnQtc2l6ZT0iMjQiIGZpbGw9IiMzNDk4REIiPjE8L3RleHQ+CiAgPHRleHQgeD0iNzUwIiB5PSIxNjAiIGZvbnQtZmFtaWx5PSJNb25vbmV0IiBmb250LXNpemU9IjI0IiBmaWxsPSIjMkM1MzgwIj4wPC90dWV4dD4KICAgPHRleHQgeD0iODUwIiB5PSI1NjAiIGZvbnQtZmFtaWx5PSJNb25vbmV0IiBmb250LXNpemU9IjI0IiBmaWxsPSIjMzQ5OERCIj4xPC90dWV4dD4KICAgPHRleHQgeD0iMjUwIiB5PSI1MTAiIGZvbnQtZmFtaWx5PSJNb25vbmV0IiBmb250LXNpemU9IjI0IiBmaWxsPSIjMkM1MzgwIj4wPC90dWV4dD4KICAgPHRleHQgeD0iOTUwIiB5PSIzMTAiIGZvbnQtZmFtaWx5PSJNb25vbmV0IiBmb250LXNpemU9IjI0IiBmaWxsPSIjMzQ5OERCIj4xPC90dWV4dD4KPC9zdmc+" alt="Representasi visual angka biner, bit 0 dan 1 yang membentuk aliran data digital, dengan sirkuit abstrak di latar belakang."/>
+
+        <section id="pendahuluan">
+            <h2>Pendahuluan: Gerbang ke Dunia Digital</h2>
+            <p>Di balik setiap klik, setiap ketukan keyboard, setiap gambar yang Anda lihat di layar, dan setiap suara yang Anda dengar dari perangkat digital, terdapat sebuah bahasa fundamental yang mengaturnya: <strong>angka biner</strong>. Ini adalah inti dari komputasi, fondasi di mana seluruh dunia teknologi digital dibangun. Angka biner, atau sistem bilangan basis 2, mungkin tampak sederhana pada pandangan pertama, hanya terdiri dari dua simbol: 0 dan 1. Namun, kesederhanaan inilah yang memberikannya kekuatan dan fleksibilitas tak terbatas untuk merepresentasikan informasi yang kompleks.</p>
+
+            <p>Bayangkan sejenak kehidupan tanpa komputer, ponsel pintar, internet, atau bahkan televisi digital. Semua ini tidak akan mungkin ada tanpa konsep angka biner. Komputer tidak memahami huruf, angka desimal yang kita gunakan sehari-hari, atau gambar secara langsung. Mereka hanya memahami sinyal listrik yang hidup (ON) atau mati (OFF), yang secara abstrak direpresentasikan sebagai 1 dan 0. Setiap bagian dari data yang Anda lihat atau gunakan di perangkat digital Anda – mulai dari dokumen teks hingga video resolusi tinggi – pada dasarnya adalah urutan panjang dari nol dan satu.</p>
+
+            <h3>Mengapa Biner Penting?</h3>
+            <p>Pentingnya angka biner terletak pada kemampuannya untuk berinteraksi langsung dengan sifat dasar perangkat keras elektronik. Komponen elektronik seperti transistor dapat dengan mudah diatur ke salah satu dari dua keadaan: menghantarkan arus atau tidak menghantarkan arus. Keadaan "hidup" atau "mati" ini secara sempurna dipetakan ke angka 1 dan 0. Hal ini membuat biner menjadi bahasa yang sangat efisien dan andal untuk sirkuit digital.</p>
+            <ul>
+                <li><strong>Efisiensi Elektronik:</strong> Dua keadaan (ON/OFF) jauh lebih mudah dan stabil untuk diimplementasikan secara fisik dalam sirkuit daripada sepuluh keadaan (0-9) seperti dalam sistem desimal.</li>
+                <li><strong>Keandalan Data:</strong> Lebih kecil kemungkinan terjadinya kesalahan karena hanya ada dua kondisi yang perlu dibedakan. Sinyal yang sedikit bising pun cenderung tidak mengubah 0 menjadi 1 atau sebaliknya.</li>
+                <li><strong>Logika Boolean:</strong> Biner secara alami terhubung dengan logika Boolean, yaitu fondasi untuk melakukan operasi logika dan aritmetika di dalam komputer.</li>
+            </ul>
+
+            <h3>Sejarah Singkat Angka Biner</h3>
+            <p>Meskipun kita sering mengasosiasikan biner dengan komputer modern, konsep sistem bilangan basis 2 bukanlah hal baru. Akar-akarnya dapat ditelusuri kembali ribuan tahun:</p>
+            <ul>
+                <li><strong>Tiongkok Kuno (I Ching):</strong> Salah satu contoh paling awal dari sistem biner ditemukan dalam teks klasik Tiongkok kuno, <a href="https://id.wikipedia.org/wiki/I_Ching" target="_blank" rel="noopener noreferrer">I Ching</a> (Kitab Perubahan), yang berasal dari sekitar abad ke-9 SM. Heksagram-heksagram di dalamnya, yang terdiri dari garis padat (Yang, mewakili 1) dan garis putus-putus (Yin, mewakili 0), dapat dianggap sebagai representasi biner.</li>
+                <li><strong>Matematikawan dan Filsuf:</strong> Sepanjang sejarah, banyak pemikir telah meneliti sistem biner. Matematikawan India Pingala (sekitar abad ke-5 SM) menggunakan sistem biner dalam metrik prosodi Sanskerta. Kemudian, pada abad ke-17, matematikawan Jerman <strong>Gottfried Wilhelm Leibniz</strong> mengembangkan sistem bilangan biner modern secara ekstensif, bahkan menghubungkannya dengan teologi dan filsafatnya. Leibniz melihat keindahan dan kesederhanaan sistem ini sebagai cerminan penciptaan alam semesta dari kekosongan (0) dan keberadaan (1).</li>
+                <li><strong>Era Komputer:</strong> Pada abad ke-20, ketika para insinyur mulai mengembangkan komputer elektronik, sistem biner Leibniz ditemukan kembali sebagai metode yang paling praktis dan efisien untuk membangun sirkuit digital. Tokoh seperti Claude Shannon dengan teorinya tentang informasi dan John von Neumann dengan arsitektur komputernya, mengukuhkan peran biner sebagai tulang punggung komputasi.</li>
+            </ul>
+            <p>Artikel ini akan membawa Anda pada perjalanan mendalam untuk memahami angka biner, mulai dari dasar-dasarnya hingga aplikasinya yang canggih di berbagai aspek teknologi. Kita akan mempelajari cara kerja biner, bagaimana mengonversinya ke dan dari sistem bilangan lain, cara melakukan operasi aritmetika dengan biner, dan bagaimana biner membentuk representasi data di dalam komputer. Mari kita selami dunia 0 dan 1 yang menakjubkan ini!</p>
+        </section>
+
+        <section id="dasar-dasar">
+            <h2>Memahami Dasar-dasar Biner</h2>
+            <p>Sebelum kita menyelam lebih jauh ke dalam seluk-beluk angka biner, penting untuk memahami konsep dasarnya dan bagaimana ia berbeda dari sistem bilangan yang kita gunakan sehari-hari, yaitu sistem desimal.</p>
+
+            <h3>Sistem Desimal (Basis 10) vs. Biner (Basis 2)</h3>
+            <p>Kita terbiasa dengan sistem desimal, atau sistem bilangan basis 10, yang menggunakan sepuluh digit (0, 1, 2, 3, 4, 5, 6, 7, 8, 9). Posisi setiap digit dalam suatu angka desimal menunjukkan nilai tempat berdasarkan pangkat 10. Misalnya, angka <code class="language-plaintext">245</code> dapat diuraikan sebagai:</p>
+            <pre class="language-plaintext">2 * 10^2  (2 * 100) = 200
+4 * 10^1  (4 * 10)  = 40
+5 * 10^0  (5 * 1)   = 5
+--------------------
+Total             = 245</pre>
+            <p>Sistem biner bekerja dengan prinsip yang sama, tetapi dengan hanya dua digit (0 dan 1) dan nilai tempat berdasarkan pangkat 2. Setiap posisi digit biner (disebut "bit") memiliki nilai yang merupakan pangkat dari 2, dimulai dari 2<sup>0</sup> di paling kanan.</p>
+            <p>Mari kita lihat contoh sederhana:</p>
+            <pre class="language-plaintext">Bilangan Desimal  | Bilangan Biner
+------------------|------------------
+0                 | 0
+1                 | 1
+2                 | 10 (1*2^1 + 0*2^0)
+3                 | 11 (1*2^1 + 1*2^0)
+4                 | 100 (1*2^2 + 0*2^1 + 0*2^0)</pre>
+
+            <h4>Bit dan Byte: Satuan Dasar Informasi</h4>
+            <p>Dalam dunia digital, informasi diukur dalam satuan-satuan yang didasarkan pada biner:</p>
+            <ul>
+                <li><strong>Bit (Binary Digit):</strong> Ini adalah unit terkecil dari informasi digital, yang hanya dapat memiliki nilai 0 atau 1. Kata "bit" sendiri adalah singkatan dari "binary digit."</li>
+                <li><strong>Byte:</strong> Sebuah byte adalah kelompok 8 bit. Byte adalah unit dasar untuk mengukur kapasitas penyimpanan dan transfer data di sebagian besar sistem komputer modern. Dengan 8 bit, kita bisa merepresentasikan 2<sup>8</sup> = 256 kombinasi unik.</li>
+                <li><strong>Kelipatan Byte:</strong>
+                    <ul>
+                        <li>Kilobyte (KB): 1024 byte (2<sup>10</sup> byte)</li>
+                        <li>Megabyte (MB): 1024 KB (2<sup>20</sup> byte)</li>
+                        <li>Gigabyte (GB): 1024 MB (2<sup>30</sup> byte)</li>
+                        <li>Terabyte (TB): 1024 GB (2<sup>40</sup> byte)</li>
+                    </ul>
+                    Perhatikan bahwa dalam konteks jaringan atau disk pemasaran, kadang-kadang "kilo" diartikan sebagai 1000, bukan 1024 (misalnya, 1 MB = 1.000.000 byte). Namun, dalam konteks komputasi internal, kelipatan 1024 (berbasis 2) lebih umum.
+                </li>
+            </ul>
+
+            <h3>Sistem Penulisan Biner</h3>
+            <p>Untuk membedakan angka biner dari angka desimal, seringkali digunakan notasi khusus. Beberapa notasi umum meliputi:</p>
+            <ul>
+                <li>Menambahkan subskrip 2: Misalnya, <code class="language-plaintext">1011_2</code></li>
+                <li>Menggunakan prefiks <code class="language-plaintext">0b</code>: Misalnya, <code class="language-plaintext">0b1011</code> (umum di banyak bahasa pemrograman).</li>
+                <li>Menyatakan secara eksplisit dalam teks: "bilangan biner 1011".</li>
+            </ul>
+
+            <h3>Representasi Kekuatan Dua</h3>
+            <p>Memahami pola kekuatan dua sangat penting untuk bekerja dengan biner. Setiap posisi bit dari kanan ke kiri mewakili pangkat 2 yang semakin tinggi:</p>
+            <pre class="language-plaintext">Posisi Bit (dari kanan, dimulai dari 0):
+... 7   6   5   4   3   2   1   0
+Nilai Tempat:
+... 2^7 2^6 2^5 2^4 2^3 2^2 2^1 2^0
+Nilai Desimal:
+... 128 64  32  16  8   4   2   1</pre>
+            <p>Dengan mengetahui nilai-nilai ini, kita bisa dengan mudah mengonversi bilangan biner ke desimal dan sebaliknya. Misalnya, untuk bilangan biner <code class="language-plaintext">1101_2</code>:</p>
+            <pre class="language-plaintext">1 * 2^3 (8)  +  1 * 2^2 (4)  +  0 * 2^1 (0)  +  1 * 2^0 (1)
+= 8 + 4 + 0 + 1 = 13</pre>
+            <p>Jadi, <code class="language-plaintext">1101_2</code> sama dengan <code class="language-plaintext">13_10</code>.</p>
+            <p>Pola ini adalah kunci untuk semua operasi biner. Semakin Anda terbiasa dengan pola kekuatan dua (1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, dst.), semakin mudah Anda akan bekerja dengan angka biner.</p>
+        </section>
+
+        <section id="konversi">
+            <h2>Konversi Antar Sistem Bilangan</h2>
+            <p>Kemampuan untuk mengonversi angka antara sistem desimal dan biner, serta sistem lain seperti oktal dan heksadesimal, adalah keterampilan dasar dalam komputasi. Bagian ini akan membahas metode konversi secara rinci dengan banyak contoh.</p>
+
+            <h3>Desimal ke Biner: Metode Pembagian Berulang</h3>
+            <p>Metode paling umum untuk mengonversi bilangan desimal ke biner adalah pembagian berulang dengan 2. Caranya adalah membagi bilangan desimal dengan 2, mencatat sisa bagi, dan kemudian mengulangi proses dengan hasil bagi hingga hasil bagi menjadi 0. Bilangan biner kemudian dibaca dari sisa bagi terakhir hingga sisa bagi pertama.</p>
+            <div class="example-block">
+                <h4>Contoh 1: Konversi 13 (Desimal) ke Biner</h4>
+                <pre class="language-plaintext">13 / 2 = 6 sisa 1  (Bit terakhir / LSB)
+ 6 / 2 = 3 sisa 0
+ 3 / 2 = 1 sisa 1
+ 1 / 2 = 0 sisa 1  (Bit pertama / MSB)
+
+Baca sisa dari bawah ke atas: 1101_2
+Jadi, 13_10 = 1101_2</pre>
+            </div>
+            <div class="example-block">
+                <h4>Contoh 2: Konversi 25 (Desimal) ke Biner</h4>
+                <pre class="language-plaintext">25 / 2 = 12 sisa 1
+12 / 2 = 6  sisa 0
+ 6 / 2 = 3  sisa 0
+ 3 / 2 = 1  sisa 1
+ 1 / 2 = 0  sisa 1
+
+Baca sisa dari bawah ke atas: 11001_2
+Jadi, 25_10 = 11001_2</pre>
+            </div>
+
+            <h3>Desimal ke Biner: Metode Pengurangan (Powers of Two)</h3>
+            <p>Metode alternatif adalah mencari kekuatan 2 terbesar yang kurang dari atau sama dengan bilangan desimal, kemudian menguranginya, dan mengulang proses dengan sisa. Anda akan meletakkan 1 di posisi kekuatan 2 yang digunakan dan 0 di posisi yang tidak digunakan.</p>
+            <div class="example-block">
+                <h4>Contoh: Konversi 25 (Desimal) ke Biner</h4>
+                <p>Kekuatan 2: ..., 128, 64, 32, 16, 8, 4, 2, 1</p>
+                <pre class="language-plaintext">1. Bilangan Desimal = 25
+2. Kekuatan 2 terbesar <= 25 adalah 16 (2^4).
+   Kurangkan: 25 - 16 = 9.
+   Biner: 1xxxx (posisi 2^4 adalah 1)
+
+3. Sisa = 9. Kekuatan 2 terbesar <= 9 adalah 8 (2^3).
+   Kurangkan: 9 - 8 = 1.
+   Biner: 11xxx (posisi 2^3 adalah 1)
+
+4. Sisa = 1. Kekuatan 2 terbesar <= 1 adalah 1 (2^0).
+   Kurangkan: 1 - 1 = 0.
+   Biner: 11001 (posisi 2^2 dan 2^1 adalah 0 karena tidak digunakan; posisi 2^0 adalah 1)
+
+Hasilnya: 11001_2</pre>
+            </div>
+
+            <h3>Biner ke Desimal: Metode Penjumlahan Posisi Nilai</h3>
+            <p>Metode ini adalah kebalikan dari yang dijelaskan di bagian dasar-dasar. Anda mengambil setiap bit biner, mengalikannya dengan 2 pangkat posisinya (dimulai dari 0 di paling kanan), dan menjumlahkan semua hasilnya.</p>
+            <div class="example-block">
+                <h4>Contoh 1: Konversi 1101_2 ke Desimal</h4>
+                <pre class="language-plaintext">Posisi:   3   2   1   0
+Biner:    1   1   0   1
+
+(1 * 2^3) + (1 * 2^2) + (0 * 2^1) + (1 * 2^0)
+= (1 * 8) + (1 * 4) + (0 * 2) + (1 * 1)
+= 8 + 4 + 0 + 1
+= 13_10</pre>
+            </div>
+            <div class="example-block">
+                <h4>Contoh 2: Konversi 10110_2 ke Desimal</h4>
+                <pre class="language-plaintext">Posisi:   4   3   2   1   0
+Biner:    1   0   1   1   0
+
+(1 * 2^4) + (0 * 2^3) + (1 * 2^2) + (1 * 2^1) + (0 * 2^0)
+= (1 * 16) + (0 * 8) + (1 * 4) + (1 * 2) + (0 * 1)
+= 16 + 0 + 4 + 2 + 0
+= 22_10</pre>
+            </div>
+
+            <h3>Hubungan Biner dengan Oktal (Basis 8) dan Heksadesimal (Basis 16)</h3>
+            <p>Sistem bilangan oktal dan heksadesimal sering digunakan dalam komputasi karena mereka menyediakan cara yang lebih ringkas untuk merepresentasikan bilangan biner yang panjang. Ini karena basis mereka adalah kekuatan dari 2:</p>
+            <ul>
+                <li>Oktal (Basis 8): <code class="language-plaintext">8 = 2^3</code>. Setiap digit oktal dapat direpresentasikan dengan tepat 3 bit biner.</li>
+                <li>Heksadesimal (Basis 16): <code class="language-plaintext">16 = 2^4</code>. Setiap digit heksadesimal dapat direpresentasikan dengan tepat 4 bit biner.</li>
+            </ul>
+            <p>Ini membuat konversi antara biner dan oktal/heksadesimal sangat mudah.</p>
+
+            <h4>Tabel Perbandingan Desimal, Biner, Oktal, Heksadesimal</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Desimal</th>
+                        <th>Biner (4-bit)</th>
+                        <th>Oktal</th>
+                        <th>Heksadesimal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td data-label="Desimal">0</td><td data-label="Biner">0000</td><td data-label="Oktal">0</td><td data-label="Heksadesimal">0</td></tr>
+                    <tr><td data-label="Desimal">1</td><td data-label="Biner">0001</td><td data-label="Oktal">1</td><td data-label="Heksadesimal">1</td></tr>
+                    <tr><td data-label="Desimal">2</td><td data-label="Biner">0010</td><td data-label="Oktal">2</td><td data-label="Heksadesimal">2</td></tr>
+                    <tr><td data-label="Desimal">3</td><td data-label="Biner">0011</td><td data-label="Oktal">3</td><td data-label="Heksadesimal">3</td></tr>
+                    <tr><td data-label="Desimal">4</td><td data-label="Biner">0100</td><td data-label="Oktal">4</td><td data-label="Heksadesimal">4</td></tr>
+                    <tr><td data-label="Desimal">5</td><td data-label="Biner">0101</td><td data-label="Oktal">5</td><td data-label="Heksadesimal">5</td></tr>
+                    <tr><td data-label="Desimal">6</td><td data-label="Biner">0110</td><td data-label="Oktal">6</td><td data-label="Heksadesimal">6</td></tr>
+                    <tr><td data-label="Desimal">7</td><td data-label="Biner">0111</td><td data-label="Oktal">7</td><td data-label="Heksadesimal">7</td></tr>
+                    <tr><td data-label="Desimal">8</td><td data-label="Biner">1000</td><td data-label="Oktal">10</td><td data-label="Heksadesimal">8</td></tr>
+                    <tr><td data-label="Desimal">9</td><td data-label="Biner">1001</td><td data-label="Oktal">11</td><td data-label="Heksadesimal">9</td></tr>
+                    <tr><td data-label="Desimal">10</td><td data-label="Biner">1010</td><td data-label="Oktal">12</td><td data-label="Heksadesimal">A</td></tr>
+                    <tr><td data-label="Desimal">11</td><td data-label="Biner">1011</td><td data-label="Oktal">13</td><td data-label="Heksadesimal">B</td></tr>
+                    <tr><td data-label="Desimal">12</td><td data-label="Biner">1100</td><td data-label="Oktal">14</td><td data-label="Heksadesimal">C</td></tr>
+                    <tr><td data-label="Desimal">13</td><td data-label="Biner">1101</td><td data-label="Oktal">15</td><td data-label="Heksadesimal">D</td></tr>
+                    <tr><td data-label="Desimal">14</td><td data-label="Biner">1110</td><td data-label="Oktal">16</td><td data-label="Heksadesimal">E</td></tr>
+                    <tr><td data-label="Desimal">15</td><td data-label="Biner">1111</td><td data-label="Oktal">17</td><td data-label="Heksadesimal">F</td></tr>
+                </tbody>
+            </table>
+
+            <h4>Konversi Biner ke Oktal</h4>
+            <p>Untuk mengonversi biner ke oktal, kelompokkan bit biner menjadi tiga-tiga dari kanan. Jika jumlah bit bukan kelipatan 3, tambahkan 0 di sebelah kiri sampai menjadi kelipatan 3. Kemudian, konversikan setiap kelompok 3 bit ke digit oktal yang setara.</p>
+            <div class="example-block">
+                <h4>Contoh: Konversi 1101101_2 ke Oktal</h4>
+                <pre class="language-plaintext">1. Tambahkan 0 di kiri agar menjadi kelipatan 3 bit: 001 101 101
+2. Pisahkan menjadi kelompok 3 bit:
+   001  |  101  |  101
+3. Konversi setiap kelompok ke oktal (lihat tabel di atas):
+    1   |   5   |   5
+Hasilnya: 155_8</pre>
+            </div>
+
+            <h4>Konversi Oktal ke Biner</h4>
+            <p>Ini adalah kebalikannya. Konversikan setiap digit oktal menjadi 3 bit biner.</p>
+            <div class="example-block">
+                <h4>Contoh: Konversi 725_8 ke Biner</h4>
+                <pre class="language-plaintext">Digit Oktal:  7   |  2   |  5
+Biner 3-bit:  111 |  010 |  101
+
+Gabungkan: 111010101_2
+Hasilnya: 111010101_2</pre>
+            </div>
+
+            <h4>Konversi Biner ke Heksadesimal</h4>
+            <p>Sama seperti oktal, tetapi kelompokkan bit biner menjadi empat-empat dari kanan. Tambahkan 0 di sebelah kiri jika perlu, lalu konversikan setiap kelompok 4 bit ke digit heksadesimal yang setara.</p>
+            <div class="example-block">
+                <h4>Contoh: Konversi 1101101_2 ke Heksadesimal</h4>
+                <pre class="language-plaintext">1. Tambahkan 0 di kiri agar menjadi kelipatan 4 bit: 0110 1101
+2. Pisahkan menjadi kelompok 4 bit:
+   0110 | 1101
+3. Konversi setiap kelompok ke heksadesimal (lihat tabel di atas):
+     6  |  D
+Hasilnya: 6D_16</pre>
+            </div>
+
+            <h4>Konversi Heksadesimal ke Biner</h4>
+            <p>Konversikan setiap digit heksadesimal menjadi 4 bit biner.</p>
+            <div class="example-block">
+                <h4>Contoh: Konversi A3F_16 ke Biner</h4>
+                <pre class="language-plaintext">Digit Heks:   A   |  3   |  F
+Biner 4-bit:  1010 | 0011 | 1111
+
+Gabungkan: 101000111111_2
+Hasilnya: 101000111111_2</pre>
+            </div>
+            <p>Menguasai konversi ini sangat membantu dalam membaca dan memahami representasi data di lingkungan pemrograman atau debugging, di mana nilai-nilai sering disajikan dalam format heksadesimal untuk keterbacaan yang lebih baik.</p>
+        </section>
+
+        <section id="aritmetika-biner">
+            <h2>Aritmetika Biner: Berhitung dengan Nol dan Satu</h2>
+            <p>Komputer tidak hanya menyimpan data biner; mereka juga melakukan operasi matematika dengan data tersebut. Aritmetika biner adalah fondasi dari semua perhitungan yang dilakukan oleh unit pemrosesan pusat (CPU).</p>
+
+            <h3>Penjumlahan Biner</h3>
+            <p>Penjumlahan biner mirip dengan penjumlahan desimal, tetapi hanya dengan dua digit. Ada empat aturan dasar:</p>
+            <ul>
+                <li><code>0 + 0 = 0</code></li>
+                <li><code>0 + 1 = 1</code></li>
+                <li><code>1 + 0 = 1</code></li>
+                <li><code>1 + 1 = 0</code> dengan <em>carry</em> 1 (bawaan 1)</li>
+                <li><code>1 + 1 + 1 = 1</code> dengan <em>carry</em> 1 (ini terjadi saat ada carry dari bit sebelumnya)</li>
+            </ul>
+            <p>Mari kita lihat beberapa contoh:</p>
+            <div class="example-block">
+                <h4>Contoh 1: Penjumlahan Sederhana</h4>
+                <pre class="language-plaintext">  01_2 (1)
++ 10_2 (2)
+-----
+  11_2 (3)</pre>
+            </div>
+            <div class="example-block">
+                <h4>Contoh 2: Penjumlahan dengan Carry</h4>
+                <pre class="language-plaintext">  101_2 (5)
++ 011_2 (3)
+-----
+Carry:   1 1    (dari kanan ke kiri)
+         1 0 1
+       + 0 1 1
+       -----
+         1 0 0 0_2 (8)</pre>
+                <p>Penjelasan langkah demi langkah untuk contoh 2:</p>
+                <ol>
+                    <li>Kolom paling kanan (2<sup>0</sup>): <code class="language-plaintext">1 + 1 = 0</code> dengan carry 1 ke kolom berikutnya.</li>
+                    <li>Kolom tengah (2<sup>1</sup>): <code class="language-plaintext">0 + 1 + carry 1 = 0</code> dengan carry 1 ke kolom berikutnya.</li>
+                    <li>Kolom paling kiri (2<sup>2</sup>): <code class="language-plaintext">1 + 0 + carry 1 = 0</code> dengan carry 1 ke kolom berikutnya.</li>
+                    <li>Ada carry 1 terakhir yang menjadi bit paling kiri hasil.</li>
+                </ol>
+            </div>
+
+            <h3>Pengurangan Biner</h3>
+            <p>Pengurangan biner juga mirip dengan desimal, menggunakan konsep "pinjaman" (borrow). Aturan dasarnya adalah:</p>
+            <ul>
+                <li><code>0 - 0 = 0</code></li>
+                <li><code>1 - 0 = 1</code></li>
+                <li><code>1 - 1 = 0</code></li>
+                <li><code>0 - 1 = 1</code> dengan <em>borrow</em> 1 dari kolom di sebelah kiri (ini berarti 0 menjadi 10_2 atau 2_10)</li>
+            </ul>
+            <div class="example-block">
+                <h4>Contoh 1: Pengurangan Sederhana</h4>
+                <pre class="language-plaintext">  11_2 (3)
+- 01_2 (1)
+-----
+  10_2 (2)</pre>
+            </div>
+            <div class="example-block">
+                <h4>Contoh 2: Pengurangan dengan Borrow</h4>
+                <pre class="language-plaintext">  100_2 (4)
+- 011_2 (3)
+-----
+Pinjaman:    -1 -1
+           0  2 2 (ini adalah nilai setelah pinjaman)
+           1  0 0
+         - 0  1 1
+         -----
+           0  0 1_2 (1)</pre>
+                <p>Penjelasan langkah demi langkah untuk contoh 2:</p>
+                <ol>
+                    <li>Kolom paling kanan (2<sup>0</sup>): <code class="language-plaintext">0 - 1</code>. Tidak bisa, jadi pinjam dari bit di sebelah kiri.</li>
+                    <li>Kolom tengah (2<sup>1</sup>): Ini adalah 0, jadi tidak bisa dipinjam. Harus pinjam dari bit paling kiri.</li>
+                    <li>Kolom paling kiri (2<sup>2</sup>): 1 menjadi 0 setelah dipinjam oleh kolom tengah.</li>
+                    <li>Kolom tengah (2<sup>1</sup>): Sekarang menjadi 10_2 (yaitu 2 desimal), dan kemudian meminjamkan 1 ke kolom kanan. Jadi, ini menjadi 1.</li>
+                    <li>Kolom paling kanan (2<sup>0</sup>): Sekarang menjadi 10_2 (yaitu 2 desimal). <code class="language-plaintext">10_2 - 1_2 = 1_2</code>.</li>
+                    <li>Kolom tengah (2<sup>1</sup>): <code class="language-plaintext">1 - 1 = 0</code>.</li>
+                    <li>Kolom paling kiri (2<sup>2</sup>): <code class="language-plaintext">0 - 0 = 0</code>.</li>
+                </ol>
+                <p>Hasilnya adalah <code class="language-plaintext">001_2</code> atau <code class="language-plaintext">1_2</code>.</p>
+
+            <h4>Metode Komplemen Dua (Two's Complement) untuk Pengurangan</h4>
+            <p>Dalam sistem komputer, pengurangan sering dilakukan menggunakan metode komplemen dua karena ini memungkinkan penggunaan sirkuit penjumlahan yang sama untuk operasi pengurangan. Ini menyederhanakan desain perangkat keras.</p>
+            <p>Untuk menghitung <code>A - B</code> menggunakan komplemen dua, kita mengubah masalah menjadi <code>A + (-B)</code>. Langkah-langkahnya adalah:</p>
+            <ol>
+                <li>Tentukan jumlah bit yang akan digunakan (misalnya, 8-bit).</li>
+                <li>Konversi bilangan B ke biner.</li>
+                <li>Hitung Komplemen Satu (One's Complement) dari B: Balikkan setiap bit (0 menjadi 1, 1 menjadi 0).</li>
+                <li>Hitung Komplemen Dua (Two's Complement) dari B: Tambahkan 1 ke hasil Komplemen Satu. Ini adalah representasi biner dari -B.</li>
+                <li>Tambahkan A dengan Komplemen Dua dari B.</li>
+                <li>Jika ada <em>carry</em> terakhir yang keluar dari bit paling kiri (most significant bit), buanglah carry tersebut.</li>
+            </ol>
+            <div class="example-block">
+                <h4>Contoh: Kurangkan 3 dari 7 (7 - 3) menggunakan 4-bit</h4>
+                <pre class="language-plaintext">1. A = 7_10 = 0111_2
+2. B = 3_10 = 0011_2
+
+3. Komplemen Satu dari B (0011_2):
+   Balikkan bit: 1100_2
+
+4. Komplemen Dua dari B (1100_2 + 1):
+   1100_2
+ + 0001_2
+ -------
+   1101_2 (Ini adalah representasi dari -3 dalam 4-bit)
+
+5. Tambahkan A dengan Komplemen Dua dari B:
+   0111_2 (7)
+ + 1101_2 (-3)
+ -------
+1 0100_2
+^ (Carry keluar)
+
+6. Buang carry terakhir: Hasilnya adalah 0100_2.
+
+Verifikasi: 0100_2 = 4_10. Benar, 7 - 3 = 4.</pre>
+            </div>
+
+            <h3>Perkalian Biner</h3>
+            <p>Perkalian biner mirip dengan perkalian panjang desimal. Kita mengalikan setiap bit dari pengali dengan bilangan yang dikalikan, kemudian menjumlahkan hasil pergeseran parsial.</p>
+            <ul>
+                <li><code>0 * 0 = 0</code></li>
+                <li><code>0 * 1 = 0</code></li>
+                <li><code>1 * 0 = 0</code></li>
+                <li><code>1 * 1 = 1</code></li>
+            </ul>
+            <div class="example-block">
+                <h4>Contoh: Kalikan 5 dengan 3 (0101_2 * 0011_2)</h4>
+                <pre class="language-plaintext">       0101_2 (5)
+    x  0011_2 (3)
+    -------
+       0101   (0101 * 1)
+      01010   (0101 * 1, digeser satu tempat ke kiri)
+     000000   (0101 * 0, digeser dua tempat ke kiri)
+    0000000   (0101 * 0, digeser tiga tempat ke kiri)
+    -------
+    0001111_2 (15)</pre>
+                <p>Penjumlahan akhir adalah:</p>
+                <pre class="language-plaintext">    0101
+  + 01010
+  -------
+    01111</pre>
+                <p>Hasilnya <code class="language-plaintext">0001111_2</code> atau <code class="language-plaintext">1111_2</code>, yang setara dengan <code class="language-plaintext">15_10</code>. Benar, 5 * 3 = 15.</p>
+            </div>
+
+            <h3>Pembagian Biner</h3>
+            <p>Pembagian biner juga menggunakan metode pembagian panjang yang mirip dengan desimal. Kita mencari berapa kali pembagi dapat masuk ke dalam bagian dari pembilang.</p>
+            <div class="example-block">
+                <h4>Contoh: Bagi 10 dengan 2 (1010_2 / 10_2)</h4>
+                <pre class="language-plaintext">       101   (Hasil bagi: 5)
+     _______
+10_2 | 1010_2  (Pembilang: 10)
+
+     10      (10_2 * 1_2)
+     ---
+      01     (Sisa)
+       0     (Turunkan 1 dari pembilang)
+       -
+       10    (10_2 * 0_2)
+       --
+        10   (Sisa)
+        10   (Turunkan 0 dari pembilang)
+        --
+        00   (10_2 * 1_2)
+        --
+         0   (Sisa akhir)
+
+Hasil bagi: 101_2 (5)
+Sisa: 00_2 (0)</pre>
+            </div>
+            <p>Operasi aritmetika biner ini adalah dasar dari semua kalkulasi di dalam komputer, dari penjumlahan sederhana hingga perhitungan grafis 3D yang kompleks.</p>
+        </section>
+
+        <section id="representasi-bilangan">
+            <h2>Representasi Bilangan dalam Komputer</h2>
+            <p>Angka biner dapat merepresentasikan lebih dari sekadar nilai positif. Komputer harus mampu menangani bilangan bulat positif dan negatif, serta bilangan pecahan atau desimal. Cara komputer merepresentasikan jenis-jenis bilangan ini memiliki implikasi besar terhadap rentang nilai dan presisi.</p>
+
+            <h3>Bilangan Tak Bertanda (Unsigned Integers)</h3>
+            <p>Bilangan tak bertanda adalah bilangan bulat positif murni (termasuk nol). Setiap bit digunakan untuk merepresentasikan nilai magnitude. Untuk <code class="language-plaintext">n</code> bit, rentang nilai yang dapat direpresentasikan adalah dari <code class="language-plaintext">0</code> hingga <code class="language-plaintext">2^n - 1</code>.</p>
+            <ul>
+                <li><strong>Dengan 8 bit:</strong> <code class="language-plaintext">0</code> hingga <code class="language-plaintext">2^8 - 1 = 255</code>.</li>
+                <li><strong>Dengan 16 bit:</strong> <code class="language-plaintext">0</code> hingga <code class="language-plaintext">2^16 - 1 = 65535</code>.</li>
+            </ul>
+            <p>Contoh: Dalam sistem 4-bit unsigned, <code class="language-plaintext">1111_2</code> adalah <code class="language-plaintext">15_10</code>.</p>
+
+            <h3>Bilangan Bertanda (Signed Integers)</h3>
+            <p>Untuk merepresentasikan bilangan negatif, berbagai skema telah dikembangkan. Tiga metode utama adalah:</p>
+
+            <h4>1. Sign-Magnitude (Magnitudo Tanda)</h4>
+            <p>Dalam metode ini, bit paling kiri (Most Significant Bit / MSB) digunakan sebagai bit tanda:</p>
+            <ul>
+                <li><code class="language-plaintext">0</code> untuk bilangan positif.</li>
+                <li><code class="language-plaintext">1</code> untuk bilangan negatif.</li>
+            </ul>
+            <p>Sisa bit digunakan untuk merepresentasikan magnitude (nilai absolut) bilangan tersebut. Untuk <code class="language-plaintext">n</code> bit, rentang nilai adalah dari <code class="language-plaintext">-(2^(n-1) - 1)</code> hingga <code class="language-plaintext">+(2^(n-1) - 1)</code>.</p>
+            <div class="example-block">
+                <h4>Contoh Sign-Magnitude (menggunakan 4 bit)</h4>
+                <pre class="language-plaintext">0011_2 = +3
+1011_2 = -3</pre>
+                <p>Kelemahan utama metode ini adalah:</p>
+                <ul>
+                    <li>Ada dua representasi untuk nol: <code class="language-plaintext">0000_2</code> (+0) dan <code class="language-plaintext">1000_2</code> (-0). Ini membuang satu kombinasi bit dan menyulitkan perbandingan nol.</li>
+                    <li>Operasi aritmetika (terutama penjumlahan dan pengurangan) menjadi lebih kompleks karena harus mempertimbangkan tanda secara terpisah.</li>
+                </ul>
+            </div>
+
+            <h4>2. One's Complement (Komplemen Satu)</h4>
+            <p>Metode ini juga menggunakan bit paling kiri sebagai bit tanda. Untuk mendapatkan representasi bilangan negatif, semua bit dari bilangan positif dibalikkan (0 menjadi 1, 1 menjadi 0).</p>
+            <div class="example-block">
+                <h4>Contoh One's Complement (menggunakan 4 bit)</h4>
+                <pre class="language-plaintext">Untuk +3: 0011_2
+Untuk -3: Balikkan semua bit dari 0011_2 &rarr; 1100_2</pre>
+                <p>Rentang nilai untuk <code class="language-plaintext">n</code> bit sama dengan sign-magnitude. Kelemahan utamanya adalah masih ada dua representasi untuk nol (<code class="language-plaintext">0000_2</code> dan <code class="language-plaintext">1111_2</code>), yang dikenal sebagai +0 dan -0. Aritmetika juga memerlukan penyesuaian khusus (end-around carry).</p>
+            </div>
+
+            <h4>3. Two's Complement (Komplemen Dua) - Standar Industri</h4>
+            <p>Komplemen Dua adalah metode yang paling banyak digunakan untuk merepresentasikan bilangan bertanda dalam sistem komputer karena mengatasi masalah representasi nol ganda dan menyederhanakan operasi aritmetika.</p>
+            <p>Untuk mendapatkan representasi negatif dari sebuah bilangan positif:</p>
+            <ol>
+                <li>Ambil Komplemen Satu-nya (balikkan semua bit).</li>
+                <li>Tambahkan 1 ke hasil Komplemen Satu.</li>
+            </ol>
+            <div class="example-block">
+                <h4>Contoh Two's Complement (menggunakan 4 bit)</h4>
+                <pre class="language-plaintext">Untuk +3:  0011_2
+
+Untuk -3:
+1. Komplemen Satu dari 0011_2: 1100_2
+2. Tambahkan 1:
+   1100_2
+ + 0001_2
+ --------
+   1101_2  (&lt;-- Ini adalah representasi dari -3)
+
+Untuk -0: Tidak ada -0. Semua bit nol (0000_2) merepresentasikan nol tunggal.
+0000_2 (0)
+Balikkan: 1111_2
+Tambahkan 1: 1111_2 + 1_2 = 10000_2. Carry keluar dibuang, jadi 0000_2.</pre>
+                <p>Keunggulan Komplemen Dua:</p>
+                <ul>
+                    <li>Hanya ada satu representasi untuk nol (<code class="language-plaintext">0000_2</code>).</li>
+                    <li>Operasi penjumlahan dan pengurangan dapat dilakukan dengan menggunakan sirkuit penjumlahan yang sama, terlepas dari apakah bilangan itu positif atau negatif.</li>
+                    <li>Rentang nilai untuk <code class="language-plaintext">n</code> bit adalah dari <code class="language-plaintext">-(2^(n-1))</code> hingga <code class="language-plaintext">+(2^(n-1) - 1)</code>. Misalnya, dengan 4 bit: dari <code class="language-plaintext">-8</code> hingga <code class="language-plaintext">+7</code>.</li>
+                </ul>
+            </div>
+
+            <h3>Bilangan Pecahan (Floating-Point Numbers)</h3>
+            <p>Mewakili bilangan desimal seperti 3.14 atau 0.005 dalam biner membutuhkan pendekatan yang berbeda, yang dikenal sebagai representasi <em>floating-point</em> (titik-mengambang). Standar yang paling umum adalah <strong>IEEE 754</strong>.</p>
+            <p>Representasi floating-point mirip dengan notasi ilmiah desimal (misalnya, <code class="language-plaintext">6.022 x 10^23</code>), tetapi dalam basis 2. Sebuah bilangan floating-point biasanya dibagi menjadi tiga bagian:</p>
+            <ol>
+                <li><strong>Bit Tanda (Sign Bit):</strong> 1 bit, 0 untuk positif, 1 untuk negatif.</li>
+                <li><strong>Eksponen (Exponent):</strong> Beberapa bit untuk merepresentasikan pangkat dari 2. Eksponen bias digunakan untuk memungkinkan representasi eksponen positif dan negatif.</li>
+                <li><strong>Mantissa / Significand:</strong> Beberapa bit untuk merepresentasikan angka signifikan (digit-digit setelah titik biner).</li>
+            </ol>
+            <p>Dua format utama dalam IEEE 754 adalah:</p>
+            <ul>
+                <li><strong>Single-Precision (32-bit):</strong>
+                    <ul>
+                        <li>1 bit untuk tanda.</li>
+                        <li>8 bit untuk eksponen (dengan bias 127).</li>
+                        <li>23 bit untuk mantissa.</li>
+                    </ul>
+                </li>
+                <li><strong>Double-Precision (64-bit):</strong>
+                    <ul>
+                        <li>1 bit untuk tanda.</li>
+                        <li>11 bit untuk eksponen (dengan bias 1023).</li>
+                        <li>52 bit untuk mantissa.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>Konsep Normalisasi dan Eksponen Bias</h4>
+            <p>Untuk memaksimalkan presisi, bilangan floating-point dinormalisasi, artinya selalu ada 1 di depan titik biner (misalnya, <code class="language-plaintext">1.xxxx</code>). Karena 1 ini selalu ada, ia tidak perlu disimpan secara eksplisit dalam mantissa (disebut "hidden bit" atau "implicit leading bit"), sehingga menghemat satu bit presisi.</p>
+            <p>Eksponen disimpan dengan "bias" untuk memungkinkan representasi eksponen negatif tanpa menggunakan bit tanda terpisah untuk eksponen itu sendiri. Misalnya, dalam single-precision, eksponen 8-bit dengan bias 127 berarti eksponen yang disimpan <code class="language-plaintext">E_stored</code> = <code class="language-plaintext">E_actual + 127</code>. Jadi, jika <code class="language-plaintext">E_actual = 0</code>, <code class="language-plaintext">E_stored = 127</code> (<code>01111111_2</code>). Jika <code class="language-plaintext">E_actual = -1</code>, <code class="language-plaintext">E_stored = 126</code> (<code>01111110_2</code>).</p>
+
+            <h4>Contoh Representasi Floating-Point (Sederhana, bukan IEEE 754 lengkap)</h4>
+            <p>Untuk memahami konsepnya, mari kita ambil contoh bilangan desimal pecahan dan bagaimana ia dapat direpresentasikan dalam format biner. Misalkan kita ingin merepresentasikan <code>0.625</code>.</p>
+            <p>Pertama, konversi bagian pecahannya ke biner dengan mengalikan dengan 2 berulang kali dan mengambil bagian bulatnya:</p>
+            <pre class="language-plaintext">0.625 * 2 = 1.25   (Ambil 1)
+0.250 * 2 = 0.50   (Ambil 0)
+0.500 * 2 = 1.00   (Ambil 1)
+Hasil biner pecahan: 0.101_2</pre>
+            <p>Jadi, <code class="language-plaintext">0.625_10 = 0.101_2</code>.</p>
+            <p>Sekarang, untuk representasi floating-point, kita perlu menormalisasinya ke bentuk <code class="language-plaintext">1.xxxx * 2^E</code>:</p>
+            <pre class="language-plaintext">0.101_2 = 1.01_2 * 2^(-1)</pre>
+            <p>Di sini:</p>
+            <ul>
+                <li>Tanda: Positif (0)</li>
+                <li>Mantissa: <code class="language-plaintext">01</code> (setelah menghilangkan 1 implisit di depan titik)</li>
+                <li>Eksponen: <code class="language-plaintext">-1</code></li>
+            </ul>
+            <p>Dalam format IEEE 754 single-precision, ini akan melibatkan konversi eksponen <code class="language-plaintext">-1</code> ke bentuk bias (<code class="language-plaintext">-1 + 127 = 126</code>) dan merepresentasikannya dalam 8 bit. Mantissa akan diisi dengan 23 bit dari <code class="language-plaintext">01</code> diikuti nol.</p>
+
+            <h4>Nilai Spesial dalam IEEE 754</h4>
+            <p>IEEE 754 juga mendefinisikan representasi untuk nilai-nilai khusus:</p>
+            <ul>
+                <li><strong>Nol (Zero):</strong> Semua bit nol, dengan bit tanda menentukan +0 atau -0.</li>
+                <li><strong>Tak Hingga (Infinity):</strong> Eksponen maksimum, mantissa semua nol, dengan bit tanda menentukan +Inf atau -Inf. Digunakan untuk hasil pembagian dengan nol.</li>
+                <li><strong>NaN (Not a Number):</strong> Eksponen maksimum, mantissa bukan nol. Digunakan untuk hasil operasi yang tidak terdefinisi (misalnya, akar kuadrat dari bilangan negatif, 0/0).</li>
+            </ul>
+            <p>Representasi floating-point ini memungkinkan komputer untuk bekerja dengan bilangan pecahan dalam rentang yang sangat luas, meskipun dengan kompromi dalam hal presisi untuk beberapa bilangan (misalnya, <code class="language-plaintext">0.1_10</code> tidak dapat direpresentasikan secara tepat dalam biner floating-point, mirip dengan <code class="language-plaintext">1/3</code> desimal).</p>
+        </section>
+
+        <section id="aplikasi">
+            <h2>Aplikasi Angka Biner dalam Teknologi</h2>
+            <p>Angka biner adalah bahasa universal di balik hampir setiap aspek teknologi modern. Dari hardware terkecil hingga jaringan global, biner adalah pondasi yang tak tergantikan. Mari kita telusuri beberapa aplikasinya yang paling krusial.</p>
+
+            <h3>Arsitektur Komputer</h3>
+            <p>Jantung setiap komputer adalah arsitektur biner. Setiap komponen bekerja dengan sinyal listrik yang ON (1) atau OFF (0).</p>
+            <ul>
+                <li><strong>CPU (Central Processing Unit):</strong> ALU (Arithmetic Logic Unit) di dalam CPU melakukan semua operasi aritmetika dan logika menggunakan biner. Instruksi yang dijalankan oleh CPU (opcode) juga direpresentasikan dalam biner. Register dalam CPU menyimpan data biner sementara.</li>
+                <li><strong>Memori (RAM, ROM):</strong> RAM (Random Access Memory) dan ROM (Read-Only Memory) menyimpan data dan instruksi sebagai pola bit. Setiap lokasi memori memiliki alamat biner unik, dan data diakses atau ditulis dalam bentuk biner.</li>
+                <li><strong>Penyimpanan Data:</strong> Hard drive, SSD, flash drive, dan media penyimpanan lainnya menyimpan data sebagai bit magnetik, muatan listrik, atau perubahan fasa optik, yang semuanya diterjemahkan menjadi 0 dan 1.</li>
+                <li><strong>Bus Data:</strong> Jalur komunikasi dalam komputer (bus data) mentransfer bit-bit ini antara CPU, memori, dan perangkat lainnya.</li>
+            </ul>
+
+            <h3>Elektronika Digital dan Gerbang Logika</h3>
+            <p>Angka biner adalah prinsip dasar dalam desain sirkuit digital. Gerbang logika adalah blok bangunan dasar dari sirkuit digital yang mengimplementasikan operasi Boolean (AND, OR, NOT, XOR, dll.) menggunakan input dan output biner.</p>
+            <ul>
+                <li><strong>Gerbang Logika:</strong>
+                    <ul>
+                        <li><strong>AND:</strong> Output 1 hanya jika semua input 1. (<code>A AND B = 1</code> jika <code>A=1</code> dan <code>B=1</code>)</li>
+                        <li><strong>OR:</strong> Output 1 jika setidaknya satu input 1. (<code>A OR B = 1</code> jika <code>A=1</code> atau <code>B=1</code> atau keduanya)</li>
+                        <li><strong>NOT:</strong> Membalikkan input (0 menjadi 1, 1 menjadi 0).</li>
+                        <li><strong>XOR (Exclusive OR):</strong> Output 1 jika input berbeda. (<code>A XOR B = 1</code> jika <code>A=1, B=0</code> atau <code>A=0, B=1</code>)</li>
+                    </ul>
+                </li>
+                <li><strong>Rangkaian Kombinasi dan Sekuensial:</strong> Gerbang-gerbang ini digabungkan untuk membentuk sirkuit yang lebih kompleks seperti adder (penjumlah biner), multiplexer, demultiplexer, flip-flop, register, dan counter, yang merupakan bagian integral dari CPU dan memori.</li>
+                <li><strong>Sirkuit Terpadu (IC):</strong> Chip komputer modern berisi miliaran transistor yang bertindak sebagai sakelar biner, membentuk jutaan gerbang logika.</li>
+            </ul>
+
+            <h3>Jaringan Komputer</h3>
+            <p>Transfer data di jaringan juga sepenuhnya berbasis biner.</p>
+            <ul>
+                <li><strong>Alamat IP:</strong> Alamat IP (Internet Protocol) mengidentifikasi perangkat di jaringan. IPv4 menggunakan 32 bit (misalnya, <code class="language-plaintext">192.168.1.1</code>, yang sebenarnya adalah <code class="language-plaintext">11000000.10101000.00000001.00000001</code> dalam biner). IPv6 menggunakan 128 bit, memungkinkan jumlah alamat yang jauh lebih besar.</li>
+                <li><strong>Subnet Mask:</strong> Digunakan untuk memisahkan bagian jaringan dan host dari alamat IP, juga direpresentasikan dalam biner (misalnya, <code class="language-plaintext">255.255.255.0</code> adalah <code class="language-plaintext">11111111.11111111.11111111.00000000</code>).</li>
+                <li><strong>Transmisi Data:</strong> Paket data yang bergerak melalui kabel (sinyal listrik), serat optik (cahaya), atau nirkabel (gelombang radio) semuanya adalah serangkaian bit yang dikirim secara berurutan.</li>
+            </ul>
+
+            <h3>Representasi Data</h3>
+            <p>Semua jenis data yang kita tangani secara digital pada dasarnya dikodekan ke dalam biner.</p>
+            <ul>
+                <li><strong>Teks:</strong>
+                    <ul>
+                        <li><strong>ASCII (American Standard Code for Information Interchange):</strong> Menggunakan 7 atau 8 bit untuk merepresentasikan karakter (huruf, angka, simbol). Misalnya, huruf 'A' adalah <code class="language-plaintext">01000001_2</code> (65 desimal).</li>
+                        <li><strong>Unicode dan UTF-8:</strong> Sistem pengodean modern yang dapat merepresentasikan karakter dari hampir semua bahasa di dunia. UTF-8 adalah pengodean Unicode yang variabel panjang, sangat kompatibel dengan ASCII, di mana setiap karakter dikodekan sebagai urutan bit biner.</li>
+                    </ul>
+                </li>
+                <li><strong>Gambar:</strong>
+                    <ul>
+                        <li><strong>Pixel:</strong> Gambar digital terdiri dari jutaan piksel. Setiap piksel direpresentasikan oleh nilai biner yang menunjukkan warna dan intensitasnya.</li>
+                        <li><strong>Warna RGB:</strong> Warna sering direpresentasikan menggunakan model RGB (Red, Green, Blue), di mana setiap komponen warna diberi nilai antara 0-255 (8 bit biner). Misalnya, <code class="language-plaintext">rgb(255, 0, 0)</code> adalah merah murni, dan dalam biner adalah <code class="language-plaintext">11111111.00000000.00000000</code>.</li>
+                        <li><strong>Alpha Channel:</strong> Bit tambahan untuk transparansi.</li>
+                    </ul>
+                </li>
+                <li><strong>Audio:</strong> Gelombang suara analog diubah menjadi digital melalui proses <em>sampling</em> (mengambil sampel sinyal pada interval waktu tertentu) dan <em>kuantisasi</em> (menetapkan nilai biner ke setiap sampel). Semakin tinggi frekuensi sampling dan resolusi bit (jumlah bit per sampel), semakin akurat representasi suara.</li>
+                <li><strong>Video:</strong> Video adalah rangkaian gambar (frame) yang ditampilkan secara cepat, ditambah dengan data audio. Setiap frame dan setiap bit audio dikodekan secara biner. Kompresi video (misalnya, H.264, HEVC) menggunakan algoritma kompleks untuk mengurangi jumlah bit yang diperlukan untuk menyimpan dan mentransmisikan video.</li>
+            </ul>
+
+            <h3>Algoritma dan Struktur Data</h3>
+            <p>Konsep biner juga meresap ke dalam desain algoritma dan struktur data.</p>
+            <ul>
+                <li><strong>Pencarian Biner (Binary Search):</strong> Algoritma efisien untuk menemukan item dalam daftar yang diurutkan dengan membagi daftar menjadi dua berulang kali, secara efektif membuang setengah dari sisa item di setiap langkah.</li>
+                <li><strong>Pohon Biner (Binary Tree):</strong> Struktur data di mana setiap node memiliki paling banyak dua anak (kiri dan kanan). Ini digunakan untuk pengindeksan data, pencarian, dan pengurutan.</li>
+                <li><strong>Heap Biner (Binary Heap):</strong> Struktur data berbasis pohon yang digunakan untuk mengimplementasikan antrian prioritas.</li>
+            </ul>
+
+            <h3>Kriptografi</h3>
+            <p>Operasi biner (bitwise operations) adalah tulang punggung banyak algoritma kriptografi. Enkripsi dan dekripsi melibatkan manipulasi bit-bit data untuk mengacak dan memulihkan informasi.</p>
+            <ul>
+                <li><strong>Operasi Bitwise:</strong> XOR, AND, OR, NOT, pergeseran bit (shift), rotasi bit adalah operasi dasar yang digunakan dalam algoritma enkripsi seperti AES (Advanced Encryption Standard).</li>
+                <li><strong>Kunci Enkripsi:</strong> Kunci itu sendiri adalah urutan bit biner yang panjang, yang kemudian digunakan untuk mengubah plaintext menjadi ciphertext dan sebaliknya.</li>
+            </ul>
+
+            <h3>Deteksi dan Koreksi Error</h3>
+            <p>Untuk memastikan integritas data selama penyimpanan atau transmisi, teknik deteksi dan koreksi error menggunakan prinsip biner.</p>
+            <ul>
+                <li><strong>Bit Paritas:</strong> Bit tambahan yang ditambahkan ke data untuk menunjukkan apakah jumlah bit 1 dalam data genap atau ganjil. Jika paritas berubah, error terdeteksi.</li>
+                <li><strong>Cyclic Redundancy Check (CRC):</strong> Metode yang lebih canggih yang menghasilkan nilai cek biner berdasarkan data, digunakan untuk mendeteksi error dalam transmisi data.</li>
+                <li><strong>Kode Hamming:</strong> Mampu tidak hanya mendeteksi error tetapi juga mengoreksinya dalam bit-bit tertentu.</li>
+            </ul>
+            <p>Singkatnya, dari sinyal listrik yang paling dasar hingga algoritma kompleks yang menggerakkan internet, angka biner adalah bahasa universal yang memungkinkan semua teknologi digital kita berfungsi.</p>
+        </section>
+
+        <section id="masa-depan">
+            <h2>Masa Depan dan Relevansi Abadi Biner</h2>
+            <p>Seiring dengan perkembangan teknologi yang pesat, muncul pertanyaan apakah angka biner akan tetap relevan di masa depan. Jawabannya adalah, ya, relevansinya akan tetap abadi, meskipun dengan beberapa evolusi dan penyesuaian di beberapa area.</p>
+
+            <h3>Kuantum Komputasi: Evolusi Bit Biner?</h3>
+            <p>Salah satu area yang sering disebut-sebut sebagai 'penerus' biner adalah <a href="https://id.wikipedia.org/wiki/Komputasi_kuantum" target="_blank" rel="noopener noreferrer">komputasi kuantum</a>. Komputer kuantum tidak menggunakan bit klasik 0 atau 1, melainkan <a href="https://id.wikipedia.org/wiki/Qubit" target="_blank" rel="noopener noreferrer">qubit</a> (quantum bit). Qubit memiliki kemampuan unik untuk berada dalam superposisi 0 dan 1 secara bersamaan, serta saling terhubung melalui fenomena entanglemen kuantum.</p>
+            <p>Ini memungkinkan komputer kuantum untuk melakukan perhitungan yang tidak mungkin dilakukan oleh komputer klasik. Namun, penting untuk dicatat bahwa:</p>
+            <ul>
+                <li><strong>Bukan Pengganti Universal:</strong> Komputer kuantum tidak dimaksudkan untuk menggantikan semua komputer klasik. Mereka akan unggul dalam jenis masalah tertentu (misalnya, simulasi molekuler, faktorisasi bilangan prima besar, optimasi kompleks), sementara komputer klasik akan tetap menjadi pilihan terbaik untuk tugas-tugas komputasi sehari-hari.</li>
+                <li><strong>Interaksi dengan Biner:</strong> Meskipun inti komputasi kuantum berbeda, hasil akhirnya seringkali harus diinterpretasikan kembali ke dalam format biner yang dapat dipahami oleh sistem komputasi klasik dan pengguna. Antarmuka antara dunia kuantum dan dunia klasik akan tetap bergantung pada biner.</li>
+                <li><strong>Komputer Klasik sebagai Infrastruktur:</strong> Untuk mengontrol dan memprogram komputer kuantum, masih dibutuhkan infrastruktur komputasi klasik yang sepenuhnya berbasis biner.</li>
+            </ul>
+            <p>Jadi, alih-alih menggantikan biner, komputasi kuantum lebih merupakan perluasan atau paradigma komputasi paralel yang bekerja bersama dengan dunia biner.</p>
+
+            <h3>Terus Mendasari Inovasi</h3>
+            <p>Biner telah membuktikan dirinya sebagai fondasi yang sangat stabil dan efisien. Inovasi masa depan, seperti kecerdasan buatan yang lebih canggih, pembelajaran mesin, augmented reality, dan internet of things (IoT), semuanya dibangun di atas kemampuan untuk memproses dan menyimpan informasi dalam format biner. Sensor IoT mengumpulkan data sebagai sinyal analog yang kemudian dikonversi menjadi biner, algoritma AI memanipulasi vektor biner, dan grafis AR/VR dirender dari data piksel biner.</p>
+            <p>Bahkan pengembangan bahasa pemrograman tingkat tinggi dan kerangka kerja canggih pada akhirnya akan dikompilasi atau diinterpretasikan ke dalam instruksi biner yang dapat dijalankan oleh prosesor. Abstraksi yang kompleks ini menyembunyikan biner dari pandangan kita, tetapi tidak menghilangkan keberadaannya.</p>
+
+            <h3>Pentingnya Memahami Biner</h3>
+            <p>Bagi para insinyur, ilmuwan komputer, dan siapa pun yang ingin memahami cara kerja teknologi secara mendalam, pemahaman tentang biner tetap esensial. Ini membantu dalam:</p>
+            <ul>
+                <li><strong>Debugging:</strong> Memahami representasi data di level terendah dapat sangat membantu dalam mengidentifikasi masalah dalam perangkat lunak atau perangkat keras.</li>
+                <li><strong>Optimasi Kinerja:</strong> Pengetahuan tentang bagaimana data disimpan dan diproses secara biner dapat membantu dalam menulis kode yang lebih efisien.</li>
+                <li><strong>Desain Sistem:</strong> Merancang sistem perangkat keras atau perangkat lunak yang efisien membutuhkan pemahaman tentang batasan dan kemampuan representasi biner.</li>
+                <li><strong>Keamanan Siber:</strong> Memahami bagaimana data direpresentasikan pada level bit sangat penting dalam menganalisis kerentanan dan merancang pertahanan siber.</li>
+            </ul>
+            <p>Angka biner adalah bahasa universal yang memungkinkan kita membangun jembatan antara dunia fisik (sinyal listrik) dan dunia informasi digital. Ini adalah bukti kekuatan kesederhanaan. Dengan hanya dua simbol, kita telah menciptakan dan terus mengembangkan peradaban digital yang kompleks dan menakjubkan.</p>
+        </section>
+
+        <section id="kesimpulan">
+            <h2>Kesimpulan</h2>
+            <p>Angka biner, dengan kesederhanaannya yang terdiri dari hanya 0 dan 1, adalah pahlawan tanpa tanda jasa di balik layar semua teknologi digital yang kita nikmati hari ini. Dari cara komputer menyimpan data hingga bagaimana mereka melakukan perhitungan kompleks, biner adalah bahasa fundamental dan tak tergantikan. Kita telah menjelajahi dasar-dasarnya, metode konversi yang vital, aritmetika biner yang menjadi tulang punggung komputasi, berbagai cara representasi bilangan (baik bilangan bulat maupun pecahan), serta berbagai aplikasinya yang luas dalam arsitektur komputer, elektronika digital, jaringan, representasi data, algoritma, kriptografi, hingga deteksi error.</p>
+            <p>Meskipun paradigma komputasi baru seperti komputasi kuantum mungkin muncul, prinsip dasar biner akan terus mendasari sebagian besar interaksi kita dengan dunia digital dan menjadi jembatan ke inovasi-inovasi mendatang. Pemahaman yang kokoh tentang angka biner bukan hanya sekadar pengetahuan teknis, melainkan sebuah wawasan mendalam tentang fondasi yang membentuk dunia modern kita.</p>
+            <p>Semoga artikel ini telah memberikan Anda pemahaman yang komprehensif dan mendalam tentang betapa luar biasanya angka biner, dan menginspirasi Anda untuk terus menjelajahi keajaiban di balik layar teknologi.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>Artikel ini didedikasikan untuk eksplorasi pengetahuan digital.</p>
+    </footer>
+
+<style>
+.related-posts {
+  clear: both;
+  display: block;
+  width: 100%;
+  margin: 30px auto;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.related-posts h3 {
+  margin-top: 0;
+}
+.related-posts ul {
+  list-style: none;
+  padding: 0;
+}
+.related-posts li {
+  margin: 6px 0;
+}
+</style>
+<div class='related-posts'><h3>Related Posts</h3><ul><li><a href="/antropologi-budaya">Antropologi Budaya</a></li>
+<li><a href="/afal">Afal</a></li>
+<li><a href="/aerodinamis">Aerodinamis</a></li>
+<li><a href="/ageusia">Ageusia</a></li>
+<li><a href="/angke">Angke</a></li>
+<li><a href="/bank-perkreditan-rakyat">Bank Perkreditan Rakyat</a></li>
+<li><a href="/ampon">Ampon</a></li>
+<li><a href="/agribisnis">Agribisnis</a></li>
+<li><a href="/askes">Askes</a></li>
+<li><a href="/anamnesis">Anamnesis</a></li></ul></div>
+<script src="/ik.js"></script>
+</body>
+</html>

@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akropolis: Jantung Peradaban Kuno Yunani di Athena</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <style>
+        /* Variabel CSS untuk skema warna "sejuk cerah" */
+        :root {
+            --primary-bg: #f8faff; /* Latar belakang sangat terang, mendekati putih */
+            --secondary-bg: #e0f2f7; /* Latar belakang aksen, biru muda cerah */
+            --text-color: #34495e; /* Teks utama, biru tua keabu-abuan */
+            --heading-color: #2c3e50; /* Judul, biru gelap */
+            --accent-color: #3498db; /* Warna aksen, biru cerah */
+            --border-color: #a7d9f7; /* Warna batas, biru muda */
+            --link-color: #2980b9; /* Warna tautan */
+            --selection-bg: #87ceeb; /* Warna seleksi teks */
+            --selection-text: #ffffff;
+            --code-bg: #f0f4f7; /* Latar belakang kode */
+        }
+
+        /* Reset CSS dasar dan box-sizing */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Gaya body utama */
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--primary-bg);
+            padding: 20px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Container untuk konten utama */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-color);
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        h1 {
+            font-size: 2.8em;
+            color: var(--heading-color);
+            margin-bottom: 15px;
+            line-height: 1.2;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        header p {
+            font-size: 1.2em;
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        /* Gaya umum untuk heading */
+        h2 {
+            font-size: 2.2em;
+            color: var(--heading-color);
+            margin-top: 45px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: 1.7em;
+            color: var(--heading-color);
+            margin-top: 35px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        h4 {
+            font-size: 1.4em;
+            color: var(--heading-color);
+            margin-top: 28px;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        /* Paragraphs */
+        p {
+            margin-bottom: 1em;
+            text-align: justify;
+            font-size: 1.05em;
+        }
+
+        /* List styling */
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 1.5em;
+            line-height: 1.6;
+            font-size: 1.05em;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        /* Links */
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        /* Blockquotes */
+        blockquote {
+            background-color: var(--secondary-bg);
+            border-left: 5px solid var(--accent-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: var(--text-color);
+            font-size: 1.1em;
+            border-radius: 4px;
+        }
+
+        /* Images */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 30px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+        }
+
+        /* Figure captions */
+        figcaption {
+            text-align: center;
+            font-style: italic;
+            font-size: 0.95em;
+            color: var(--text-color);
+            margin-top: -15px;
+            margin-bottom: 30px;
+            padding: 10px 0;
+            background-color: var(--secondary-bg);
+            border-radius: 0 0 8px 8px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        /* Code snippets */
+        code, pre {
+            font-family: 'Fira Code', 'Cascadia Code', 'Consolas', 'Monaco', monospace;
+            background-color: var(--code-bg);
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+
+        pre {
+            padding: 15px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9em;
+            color: var(--text-color);
+        }
+
+        /* Responsiveness for smaller screens */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            .container {
+                padding: 20px;
+                border-radius: 8px;
+            }
+            h1 {
+                font-size: 2.2em;
+            }
+            h2 {
+                font-size: 1.8em;
+                margin-top: 35px;
+            }
+            h3 {
+                font-size: 1.5em;
+                margin-top: 28px;
+            }
+            h4 {
+                font-size: 1.2em;
+                margin-top: 20px;
+            }
+            p, ul, ol, blockquote {
+                font-size: 1em;
+            }
+            img {
+                margin: 20px auto;
+            }
+            figcaption {
+                margin-top: -10px;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                padding: 15px;
+                border-radius: 5px;
+                box-shadow: none; /* Lebih bersih di layar sangat kecil */
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            h3 {
+                font-size: 1.3em;
+            }
+            h4 {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Akropolis: Jantung Peradaban Kuno Yunani di Athena</h1>
+            <p>Simbol Keagungan, Seni, dan Demokrasi Abadi</p>
+        </header>
+
+        <main>
+            <figure>
+                <svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="akropolis-svg-title akropolis-svg-desc">
+                    <title id="akropolis-svg-title">Siluet Akropolis Athena</title>
+                    <desc id="akropolis-svg-desc">Siluet Akropolis dengan Parthenon dan Propylaea di atas bukit, di bawah langit cerah.</desc>
+                    <defs>
+                        <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#87ceeb;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#b0e0e6;stop-opacity:1" />
+                        </linearGradient>
+                        <filter id="shadow">
+                            <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.2"/>
+                        </filter>
+                    </defs>
+                    <rect x="0" y="0" width="1000" height="300" fill="url(#skyGradient)" />
+                    
+                    <!-- Bukit -->
+                    <path d="M0 300 L0 200 C100 150, 200 180, 300 170 C400 160, 500 180, 600 175 C700 170, 800 190, 1000 180 L1000 300 Z" fill="#b1a08e" filter="url(#shadow)"/>
+                    
+                    <!-- Parthenon (kanan tengah) -->
+                    <path d="M720 100 L720 140 H740 L740 100 L760 100 L760 140 H780 L780 100 L800 100 L800 140 H820 L820 100 L840 100 L840 140 H860 L860 100 L880 100 L880 140 H900 L900 100 L920 100 L920 140 H940 L940 100 L960 100 L960 140 H980 L980 100 L990 100 L990 140 H995 L995 100 L999 100 L999 140 H1000 L1000 140 L1000 160 L700 160 L700 140 L710 140 L710 100 Z" fill="#c0b29a" />
+                    <polygon points="700,160 850,80 1000,160" fill="#a0927c" />
+                    <rect x="700" y="160" width="300" height="15" fill="#a0927c" />
+
+                    <!-- Propylaea (kiri) -->
+                    <path d="M100 120 L100 150 H120 L120 120 L140 120 L140 150 H160 L160 120 L180 120 L180 150 H200 L200 120 L220 120 L220 150 H240 L240 120 L260 120 L260 150 H280 L280 120 L300 120 L300 150 H320 L320 120 L340 120 L340 150 H360 L360 120 L380 120 L380 150 H400 L400 120 L420 120 L420 150 H440 L440 120 L460 120 L460 150 H480 L480 120 L500 120 L500 150 H520 L520 120 L540 120 L540 150 H560 L560 120 L580 120 L580 150 H600 L600 120 L620 120 L620 150 H640 L640 120 L660 120 L660 150 H680 L680 120 L700 120 L700 150 L700 170 L80 170 L80 150 L100 150 Z" fill="#c0b29a" />
+                    <polygon points="80,170 390,90 700,170" fill="#a0927c" />
+                    <rect x="80" y="170" width="620" height="15" fill="#a0927c" />
+                </svg>
+                <figcaption>Akropolis Athena, situs kuno yang penuh sejarah dan keagungan. Siluetnya menandakan kehadiran Parthenon dan Propylaea.</figcaption>
+            </figure>
+
+            <p>Akropolis Athena, sebuah bukit batu kapur yang menjulang setinggi 156 meter di atas permukaan laut di jantung kota Athena, Yunani, bukan hanya sebuah situs arkeologi biasa. Ia adalah jantung yang berdetak dari peradaban kuno Yunani, sebuah monumen abadi bagi kehebatan seni, arsitektur, filsafat, dan demokrasi yang membentuk fondasi dunia Barat. Nama "Akropolis" sendiri berasal dari bahasa Yunani Kuno, "akros" (tertinggi) dan "polis" (kota), secara harfiah berarti "kota tertinggi" atau "kota di puncak". Penamaan ini sangat tepat, mengingat perannya yang sentral sebagai benteng pertahanan, pusat keagamaan, dan simbol kekuasaan selama ribuan tahun.</p>
+
+            <p>Sejarah Akropolis adalah cerminan langsung dari sejarah Athena dan, pada tingkat yang lebih luas, peradaban Yunani secara keseluruhan. Dari permulaannya sebagai pemukiman prasejarah dan benteng Mycenaean, hingga masa keemasannya di bawah kepemimpinan Perikles, dan kemudian transformasinya selama periode Romawi, Bizantium, Utsmaniyah, hingga akhirnya menjadi situs warisan dunia yang diakui secara global, Akropolis telah menyaksikan pasang surut berbagai kekaisaran dan pergeseran budaya. Setiap lapisan sejarahnya meninggalkan jejak, menciptakan narasi yang kompleks dan kaya yang terus diungkap oleh para arkeolog dan sejarawan.</p>
+
+            <p>Bangunan-bangunan megah yang menghiasi puncaknya, seperti Parthenon yang ikonik, Propylaea yang agung, Kuil Erechtheion yang unik, dan Kuil Athena Nike yang elegan, bukan sekadar struktur batu. Mereka adalah manifestasi fisik dari cita-cita luhur dan pencapaian monumental bangsa Yunani Kuno. Masing-masing memiliki cerita, tujuan, dan keunikan arsitektur yang menakjubkan, yang secara kolektif melukiskan gambaran tentang kehidupan keagamaan, politik, dan artistik masyarakat Athena pada masa jayanya.</p>
+
+            <p>Dalam artikel ini, kita akan menyelami lebih dalam ke dalam dunia Akropolis. Kita akan menjelajahi asal-usulnya yang misterius, melacak evolusinya melalui berbagai periode sejarah, mengagumi keindahan arsitektur dan signifikansi spiritual dari bangunan-bangunan utamanya, dan memahami mengapa Akropolis tetap relevan dan menginspirasi hingga hari ini. Dari mitos dan legenda yang menyelimutinya hingga upaya restorasi modern yang cermat, Akropolis adalah sebuah mahakarya yang tak lekang oleh waktu, sebuah jendela ke masa lalu yang terus berbicara kepada masa kini.</p>
+
+            <h2>Definisi dan Sejarah Singkat Akropolis</h2>
+            <p>Secara etimologi, seperti yang telah disebutkan, Akropolis berarti "kota tertinggi". Konsep akropolis, sebagai benteng alami di atas bukit, bukanlah fenomena yang unik di Athena. Banyak kota-kota Yunani Kuno lainnya, seperti Argos, Korintus, dan Thebes, juga memiliki akropolis mereka sendiri. Namun, Akropolis Athena-lah yang paling terkenal, paling megah, dan paling signifikan secara budaya dan sejarah, sehingga ketika orang berbicara tentang "Akropolis", biasanya yang dimaksud adalah Akropolis Athena.</p>
+
+            <p>Lokasinya yang strategis, sebuah bukit terjal dengan sisi-sisi yang curam, memberikan perlindungan alami yang sangat baik. Sejak zaman Neolitikum (sekitar 4000 SM), bukit ini telah dihuni dan digunakan sebagai tempat perlindungan. Bukti arkeologi menunjukkan bahwa pemukiman pertama di puncak bukit berasal dari periode prasejarah, menjadikannya salah satu tempat paling awal yang dihuni di wilayah Attika. Pada periode Mycenaean (sekitar 1600-1100 SM), Akropolis telah berkembang menjadi benteng yang kokoh, dikelilingi oleh tembok tebal yang dikenal sebagai "Cyclopean Walls" karena ukurannya yang masif, konon dibangun oleh para raksasa bermata satu, Cyclops. Di dalamnya, terdapat istana penguasa Mycenaean, sebuah pusat administratif dan militer yang penting.</p>
+
+            <p>Setelah keruntuhan peradaban Mycenaean dan Zaman Kegelapan Yunani (sekitar 1100-800 SM), fungsi Akropolis bergeser secara bertahap dari istana benteng menjadi pusat keagamaan yang didedikasikan untuk dewi Athena, pelindung kota. Selama periode Archaic (sekitar 800-480 SM), kuil-kuil kayu dan batu kapur mulai dibangun di atas bukit. Kuil-kuil ini, meskipun tidak lagi ada, merupakan cikal bakal struktur batu megah yang kita kenal sekarang. Perkembangan yang signifikan terjadi pada masa pemerintahan tiran Peisistratos pada abad ke-6 SM, yang memperluas dan memperindah situs ini dengan pembangunan kuil-kuil baru dan propylon (gerbang) monumental.</p>
+
+            <p>Titik balik dalam sejarah Akropolis terjadi pada tahun 480 SM, ketika invasi Persia yang dipimpin oleh Raja Xerxes menghancurkan seluruh bangunan di Akropolis. Kuil-kuil Archaic dibakar dan patung-patung dirusak. Namun, kehancuran ini menjadi katalisator bagi pembangunan kembali yang luar biasa yang akan mengikuti. Dalam beberapa dekade berikutnya, di bawah kepemimpinan negarawan karismatik Perikles, Athena mengalami "Masa Keemasan" (sekitar 460-430 SM). Selama periode inilah, dengan dana yang besar dari Liga Delian (aliansi kota-kota Yunani yang dipimpin Athena), Akropolis diubah menjadi kompleks arsitektur yang menakjubkan yang kita kenal sekarang. Proyek pembangunan ini melibatkan arsitek-arsitek terkemuka seperti Ictinus, Callicrates, dan Mnesicles, serta pemahat legendaris Pheidias.</p>
+
+            <p>Sejak itu, Akropolis terus beradaptasi dengan perubahan zaman. Ia menjadi gereja Kristen, masjid Utsmaniyah, dan bahkan gudang mesiu. Setiap era menambahkan lapisan baru pada naratifnya yang kaya. Di era modern, sejak kemerdekaan Yunani pada abad ke-19, upaya besar telah dilakukan untuk menggali, merestorasi, dan melindungi Akropolis, menjadikannya salah satu situs Warisan Dunia UNESCO yang paling berharga dan daya tarik turis yang tak tertandingi.</p>
+
+            <h2>Periode Penting dalam Sejarah Akropolis</h2>
+
+            <h3>1. Prasejarah dan Periode Mycenaean (sekitar 4000 SM – 1100 SM)</h3>
+            <p>Bukti arkeologi menunjukkan bahwa bukit Akropolis telah menjadi pemukiman manusia sejak zaman Neolitikum. Sisa-sisa tembikar dan artefak lainnya dari periode ini telah ditemukan, menunjukkan keberadaan komunitas pertanian awal. Lokasi yang tinggi dan terjal menawarkan keuntungan pertahanan yang jelas dari serangan luar, menjadikannya tempat yang ideal untuk pemukiman awal.</p>
+            <p>Pada periode Mycenaean, Akropolis menjadi pusat kekuatan yang penting. Sekitar 1300 SM, sebuah istana Mycenaean yang megah dibangun di puncaknya. Istana ini dikelilingi oleh tembok pertahanan yang sangat tebal, terbuat dari batu-batu besar yang tidak beraturan, dikenal sebagai "Tembok Cyclopean". Legenda menyebutkan bahwa tembok ini dibangun oleh raksasa Cyclops karena ukuran batu-batu yang digunakan begitu besar sehingga manusia biasa dianggap tidak mungkin mengangkatnya. Di dalam tembok ini, selain istana, terdapat juga tempat-tempat suci dan fasilitas militer. Terdapat juga sumber air bawah tanah yang dapat diakses dari dalam benteng, sebuah aset vital selama pengepungan. Peran Akropolis pada masa ini adalah sebagai pusat politik, militer, dan keagamaan bagi kota Athena yang sedang berkembang.</p>
+
+            <h3>2. Periode Geometris dan Archaic (sekitar 900 SM – 480 SM)</h3>
+            <p>Setelah keruntuhan peradaban Mycenaean dan transisi melalui Zaman Kegelapan Yunani, Akropolis mengalami pergeseran fungsi. Meskipun masih berfungsi sebagai tempat perlindungan dalam kasus serangan, penekanannya beralih ke peran keagamaan. Kuil-kuil pertama yang didedikasikan untuk dewi Athena mulai didirikan. Pada periode Archaic, bukit ini dipenuhi dengan berbagai struktur keagamaan, termasuk dua kuil besar yang dikenal sebagai "Hekatompedon" (kuil seratus kaki) dan "Kuil Athena Kuno", serta patung-patung persembahan (kore) yang berwarna-warni.</p>
+            <p>Para tiran Athena, seperti Peisistratos pada abad ke-6 SM, sangat berkontribusi pada pengembangan Akropolis. Di bawah pemerintahannya, pembangunan diperluas, termasuk apa yang mungkin merupakan Propylon pertama, gerbang monumental yang memberi akses ke situs suci. Ini adalah masa ketika seni pahat Yunani berkembang pesat, dan banyak patung persembahan yang indah diletakkan di Akropolis. Material yang digunakan sebagian besar adalah batu kapur lokal, tetapi marmer mulai diperkenalkan untuk elemen-elemen tertentu. Koleksi artefak Archaic yang ditemukan di Akropolis, banyak yang sengaja dikubur setelah dihancurkan oleh Persia, memberikan wawasan yang tak ternilai tentang seni dan agama pada periode ini.</p>
+
+            <h3>3. Invasi Persia dan Kehancuran (480 SM)</h3>
+            <p>Tahun 480 SM menandai titik paling gelap dalam sejarah Akropolis. Selama Perang Persia, pasukan Raja Xerxes menaklukkan Athena setelah Pertempuran Thermopylae. Mereka menjarah dan membakar kota, termasuk Akropolis. Semua kuil, patung, dan bangunan yang ada di puncak bukit dihancurkan secara brutal. Tiang-tiang dirobohkan, patung-patung dipenggal, dan sisa-sisa bangunan dibakar. Kehancuran ini merupakan pukulan telak bagi Athena dan simbol-simbol keagamaannya.</p>
+            <p>Namun, tragedi ini secara paradoks membuka jalan bagi salah satu periode pembangunan paling spektakuler dalam sejarah manusia. Setelah kemenangan Yunani atas Persia di Pertempuran Salamis dan Plataea, Athena bersumpah untuk tidak membangun kembali kuil-kuil yang hancur sebagai pengingat abadi akan kekejaman Persia. Namun, janji ini pada akhirnya dilanggar demi visi yang lebih besar.</p>
+
+            <h3>4. Masa Keemasan Perikles (sekitar 460 SM – 430 SM)</h3>
+            <p>Kehancuran Akropolis oleh Persia membuka peluang bagi proyek pembangunan kembali yang paling ambisius dan monumental dalam sejarah Yunani Kuno. Di bawah kepemimpinan negarawan karismatik Perikles, Athena memasuki "Masa Keemasan" atau "Zaman Perikles", sebuah periode kejayaan politik, ekonomi, dan budaya yang tak tertandingi. Dengan menggunakan dana dari Liga Delian—sebuah aliansi maritim kota-kota Yunani yang awalnya dibentuk untuk melawan Persia—Perikles memulai program pembangunan besar-besaran di Akropolis.</p>
+            <p>Dana ini, yang seharusnya digunakan untuk pertahanan bersama, dialihkan oleh Athena untuk memperindah kotanya sendiri, sebuah tindakan yang menuai kritik dari sekutu-sekutunya. Namun, bagi Perikles, pembangunan ini bukan sekadar pamer kekayaan atau kekuasaan; itu adalah manifestasi fisik dari supremasi Athena dalam seni, demokrasi, dan kepemimpinan. Dia percaya bahwa kemewahan ini akan menjadi monumen abadi bagi Athena dan sumber inspirasi bagi warga negaranya.</p>
+            <p>Proyek ini diawasi oleh Pheidias, pemahat terkemuka pada masanya, yang bertanggung jawab atas desain artistik keseluruhan dan sebagian besar patung. Arsitek-arsitek brilian seperti Ictinus, Callicrates, dan Mnesicles dipekerjakan untuk merancang dan membangun struktur-struktur utama. Pekerjaan ini memberikan pekerjaan bagi ribuan warga Athena, mulai dari penambang marmer di Gunung Pentelikon, pengukir, pemahat, tukang kayu, hingga pekerja kasar. Selama kurang lebih 30 tahun, Akropolis diubah menjadi kompleks arsitektur yang paling indah dan canggih di dunia kuno.</p>
+            <p>Empat bangunan utama yang mendefinisikan Akropolis modern dibangun pada periode ini:
+                <ul>
+                    <li><strong>Parthenon:</strong> Kuil terbesar dan paling terkenal, didedikasikan untuk Athena Parthenos (Athena Perawan).</li>
+                    <li><strong>Propylaea:</strong> Gerbang monumental yang berfungsi sebagai pintu masuk utama ke kompleks suci.</li>
+                    <li><strong>Erechtheion:</strong> Kuil yang rumit dan multi-level, didedikasikan untuk Athena Polias dan Poseidon.</li>
+                    <li><strong>Kuil Athena Nike:</strong> Kuil kecil yang anggun di dekat Propylaea, didedikasikan untuk dewi kemenangan.</li>
+                </ul>
+            </p>
+            <p>Pembangunan di Akropolis pada masa Perikles bukan hanya tentang keindahan arsitektur; itu adalah pernyataan politik dan ideologis. Melalui proyek-proyek ini, Athena memproyeksikan citranya sebagai pemimpin budaya dan politik dunia Yunani, sebuah kota yang mampu menggabungkan kekuatan militer, kemakmuran ekonomi, dan keunggulan artistik serta intelektual. Setiap detail, dari pilihan marmer Pentelik yang berkilauan hingga presisi matematis dan ilusi optik dalam arsitektur, mencerminkan puncak pencapaian peradaban manusia.</p>
+
+            <h3>5. Periode Hellenistik dan Romawi (sekitar 323 SM – 330 M)</h3>
+            <p>Setelah kemunduran Athena sebagai kekuatan politik utama pasca-Perang Peloponnesia dan bangkitnya Makedonia, Akropolis tetap menjadi pusat keagamaan dan simbol prestise. Selama periode Hellenistik, meskipun tidak ada pembangunan besar, beberapa patung dan dedikasi ditambahkan oleh para penguasa Hellenistik yang ingin menunjukkan rasa hormat mereka kepada Athena.</p>
+            <p>Kedatangan Romawi membawa perubahan baru. Kaisar Romawi memiliki kekaguman yang mendalam terhadap budaya Yunani, dan Athena sering dikunjungi oleh para kaisar dan intelektual Romawi. Akropolis terus dipelihara dan dihormati. Kaisar Augustus membangun Kuil Roma dan Augustus di dekat Parthenon. Kaisar Hadrian, seorang Hellenophile yang terkenal, melakukan perbaikan dan penambahan di banyak bagian Athena, meskipun dampak langsungnya pada Akropolis lebih pada pemeliharaan daripada pembangunan baru yang substansial. Patung-patung Romawi dan dedikasi ditempatkan di situs, menunjukkan kontinuitas penggunaan Akropolis sebagai pusat keagamaan dan budaya di bawah kekuasaan Romawi.</p>
+
+            <h3>6. Periode Bizantium dan Abad Pertengahan (sekitar 330 M – 1453 M)</h3>
+            <p>Dengan runtuhnya Kekaisaran Romawi Barat dan kebangkitan Kekaisaran Bizantium, agama Kristen menjadi dominan. Akropolis mengalami transformasi signifikan. Kuil-kuil pagan diubah menjadi gereja-gereja Kristen. Parthenon, misalnya, diubah menjadi Gereja Bunda Maria (Panagia Atheniotissa), salah satu gereja Kristen terbesar di dunia Bizantium. Interiornya disesuaikan untuk ritus Kristen, dengan penambahan apse dan ikonografi Kristen. Propylaea diubah menjadi istana uskup dan kemudian menjadi menara pertahanan.</p>
+            <p>Pada periode ini, Athena dan Akropolis menjadi bagian dari Kekaisaran Bizantium. Meskipun tidak ada pembangunan baru yang megah, bangunan-bangunan kuno terus digunakan dan dipelihara. Namun, seiring waktu, ada beberapa modifikasi dan penambahan arsitektur Bizantium yang relatif kecil. Pada abad ke-13, setelah Perang Salib Keempat, Akropolis jatuh ke tangan para bangsawan Franka dan berfungsi sebagai kastil feodal. Selanjutnya, ia dikuasai oleh berbagai kekuatan Eropa lainnya, termasuk Catalonia dan Firenze, yang semuanya menambahkan sentuhan arsitektur militer pada benteng tersebut.</p>
+
+            <h3>7. Kekuasaan Utsmaniyah (1453 M – 1821 M)</h3>
+            <p>Pada tahun 1453, Athena jatuh ke tangan Kesultanan Utsmaniyah. Akropolis kembali mengalami transformasi. Parthenon, yang sebelumnya adalah gereja Kristen, diubah menjadi masjid. Sebuah menara minaret dibangun di sudut barat daya Parthenon. Propylaea diubah menjadi markas komandan Utsmaniyah dan gudang mesiu. Kuil Erechtheion menjadi harem. Kehidupan di Akropolis sangat berbeda; ia menjadi bagian dari garnisun militer Utsmaniyah, dan akses bagi penduduk sipil terbatas.</p>
+            <p>Sayangnya, periode Utsmaniyah juga ditandai dengan kerusakan parah pada Akropolis. Insiden paling merusak terjadi pada tahun 1687, selama Pengepungan Athena oleh Venesia. Pasukan Utsmaniyah menggunakan Parthenon sebagai gudang mesiu. Sebuah meriam Venesia mengenai gudang tersebut, menyebabkan ledakan dahsyat yang menghancurkan bagian tengah Parthenon dan banyak pahatan frieze serta pedimen. Ini adalah salah satu bencana terbesar dalam sejarah situs tersebut.</p>
+            <p>Kemudian, pada awal abad ke-19, Lord Elgin, duta besar Inggris untuk Kekaisaran Utsmaniyah, mendapatkan izin (dengan cara yang masih diperdebatkan hingga kini) untuk memindahkan sejumlah besar pahatan dari Parthenon dan bangunan lain di Akropolis. Pahatan-pahatan ini, yang dikenal sebagai "Elgin Marbles" atau "Parthenon Marbles", kini disimpan di British Museum di London, memicu perdebatan panjang tentang pengembaliannya ke Yunani.</p>
+
+            <h3>8. Akropolis Modern dan Upaya Restorasi (1821 M – Sekarang)</h3>
+            <p>Dengan pecahnya Perang Kemerdekaan Yunani pada tahun 1821 dan pembentukan negara Yunani modern, Akropolis menjadi simbol nasional yang kuat. Setelah kemerdekaan, semua bangunan non-kuno (seperti minaret Utsmaniyah dan rumah-rumah Bizantium/Franka) di Akropolis dihancurkan untuk mengembalikan situs ke bentuk kuno Yunani. Pekerjaan arkeologi besar-besaran dimulai, menggali sisa-sisa yang terkubur dan mengidentifikasi struktur-struktur kuno.</p>
+            <p>Pada akhir abad ke-19 dan awal abad ke-20, upaya restorasi pertama dimulai. Namun, metode restorasi awal seringkali tidak ideal, menggunakan bahan-bahan modern seperti besi yang kemudian berkarat dan menyebabkan kerusakan lebih lanjut pada marmer. Sejak tahun 1975, sebuah program restorasi yang komprehensif dan hati-hati, yang dikenal sebagai "Proyek Restorasi Akropolis", telah berlangsung. Proyek ini dipimpin oleh Komite Konservasi Monumen Akropolis (ESMA) dan telah menggunakan teknik-teknik canggih, memindahkan marmer yang rusak ke museum dan menggantinya dengan marmer baru dari tambang Pentelikon yang sama, sambil menggunakan pasak titanium anti-korosi. Tujuannya adalah untuk mengembalikan integritas struktural dan estetika monumen sejauh mungkin, sambil menjaga keaslian material dan teknik kuno.</p>
+            <p>Hari ini, Akropolis Athena berdiri sebagai salah satu situs arkeologi paling penting di dunia, sebuah Situs Warisan Dunia UNESCO, dan simbol kebanggaan nasional bagi Yunani. Jutaan pengunjung datang setiap tahun untuk mengagumi keindahannya dan merasakan aura sejarah yang kuat. Upaya restorasi terus berlanjut, memastikan bahwa warisan tak ternilai ini akan tetap terjaga untuk generasi mendatang.</p>
+
+            <h2>Bangunan Utama di Akropolis</h2>
+            <p>Kompleks Akropolis adalah rumah bagi beberapa mahakarya arsitektur Yunani Kuno, masing-masing dengan sejarah dan signifikansi uniknya. Struktur-struktur ini dibangun sebagian besar dari marmer Pentelik yang indah, yang ditambang dari Gunung Pentelikon di dekatnya, dan menampilkan tingkat keahlian yang luar biasa dalam desain, konstruksi, dan dekorasi pahat.</p>
+
+            <h3>1. Parthenon</h3>
+            <figure>
+                <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="parthenon-svg-title parthenon-svg-desc">
+                    <title id="parthenon-svg-title">Siluet Parthenon</title>
+                    <desc id="parthenon-svg-desc">Siluet Parthenon yang ikonik dengan kolom-kolom Doric yang menonjol dan atap segitiga.</desc>
+                    <defs>
+                        <linearGradient id="skyGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#87ceeb;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#b0e0e6;stop-opacity:1" />
+                        </linearGradient>
+                        <filter id="shadow2">
+                            <feDropShadow dx="3" dy="3" stdDeviation="3" flood-color="#000" flood-opacity="0.2"/>
+                        </filter>
+                    </defs>
+                    <rect x="0" y="0" width="1000" height="500" fill="url(#skyGradient2)" />
+                    
+                    <!-- Base -->
+                    <rect x="100" y="300" width="800" height="40" fill="#a0927c" filter="url(#shadow2)"/>
+                    <rect x="105" y="290" width="790" height="10" fill="#c0b29a" />
+                    
+                    <!-- Columns -->
+                    <!-- Front (8 columns) -->
+                    <rect x="110" y="100" width="20" height="190" fill="#c0b29a" rx="5" ry="5"/>
+                    <rect x="170" y="100" width="20" height="190" fill="#c0b29a" rx="5" ry="5"/>
+                    <rect x="230" y="100" width="20" height="190" fill="#c0b29a" rx="5" ry="5"/>
+                    <rect x="290" y="100" width="20" height="190" fill="#c0b29a" rx="5" ry="5"/>
+                    <rect x="350" y="100" width="20" height="190" fill="#c0b29a" rx="5" ry="5"/>
+                    <rect x="410" y="100" width="20" height="190" fill="#c0b29a" rx="5" ry="5"/>
+                    <rect x="470" y="100" width="20" height="190" fill="#c0b29a" rx="5" ry="5"/>
+                    <rect x="530" y="100" width="20" height="190" fill="#c0b29a" rx="5" ry="5"/>
+
+                    <!-- Side (partial, to give depth) -->
+                    <rect x="115" y="110" width="10" height="180" fill="#b1a08e" rx="3" ry="3"/>
+                    <rect x="175" y="110" width="10" height="180" fill="#b1a08e" rx="3" ry="3"/>
+                    <rect x="235" y="110" width="10" height="180" fill="#b1a08e" rx="3" ry="3"/>
+                    <rect x="295" y="110" width="10" height="180" fill="#b1a08e" rx="3" ry="3"/>
+
+                    <!-- Entablature -->
+                    <rect x="100" y="70" width="800" height="30" fill="#a0927c" />
+                    <rect x="100" y="40" width="800" height="30" fill="#c0b29a" />
+                    
+                    <!-- Pediment -->
+                    <polygon points="100,40 500,0 900,40" fill="#a0927c" />
+                </svg>
+                <figcaption>Parthenon, kuil persembahan untuk dewi Athena Parthenos, adalah puncak arsitektur Doric.</figcaption>
+            </figure>
+            <p>Parthenon, tanpa diragukan lagi, adalah mahkota kemegahan Akropolis dan salah satu bangunan paling terkenal di dunia. Dibangun antara 447 dan 438 SM, didedikasikan untuk Athena Parthenos, dewi pelindung kota. Ini adalah kuil berukuran kolosal yang dirancang oleh arsitek Ictinus dan Callicrates, dengan pahatan dekoratif di bawah arahan Pheidias.</p>
+            <p>Parthenon adalah contoh utama dari Ordo Doric, gaya arsitektur Yunani Kuno yang dicirikan oleh kolom-kolom yang kokoh dan sederhana dengan bagian atas (kapitel) polos. Namun, Parthenon bukanlah kuil Doric biasa. Para arsiteknya menggunakan serangkaian ilusi optik yang rumit, dikenal sebagai "penyesuaian optik", untuk membuat bangunan terlihat sempurna secara visual. Misalnya, platform dasar (stylobate) sedikit melengkung ke atas di bagian tengah untuk mengatasi ilusi bahwa garis lurus yang panjang akan tampak melengkung ke bawah. Kolom-kolom juga sedikit miring ke dalam dan memiliki "entasis" (pembengkakan halus di bagian tengah) untuk memberikan kesan kekuatan dan vitalitas, serta untuk mencegahnya terlihat kaku atau cekung. Setiap kolom sedikit berbeda, dan tidak ada garis yang benar-benar lurus dalam seluruh struktur.</p>
+            <p>Kuil ini dibangun seluruhnya dari marmer Pentelik yang berkilauan dan dihiasi dengan pahatan yang luar biasa. Bagian timpanon (ruang segitiga di bawah atap) menampilkan adegan kelahiran Athena di timur dan pertarungan Athena dan Poseidon untuk dominasi Attika di barat. Frieze panathenaic, yang membentang di sekitar dinding interior cella (ruang utama kuil), menggambarkan prosesi festival Panathenaic, sebuah perayaan empat tahunan yang penting bagi Athena. Metope (panel pahatan di atas kolom) menggambarkan berbagai mitos, seperti Gigantomachy (pertempuran dewa melawan raksasa), Amazonomachy (pertempuran melawan Amazon), Kentauromachy (pertempuran melawan Centaur), dan Trojanomachy (perang Troya).</p>
+            <p>Di dalam cella, terdapat patung kultus raksasa Athena Parthenos setinggi 12 meter, yang dibuat dari gading dan emas oleh Pheidias. Patung ini, yang sekarang hilang, adalah salah satu keajaiban dunia kuno dan merepresentasikan kekayaan serta kesalehan Athena. Parthenon tidak hanya berfungsi sebagai kuil tetapi juga sebagai perbendaharaan Liga Delian, yang menunjukkan peran Athena sebagai kekuatan dominan di antara negara-kota Yunani.</p>
+            <p>Selama berabad-abad, Parthenon mengalami berbagai transformasi. Ia menjadi gereja Kristen Bizantium yang megah, Gereja Bunda Maria, dan kemudian menjadi masjid di bawah kekuasaan Utsmaniyah. Sayangnya, pada tahun 1687, saat digunakan sebagai gudang mesiu oleh Utsmaniyah, sebuah peluru meriam Venesia menembus atapnya, menyebabkan ledakan besar yang menghancurkan sebagian besar struktur interior dan pahatan-pahatannya. Meskipun demikian, Parthenon tetap menjadi simbol abadi dari keindahan, kekuatan, dan warisan intelektual Yunani Kuno.</p>
+
+            <h3>2. Propylaea</h3>
+            <p>Propylaea adalah gerbang monumental yang berfungsi sebagai pintu masuk ke Akropolis. Dibangun antara 437 dan 432 SM oleh arsitek Mnesicles, ia dirancang untuk menjadi pintu gerbang yang megah dan fungsional ke tempat suci tersebut. Desainnya sangat kompleks, karena harus mengakomodasi perbedaan tingkat tanah yang curam dan berfungsi sebagai transisi dari dunia sekuler di luar ke dunia sakral di dalamnya.</p>
+            <p>Struktur Propylaea terdiri dari sebuah bangunan pusat dengan dua sayap samping. Bangunan pusat memiliki enam kolom Doric besar di bagian depan dan belakang, menyerupai fasad kuil. Dua sayap sampingnya yang lebih kecil, satu di utara dan satu di selatan, menampung ruangan-ruangan. Sayap utara, yang dikenal sebagai Pinakotheke, diyakini berfungsi sebagai galeri seni atau ruang makan, sementara sayap selatan lebih kecil dan mungkin berfungsi sebagai pos jaga atau ruang penyimpanan. Interior bangunan pusat memiliki enam kolom Ionic yang ramping, menciptakan kontras yang menarik dengan kolom Doric yang kokoh di eksterior.</p>
+            <p>Pembangunan Propylaea tidak pernah sepenuhnya selesai, kemungkinan karena pecahnya Perang Peloponnesia. Meskipun demikian, ia tetap merupakan mahakarya arsitektur yang menunjukkan inovasi dan keahlian Mnesicles dalam mengatasi tantangan topografi dan menggabungkan berbagai gaya arsitektur. Gerbang ini dirancang untuk menciptakan kesan kemegahan dan persiapan bagi para peziarah yang akan memasuki area suci Akropolis, dengan pemandangan Parthenon yang perlahan-lahan terungkap saat seseorang melewatinya.</p>
+            <p>Seperti Parthenon, Propylaea juga mengalami perubahan fungsi selama berabad-abad. Ia menjadi istana uskup Bizantium, kemudian benteng bagi berbagai penguasa Abad Pertengahan, dan akhirnya markas komandan Utsmaniyah. Struktur ini juga mengalami kerusakan signifikan, terutama akibat ledakan pada abad ke-17. Namun, upaya restorasi modern telah membantu mengembalikan sebagian besar kemegahannya.</p>
+
+            <h3>3. Erechtheion</h3>
+            <figure>
+                <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="erechtheion-svg-title erechtheion-svg-desc">
+                    <title id="erechtheion-svg-title">Pura Erechtheion dengan Caryatids</title>
+                    <desc id="erechtheion-svg-desc">Pura Erechtheion dengan serambi Caryatids yang ikonik, diukir dalam gaya Yunani Kuno.</desc>
+                    <defs>
+                        <linearGradient id="skyGradient3" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#87ceeb;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#b0e0e6;stop-opacity:1" />
+                        </linearGradient>
+                        <filter id="shadow3">
+                            <feDropShadow dx="3" dy="3" stdDeviation="3" flood-color="#000" flood-opacity="0.2"/>
+                        </filter>
+                    </defs>
+                    <rect x="0" y="0" width="1000" height="500" fill="url(#skyGradient3)" />
+                    
+                    <!-- Base -->
+                    <rect x="200" y="320" width="600" height="30" fill="#a0927c" filter="url(#shadow3)"/>
+                    <rect x="205" y="310" width="590" height="10" fill="#c0b29a" />
+
+                    <!-- Main Structure (simplified) -->
+                    <rect x="200" y="100" width="600" height="210" fill="#c0b29a" rx="5" ry="5"/>
+                    <rect x="200" y="100" width="600" height="20" fill="#a0927c" />
+
+                    <!-- North Porch (Ionic columns) -->
+                    <rect x="350" y="120" width="20" height="180" fill="#c0b29a" rx="5" ry="5"/>
+                    <rect x="420" y="120" width="20" height="180" fill="#c0b29a" rx="5" ry="5"/>
+                    <rect x="490" y="120" width="20" height="180" fill="#c0b29a" rx="5" ry="5"/>
+                    <rect x="340" y="100" width="180" height="20" fill="#a0927c" />
+
+                    <!-- Caryatid Porch -->
+                    <rect x="620" y="220" width="150" height="100" fill="#c0b29a" />
+                    <!-- Caryatids (simplified female figures) -->
+                    <path d="M635 250 L630 220 L640 220 L635 250 M630 250 L635 320 L640 250 Z" fill="#b1a08e" />
+                    <path d="M660 250 L655 220 L665 220 L660 250 M655 250 L660 320 L665 250 Z" fill="#b1a08e" />
+                    <path d="M685 250 L680 220 L690 220 L685 250 M680 250 L685 320 L690 250 Z" fill="#b1a08e" />
+                    <path d="M710 250 L705 220 L715 220 L710 250 M705 250 L710 320 L715 250 Z" fill="#b1a08e" />
+                    <path d="M735 250 L730 220 L740 220 L735 250 M730 250 L735 320 L740 250 Z" fill="#b1a08e" />
+                    <path d="M760 250 L755 220 L765 220 L760 250 M755 250 L760 320 L765 250 Z" fill="#b1a08e" />
+                </svg>
+                <figcaption>Pura Erechtheion, terkenal dengan Serambi Caryatids yang anggun, rumah bagi situs-situs suci kuno.</figcaption>
+            </figure>
+            <p>Erechtheion, dibangun antara 421 dan 406 SM, adalah salah satu kuil paling unik dan paling rumit di Akropolis. Kuil ini dinamai berdasarkan Erichthonius, seorang raja legendaris Athena, dan merupakan contoh sempurna dari gaya Ionic. Berbeda dengan Parthenon yang megah dan simetris, Erechtheion memiliki denah lantai yang tidak beraturan dan multi-level, yang dirancang untuk mengakomodasi berbagai situs suci yang telah ada di lokasi tersebut sejak zaman kuno.</p>
+            <p>Kuil ini didedikasikan untuk dua dewa pelindung Athena, yaitu Athena Polias (Athena Pelindung Kota) dan Poseidon, serta dewa-dewa dan pahlawan Athena lainnya. Beberapa situs paling suci di Akropolis terletak di dalam atau di sekitar Erechtheion:
+                <ul>
+                    <li><strong>Pohon Zaitun Suci Athena:</strong> Konon merupakan hadiah Athena kepada Athena dalam pertarungan melawan Poseidon.</li>
+                    <li><strong>Sumur Garam Poseidon:</strong> Tempat Poseidon memukulkan trisulanya ke batu, menyebabkan air asin menyembur.</li>
+                    <li><strong>Makam Raja Kekrops:</strong> Raja pertama Athena yang legendaris.</li>
+                    <li><strong>Situs Erichthonius:</strong> Ruangan yang diyakini sebagai tempat pemujaan bagi pahlawan eponim kota.</li>
+                </ul>
+            </p>
+            <p>Fitur paling mencolok dari Erechtheion adalah "Serambi Perawan" atau "Serambi Caryatids" yang terkenal. Ini adalah serambi kecil di sisi selatan kuil, di mana enam patung wanita anggun (caryatids) berfungsi sebagai kolom penyangga atap. Patung-patung ini adalah mahakarya seni pahat, dan yang ada di situs sekarang adalah replika; yang asli, kecuali satu yang dibawa oleh Lord Elgin ke British Museum, disimpan di Museum Akropolis untuk perlindungan.</p>
+            <p>Erechtheion juga memiliki serambi Ionic yang menonjol di sisi utara, dengan enam kolom Ionic yang tinggi dan langsing, serta serambi timur dengan enam kolom Ionic yang menghadap ke arah Propylaea. Desain yang asimetris dan penempatan yang tidak lazim ini membuat Erechtheion menonjol dibandingkan bangunan Yunani lainnya, mencerminkan kebutuhan untuk menyatukan berbagai tempat suci kuno di bawah satu atap yang harmonis.</p>
+            <p>Kuil ini juga berfungsi sebagai tempat untuk menyimpan xoanon, patung Athena Polias yang sangat kuno, terbuat dari kayu, yang diyakini jatuh dari langit dan merupakan objek pemujaan utama Athena selama festival Panathenaic.</p>
+
+            <h3>4. Kuil Athena Nike</h3>
+            <p>Kuil Athena Nike, dibangun sekitar 420 SM oleh arsitek Callicrates (juga salah satu arsitek Parthenon), adalah kuil Ionic yang kecil namun anggun. Terletak di tepi barat daya Akropolis, tepat di samping Propylaea, di atas bastion yang kokoh. "Nike" berarti "kemenangan" dalam bahasa Yunani, sehingga kuil ini didedikasikan untuk Athena dalam perannya sebagai dewi kemenangan. Kuil ini dibangun untuk merayakan kemenangan Athena atas Persia dan diharapkan untuk mengamankan kemenangan di masa depan, terutama selama Perang Peloponnesia.</p>
+            <p>Kuil ini adalah amphiprostyle, yang berarti memiliki deretan empat kolom Ionic di bagian depan dan belakang, tetapi tidak di sisi. Frieze di sekitar kuil menggambarkan adegan dari pertempuran antara Yunani dan Persia, serta dewa-dewi. Yang paling terkenal adalah relief yang menggambarkan Nike mengikat sandalnya (Nike Sandal-binder), sebuah karya yang menunjukkan keindahan dan kehalusan seni pahat Yunani klasik.</p>
+            <p>Posisi kuil ini sangat strategis, mengawasi jalan masuk utama ke Akropolis dan menawarkan pemandangan teluk Saronic yang menakjubkan. Keberadaannya di pintu masuk Akropolis berfungsi sebagai pengingat konstan akan kekuatan militer Athena dan perlindungan ilahi yang mereka yakini mereka nikmati.</p>
+            <p>Mirip dengan bangunan lain di Akropolis, Kuil Athena Nike juga mengalami nasib yang bergejolak. Selama periode Utsmaniyah, ia dibongkar untuk menggunakan batunya sebagai bagian dari benteng pertahanan. Namun, pada abad ke-19, kuil ini berhasil direkonstruksi sepenuhnya oleh para arkeolog, menjadikannya salah satu contoh awal restorasi arkeologi skala besar. Ia kemudian dibongkar dan direkonstruksi lagi pada abad ke-20 untuk memperbaiki kesalahan konstruksi sebelumnya dan memastikan stabilitasnya.</p>
+
+            <h3>5. Teater Dionysus Eleuthereus</h3>
+            <p>Meskipun secara teknis terletak di lereng selatan Akropolis, Teater Dionysus Eleuthereus secara inheren terhubung dengan situs suci di atasnya. Ini adalah teater tertua di dunia, yang merupakan tempat kelahiran drama Yunani. Didirikan pada abad ke-6 SM, awalnya merupakan situs sederhana dengan tempat duduk kayu. Namun, pada abad ke-4 SM, di bawah Lycurgus, teater ini dibangun kembali dengan batu dan dapat menampung hingga 17.000 penonton.</p>
+            <p>Teater ini didedikasikan untuk Dionysus, dewa anggur, kesuburan, dan drama. Di sinilah karya-karya abadi dari dramawan besar seperti Aeschylus, Sophocles, Euripides, dan Aristophanes pertama kali dipentaskan. Bangku-bangku depan yang mewah diperuntukkan bagi para pejabat dan pendeta, dan kursi kehormatan di tengah diperuntukkan bagi Pendeta Dionysus.</p>
+            <p>Teater ini mengalami modifikasi selama periode Romawi, dengan penambahan panggung yang lebih tinggi dan dekorasi yang lebih mewah untuk mengakomodasi pertunjukan gladiator. Meskipun sekarang sebagian besar dalam reruntuhan, sisa-sisa teater ini masih memberikan gambaran yang kuat tentang asal-usul teater Barat dan peran sentralnya dalam kehidupan budaya Athena kuno.</p>
+
+            <h3>6. Odeon Herodes Atticus</h3>
+            <p>Juga terletak di lereng selatan Akropolis, Odeon Herodes Atticus adalah teater musik batu yang megah. Bangunan ini jauh lebih muda daripada bangunan-bangunan lain di Akropolis, dibangun pada tahun 161 M oleh Herodes Atticus, seorang filantropis kaya Romawi, sebagai peringatan untuk istrinya yang telah meninggal. Dengan kapasitas sekitar 5.000 penonton, odeon ini digunakan untuk konser musik dan pertunjukan lainnya.</p>
+            <p>Strukturnya menampilkan arsitektur Romawi, dengan panggung yang dibangun dari marmer dan kursi-kursi yang berundak di sepanjang lereng bukit. Meskipun atap kayu aslinya telah lama runtuh, Odeon ini telah dipulihkan secara ekstensif pada abad ke-20 dan kini masih digunakan untuk berbagai pertunjukan, terutama selama Festival Athena dan Epidaurus yang terkenal. Pengalaman menonton pertunjukan di Odeon dengan Akropolis yang diterangi di atasnya adalah salah satu pengalaman budaya yang paling berkesan di Athena.</p>
+
+            <h3>7. Asclepeion</h3>
+            <p>Terletak di lereng selatan, di bawah Propylaea, Asclepeion adalah tempat suci yang didedikasikan untuk Asclepius, dewa penyembuhan. Situs ini didirikan pada akhir abad ke-5 SM setelah Athena dilanda wabah. Kompleks ini mencakup kuil Asclepius, sebuah stoa (serambi berkolom) untuk menampung pasien, dan sebuah sumber air suci. Orang-orang akan datang ke sini untuk mencari penyembuhan melalui ritual, doa, dan tidur di dalam stoa, di mana mereka berharap Asclepius akan muncul dalam mimpi mereka dan memberikan petunjuk penyembuhan. Ini mencerminkan praktik pengobatan kuno yang menggabungkan agama dan unsur-unsur awal terapi.</p>
+
+            <h2>Signifikansi Akropolis</h2>
+            <p>Akropolis jauh lebih dari sekadar kumpulan reruntuhan kuno; ia adalah sebuah nexus tempat sejarah, seni, politik, dan spiritualitas menyatu. Signifikansinya melampaui batas-batas geografis Athena dan waktu, menjadikannya salah satu situs paling penting dalam peradaban manusia.</p>
+
+            <h3>1. Keunggulan Arsitektur dan Seni</h3>
+            <p>Akropolis adalah puncak pencapaian arsitektur Yunani Klasik. Bangunan-bangunan seperti Parthenon menunjukkan penguasaan mutlak atas Ordo Doric, dengan inovasi seperti entasis dan penyesuaian optik yang memberikan keindahan dan kesempurnaan visual yang tak tertandingi. Erechtheion menampilkan keanggunan Ordo Ionic dan solusi kreatif untuk tata letak yang kompleks. Propylaea memadukan kedua gaya dengan fungsi monumental.</p>
+            <p>Seni pahat Akropolis, terutama yang terkait dengan Pheidias dan lokakaryanya, merupakan tolok ukur bagi seni pahat klasik. Patung-patung pedimen, metope, dan frieze dari Parthenon adalah contoh keunggulan artistik yang tak lekang oleh waktu, menggambarkan keindahan tubuh manusia, kekuatan narasi mitologis, dan kehalusan ekspresi. Frieze Panathenaic, dengan penggambaran prosesi warga Athena, adalah salah satu contoh paling awal seni monumental yang secara realistis menggambarkan manusia biasa dalam konteks keagamaan dan sipil.</p>
+            <p>Bahan yang digunakan, marmer Pentelik, terkenal karena kualitasnya yang tinggi dan kilauan keemasan saat terkena sinar matahari, menambah dimensi keindahan lain pada situs tersebut. Interaksi antara cahaya, marmer, dan arsitektur menciptakan pengalaman visual yang dinamis dan mendalam bagi setiap pengunjung.</p>
+
+            <h3>2. Simbol Demokrasi dan Peradaban Barat</h3>
+            <p>Akropolis dibangun pada puncak demokrasi Athena. Proyek pembangunan besar-besaran di bawah Perikles bukan hanya proyek keagamaan atau artistik; itu adalah pernyataan politik yang kuat. Dengan menggunakan dana publik untuk mempercantik kota, Athena tidak hanya menampilkan kemakmurannya tetapi juga memperkuat rasa identitas dan kebanggaan warga negaranya. Ini adalah simbol kebebasan Athena, kekuatan maritimnya, dan ide-ide yang mendefinisikan demokrasi: pemerintahan oleh rakyat, keadilan, dan keunggulan dalam seni dan pemikiran.</p>
+            <p>Parthenon, dengan citra Athena Parthenos, melambangkan kebijaksanaan dan kekuatan yang menopang Athena. Akropolis secara keseluruhan menjadi representasi fisik dari ideal-ideal yang akan memengaruhi pemikiran politik dan filosofis di seluruh dunia Barat selama ribuan tahun. Ia adalah tempat di mana demokrasi pertama kali berakar, dan bangunan-bangunan di sana adalah bukti nyata dari cita-cita luhur peradaban yang berupaya mencapai kesempurnaan dalam segala aspek kehidupan.</p>
+
+            <h3>3. Pusat Keagamaan dan Mitos</h3>
+            <p>Sebelum menjadi pusat politik dan artistik, Akropolis adalah tempat suci. Ia adalah tempat yang didedikasikan untuk Athena, dewi pelindung kota, serta dewa-dewi dan pahlawan lainnya. Setiap kuil dan altar memiliki signifikansi keagamaan yang mendalam, mencerminkan kepercayaan dan ritual masyarakat Athena kuno.</p>
+            <p>Mitos-mitos Yunani yang paling penting terjalin erat dengan Akropolis. Kisah pertarungan antara Athena dan Poseidon untuk hak menjadi pelindung Athena, dengan hadiah pohon zaitun dan sumur garam, diyakini terjadi di situs Erechtheion. Kehadiran patung kultus, persembahan, dan upacara keagamaan yang rutin menegaskan peran Akropolis sebagai jantung spiritual kota, tempat di mana manusia dapat berinteraksi dengan dunia ilahi.</p>
+            <p>Prosesi Panathenaic, yang digambarkan pada frieze Parthenon, adalah festival keagamaan terbesar Athena, di mana warga kota berbaris ke Akropolis untuk mempersembahkan peplos (jubah baru) kepada patung Athena di Erechtheion. Ini menunjukkan bagaimana Akropolis tidak hanya menjadi tempat ibadah tetapi juga arena penting untuk ekspresi identitas komunal dan kesalehan sipil.</p>
+
+            <h3>4. Inspirasi Budaya Global</h3>
+            <p>Sejak penemuan kembali dan restorasi pada abad ke-19, Akropolis telah menjadi sumber inspirasi tak terbatas bagi seniman, arsitek, filsuf, dan politisi di seluruh dunia. Arsitektur Neo-Klasik yang dominan di banyak bangunan publik di Eropa dan Amerika Utara secara langsung terinspirasi oleh proporsi dan gaya bangunan Akropolis.</p>
+            <p>Akropolis melambangkan idealisme klasik: harmoni, keseimbangan, akal, dan keindahan. Ia adalah pengingat abadi tentang kemampuan manusia untuk mencapai keagungan, bahkan di tengah tantangan dan kehancuran. Sebagai Situs Warisan Dunia UNESCO, ia diakui secara universal sebagai salah satu warisan budaya terpenting umat manusia, yang terus menginspirasi kekaguman dan studi di seluruh dunia.</p>
+            <p>Bagi Yunani modern, Akropolis adalah simbol kebanggaan nasional, ikatan yang tak terputus dengan masa lalu yang gemilang, dan janji akan masa depan yang terus diwarnai oleh warisan kuno mereka. Kehadirannya yang dominan di kaki langit Athena terus menjadi mercusuar bagi wisatawan dan cendekiawan, mengundang mereka untuk merenungkan keajaiban peradaban yang lahir di bukit batu ini.</p>
+
+            <h2>Konservasi dan Tantangan</h2>
+            <p>Melindungi dan melestarikan Akropolis adalah tugas yang monumental, terus-menerus menghadapi tantangan dari faktor alam, polusi, dan dampak manusia. Upaya konservasi modern dimulai secara serius setelah kemerdekaan Yunani pada abad ke-19, namun program restorasi yang paling komprehensif dan ilmiah baru diluncurkan pada tahun 1975.</p>
+
+            <h3>1. Dampak Polusi Udara</h3>
+            <p>Salah satu ancaman terbesar bagi Akropolis adalah polusi udara. Gas buang kendaraan bermotor dan emisi industri di Athena telah menghasilkan hujan asam yang merusak marmer Pentelik. Marmer, yang pada dasarnya adalah kalsium karbonat, bereaksi dengan asam di udara dan hujan, menyebabkan permukaannya terkikis, kehilangan detail pahatan, dan menjadi rapuh. Fenomena ini, yang dikenal sebagai "kanker batu", telah menyebabkan kerusakan parah pada pahatan dan permukaan arsitektur selama beberapa dekade.</p>
+            <p>Untuk mengatasi masalah ini, pemerintah Yunani telah menerapkan langkah-langkah untuk mengurangi polusi udara di Athena, dan pahatan-pahatan yang paling rentan telah dipindahkan ke Museum Akropolis yang beriklim terkontrol untuk perlindungan, digantikan dengan replika di situs. Namun, struktur bangunan itu sendiri tetap terpapar, dan perlindungan penuh adalah tantangan berkelanjutan.</p>
+
+            <h3>2. Erosi dan Pelapukan Alami</h3>
+            <p>Selain polusi, Akropolis juga rentan terhadap erosi dan pelapukan alami akibat angin, hujan, suhu ekstrem, dan gempa bumi. Ribuan tahun paparan terhadap elemen-elemen ini telah melemahkan struktur batu dan menyebabkan retakan atau pecahnya bagian-bagian tertentu.</p>
+            <p>Pemasangan sistem drainase yang lebih baik untuk mengelola aliran air hujan, pengisian celah dengan mortir khusus, dan penguatan struktural internal adalah bagian dari upaya untuk melawan proses pelapukan alami ini.</p>
+
+            <h3>3. Kerusakan Akibat Intervensi Masa Lalu</h3>
+            <p>Sejarah panjang Akropolis yang bergejolak, dengan transformasinya menjadi gereja, masjid, benteng, dan gudang mesiu, telah meninggalkan jejak kerusakan. Lebih lanjut, upaya restorasi awal pada akhir abad ke-19 dan awal abad ke-20 seringkali tidak mempertimbangkan kompatibilitas material. Misalnya, pasak besi yang digunakan untuk menyatukan blok marmer terbukti berkarat seiring waktu, menyebabkan marmer di sekitarnya retak dan pecah. Demikian pula, penggunaan beton atau semen yang tidak tepat juga menyebabkan masalah struktural dan estetika.</p>
+            <p>Proyek Restorasi Akropolis saat ini secara metodis membatalkan intervensi yang merugikan ini. Pasak besi yang berkarat diganti dengan pasak titanium anti-korosi. Blok marmer yang rusak dipisahkan, dibersihkan, dan jika memungkinkan, disatukan kembali menggunakan teknik presisi tinggi. Marmer yang terlalu rusak untuk direstorasi diganti dengan marmer baru dari tambang Pentelik yang sama, dipotong dan dipahat agar sesuai dengan potongan aslinya. Pendekatan ini menuntut kesabaran, penelitian ilmiah yang cermat, dan keahlian tingkat tinggi.</p>
+
+            <h3>4. Dampak Pariwisata</h3>
+            <p>Sebagai salah satu tujuan wisata paling populer di dunia, Akropolis menerima jutaan pengunjung setiap tahun. Meskipun pariwisata penting untuk ekonomi Yunani, ia juga menimbulkan tantangan. Jutaan kaki yang berjalan di atas marmer menyebabkan keausan. Sentuhan tangan pada pahatan dan struktur dapat menyebabkan transfer minyak kulit dan kotoran. Volume pengunjung yang tinggi juga memerlukan infrastruktur yang memadai, seperti jalur akses yang aman dan pemeliharaan fasilitas.</p>
+            <p>Untuk memitigasi dampak ini, area-area tertentu mungkin dibatasi, jalur khusus dibangun untuk mengarahkan aliran pengunjung, dan pengawasan ketat diberlakukan. Penerapan pembatasan jumlah pengunjung per hari atau per jam, serta teknologi baru untuk pemantauan dan konservasi, terus dieksplorasi untuk menyeimbangkan akses publik dengan perlindungan situs.</p>
+
+            <h3>5. Tantangan Pendanaan dan Keahlian</h3>
+            <p>Proyek restorasi Akropolis sangat mahal dan membutuhkan tim ahli yang sangat terampil—arkeolog, arsitek, insinyur, pemahat, dan konservator. Mengamankan pendanaan yang konsisten dari pemerintah Yunani, Uni Eropa, dan organisasi internasional adalah tantangan yang berkelanjutan. Demikian pula, melatih dan mempertahankan tenaga ahli yang diperlukan untuk pekerjaan yang sangat spesifik dan detail ini juga merupakan bagian penting dari upaya konservasi.</p>
+
+            <p>Meskipun menghadapi tantangan yang kompleks, komitmen untuk melestarikan Akropolis tetap kuat. Proyek restorasi yang sedang berlangsung diakui secara internasional sebagai model konservasi warisan budaya. Tujuannya bukan hanya untuk memperbaiki kerusakan, tetapi juga untuk mengungkapkan keindahan asli situs tersebut, memperpanjang umurnya, dan memastikan bahwa warisan tak ternilai ini akan tetap tersedia untuk dinikmati dan dipelajari oleh generasi mendatang.</p>
+
+            <h2>Akropolis Hari Ini</h2>
+            <p>Akropolis Athena saat ini adalah sebuah situs arkeologi yang hidup, yang terus-menerus mengalami proses penelitian, restorasi, dan interpretasi. Ia adalah salah satu destinasi wisata paling ikonik di dunia, menarik jutaan pengunjung dari seluruh penjuru bumi setiap tahunnya.</p>
+
+            <h3>1. Daya Tarik Wisata Utama</h3>
+            <p>Bagi banyak orang, kunjungan ke Athena tidak lengkap tanpa mendaki Akropolis. Saat melangkah melalui Propylaea, pengunjung akan merasakan jejak ribuan tahun sejarah. Pemandangan dari puncak bukit, yang mencakup seluruh kota Athena modern hingga Teluk Saronic, sungguh menakjubkan. Pengunjung dapat berjalan di sekitar Parthenon yang megah, mengagumi Serambi Caryatids di Erechtheion, dan melihat Kuil Athena Nike. Meskipun banyak pahatan asli telah dipindahkan ke museum, kehadiran bangunan itu sendiri, dengan skala dan keindahannya, cukup untuk membangkitkan kekaguman.</p>
+            <p>Akses ke Akropolis telah ditingkatkan untuk kenyamanan pengunjung, termasuk lift untuk penyandang disabilitas, meskipun medan di dalam situs itu sendiri masih berupa jalan bebatuan dan tanjakan. Panduan audio dan papan informasi tersedia untuk membantu pengunjung memahami sejarah dan signifikansi setiap struktur.</p>
+
+            <h3>2. Museum Akropolis Baru</h3>
+            <p>Sebagai pelengkap penting untuk kunjungan ke situs itu sendiri, Museum Akropolis yang baru, yang dibuka pada tahun 2009, adalah sebuah institusi modern yang menakjubkan yang terletak di kaki Akropolis. Dirancang oleh arsitek Bernard Tschumi, museum ini menyimpan semua artefak penting yang ditemukan di Akropolis, mulai dari zaman Archaic hingga Romawi dan Bizantium.</p>
+            <p>Museum ini dibangun di atas fondasi pemukiman kuno yang dapat dilihat melalui lantai kaca, dan pameran utamanya disusun secara kronologis dan tematik. Lantai atasnya, yang meniru dimensi Parthenon, didedikasikan sepenuhnya untuk pahatan-pahatan Parthenon, termasuk metope, frieze, dan patung-patung pedimen yang telah diselamatkan. Desain museum memungkinkan cahaya alami menyinari artefak dan menawarkan pemandangan langsung ke Akropolis dari jendela-jendela besar, menciptakan dialog yang kuat antara museum dan situs yang diwakilinya. Museum ini juga merupakan tempat di mana pahatan-pahatan asli Akropolis dilindungi dari polusi dan kerusakan lingkungan, sementara replika ditempatkan di situs.</p>
+
+            <h3>3. Pusat Penelitian dan Pendidikan</h3>
+            <p>Akropolis juga tetap menjadi pusat vital untuk penelitian arkeologi dan pendidikan. Tim konservator dan arkeolog terus bekerja di situs, mengungkap detail baru tentang konstruksi kuno, melakukan pekerjaan restorasi yang rumit, dan mempelajari material serta teknik yang digunakan oleh bangsa Yunani Kuno. Penemuan-penemuan baru secara teratur menambah pemahaman kita tentang peradaban yang membangunnya.</p>
+            <p>Berbagai program pendidikan dan lokakarya diselenggarakan untuk siswa, akademisi, dan masyarakat umum, yang bertujuan untuk meningkatkan kesadaran tentang pentingnya Akropolis dan upaya berkelanjutan untuk melindunginya. Situs ini menjadi laboratorium hidup untuk studi arsitektur, seni, sejarah, dan konservasi.</p>
+
+            <h3>4. Simbol Nasional dan Internasional</h3>
+            <p>Bagi Yunani, Akropolis adalah lambang identitas nasional, sebuah penghubung tak terputus dengan masa lalu mereka yang gemilang dan sumber kebanggaan yang mendalam. Ia sering digunakan dalam citra resmi negara dan menjadi fokus perayaan nasional.</p>
+            <p>Di panggung dunia, Akropolis diakui sebagai Situs Warisan Dunia UNESCO dan merupakan simbol universal dari peradaban klasik, demokrasi, dan keunggulan artistik manusia. Ini adalah pengingat abadi tentang asal-usul banyak konsep Barat tentang pemerintahan, seni, filsafat, dan arsitektur. Perannya sebagai mercusuar budaya terus diperkuat melalui upaya diplomasi budaya, program restorasi internasional, dan advokasi untuk perlindungannya di tingkat global.</p>
+            <p>Dengan semua aktivitas ini, Akropolis tidak hanya menjadi monumen masa lalu, tetapi juga bagian integral dari Athena modern, sebuah situs yang terus hidup, bernafas, dan menginspirasi, menjembatani kesenjangan antara dunia kuno dan kontemporer.</p>
+
+            <h2>Kesimpulan</h2>
+            <p>Akropolis Athena adalah sebuah warisan yang tak ternilai harganya, sebuah situs yang melampaui batas-batas geografis dan zaman untuk berbicara tentang puncak pencapaian manusia. Dari benteng prasejarah hingga pusat keagamaan Mycenaean, dari kehancuran oleh Persia hingga kebangkitan sebagai mahakarya arsitektur di bawah Perikles, dan melalui berabad-abad transformasi sebagai gereja, masjid, dan benteng, setiap batu di Akropolis menceritakan sebuah kisah yang mendalam dan berharga.</p>
+
+            <p>Bangunan-bangunan utamanya—Parthenon yang megah, Propylaea yang agung, Erechtheion yang unik dengan Caryatids-nya, dan Kuil Athena Nike yang anggun—bukan hanya struktur batu yang indah. Mereka adalah manifestasi fisik dari idealisme Yunani Kuno: pengejaran kesempurnaan dalam seni, dedikasi kepada dewa-dewi, dan komitmen terhadap prinsip-prinsip demokrasi yang membentuk fondasi peradaban Barat.</p>
+
+            <p>Akropolis bukan hanya simbol masa lalu yang mulia, tetapi juga pengingat yang hidup akan kapasitas manusia untuk inovasi, kreativitas, dan ketahanan. Ia mengingatkan kita akan kekuatan ide-ide—demokrasi, filsafat, seni, dan ilmu pengetahuan—yang pertama kali bersemi di Athena dan menyebar ke seluruh dunia. Signifikansinya meluas jauh melampaui arsitekturnya yang mengesankan; ia adalah simbol peradaban, pusat spiritual, dan inspirasi abadi bagi umat manusia.</p>
+
+            <p>Upaya konservasi yang sedang berlangsung, yang melibatkan keahlian dan dedikasi internasional, mencerminkan nilai universal yang diberikan pada situs ini. Meskipun tantangan seperti polusi dan dampak pariwisata terus ada, komitmen untuk menjaga keutuhan Akropolis bagi generasi mendatang tetap tak tergoyahkan. Setiap upaya restorasi, setiap penelitian arkeologi baru, setiap pengunjung yang terpana oleh keindahannya, menegaskan kembali status Akropolis sebagai salah satu keajaiban sejati dunia.</p>
+
+            <p>Mengunjungi Akropolis hari ini adalah perjalanan kembali ke masa lalu, kesempatan untuk berdiri di tempat yang sama di mana para filsuf merenungkan alam semesta, para politisi memperdebatkan masa depan negara-kota, dan para seniman menciptakan keindahan abadi. Ia adalah bukit batu yang diterangi oleh sejarah, tempat di mana masa lalu berbisik kepada masa kini, mengundang kita untuk merenungkan keagungan peradaban yang berdiri di atasnya, dan merayakan warisan abadi dari peradaban Yunani Kuno.</p>
+        </main>
+
+        <footer>
+            <p>Artikel ini didedikasikan untuk keagungan warisan Akropolis Athena.</p>
+            <p>Semua hak cipta dilindungi.</p>
+        </footer>
+    </div>
+
+<style>
+.related-posts {
+  clear: both;
+  display: block;
+  width: 100%;
+  margin: 30px auto;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.related-posts h3 {
+  margin-top: 0;
+}
+.related-posts ul {
+  list-style: none;
+  padding: 0;
+}
+.related-posts li {
+  margin: 6px 0;
+}
+</style>
+<div class='related-posts'><h3>Related Posts</h3><ul><li><a href="/abuya">Abuya</a></li>
+<li><a href="/air-ludah">Air Ludah</a></li>
+<li><a href="/abimana">Abimana</a></li>
+<li><a href="/athg">Athg</a></li>
+<li><a href="/akibat">Akibat</a></li>
+<li><a href="/amali">Amali</a></li>
+<li><a href="/art">Art</a></li>
+<li><a href="/alhamdulillah">Alhamdulillah</a></li>
+<li><a href="/bajo">Bajo</a></li>
+<li><a href="/arogan">Arogan</a></li></ul></div>
+<script src="/ik.js"></script>
+</body>
+</html>

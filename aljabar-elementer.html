@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aljabar Elementer: Fondasi Matematika Esensial</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <meta name="description" content="Pelajari dasar-dasar aljabar elementer, dari variabel hingga persamaan, dengan penjelasan mendalam dan contoh.">
+    <style>
+        /*
+        Warna Sejuk Cerah:
+        - Latar belakang utama: #f8fbf8 (Hampir putih, sentuhan hijau mint sangat pudar)
+        - Teks utama: #333333 (Abu-abu gelap lembut)
+        - Judul: #2c7a7b (Biru kehijauan gelap, menenangkan)
+        - Aksen/Link: #008cba (Biru langit cerah)
+        - Latar belakang blok kode/contoh: #eef7ee (Hijau mint sangat terang)
+        - Batas/garis pemisah: #dbe4db (Abu-abu hijau muda)
+        */
+
+        :root {
+            --bg-primary: #f8fbf8;
+            --text-primary: #333333;
+            --heading-color: #2c7a7b;
+            --accent-color: #008cba;
+            --bg-code: #eef7ee;
+            --border-color: #dbe4db;
+            --text-secondary: #555555;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--heading-color);
+            color: #ffffff;
+            padding: 2em 1em;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8em;
+            letter-spacing: 0.05em;
+        }
+
+        main {
+            flex: 1;
+            max-width: 900px;
+            margin: 2em auto;
+            padding: 0 1.5em;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        section {
+            padding: 2em 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--heading-color);
+            margin-top: 1.5em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+
+        h1 { font-size: 2.2em; text-align: center; margin-bottom: 1em; }
+        h2 { font-size: 1.8em; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5em; margin-top: 2.5em; }
+        h3 { font-size: 1.4em; color: var(--accent-color); margin-top: 2em; }
+        h4 { font-size: 1.2em; color: var(--text-secondary); margin-top: 1.5em; }
+
+        p {
+            margin-bottom: 1em;
+            text-align: justify;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #005f7f;
+            text-decoration: underline;
+        }
+
+        ul, ol {
+            margin-left: 1.5em;
+            margin-bottom: 1em;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        code, pre {
+            font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', 'Lucida Console', monospace;
+            background-color: var(--bg-code);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            color: var(--text-primary);
+            font-size: 0.95em;
+        }
+
+        pre {
+            display: block;
+            padding: 1em;
+            overflow-x: auto;
+            margin: 1.5em 0;
+            border: 1px solid var(--border-color);
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .example {
+            background-color: var(--bg-code);
+            border-left: 5px solid var(--accent-color);
+            padding: 1em 1.5em;
+            margin: 1.5em 0;
+            border-radius: 8px;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .example h4 {
+            margin-top: 0;
+            color: var(--heading-color);
+            border-bottom: 1px dotted var(--border-color);
+            padding-bottom: 0.5em;
+            margin-bottom: 1em;
+        }
+
+        .note {
+            background-color: #f0f8ff; /* Light blue for notes */
+            border-left: 5px solid #6cb6ff; /* Deeper blue */
+            padding: 1em 1.5em;
+            margin: 1.5em 0;
+            border-radius: 8px;
+        }
+
+        .svg-icon {
+            display: block;
+            margin: 1.5em auto;
+            max-width: 120px;
+            height: auto;
+            filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.1));
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5em 1em;
+            margin-top: 3em;
+            background-color: var(--heading-color);
+            color: #ffffff;
+            font-size: 0.9em;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            main {
+                margin: 1em auto;
+                padding: 0 1em;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            h3 { font-size: 1.2em; }
+            p, li { font-size: 1em; }
+            section { padding: 1.5em 0; }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 1.5em 0.5em;
+            }
+            header h1 {
+                font-size: 1.6em;
+            }
+            main {
+                padding: 0 0.8em;
+            }
+            h1 { font-size: 1.6em; }
+            h2 { font-size: 1.3em; }
+            h3 { font-size: 1.1em; }
+            p, li { font-size: 0.95em; }
+            .svg-icon { max-width: 80px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Panduan Lengkap Aljabar Elementer</h1>
+    </header>
+
+    <main>
+        <h1>Aljabar Elementer: Fondasi Esensial dalam Matematika</h1>
+        <p>Aljabar adalah salah satu cabang matematika yang paling fundamental dan memiliki aplikasi luas di berbagai bidang, mulai dari sains, teknik, ekonomi, hingga kehidupan sehari-hari. Aljabar Elementer adalah gerbang awal untuk memahami konsep-konsep aljabar yang lebih kompleks. Ini adalah jembatan dari aritmatika (berhitung dengan angka konkret) ke matematika yang lebih abstrak, di mana kita menggunakan simbol (variabel) untuk merepresentasikan nilai yang tidak diketahui atau berubah.</p>
+        <p>Artikel ini akan membawa Anda menjelajahi dunia Aljabar Elementer secara mendalam, mulai dari dasar-dasar yang paling sederhana hingga konsep-konsep kunci seperti persamaan, pertidaksamaan, polinomial, dan sistem persamaan linear. Kami akan menyajikan penjelasan yang jelas, contoh-contoh praktis, dan tips untuk membantu Anda membangun pemahaman yang kuat dan fondasi yang kokoh dalam aljabar.</p>
+
+        <section id="pengenalan-konsep-dasar">
+            <h2>1. Pengenalan Konsep Dasar Aljabar</h2>
+            <p>Untuk memulai perjalanan kita dalam aljabar, penting untuk memahami beberapa istilah dan konsep dasar yang akan sering kita gunakan.</p>
+
+            <svg class="svg-icon" alt="Simbol Aljabar: Huruf 'x' dan simbol '=' dengan angka dan operasi matematika" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="10" width="80" height="80" rx="15" ry="15" fill="#f0f8ff" stroke="#2c7a7b" stroke-width="3"/>
+                <path d="M30 30 L70 70 M70 30 L30 70" stroke="#008cba" stroke-width="5" stroke-linecap="round"/>
+                <text x="50" y="25" font-family="Arial, sans-serif" font-size="12" fill="#2c7a7b" text-anchor="middle">variabel</text>
+                <line x1="25" y1="50" x2="75" y2="50" stroke="#555555" stroke-width="2"/>
+                <line x1="25" y1="60" x2="75" y2="60" stroke="#555555" stroke-width="2"/>
+                <text x="50" y="85" font-family="Arial, sans-serif" font-size="12" fill="#2c7a7b" text-anchor="middle">Aljabar</text>
+            </svg>
+
+            <h3>1.1. Variabel, Konstanta, dan Koefisien</h3>
+            <p>Dalam aritmatika, kita bekerja dengan angka seperti 2, 7, atau 1/2. Dalam aljabar, kita menambahkan dimensi baru dengan menggunakan simbol untuk mewakili nilai-nilai tersebut.</p>
+            <ul>
+                <li><strong>Variabel:</strong> Sebuah simbol, biasanya huruf (seperti <code>x</code>, <code>y</code>, <code>a</code>, <code>b</code>, <code>t</code>), yang mewakili nilai yang tidak diketahui atau nilai yang dapat berubah. Fungsi utama variabel adalah sebagai "tempat penampungan" untuk angka. Misalnya, dalam ekspresi <code>2x + 5</code>, <code>x</code> adalah variabel.</li>
+                <li><strong>Konstanta:</strong> Sebuah nilai tetap yang tidak berubah. Dalam ekspresi <code>2x + 5</code>, angka <code>5</code> adalah konstanta. Angka <code>2</code> juga merupakan konstanta, tetapi dalam konteks ini, ia memiliki peran khusus sebagai koefisien. Contoh lain konstanta adalah <code>-7</code>, <code>100</code>, atau <code>π</code>.</li>
+                <li><strong>Koefisien:</strong> Angka yang mengalikan variabel. Dalam <code>2x + 5</code>, <code>2</code> adalah koefisien dari <code>x</code>. Jika kita memiliki <code>-3y</code>, maka <code>-3</code> adalah koefisien dari <code>y</code>. Jika sebuah variabel muncul tanpa angka di depannya, koefisiennya dianggap <code>1</code> (misalnya, <code>x</code> berarti <code>1x</code>).</li>
+            </ul>
+
+            <div class="example">
+                <h4>Contoh Identifikasi</h4>
+                <p>Identifikasi variabel, konstanta, dan koefisien dalam ekspresi <code>5a - 7b + 12</code>.</p>
+                <ul>
+                    <li><strong>Variabel:</strong> <code>a</code> dan <code>b</code></li>
+                    <li><strong>Konstanta:</strong> <code>12</code></li>
+                    <li><strong>Koefisien:</strong> <code>5</code> (untuk <code>a</code>) dan <code>-7</code> (untuk <code>b</code>)</li>
+                </ul>
+            </div>
+
+            <h3>1.2. Ekspresi Aljabar</h3>
+            <p>Ekspresi aljabar adalah kombinasi dari variabel, konstanta, dan koefisien yang dihubungkan oleh operasi matematika (penjumlahan, pengurangan, perkalian, pembagian, pangkat). Ekspresi aljabar <em>tidak</em> mengandung tanda sama dengan (<code>=</code>). Mereka adalah "frasa" matematika, bukan "kalimat" lengkap.</p>
+            <ul>
+                <li><code>3x + 7</code></li>
+                <li><code>y - 8</code></li>
+                <li><code>4ab</code></li>
+                <li><code>x^2 + 2x - 1</code></li>
+            </ul>
+
+            <h3>1.3. Istilah (Term)</h3>
+            <p>Dalam sebuah ekspresi aljabar, istilah adalah bagian-bagian yang dipisahkan oleh tanda tambah (<code>+</code>) atau kurang (<code>-</code>). Setiap istilah bisa berupa konstanta, variabel, atau hasil kali dari konstanta dan variabel.</p>
+            <div class="example">
+                <h4>Contoh Istilah</h4>
+                <p>Dalam ekspresi <code>5x^2 - 3x + 10</code>, terdapat tiga istilah:</p>
+                <ul>
+                    <li><code>5x^2</code></li>
+                    <li><code>-3x</code></li>
+                    <li><code>10</code></li>
+                </ul>
+            </div>
+
+            <h3>1.4. Istilah Serupa (Like Terms)</h3>
+            <p>Istilah serupa adalah istilah-istilah yang memiliki variabel yang sama dan pangkat variabel yang sama. Hanya istilah serupa yang dapat dijumlahkan atau dikurangkan. Konstanta dianggap sebagai istilah serupa satu sama lain.</p>
+            <div class="example">
+                <h4>Contoh Istilah Serupa</h4>
+                <ul>
+                    <li><code>3x</code> dan <code>-7x</code> adalah istilah serupa (keduanya memiliki <code>x</code> dengan pangkat 1).</li>
+                    <li><code>5y^2</code> dan <code>y^2</code> adalah istilah serupa (keduanya memiliki <code>y^2</code>).</li>
+                    <li><code>10</code> dan <code>-2</code> adalah istilah serupa (keduanya konstanta).</li>
+                    <li><code>4xy</code> dan <code>-2xy</code> adalah istilah serupa.</li>
+                    <li><code>6x</code> dan <code>6x^2</code> <em>bukan</em> istilah serupa (pangkat <code>x</code> berbeda).</li>
+                    <li><code>8a</code> dan <code>8b</code> <em>bukan</em> istilah serupa (variabelnya berbeda).</li>
+                </ul>
+            </div>
+
+            <h3>1.5. Menyederhanakan Ekspresi Aljabar</h3>
+            <p>Menyederhanakan ekspresi aljabar berarti menggabungkan istilah-istilah serupa untuk membuat ekspresi lebih ringkas dan mudah dibaca. Kita hanya dapat menjumlahkan atau mengurangkan koefisien dari istilah-istilah yang serupa.</p>
+            <div class="example">
+                <h4>Contoh Penyederhanaan</h4>
+                <p>Sederhanakan ekspresi: <code>7x + 3y - 2x + 5y - 4</code></p>
+                <pre>Langkah 1: Kelompokkan istilah-istilah serupa.
+(7x - 2x) + (3y + 5y) - 4
+
+Langkah 2: Gabungkan koefisien dari setiap kelompok.
+(7 - 2)x + (3 + 5)y - 4
+5x + 8y - 4</pre>
+                <p>Ekspresi yang disederhanakan adalah <code>5x + 8y - 4</code>.</p>
+            </div>
+            <div class="example">
+                <h4>Contoh Lebih Lanjut</h4>
+                <p>Sederhanakan ekspresi: <code>4a^2 + 3a - 2a^2 + 5 - a + 1</code></p>
+                <pre>Langkah 1: Kelompokkan istilah serupa.
+(4a^2 - 2a^2) + (3a - a) + (5 + 1)
+
+Langkah 2: Gabungkan koefisien.
+(4 - 2)a^2 + (3 - 1)a + (5 + 1)
+2a^2 + 2a + 6</pre>
+                <p>Ekspresi yang disederhanakan adalah <code>2a^2 + 2a + 6</code>.</p>
+            </div>
+
+            <h3>1.6. Urutan Operasi (PEMDAS/BODMAS)</h3>
+            <p>Ketika sebuah ekspresi aljabar memiliki beberapa operasi, kita harus mengikuti urutan operasi standar untuk memastikan hasil yang konsisten dan benar. Urutan operasi dikenal dengan akronim <strong>PEMDAS</strong> (Parentheses, Exponents, Multiplication and Division (from left to right), Addition and Subtraction (from left to right)) atau <strong>BODMAS</strong> (Brackets, Orders, Division and Multiplication, Addition and Subtraction).</p>
+            <ol>
+                <li><strong>Parentheses/Brackets (Kurung):</strong> Lakukan operasi di dalam kurung terlebih dahulu.</li>
+                <li><strong>Exponents/Orders (Pangkat):</strong> Hitung semua eksponen (pangkat) dan akar.</li>
+                <li><strong>Multiplication and Division (Perkalian dan Pembagian):</strong> Lakukan operasi perkalian dan pembagian dari kiri ke kanan.</li>
+                <li><strong>Addition and Subtraction (Penjumlahan dan Pengurangan):</strong> Lakukan operasi penjumlahan dan pengurangan dari kiri ke kanan.</li>
+            </ol>
+            <div class="example">
+                <h4>Contoh Urutan Operasi</h4>
+                <p>Hitung nilai dari <code>3 + 4 * (5 - 2)^2</code></p>
+                <pre>Langkah 1: Selesaikan operasi dalam kurung.
+3 + 4 * (3)^2
+
+Langkah 2: Hitung pangkat.
+3 + 4 * 9
+
+Langkah 3: Lakukan perkalian.
+3 + 36
+
+Langkah 4: Lakukan penjumlahan.
+39</pre>
+            </div>
+        </section>
+
+        <section id="persamaan-linear-satu-variabel">
+            <h2>2. Persamaan Linear Satu Variabel</h2>
+            <p>Setelah memahami ekspresi aljabar, langkah selanjutnya adalah memahami persamaan. Sebuah persamaan adalah pernyataan matematika yang menyatakan bahwa dua ekspresi aljabar adalah sama, ditunjukkan dengan tanda sama dengan (<code>=</code>).</p>
+
+            <svg class="svg-icon" alt="Timbangan yang seimbang, melambangkan persamaan aljabar" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="25" y="70" width="50" height="5" fill="#555555"/>
+                <rect x="47.5" y="20" width="5" height="50" fill="#555555"/>
+                <circle cx="50" cy="17.5" r="7.5" fill="#555555"/>
+                <line x1="20" y1="25" x2="80" y2="25" stroke="#2c7a7b" stroke-width="3"/>
+                <circle cx="20" cy="35" r="10" fill="#eef7ee" stroke="#008cba" stroke-width="2"/>
+                <circle cx="80" cy="35" r="10" fill="#eef7ee" stroke="#008cba" stroke-width="2"/>
+                <text x="20" y="38" font-family="Arial, sans-serif" font-size="12" fill="#333333" text-anchor="middle">x</text>
+                <text x="80" y="38" font-family="Arial, sans-serif" font-size="12" fill="#333333" text-anchor="middle">5</text>
+                <path d="M40 40 L60 40 L60 45 L40 45 Z" fill="#2c7a7b"/>
+                <text x="50" y="43" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">=</text>
+            </svg>
+
+            <h3>2.1. Apa Itu Persamaan Linear?</h3>
+            <p>Persamaan linear adalah persamaan di mana variabelnya memiliki pangkat tertinggi 1. Ketika digambarkan pada grafik, persamaan linear akan membentuk garis lurus. Persamaan linear satu variabel hanya melibatkan satu jenis variabel.</p>
+            <ul>
+                <li><code>x + 5 = 12</code></li>
+                <li><code>3y - 4 = 11</code></li>
+                <li><code>2(z + 1) = 10</code></li>
+            </ul>
+            <p>Tujuan utama dalam menyelesaikan persamaan adalah menemukan nilai variabel yang membuat persamaan itu benar. Ini disebut sebagai "solusi" atau "akar" persamaan.</p>
+
+            <h3>2.2. Prinsip Ekuivalensi Persamaan</h3>
+            <p>Untuk menyelesaikan persamaan, kita menggunakan prinsip ekuivalensi, yang menyatakan bahwa kita dapat melakukan operasi matematika yang sama pada kedua sisi persamaan tanpa mengubah kesetaraan. Operasi-operasi ini meliputi:</p>
+            <ul>
+                <li>Menambahkan angka yang sama ke kedua sisi.</li>
+                <li>Mengurangi angka yang sama dari kedua sisi.</li>
+                <li>Mengalikan kedua sisi dengan angka yang sama (bukan nol).</li>
+                <li>Membagi kedua sisi dengan angka yang sama (bukan nol).</li>
+            </ul>
+            <p>Intinya adalah menjaga "keseimbangan" persamaan, seperti timbangan. Jika Anda menambahkan beban di satu sisi, Anda harus menambahkan beban yang sama di sisi lain untuk menjaga timbangan tetap seimbang.</p>
+
+            <h3>2.3. Menyelesaikan Persamaan Satu Langkah</h3>
+            <p>Persamaan satu langkah adalah yang dapat diselesaikan dengan satu operasi. Kita menggunakan operasi invers (kebalikan) untuk mengisolasi variabel.</p>
+            <h4>Contoh 1: Penjumlahan</h4>
+            <div class="example">
+                <p>Selesaikan: <code>x + 7 = 15</code></p>
+                <pre>Tujuan: Mengisolasi 'x'.
+Operasi invers dari '+ 7' adalah '- 7'.
+x + 7 - 7 = 15 - 7
+x = 8</pre>
+                <p>Untuk mengecek, substitusikan <code>x = 8</code> kembali ke persamaan asli: <code>8 + 7 = 15</code> (Benar).</p>
+            </div>
+            <h4>Contoh 2: Pengurangan</h4>
+            <div class="example">
+                <p>Selesaikan: <code>y - 3 = 10</code></p>
+                <pre>Tujuan: Mengisolasi 'y'.
+Operasi invers dari '- 3' adalah '+ 3'.
+y - 3 + 3 = 10 + 3
+y = 13</pre>
+                <p>Cek: <code>13 - 3 = 10</code> (Benar).</p>
+            </div>
+            <h4>Contoh 3: Perkalian</h4>
+            <div class="example">
+                <p>Selesaikan: <code>4a = 28</code></p>
+                <pre>Tujuan: Mengisolasi 'a'.
+Operasi invers dari '* 4' adalah '/ 4'.
+4a / 4 = 28 / 4
+a = 7</pre>
+                <p>Cek: <code>4 * 7 = 28</code> (Benar).</p>
+            </div>
+            <h4>Contoh 4: Pembagian</h4>
+            <div class="example">
+                <p>Selesaikan: <code>b / 5 = 6</code></p>
+                <pre>Tujuan: Mengisolasi 'b'.
+Operasi invers dari '/ 5' adalah '* 5'.
+(b / 5) * 5 = 6 * 5
+b = 30</pre>
+                <p>Cek: <code>30 / 5 = 6</code> (Benar).</p>
+            </div>
+
+            <h3>2.4. Menyelesaikan Persamaan Dua Langkah</h3>
+            <p>Persamaan dua langkah membutuhkan dua operasi untuk mengisolasi variabel. Aturan umumnya adalah membatalkan operasi penjumlahan atau pengurangan terlebih dahulu, kemudian membatalkan operasi perkalian atau pembagian.</p>
+            <div class="example">
+                <h4>Contoh 1</h4>
+                <p>Selesaikan: <code>2x + 5 = 17</code></p>
+                <pre>Langkah 1: Batalkan penjumlahan (kurangkan 5 dari kedua sisi).
+2x + 5 - 5 = 17 - 5
+2x = 12
+
+Langkah 2: Batalkan perkalian (bagi kedua sisi dengan 2).
+2x / 2 = 12 / 2
+x = 6</pre>
+                <p>Cek: <code>2(6) + 5 = 12 + 5 = 17</code> (Benar).</p>
+            </div>
+            <div class="example">
+                <h4>Contoh 2</h4>
+                <p>Selesaikan: <code>(y / 3) - 4 = 2</code></p>
+                <pre>Langkah 1: Batalkan pengurangan (tambahkan 4 ke kedua sisi).
+(y / 3) - 4 + 4 = 2 + 4
+y / 3 = 6
+
+Langkah 2: Batalkan pembagian (kalikan kedua sisi dengan 3).
+(y / 3) * 3 = 6 * 3
+y = 18</pre>
+                <p>Cek: <code>(18 / 3) - 4 = 6 - 4 = 2</code> (Benar).</p>
+            </div>
+
+            <h3>2.5. Menyelesaikan Persamaan Multi-Langkah</h3>
+            <p>Persamaan multi-langkah melibatkan lebih dari dua operasi. Langkah-langkah umum untuk menyelesaikannya adalah:</p>
+            <ol>
+                <li><strong>Sederhanakan setiap sisi:</strong> Gabungkan istilah serupa dan gunakan sifat distributif jika ada tanda kurung.</li>
+                <li><strong>Kumpulkan variabel di satu sisi:</strong> Gunakan operasi invers untuk memindahkan semua istilah variabel ke satu sisi persamaan dan semua konstanta ke sisi lain.</li>
+                <li><strong>Selesaikan persamaan dua langkah:</strong> Gunakan langkah-langkah yang dijelaskan sebelumnya.</li>
+            </ol>
+            <div class="example">
+                <h4>Contoh 1</h4>
+                <p>Selesaikan: <code>3(x + 2) - x = 14</code></p>
+                <pre>Langkah 1: Gunakan sifat distributif.
+3x + 6 - x = 14
+
+Langkah 2: Gabungkan istilah serupa di sisi kiri.
+(3x - x) + 6 = 14
+2x + 6 = 14
+
+Langkah 3: Batalkan penjumlahan (kurangkan 6).
+2x + 6 - 6 = 14 - 6
+2x = 8
+
+Langkah 4: Batalkan perkalian (bagi dengan 2).
+2x / 2 = 8 / 2
+x = 4</pre>
+                <p>Cek: <code>3(4 + 2) - 4 = 3(6) - 4 = 18 - 4 = 14</code> (Benar).</p>
+            </div>
+            <div class="example">
+                <h4>Contoh 2: Variabel di Kedua Sisi</h4>
+                <p>Selesaikan: <code>5x - 7 = 2x + 8</code></p>
+                <pre>Langkah 1: Pindahkan istilah variabel ke satu sisi (misalnya, ke kiri) dengan mengurangi 2x dari kedua sisi.
+5x - 2x - 7 = 2x - 2x + 8
+3x - 7 = 8
+
+Langkah 2: Pindahkan konstanta ke sisi lain (kanan) dengan menambahkan 7 ke kedua sisi.
+3x - 7 + 7 = 8 + 7
+3x = 15
+
+Langkah 3: Selesaikan persamaan satu langkah (bagi dengan 3).
+3x / 3 = 15 / 3
+x = 5</pre>
+                <p>Cek: <code>5(5) - 7 = 25 - 7 = 18</code> dan <code>2(5) + 8 = 10 + 8 = 18</code>. Kedua sisi sama, jadi benar.</p>
+            </div>
+
+            <h3>2.6. Persamaan dengan Pecahan</h3>
+            <p>Ketika persamaan melibatkan pecahan, salah satu cara paling efisien untuk menyelesaikannya adalah dengan menghilangkan pecahan terlebih dahulu. Ini dapat dilakukan dengan mengalikan seluruh persamaan dengan Kelipatan Persekutuan Terkecil (KPT) dari semua penyebut.</p>
+            <div class="example">
+                <h4>Contoh</h4>
+                <p>Selesaikan: <code>(x / 2) + (x / 3) = 10</code></p>
+                <pre>Penyebutnya adalah 2 dan 3. KPT dari 2 dan 3 adalah 6.
+Langkah 1: Kalikan seluruh persamaan dengan KPT (6).
+6 * (x / 2) + 6 * (x / 3) = 6 * 10
+(6x / 2) + (6x / 3) = 60
+3x + 2x = 60
+
+Langkah 2: Gabungkan istilah serupa.
+5x = 60
+
+Langkah 3: Selesaikan persamaan satu langkah.
+5x / 5 = 60 / 5
+x = 12</pre>
+                <p>Cek: <code>(12 / 2) + (12 / 3) = 6 + 4 = 10</code> (Benar).</p>
+            </div>
+        </section>
+
+        <section id="pertidaksamaan-linear-satu-variabel">
+            <h2>3. Pertidaksamaan Linear Satu Variabel</h2>
+            <p>Pertidaksamaan mirip dengan persamaan, tetapi alih-alih menyatakan bahwa dua ekspresi sama, pertidaksamaan menyatakan bahwa satu ekspresi lebih besar dari, lebih kecil dari, lebih besar dari atau sama dengan, atau lebih kecil dari atau sama dengan ekspresi lainnya.</p>
+
+            <svg class="svg-icon" alt="Garis bilangan dengan panah menunjukkan arah pertidaksamaan" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="10" y1="50" x2="90" y2="50" stroke="#555555" stroke-width="2"/>
+                <polygon points="85,45 90,50 85,55" fill="#555555"/>
+                <circle cx="50" cy="50" r="5" fill="#008cba" stroke="#008cba" stroke-width="2"/>
+                <path d="M50 50 L75 50 L75 45 M75 50 L75 55" stroke="#008cba" stroke-width="2" stroke-linecap="round"/>
+                <text x="50" y="40" font-family="Arial, sans-serif" font-size="12" fill="#333333" text-anchor="middle">x > 5</text>
+                <text x="50" y="65" font-family="Arial, sans-serif" font-size="12" fill="#2c7a7b" text-anchor="middle">Pertidaksamaan</text>
+            </svg>
+
+            <h3>3.1. Simbol Pertidaksamaan</h3>
+            <ul>
+                <li><code>&lt;</code> : lebih kecil dari (kurang dari)</li>
+                <li><code>&gt;</code> : lebih besar dari (lebih dari)</li>
+                <li><code>&le;</code> : lebih kecil dari atau sama dengan</li>
+                <li><code>&ge;</code> : lebih besar dari atau sama dengan</li>
+            </ul>
+            <p>Solusi untuk pertidaksamaan biasanya bukan satu nilai, melainkan rentang nilai. Misalnya, <code>x &gt; 5</code> berarti <code>x</code> bisa berupa 6, 7, 5.1, atau angka lain yang lebih besar dari 5.</p>
+
+            <h3>3.2. Menyelesaikan Pertidaksamaan</h3>
+            <p>Aturan untuk menyelesaikan pertidaksamaan linear sangat mirip dengan persamaan linear, dengan satu pengecualian penting:</p>
+            <div class="note">
+                <h4>Aturan Penting</h4>
+                <p>Jika Anda mengalikan atau membagi kedua sisi pertidaksamaan dengan bilangan negatif, <strong>Anda harus membalik arah tanda pertidaksamaan.</strong></p>
+            </div>
+            <div class="example">
+                <h4>Contoh 1: Penjumlahan/Pengurangan</h4>
+                <p>Selesaikan: <code>x + 3 &lt; 8</code></p>
+                <pre>x + 3 - 3 &lt; 8 - 3
+x &lt; 5</pre>
+                <p>Solusinya adalah semua angka yang lebih kecil dari 5.</p>
+            </div>
+            <div class="example">
+                <h4>Contoh 2: Perkalian/Pembagian (Bilangan Positif)</h4>
+                <p>Selesaikan: <code>2x &ge; 10</code></p>
+                <pre>2x / 2 &ge; 10 / 2
+x &ge; 5</pre>
+                <p>Solusinya adalah semua angka yang lebih besar dari atau sama dengan 5.</p>
+            </div>
+            <div class="example">
+                <h4>Contoh 3: Perkalian/Pembagian (Bilangan Negatif)</h4>
+                <p>Selesaikan: <code>-3x &lt; 12</code></p>
+                <pre>Bagi kedua sisi dengan -3. Ingat untuk membalik tanda pertidaksamaan.
+-3x / -3 &gt; 12 / -3
+x &gt; -4</pre>
+                <p>Solusinya adalah semua angka yang lebih besar dari -4.</p>
+            </div>
+
+            <h3>3.3. Menyajikan Solusi Pertidaksamaan</h3>
+            <p>Ada beberapa cara untuk menyajikan solusi pertidaksamaan:</p>
+            <h4>1. Notasi Ketidaksamaan</h4>
+            <p>Ini adalah bentuk standar yang kita gunakan, misalnya <code>x &lt; 5</code>.</p>
+            <h4>2. Grafik Garis Bilangan</h4>
+            <ul>
+                <li>Gunakan lingkaran terbuka (<code>o</code>) untuk <code>&lt;</code> atau <code>&gt;</code> (tidak termasuk nilai batas).</li>
+                <li>Gunakan lingkaran tertutup (<code>•</code>) untuk <code>&le;</code> atau <code>&ge;</code> (termasuk nilai batas).</li>
+                <li>Gambarkan panah dari lingkaran ke arah yang benar (ke kanan untuk lebih besar, ke kiri untuk lebih kecil).</li>
+            </ul>
+            <div class="example">
+                <p>Representasi <code>x &lt; 5</code> pada garis bilangan akan memiliki lingkaran terbuka di 5 dan panah yang mengarah ke kiri.</p>
+                <p>Representasi <code>x &ge; -4</code> pada garis bilangan akan memiliki lingkaran tertutup di -4 dan panah yang mengarah ke kanan.</p>
+            </div>
+            <h4>3. Notasi Interval</h4>
+            <p>Ini adalah cara yang lebih ringkas untuk menulis rentang solusi:</p>
+            <ul>
+                <li>Gunakan tanda kurung biasa <code>( )</code> untuk menunjukkan bahwa nilai batas tidak termasuk (mirip lingkaran terbuka).</li>
+                <li>Gunakan tanda kurung siku <code>[ ]</code> untuk menunjukkan bahwa nilai batas termasuk (mirip lingkaran tertutup).</li>
+                <li>Gunakan simbol tak hingga <code>&infin;</code> untuk menunjukkan bahwa rentang tidak memiliki batas.</li>
+            </ul>
+            <div class="example">
+                <ul>
+                    <li><code>x &lt; 5</code> ditulis sebagai <code>(-&infin;, 5)</code></li>
+                    <li><code>x &ge; 5</code> ditulis sebagai <code>[5, &infin;)</code></li>
+                    <li><code>-4 &le; x &lt; 7</code> ditulis sebagai <code>[-4, 7)</code></li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="pangkat-dan-eksponen">
+            <h2>4. Pangkat dan Eksponen</h2>
+            <p>Pangkat adalah cara singkat untuk menulis perkalian berulang dari sebuah bilangan atau variabel.</p>
+
+            <svg class="svg-icon" alt="Simbol 'x' dengan pangkat 'n'" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M25 75 L75 25 M75 75 L25 25" stroke="#2c7a7b" stroke-width="7" stroke-linecap="round"/>
+                <text x="78" y="28" font-family="Arial, sans-serif" font-size="20" fill="#008cba">n</text>
+                <text x="50" y="85" font-family="Arial, sans-serif" font-size="12" fill="#333333" text-anchor="middle">Pangkat</text>
+            </svg>
+
+            <h3>4.1. Definisi Pangkat</h3>
+            <p>Dalam ekspresi <code>a^n</code>:</p>
+            <ul>
+                <li><code>a</code> disebut <strong>basis</strong> (bilangan yang dikalikan).</li>
+                <li><code>n</code> disebut <strong>eksponen</strong> atau <strong>pangkat</strong> (berapa kali basis dikalikan dengan dirinya sendiri).</li>
+            </ul>
+            <p>Contoh: <code>2^3 = 2 * 2 * 2 = 8</code>. Di sini, 2 adalah basis dan 3 adalah eksponen.</p>
+
+            <h3>4.2. Aturan Eksponen</h3>
+            <p>Ada beberapa aturan penting yang perlu dipahami untuk bekerja dengan eksponen:</p>
+            <h4>1. Aturan Perkalian (Product Rule)</h4>
+            <p>Ketika mengalikan basis yang sama, tambahkan eksponennya: <code>a^m * a^n = a^(m+n)</code></p>
+            <div class="example">
+                <pre>x^3 * x^5 = x^(3+5) = x^8
+2^2 * 2^4 = 2^(2+4) = 2^6 = 64</pre>
+            </div>
+
+            <h4>2. Aturan Pembagian (Quotient Rule)</h4>
+            <p>Ketika membagi basis yang sama, kurangkan eksponennya: <code>a^m / a^n = a^(m-n)</code> (dengan <code>a &ne; 0</code>)</p>
+            <div class="example">
+                <pre>y^7 / y^3 = y^(7-3) = y^4
+5^8 / 5^6 = 5^(8-6) = 5^2 = 25</pre>
+            </div>
+
+            <h4>3. Aturan Pangkat (Power Rule)</h4>
+            <p>Ketika memangkatkan pangkat, kalikan eksponennya: <code>(a^m)^n = a^(m*n)</code></p>
+            <div class="example">
+                <pre>(x^4)^2 = x^(4*2) = x^8
+(3^3)^2 = 3^(3*2) = 3^6 = 729</pre>
+            </div>
+
+            <h4>4. Aturan Pangkat dari Produk</h4>
+            <p>Pangkatkan setiap faktor dalam produk: <code>(ab)^n = a^n * b^n</code></p>
+            <div class="example">
+                <pre>(2x)^3 = 2^3 * x^3 = 8x^3
+(3xy)^2 = 3^2 * x^2 * y^2 = 9x^2y^2</pre>
+            </div>
+
+            <h4>5. Aturan Pangkat dari Pecahan</h4>
+            <p>Pangkatkan pembilang dan penyebut: <code>(a/b)^n = a^n / b^n</code> (dengan <code>b &ne; 0</code>)</p>
+            <div class="example">
+                <pre>(x/y)^4 = x^4 / y^4
+(2/3)^3 = 2^3 / 3^3 = 8 / 27</pre>
+            </div>
+
+            <h4>6. Eksponen Nol (Zero Exponent)</h4>
+            <p>Setiap basis (bukan nol) yang dipangkatkan nol adalah 1: <code>a^0 = 1</code> (dengan <code>a &ne; 0</code>)</p>
+            <div class="example">
+                <pre>5^0 = 1
+x^0 = 1
+(3xy^2)^0 = 1</pre>
+            </div>
+
+            <h4>7. Eksponen Negatif (Negative Exponent)</h4>
+            <p>Basis dengan eksponen negatif sama dengan kebalikan dari basis tersebut dengan eksponen positif: <code>a^-n = 1 / a^n</code> (dengan <code>a &ne; 0</code>)</p>
+            <div class="example">
+                <pre>x^-2 = 1 / x^2
+3^-1 = 1 / 3^1 = 1/3
+1 / y^-3 = y^3</pre>
+            </div>
+
+            <div class="example">
+                <h4>Contoh Penyederhanaan Ekspresi Eksponensial</h4>
+                <p>Sederhanakan: <code>(2x^3y^-2)^2 * (3x^-1y^4)</code></p>
+                <pre>Langkah 1: Terapkan aturan pangkat pada produk pertama.
+(2^2 * (x^3)^2 * (y^-2)^2) * (3x^-1y^4)
+(4 * x^6 * y^-4) * (3x^-1y^4)
+
+Langkah 2: Kalikan koefisien dan gabungkan basis yang sama dengan menambahkan eksponen.
+(4 * 3) * (x^6 * x^-1) * (y^-4 * y^4)
+12 * x^(6 + (-1)) * y^(-4 + 4)
+12 * x^5 * y^0
+
+Langkah 3: Terapkan aturan eksponen nol.
+12 * x^5 * 1
+12x^5</pre>
+            </div>
+        </section>
+
+        <section id="polinomial">
+            <h2>5. Polinomial</h2>
+            <p>Polinomial adalah ekspresi aljabar yang terdiri dari satu atau lebih istilah, di mana variabel hanya memiliki eksponen bilangan bulat non-negatif.</p>
+
+            <svg class="svg-icon" alt="Kurva polinomial abstrak" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 70 C 30 20, 70 80, 90 30" stroke="#2c7a7b" stroke-width="4" fill="none"/>
+                <circle cx="20" cy="65" r="5" fill="#eef7ee" stroke="#008cba" stroke-width="2"/>
+                <circle cx="50" cy="50" r="5" fill="#eef7ee" stroke="#008cba" stroke-width="2"/>
+                <circle cx="80" cy="35" r="5" fill="#eef7ee" stroke="#008cba" stroke-width="2"/>
+                <text x="50" y="85" font-family="Arial, sans-serif" font-size="12" fill="#333333" text-anchor="middle">Polinomial</text>
+            </svg>
+
+            <h3>5.1. Definisi dan Klasifikasi</h3>
+            <p>Istilah dalam polinomial tidak boleh memiliki variabel dalam penyebut (misalnya, <code>1/x</code>) atau di bawah tanda akar (misalnya, <code>&radic;x</code>).</p>
+            <ul>
+                <li><strong>Monomial:</strong> Sebuah polinomial dengan satu istilah. Contoh: <code>5x^3</code>, <code>-7y</code>, <code>12</code>.</li>
+                <li><strong>Binomial:</strong> Sebuah polinomial dengan dua istilah. Contoh: <code>x + 3</code>, <code>2y^2 - 5z</code>.</li>
+                <li><strong>Trinomial:</strong> Sebuah polinomial dengan tiga istilah. Contoh: <code>x^2 + 2x - 1</code>, <code>3a^3 - 4a + 7</code>.</li>
+                <li>Polinomial dengan empat istilah atau lebih umumnya disebut "polinomial".</li>
+            </ul>
+
+            <h4>Derajat Polinomial</h4>
+            <p>Derajat suatu istilah adalah jumlah pangkat variabel dalam istilah tersebut. Derajat polinomial adalah derajat tertinggi dari istilah mana pun dalam polinomial.</p>
+            <div class="example">
+                <ul>
+                    <li><code>5x^3</code>: Derajat 3.</li>
+                    <li><code>2x^2y^4</code>: Derajat <code>2 + 4 = 6</code>.</li>
+                    <li><code>4x^2 - 3x + 1</code>: Derajat 2 (karena istilah tertinggi adalah <code>4x^2</code>).</li>
+                    <li><code>7</code>: Derajat 0 (konstanta memiliki derajat 0).</li>
+                </ul>
+            </div>
+
+            <h3>5.2. Penjumlahan dan Pengurangan Polinomial</h3>
+            <p>Untuk menjumlahkan atau mengurangkan polinomial, kita hanya perlu menggabungkan istilah-istilah serupa. Ingatlah untuk mendistribusikan tanda negatif saat mengurangkan polinomial.</p>
+            <div class="example">
+                <h4>Contoh Penjumlahan</h4>
+                <p><code>(3x^2 + 2x - 5) + (x^2 - 4x + 7)</code></p>
+                <pre>Langkah 1: Buang kurung (karena ini penjumlahan).
+3x^2 + 2x - 5 + x^2 - 4x + 7
+
+Langkah 2: Kelompokkan istilah serupa.
+(3x^2 + x^2) + (2x - 4x) + (-5 + 7)
+
+Langkah 3: Gabungkan istilah serupa.
+4x^2 - 2x + 2</pre>
+            </div>
+            <div class="example">
+                <h4>Contoh Pengurangan</h4>
+                <p><code>(5y^2 - 3y + 1) - (2y^2 + y - 4)</code></p>
+                <pre>Langkah 1: Distribusikan tanda negatif ke setiap istilah di polinomial kedua.
+5y^2 - 3y + 1 - 2y^2 - y + 4
+
+Langkah 2: Kelompokkan istilah serupa.
+(5y^2 - 2y^2) + (-3y - y) + (1 + 4)
+
+Langkah 3: Gabungkan istilah serupa.
+3y^2 - 4y + 5</pre>
+            </div>
+
+            <h3>5.3. Perkalian Polinomial</h3>
+            <p>Perkalian polinomial melibatkan penerapan sifat distributif secara berulang.</p>
+            <h4>1. Monomial dengan Polinomial</h4>
+            <p>Kalikan monomial dengan setiap istilah dalam polinomial.</p>
+            <div class="example">
+                <p><code>2x(x^2 - 3x + 5)</code></p>
+                <pre>2x * x^2  -  2x * 3x  +  2x * 5
+2x^3 - 6x^2 + 10x</pre>
+            </div>
+
+            <h4>2. Binomial dengan Binomial (Metode FOIL)</h4>
+            <p>Metode FOIL (First, Outer, Inner, Last) adalah cara yang berguna untuk mengingat langkah-langkah perkalian dua binomial.</p>
+            <ul>
+                <li><strong>F</strong>irst: Kalikan istilah pertama dari setiap binomial.</li>
+                <li><strong>O</strong>uter: Kalikan istilah terluar.</li>
+                <li><strong>I</strong>nner: Kalikan istilah terdalam.</li>
+                <li><strong>L</strong>ast: Kalikan istilah terakhir dari setiap binomial.</li>
+                <li>Kemudian, gabungkan istilah serupa.</li>
+            </ul>
+            <div class="example">
+                <p><code>(x + 3)(x - 2)</code></p>
+                <pre>First:  x * x = x^2
+Outer:  x * -2 = -2x
+Inner:  3 * x = 3x
+Last:   3 * -2 = -6
+
+Gabungkan: x^2 - 2x + 3x - 6
+Sederhanakan: x^2 + x - 6</pre>
+            </div>
+
+            <h4>3. Polinomial dengan Polinomial</h4>
+            <p>Untuk mengalikan polinomial yang lebih besar, kalikan setiap istilah dari polinomial pertama dengan setiap istilah dari polinomial kedua. Kemudian gabungkan istilah serupa.</p>
+            <div class="example">
+                <p><code>(x + 1)(x^2 + 2x - 3)</code></p>
+                <pre>Kalikan 'x' dengan setiap istilah di polinomial kedua:
+x * x^2 = x^3
+x * 2x  = 2x^2
+x * -3  = -3x
+
+Kalikan '1' dengan setiap istilah di polinomial kedua:
+1 * x^2 = x^2
+1 * 2x  = 2x
+1 * -3  = -3
+
+Tulis semua hasil dan gabungkan istilah serupa:
+x^3 + 2x^2 - 3x + x^2 + 2x - 3
+x^3 + (2x^2 + x^2) + (-3x + 2x) - 3
+x^3 + 3x^2 - x - 3</pre>
+            </div>
+
+            <h3>5.4. Pembagian Polinomial (Pembagian Panjang)</h3>
+            <p>Pembagian polinomial mirip dengan pembagian panjang bilangan. Ini digunakan untuk membagi polinomial dengan polinomial lain.</p>
+            <div class="example">
+                <h4>Contoh</h4>
+                <p>Bagi <code>(x^2 + 5x + 6)</code> dengan <code>(x + 2)</code></p>
+                <pre>Langkah 1: Bagi istilah pertama pembilang (x^2) dengan istilah pertama penyebut (x).
+x^2 / x = x. Ini adalah istilah pertama dari hasil bagi Anda.
+
+Langkah 2: Kalikan hasil (x) dengan seluruh penyebut (x + 2).
+x * (x + 2) = x^2 + 2x
+
+Langkah 3: Kurangkan hasil ini dari pembilang.
+(x^2 + 5x + 6) - (x^2 + 2x)
+= x^2 + 5x + 6 - x^2 - 2x
+= 3x + 6
+
+Langkah 4: Turunkan istilah berikutnya (jika ada).
+Kita turunkan +6, jadi sekarang kita punya 3x + 6.
+
+Langkah 5: Ulangi prosesnya. Bagi istilah pertama yang tersisa (3x) dengan istilah pertama penyebut (x).
+3x / x = 3. Ini adalah istilah kedua dari hasil bagi Anda.
+
+Langkah 6: Kalikan hasil (3) dengan seluruh penyebut (x + 2).
+3 * (x + 2) = 3x + 6
+
+Langkah 7: Kurangkan hasil ini dari 3x + 6.
+(3x + 6) - (3x + 6) = 0
+
+Karena sisanya adalah 0, pembagiannya selesai.
+Hasilnya adalah x + 3.</pre>
+            </div>
+            <p>Pembagian panjang polinomial ini penting untuk memahami faktorisasi polinomial dan menemukan akar-akar polinomial yang lebih tinggi.</p>
+        </section>
+
+        <section id="faktorisasi-polinomial">
+            <h2>6. Faktorisasi Polinomial</h2>
+            <p>Faktorisasi adalah proses memecah polinomial menjadi faktor-faktor perkalian yang lebih sederhana. Ini adalah kebalikan dari perkalian polinomial dan merupakan keterampilan krusial dalam aljabar untuk menyelesaikan persamaan, menyederhanakan ekspresi, dan bekerja dengan pecahan rasional.</p>
+
+            <svg class="svg-icon" alt="Blok matematika yang terbagi menjadi dua faktor" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="15" y="30" width="70" height="40" rx="8" ry="8" fill="#eef7ee" stroke="#2c7a7b" stroke-width="2"/>
+                <line x1="50" y1="30" x2="50" y2="70" stroke="#008cba" stroke-width="2" stroke-dasharray="5 5"/>
+                <text x="32" y="55" font-family="Arial, sans-serif" font-size="12" fill="#333333" text-anchor="middle">(x+a)</text>
+                <text x="68" y="55" font-family="Arial, sans-serif" font-size="12" fill="#333333" text-anchor="middle">(x+b)</text>
+                <text x="50" y="85" font-family="Arial, sans-serif" font-size="12" fill="#333333" text-anchor="middle">Faktorisasi</text>
+            </svg>
+
+            <h3>6.1. Faktor Persekutuan Terbesar (FPB)</h3>
+            <p>Langkah pertama dalam faktorisasi selalu mencari Faktor Persekutuan Terbesar (FPB) dari semua istilah dalam polinomial. FPB adalah monomial terbesar yang dapat membagi habis setiap istilah dalam polinomial.</p>
+            <div class="example">
+                <h4>Contoh</h4>
+                <p>Faktorkan: <code>6x^3 + 9x^2 - 12x</code></p>
+                <pre>Langkah 1: Cari FPB dari koefisien (6, 9, -12). FPB-nya adalah 3.
+Langkah 2: Cari FPB dari variabel (x^3, x^2, x). Ambil variabel dengan pangkat terendah, yaitu x.
+Langkah 3: FPB dari polinomial adalah 3x.
+Langkah 4: Bagi setiap istilah dalam polinomial dengan FPB.
+(6x^3 / 3x) + (9x^2 / 3x) - (12x / 3x)
+2x^2 + 3x - 4
+
+Langkah 5: Tuliskan sebagai produk dari FPB dan hasil pembagian.
+3x(2x^2 + 3x - 4)</pre>
+            </div>
+
+            <h3>6.2. Faktorisasi Trinomial Bentuk <code>x^2 + bx + c</code></h3>
+            <p>Untuk faktorisasi trinomial di mana koefisien <code>x^2</code> adalah 1, kita mencari dua angka yang hasil kalinya adalah <code>c</code> dan hasil jumlahnya adalah <code>b</code>.</p>
+            <div class="example">
+                <h4>Contoh 1</h4>
+                <p>Faktorkan: <code>x^2 + 7x + 10</code></p>
+                <pre>Kita mencari dua angka yang:
+- Hasil kali = 10
+- Hasil jumlah = 7
+
+Pasangan faktor dari 10:
+(1, 10) -> jumlah 11 (tidak cocok)
+(2, 5)  -> jumlah 7 (cocok!)
+
+Jadi, faktornya adalah (x + 2)(x + 5).</pre>
+            </div>
+            <div class="example">
+                <h4>Contoh 2</h4>
+                <p>Faktorkan: <code>x^2 - 8x + 15</code></p>
+                <pre>Kita mencari dua angka yang:
+- Hasil kali = 15
+- Hasil jumlah = -8
+
+Karena hasil kali positif dan hasil jumlah negatif, kedua angka harus negatif.
+Pasangan faktor negatif dari 15:
+(-1, -15) -> jumlah -16 (tidak cocok)
+(-3, -5)  -> jumlah -8 (cocok!)
+
+Jadi, faktornya adalah (x - 3)(x - 5).</pre>
+            </div>
+
+            <h3>6.3. Faktorisasi Perbedaan Dua Kuadrat</h3>
+            <p>Bentuk ini berlaku untuk binomial yang merupakan pengurangan dari dua suku kuadrat sempurna. Rumusnya adalah: <code>a^2 - b^2 = (a + b)(a - b)</code></p>
+            <div class="example">
+                <h4>Contoh 1</h4>
+                <p>Faktorkan: <code>x^2 - 25</code></p>
+                <pre>Ini adalah x^2 - 5^2.
+Jadi, a = x dan b = 5.
+(x + 5)(x - 5)</pre>
+            </div>
+            <div class="example">
+                <h4>Contoh 2</h4>
+                <p>Faktorkan: <code>4y^2 - 81z^2</code></p>
+                <pre>Ini adalah (2y)^2 - (9z)^2.
+Jadi, a = 2y dan b = 9z.
+(2y + 9z)(2y - 9z)</pre>
+            </div>
+
+            <h3>6.4. Faktorisasi Trinomial Bentuk <code>ax^2 + bx + c</code> (dengan <code>a &ne; 1</code>)</h3>
+            <p>Faktorisasi jenis ini sedikit lebih kompleks. Salah satu metode yang umum adalah metode "pengelompokan" atau "pemisahan istilah tengah".</p>
+            <ol>
+                <li>Cari dua angka (misalnya, <code>p</code> dan <code>q</code>) yang hasil kalinya sama dengan <code>a * c</code> dan hasil jumlahnya sama dengan <code>b</code>.</li>
+                <li>Tulis ulang istilah tengah (<code>bx</code>) sebagai jumlah <code>px + qx</code>.</li>
+                <li>Faktorkan dengan pengelompokan.</li>
+            </ol>
+            <div class="example">
+                <h4>Contoh</h4>
+                <p>Faktorkan: <code>2x^2 + 7x + 3</code></p>
+                <pre>Langkah 1: Cari p dan q.
+a * c = 2 * 3 = 6
+b = 7
+Dua angka yang hasil kalinya 6 dan hasil jumlahnya 7 adalah 1 dan 6.
+(p = 1, q = 6)
+
+Langkah 2: Tulis ulang istilah tengah (7x) sebagai 1x + 6x.
+2x^2 + 1x + 6x + 3
+
+Langkah 3: Faktorkan dengan pengelompokan. Kelompokkan dua istilah pertama dan dua istilah terakhir.
+(2x^2 + 1x) + (6x + 3)
+
+Langkah 4: Faktorkan FPB dari setiap kelompok.
+x(2x + 1) + 3(2x + 1)
+
+Langkah 5: Perhatikan bahwa (2x + 1) adalah faktor persekutuan. Faktorkan ini.
+(2x + 1)(x + 3)</pre>
+            </div>
+
+            <h3>6.5. Faktorisasi dengan Pengelompokan (Grouping)</h3>
+            <p>Metode ini digunakan untuk polinomial dengan empat istilah atau lebih, terutama ketika faktorisasi FPB umum tidak langsung terlihat.</p>
+            <div class="example">
+                <h4>Contoh</h4>
+                <p>Faktorkan: <code>x^3 + 2x^2 + 5x + 10</code></p>
+                <pre>Langkah 1: Kelompokkan istilah menjadi dua pasang.
+(x^3 + 2x^2) + (5x + 10)
+
+Langkah 2: Faktorkan FPB dari setiap kelompok.
+x^2(x + 2) + 5(x + 2)
+
+Langkah 3: Perhatikan bahwa (x + 2) adalah faktor persekutuan. Faktorkan ini.
+(x + 2)(x^2 + 5)</pre>
+            </div>
+        </section>
+
+        <section id="pecahan-rasional">
+            <h2>7. Pecahan Rasional</h2>
+            <p>Pecahan rasional adalah rasio dari dua polinomial, di mana penyebutnya bukan nol. Sama seperti pecahan biasa, kita bisa menyederhanakan, mengalikan, membagi, menjumlahkan, dan mengurangkannya.</p>
+
+            <svg class="svg-icon" alt="Simbol pecahan aljabar a/b" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="25" y="25" width="50" height="50" rx="8" ry="8" fill="#f0f8ff" stroke="#2c7a7b" stroke-width="2"/>
+                <text x="50" y="45" font-family="Arial, sans-serif" font-size="20" fill="#008cba" text-anchor="middle">A</text>
+                <line x1="30" y1="55" x2="70" y2="55" stroke="#333333" stroke-width="2"/>
+                <text x="50" y="75" font-family="Arial, sans-serif" font-size="20" fill="#008cba" text-anchor="middle">B</text>
+                <text x="50" y="85" font-family="Arial, sans-serif" font-size="12" fill="#333333" text-anchor="middle">Pecahan Rasional</text>
+            </svg>
+
+            <h3>7.1. Menyederhanakan Pecahan Rasional</h3>
+            <p>Untuk menyederhanakan pecahan rasional, faktorkan pembilang dan penyebut, lalu batalkan faktor-faktor persekutuan.</p>
+            <div class="example">
+                <h4>Contoh</h4>
+                <p>Sederhanakan: <code>(x^2 - 4) / (x^2 + 5x + 6)</code></p>
+                <pre>Langkah 1: Faktorkan pembilang dan penyebut.
+Pembilang (perbedaan dua kuadrat): x^2 - 4 = (x - 2)(x + 2)
+Penyebut (trinomial): x^2 + 5x + 6 = (x + 2)(x + 3)
+
+Langkah 2: Tulis ulang pecahan dengan faktor-faktor.
+[(x - 2)(x + 2)] / [(x + 2)(x + 3)]
+
+Langkah 3: Batalkan faktor persekutuan (x + 2).
+(x - 2) / (x + 3)
+
+Pecahan rasional yang disederhanakan adalah (x - 2) / (x + 3).</pre>
+            </div>
+
+            <h3>7.2. Mengalikan Pecahan Rasional</h3>
+            <p>Untuk mengalikan pecahan rasional, kalikan pembilang dengan pembilang dan penyebut dengan penyebut. Akan lebih mudah jika Anda memfaktorkan ekspresi terlebih dahulu dan membatalkan faktor persekutuan sebelum mengalikan.</p>
+            <div class="example">
+                <h4>Contoh</h4>
+                <p>Kalikan: <code>[(x + 3) / (x - 1)] * [(x^2 - 1) / (x + 3)]</code></p>
+                <pre>Langkah 1: Faktorkan semua ekspresi jika memungkinkan.
+x^2 - 1 = (x - 1)(x + 1)
+
+Langkah 2: Tulis ulang perkalian dengan faktor-faktor.
+[(x + 3) / (x - 1)] * [(x - 1)(x + 1) / (x + 3)]
+
+Langkah 3: Batalkan faktor persekutuan di antara pembilang dan penyebut (x+3 dan x-1).
+(x + 1)
+
+Hasil perkalian adalah x + 1.</pre>
+            </div>
+
+            <h3>7.3. Membagi Pecahan Rasional</h3>
+            <p>Untuk membagi pecahan rasional, kalikan pecahan pertama dengan kebalikan dari pecahan kedua (flip the second fraction).</p>
+            <div class="example">
+                <h4>Contoh</h4>
+                <p>Bagi: <code>[(x^2) / (y)] &divide; [(x) / (y^2)]</code></p>
+                <pre>Langkah 1: Ubah pembagian menjadi perkalian dengan membalik pecahan kedua.
+[(x^2) / (y)] * [(y^2) / (x)]
+
+Langkah 2: Kalikan pembilang dan penyebut.
+(x^2 * y^2) / (y * x)
+
+Langkah 3: Sederhanakan.
+(x * x * y * y) / (y * x)
+Batalkan satu 'x' dan satu 'y' dari pembilang dan penyebut.
+xy</pre>
+            </div>
+
+            <h3>7.4. Menjumlahkan dan Mengurangkan Pecahan Rasional</h3>
+            <p>Seperti pecahan biasa, Anda memerlukan penyebut yang sama untuk menjumlahkan atau mengurangkan pecahan rasional.</p>
+            <h4>Penyebut yang Sama</h4>
+            <p>Jika penyebutnya sudah sama, cukup jumlahkan atau kurangkan pembilangnya dan pertahankan penyebut yang sama.</p>
+            <div class="example">
+                <p><code>[ (2x) / (x + 1) ] + [ (5) / (x + 1) ]</code></p>
+                <pre>Karena penyebutnya sama, jumlahkan pembilangnya:
+(2x + 5) / (x + 1)</pre>
+            </div>
+            <h4>Penyebut Berbeda</h4>
+            <ol>
+                <li>Faktorkan setiap penyebut untuk menemukan KPT (Kelipatan Persekutuan Terkecil).</li>
+                <li>Ubah setiap pecahan agar memiliki KPT sebagai penyebut barunya dengan mengalikan pembilang dan penyebut dengan faktor yang hilang.</li>
+                <li>Jumlahkan atau kurangkan pembilangnya.</li>
+                <li>Sederhanakan hasilnya jika memungkinkan.</li>
+            </ol>
+            <div class="example">
+                <h4>Contoh</h4>
+                <p>Jumlahkan: <code>[3 / (x + 2)] + [2 / (x - 1)]</code></p>
+                <pre>Langkah 1: KPT dari (x + 2) dan (x - 1) adalah (x + 2)(x - 1).
+
+Langkah 2: Ubah setiap pecahan agar memiliki KPT.
+Untuk pecahan pertama, kalikan pembilang dan penyebut dengan (x - 1):
+[3 * (x - 1)] / [(x + 2) * (x - 1)] = (3x - 3) / [(x + 2)(x - 1)]
+
+Untuk pecahan kedua, kalikan pembilang dan penyebut dengan (x + 2):
+[2 * (x + 2)] / [(x - 1) * (x + 2)] = (2x + 4) / [(x + 2)(x - 1)]
+
+Langkah 3: Jumlahkan pembilang.
+[(3x - 3) + (2x + 4)] / [(x + 2)(x - 1)]
+(3x + 2x - 3 + 4) / [(x + 2)(x - 1)]
+(5x + 1) / [(x + 2)(x - 1)]</pre>
+            </div>
+        </section>
+
+        <section id="akar-dan-radikal">
+            <h2>8. Akar dan Radikal</h2>
+            <p>Akar kuadrat, akar kubik, dan akar lainnya adalah operasi invers dari pemangkatan. Radikal adalah istilah umum untuk ekspresi yang melibatkan tanda akar (<code>&radic;</code>).</p>
+
+            <svg class="svg-icon" alt="Simbol akar kuadrat dengan 'x' di dalamnya" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 50 L25 50 L35 75 L45 25 L80 25" stroke="#2c7a7b" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="75" y="15" width="10" height="15" fill="#2c7a7b"/>
+                <text x="55" y="45" font-family="Arial, sans-serif" font-size="20" fill="#008cba" text-anchor="middle">x</text>
+                <text x="50" y="85" font-family="Arial, sans-serif" font-size="12" fill="#333333" text-anchor="middle">Akar & Radikal</text>
+            </svg>
+
+            <h3>8.1. Definisi dan Terminologi</h3>
+            <p>Dalam ekspresi <code>&radic;a</code> (akar kuadrat dari <code>a</code>) atau <code>&sup3;&radic;a</code> (akar kubik dari <code>a</code>):</p>
+            <ul>
+                <li>Simbol <code>&radic;</code> disebut <strong>tanda radikal</strong>.</li>
+                <li>Angka di atas tanda radikal (misalnya, <code>3</code> dalam <code>&sup3;&radic;</code>) disebut <strong>indeks</strong>. Untuk akar kuadrat, indeks <code>2</code> biasanya tidak ditulis.</li>
+                <li>Ekspresi di bawah tanda radikal (<code>a</code>) disebut <strong>radikan</strong>.</li>
+            </ul>
+            <p>Akar kuadrat dari <code>a</code> adalah bilangan non-negatif yang, ketika dikuadratkan, menghasilkan <code>a</code>. Misalnya, <code>&radic;25 = 5</code> karena <code>5^2 = 25</code>.</p>
+            <p>Akar kubik dari <code>a</code> adalah bilangan yang, ketika dipangkatkan tiga, menghasilkan <code>a</code>. Misalnya, <code>&sup3;&radic;8 = 2</code> karena <code>2^3 = 8</code>.</p>
+
+            <h3>8.2. Menyederhanakan Ekspresi Radikal</h3>
+            <p>Untuk menyederhanakan akar kuadrat, cari faktor kuadrat sempurna dari radikan. Rumusnya adalah <code>&radic;(ab) = &radic;a * &radic;b</code>.</p>
+            <div class="example">
+                <h4>Contoh 1</h4>
+                <p>Sederhanakan: <code>&radic;48</code></p>
+                <pre>Faktor kuadrat sempurna terbesar dari 48 adalah 16 (karena 16 * 3 = 48).
+&radic;48 = &radic;(16 * 3)
+     = &radic;16 * &radic;3
+     = 4&radic;3</pre>
+            </div>
+            <div class="example">
+                <h4>Contoh 2: Dengan Variabel</h4>
+                <p>Sederhanakan: <code>&radic;(x^5)</code></p>
+                <pre>Kita mencari pangkat genap terbesar yang kurang dari atau sama dengan 5, yaitu x^4.
+&radic;(x^4 * x)
+= &radic;x^4 * &radic;x
+= x^2&radic;x</pre>
+            </div>
+
+            <h3>8.3. Menjumlahkan dan Mengurangkan Radikal</h3>
+            <p>Anda hanya dapat menjumlahkan atau mengurangkan radikal yang memiliki indeks dan radikan yang sama (yaitu, "radikal serupa").</p>
+            <div class="example">
+                <h4>Contoh</h4>
+                <p>Sederhanakan: <code>3&radic;2 + 5&radic;2 - &radic;2</code></p>
+                <pre>Karena semua adalah &radic;2, kita hanya menjumlahkan/mengurangkan koefisien.
+(3 + 5 - 1)&radic;2
+7&radic;2</pre>
+            </div>
+            <div class="example">
+                <h4>Contoh: Perlu Menyederhanakan Dulu</h4>
+                <p>Sederhanakan: <code>&radic;18 + &radic;50</code></p>
+                <pre>Langkah 1: Sederhanakan setiap radikal.
+&radic;18 = &radic;(9 * 2) = &radic;9 * &radic;2 = 3&radic;2
+&radic;50 = &radic;(25 * 2) = &radic;25 * &radic;2 = 5&radic;2
+
+Langkah 2: Sekarang kedua radikal serupa, jadi jumlahkan.
+3&radic;2 + 5&radic;2 = 8&radic;2</pre>
+            </div>
+
+            <h3>8.4. Mengalikan Radikal</h3>
+            <p>Untuk mengalikan radikal dengan indeks yang sama, kalikan radikannya dan kalikan koefisien di luar radikal. Rumusnya: <code>&radic;a * &radic;b = &radic;(ab)</code>.</p>
+            <div class="example">
+                <h4>Contoh 1</h4>
+                <p>Kalikan: <code>&radic;3 * &radic;7</code></p>
+                <pre>&radic;(3 * 7) = &radic;21</pre>
+            </div>
+            <div class="example">
+                <h4>Contoh 2</h4>
+                <p>Kalikan: <code>(2&radic;5) * (3&radic;10)</code></p>
+                <pre>Kalikan koefisien: 2 * 3 = 6
+Kalikan radikan: &radic;5 * &radic;10 = &radic;50
+Hasilnya: 6&radic;50
+
+Sekarang sederhanakan &radic;50:
+6&radic;(25 * 2) = 6 * &radic;25 * &radic;2
+                = 6 * 5 * &radic;2
+                = 30&radic;2</pre>
+            </div>
+
+            <h3>8.5. Merasionalkan Penyebut</h3>
+            <p>Dalam matematika, tidak umum meninggalkan radikal di penyebut pecahan. Proses menghilangkan radikal dari penyebut disebut merasionalkan penyebut.</p>
+            <h4>1. Jika Penyebut adalah Radikal Tunggal</h4>
+            <p>Kalikan pembilang dan penyebut dengan radikal yang sama di penyebut.</p>
+            <div class="example">
+                <h4>Contoh</h4>
+                <p>Rasionalkan: <code>1 / &radic;3</code></p>
+                <pre>(1 / &radic;3) * (&radic;3 / &radic;3)
+= &radic;3 / 3</pre>
+            </div>
+            <h4>2. Jika Penyebut adalah Binomial dengan Radikal</h4>
+            <p>Kalikan pembilang dan penyebut dengan konjugat dari penyebut. Konjugat dari <code>a + &radic;b</code> adalah <code>a - &radic;b</code>, dan sebaliknya. Ini menggunakan perbedaan dua kuadrat: <code>(a + b)(a - b) = a^2 - b^2</code>.</p>
+            <div class="example">
+                <h4>Contoh</h4>
+                <p>Rasionalkan: <code>2 / (1 + &radic;5)</code></p>
+                <pre>Konjugat dari (1 + &radic;5) adalah (1 - &radic;5).
+[2 / (1 + &radic;5)] * [(1 - &radic;5) / (1 - &radic;5)]
+
+Pembilang: 2 * (1 - &radic;5) = 2 - 2&radic;5
+Penyebut: (1 + &radic;5)(1 - &radic;5) = 1^2 - (&radic;5)^2 = 1 - 5 = -4
+
+Hasilnya: (2 - 2&radic;5) / -4
+Sederhanakan dengan membagi setiap istilah di pembilang dengan -4:
+-2/4 + 2&radic;5/4
+= -1/2 + &radic;5/2</pre>
+            </div>
+        </section>
+
+        <section id="sistem-persamaan-linear">
+            <h2>9. Sistem Persamaan Linear</h2>
+            <p>Sistem persamaan linear adalah kumpulan dua atau lebih persamaan linear yang melibatkan dua atau lebih variabel. Tujuan kita adalah menemukan nilai-nilai variabel yang memenuhi <em>semua</em> persamaan dalam sistem secara bersamaan.</p>
+
+            <svg class="svg-icon" alt="Dua garis lurus berpotongan, mewakili solusi sistem persamaan" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="10" y1="80" x2="90" y2="20" stroke="#2c7a7b" stroke-width="3"/>
+                <line x1="10" y1="20" x2="90" y2="80" stroke="#008cba" stroke-width="3"/>
+                <circle cx="50" cy="50" r="7" fill="#eef7ee" stroke="#333333" stroke-width="2"/>
+                <text x="50" y="85" font-family="Arial, sans-serif" font-size="12" fill="#333333" text-anchor="middle">Sistem Persamaan</text>
+            </svg>
+
+            <h3>9.1. Definisi</h3>
+            <p>Sistem persamaan linear paling sederhana adalah yang melibatkan dua persamaan dan dua variabel, seperti:</p>
+            <pre>x + y = 5
+2x - y = 4</pre>
+            <p>Solusi untuk sistem ini adalah pasangan terurut <code>(x, y)</code> yang membuat kedua persamaan benar.</p>
+
+            <h3>9.2. Metode Grafik</h3>
+            <p>Secara grafis, setiap persamaan linear mewakili sebuah garis lurus. Solusi dari sistem persamaan linear adalah titik potong dari garis-garis tersebut. Ada tiga kemungkinan hasil:</p>
+            <ul>
+                <li><strong>Satu Solusi:</strong> Garis-garis berpotongan pada satu titik (ini adalah kasus paling umum).</li>
+                <li><strong>Tidak Ada Solusi:</strong> Garis-garis sejajar dan tidak pernah berpotongan. Ini terjadi ketika persamaan memiliki kemiringan yang sama tetapi intersep y yang berbeda.</li>
+                <li><strong>Tak Terhingga Solusi:</strong> Kedua persamaan sebenarnya adalah garis yang sama. Ini terjadi ketika satu persamaan adalah kelipatan dari yang lain.</li>
+            </ul>
+            <p>Meskipun metode grafik membantu secara visual, ini mungkin tidak selalu memberikan solusi yang tepat jika koordinatnya bukan bilangan bulat. Untuk solusi yang tepat, kita menggunakan metode aljabar.</p>
+
+            <h3>9.3. Metode Substitusi</h3>
+            <p>Metode substitusi bekerja dengan menyelesaikan salah satu persamaan untuk satu variabel, lalu mengganti ekspresi itu ke persamaan lainnya.</p>
+            <div class="example">
+                <h4>Contoh</h4>
+                <p>Selesaikan sistem:
+                <pre>1) x + y = 5
+2) 2x - y = 4</pre></p>
+                <pre>Langkah 1: Selesaikan Persamaan (1) untuk y (atau x, pilih yang paling mudah).
+y = 5 - x
+
+Langkah 2: Substitusikan ekspresi untuk y ke Persamaan (2).
+2x - (5 - x) = 4
+2x - 5 + x = 4
+3x - 5 = 4
+
+Langkah 3: Selesaikan persamaan untuk x.
+3x = 9
+x = 3
+
+Langkah 4: Substitusikan nilai x (3) kembali ke salah satu persamaan asli (atau y = 5 - x) untuk menemukan y.
+y = 5 - 3
+y = 2
+
+Solusinya adalah (3, 2).</pre>
+                <p>Cek: <code>3 + 2 = 5</code> (Benar). <code>2(3) - 2 = 6 - 2 = 4</code> (Benar).</p>
+            </div>
+
+            <h3>9.4. Metode Eliminasi (Penjumlahan)</h3>
+            <p>Metode eliminasi bekerja dengan menjumlahkan atau mengurangkan persamaan untuk menghilangkan salah satu variabel. Kadang-kadang, Anda mungkin perlu mengalikan satu atau kedua persamaan dengan konstanta agar koefisien salah satu variabel berlawanan atau sama.</p>
+            <div class="example">
+                <h4>Contoh 1: Variabel Sudah Berlawanan</h4>
+                <p>Selesaikan sistem:
+                <pre>1) x + y = 5
+2) 2x - y = 4</pre></p>
+                <pre>Langkah 1: Perhatikan bahwa koefisien 'y' adalah +1 dan -1, yang akan saling menghilangkan jika dijumlahkan.
+Tambahkan Persamaan (1) dan Persamaan (2).
+(x + y) + (2x - y) = 5 + 4
+3x = 9
+
+Langkah 2: Selesaikan untuk x.
+x = 3
+
+Langkah 3: Substitusikan x = 3 ke salah satu persamaan asli untuk menemukan y.
+3 + y = 5
+y = 2
+
+Solusinya adalah (3, 2).</pre>
+            </div>
+            <div class="example">
+                <h4>Contoh 2: Perlu Perkalian</h4>
+                <p>Selesaikan sistem:
+                <pre>1) 2x + 3y = 7
+2) 4x - 2y = 2</pre></p>
+                <pre>Langkah 1: Putuskan variabel mana yang akan dieliminasi. Mari kita eliminasi 'x'.
+Koefisien 'x' adalah 2 dan 4. Kita bisa membuat keduanya 4 (atau -4).
+Kalikan Persamaan (1) dengan -2 agar koefisien 'x' menjadi -4.
+-2 * (2x + 3y) = -2 * 7
+-4x - 6y = -14   (Ini Persamaan 3 yang baru)
+
+Langkah 2: Tambahkan Persamaan (3) yang baru dengan Persamaan (2).
+  -4x - 6y = -14
++  4x - 2y =   2
+----------------
+      -8y = -12
+
+Langkah 3: Selesaikan untuk y.
+y = -12 / -8
+y = 3/2
+
+Langkah 4: Substitusikan y = 3/2 ke salah satu persamaan asli (misalnya Persamaan 1).
+2x + 3(3/2) = 7
+2x + 9/2 = 7
+2x = 7 - 9/2
+2x = 14/2 - 9/2
+2x = 5/2
+x = 5/4
+
+Solusinya adalah (5/4, 3/2).</pre>
+            </div>
+        </section>
+
+        <section id="aplikasi-aljabar-soal-cerita">
+            <h2>10. Aplikasi Aljabar (Soal Cerita)</h2>
+            <p>Aljabar adalah alat yang sangat ampuh untuk memecahkan masalah di dunia nyata. Kemampuan untuk mengubah masalah dari narasi kata menjadi persamaan matematika (memodelkan masalah) adalah keterampilan yang sangat berharga.</p>
+
+            <svg class="svg-icon" alt="Gambar gelembung bicara dengan simbol matematika di dalamnya" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 20 C 70 5, 95 30, 90 50 C 85 70, 60 95, 40 90 C 20 85, 5 60, 10 40 C 15 20, 30 15, 50 20 Z" fill="#eef7ee" stroke="#2c7a7b" stroke-width="3"/>
+                <text x="50" y="45" font-family="Arial, sans-serif" font-size="16" fill="#008cba" text-anchor="middle">?</text>
+                <text x="50" y="65" font-family="Arial, sans-serif" font-size="12" fill="#333333" text-anchor="middle">Aplikasi</text>
+            </svg>
+
+            <h3>Langkah-langkah Memecahkan Soal Cerita Aljabar:</h3>
+            <ol>
+                <li><strong>Baca dan Pahami:</strong> Baca masalah dengan cermat. Apa yang diketahui? Apa yang ditanyakan?</li>
+                <li><strong>Definisikan Variabel:</strong> Beri nama variabel untuk kuantitas yang tidak diketahui (misalnya, <code>x</code> untuk umur, <code>y</code> untuk jumlah).</li>
+                <li><strong>Terjemahkan ke Persamaan:</strong> Ubah informasi dalam kata-kata menjadi ekspresi dan persamaan matematika. Cari kata kunci (misalnya, "jumlah" berarti +, "kurang dari" berarti -, "dua kali" berarti 2*, "adalah" berarti =).</li>
+                <li><strong>Selesaikan Persamaan:</strong> Gunakan teknik aljabar yang telah kita pelajari untuk menyelesaikan persamaan atau sistem persamaan.</li>
+                <li><strong>Periksa dan Jawab:</strong> Periksa apakah solusi Anda masuk akal dalam konteks masalah. Jawab pertanyaan yang diajukan dalam soal dengan jelas.</li>
+            </ol>
+
+            <div class="example">
+                <h4>Contoh Soal Cerita 1: Persamaan Linear</h4>
+                <p>Harga sebuah buku adalah tiga kali harga sebuah pensil. Jika total harga satu buku dan dua pensil adalah Rp 20.000, berapa harga masing-masing?</p>
+                <pre>Langkah 1: Pahami. Kita mencari harga buku dan pensil.
+
+Langkah 2: Definisikan variabel.
+Misalkan 'b' adalah harga buku.
+Misalkan 'p' adalah harga pensil.
+
+Langkah 3: Terjemahkan ke persamaan.
+"Harga sebuah buku adalah tiga kali harga sebuah pensil":  b = 3p  (Persamaan 1)
+"Total harga satu buku dan dua pensil adalah Rp 20.000": b + 2p = 20000 (Persamaan 2)
+
+Langkah 4: Selesaikan sistem persamaan (gunakan metode substitusi).
+Substitusikan (b = 3p) dari Persamaan 1 ke Persamaan 2:
+(3p) + 2p = 20000
+5p = 20000
+p = 20000 / 5
+p = 4000
+
+Sekarang cari 'b' menggunakan p = 4000:
+b = 3p = 3 * 4000
+b = 12000
+
+Langkah 5: Periksa dan jawab.
+Harga pensil adalah Rp 4.000.
+Harga buku adalah Rp 12.000.
+Apakah harga buku 3 kali harga pensil? 12000 = 3 * 4000 (Ya).
+Apakah total satu buku dan dua pensil Rp 20.000? 12000 + 2*4000 = 12000 + 8000 = 20000 (Ya).
+Jawaban: Harga buku adalah Rp 12.000 dan harga pensil adalah Rp 4.000.</pre>
+            </div>
+
+            <div class="example">
+                <h4>Contoh Soal Cerita 2: Pertidaksamaan</h4>
+                <p>Seorang siswa ingin mendapatkan nilai rata-rata minimal 85 dalam empat ujian. Tiga nilai ujian pertamanya adalah 80, 88, dan 79. Berapa nilai minimum yang harus dia dapatkan pada ujian keempat agar mencapai tujuannya?</p>
+                <pre>Langkah 1: Pahami. Kita mencari nilai ujian keempat.
+
+Langkah 2: Definisikan variabel.
+Misalkan 'x' adalah nilai ujian keempat.
+
+Langkah 3: Terjemahkan ke pertidaksamaan.
+Rata-rata dari empat ujian adalah (80 + 88 + 79 + x) / 4.
+Nilai rata-rata minimal 85 berarti rata-rata harus lebih besar dari atau sama dengan 85.
+(80 + 88 + 79 + x) / 4 >= 85
+
+Langkah 4: Selesaikan pertidaksamaan.
+(247 + x) / 4 >= 85
+Kalikan kedua sisi dengan 4:
+247 + x >= 85 * 4
+247 + x >= 340
+Kurangkan 247 dari kedua sisi:
+x >= 340 - 247
+x >= 93
+
+Langkah 5: Periksa dan jawab.
+Siswa tersebut harus mendapatkan nilai minimal 93 pada ujian keempat.
+Jika dia mendapatkan 93, rata-ratanya adalah (80+88+79+93)/4 = 340/4 = 85. Ini memenuhi minimal 85.</pre>
+            </div>
+        </section>
+
+        <section id="penutup">
+            <h2>Kesimpulan</h2>
+            <p>Aljabar Elementer adalah tonggak penting dalam pendidikan matematika. Dari konsep sederhana tentang variabel dan konstanta hingga pemecahan sistem persamaan yang kompleks, setiap topik membentuk blok bangunan yang esensial. Dengan menguasai dasar-dasar ini, Anda tidak hanya mengembangkan keterampilan analitis dan pemecahan masalah yang kuat, tetapi juga membuka pintu ke cabang-cabang matematika yang lebih tinggi dan aplikasi praktis di berbagai disiplin ilmu.</p>
+            <p>Ingatlah bahwa latihan adalah kunci. Semakin banyak Anda berlatih memecahkan berbagai jenis masalah aljabar, semakin Anda akan membangun intuisi dan kepercayaan diri Anda. Jangan takut untuk membuat kesalahan; itu adalah bagian dari proses pembelajaran. Teruslah bereksplorasi, teruslah bertanya, dan teruslah belajar. Dunia aljabar menanti untuk Anda taklukkan!</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; Panduan Aljabar Elementer. Semua hak dilindungi.</p>
+    </footer>
+
+<style>
+.related-posts {
+  clear: both;
+  display: block;
+  width: 100%;
+  margin: 30px auto;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.related-posts h3 {
+  margin-top: 0;
+}
+.related-posts ul {
+  list-style: none;
+  padding: 0;
+}
+.related-posts li {
+  margin: 6px 0;
+}
+</style>
+<div class='related-posts'><h3>Related Posts</h3><ul><li><a href="/alar">Alar</a></li>
+<li><a href="/acar">Acar</a></li>
+<li><a href="/ajen">Ajen</a></li>
+<li><a href="/anastesi">Anastesi</a></li>
+<li><a href="/baht">Baht</a></li>
+<li><a href="/animasi">Animasi</a></li>
+<li><a href="/adres">Adres</a></li>
+<li><a href="/aktris">Aktris</a></li>
+<li><a href="/arabika">Arabika</a></li>
+<li><a href="/aci">Aci</a></li></ul></div>
+<script src="/ik.js"></script>
+</body>
+</html>
